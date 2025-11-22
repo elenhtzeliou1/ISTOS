@@ -1,0 +1,324 @@
+@media (min-width: 1024px) {
+
+
+
+    /*Menu*/
+    /* no show .nav-menu*/
+    nav {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+        height: var(--nav-height);
+        padding: var(--gap-mid) var(--gap-mid);
+        border-bottom: 1px solid rgb(27, 27, 27);
+    }
+
+    .nav-top {
+        justify-content: flex-start;
+        width: auto;
+        display: contents;
+    }
+
+    .nav-menu {
+        background-color: rgb(115, 255, 0);
+        display: none;
+        height: 0;
+    }
+
+    .logo {
+        order: 1;
+        font-size: 24px;
+    }
+
+    .nav-link-menu {
+        order: 2;
+        opacity: 1;
+        max-height: none;
+        overflow: visible;
+        height: auto;
+        width: auto;
+        display: flex;
+
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        gap: var(--gap-mid);
+    }
+
+    .nav-top>a {
+        order: 3;
+    }
+
+    .nav-top>a:hover {
+        background-color: black;
+        color: white;
+        transition: 0.2s;
+    }
+
+    .nav-link-menu>a {
+        display: none;
+    }
+
+    .group-link {
+        flex-direction: row;
+        gap: var(--gap-mid);
+    }
+
+    .group-link>a {
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        padding: 6px 0;
+        font-weight: 300;
+        font-size: 16px;
+
+
+        text-decoration: none;
+    }
+
+    /* animated colored line */
+    .group-link>a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+
+        width: 100%;
+        height: 1px;
+        background-color: var(--nav-button-color);
+
+        transform: scaleX(0);
+        /* grow from left to right */
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .group-link>a:hover::after {
+        transform: scaleX(1);
+
+    }
+
+    .group-link>span {
+        display: none;
+    }
+
+    
+
+    /*Menu*/
+
+
+
+    .intro-container {
+        max-width: none;
+        width: 100%;
+        gap: 0;
+        min-height: var(--min-height-wide);
+    }
+
+    .title-container {
+        padding: 4rem 0;
+
+    }
+
+    .title-container h1 {
+        font-size: var(--h1-mid);
+
+    }
+
+    .title-container>i {
+        font-size: 34px;
+    }
+
+    .title-container p {
+        font-size: 22px;
+        width: 50%;
+    }
+
+    .intro-item {
+        width: 260px;
+        height: 200px;
+    }
+    .intro-item > p{
+        font-size: 12px;
+    }
+
+
+
+
+    .description-intro {
+        align-items: center;
+        gap: var(--gap);
+        justify-content: space-evenly;
+        position: relative;
+        top: -15vh;
+        text-align: center;
+    }
+
+    .description-intro>p {
+        width: 70%;
+        font-size: 20px;
+    }
+
+    .description-card {
+        display: flex;
+        align-items: stretch;
+        padding: 0;
+        gap: 2rem;
+        min-height: 550px;
+    }
+
+    /* Flip 02 and 04 only! */
+    .description-card:nth-of-type(2),
+    .description-card:nth-of-type(4) {
+        flex-direction: row-reverse;
+    }
+
+    .description-card-details {
+        flex: 1.6;
+
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2rem 2rem;
+    }
+
+    .description-card-details>p {
+        font-size: 20px;
+    }
+
+    .card-number-block {
+        position: static;
+        flex: 0 0 var(--number-block-width);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .block-line {
+        flex: 1.4;
+        width: 1px;
+        background-color: white;
+    }
+
+    .description-image {
+        flex: 1.6;
+        justify-content: center;
+        align-items: center;
+        padding: 6rem 2rem;
+    }
+
+    .courses-description-wraper {
+        padding: 4rem 2rem;
+        max-width: none;
+        width: 100%;
+        gap: var(--gap-big);
+    }
+
+    .courses-description-intro>p {
+        width: 70%;
+        font-size: 20px;
+    }
+
+    .courses-description-intro>h1 {
+        font-size: var(--h1-mid);
+
+    }
+
+
+    .courses {
+        padding: 8rem 0;
+    }
+
+    .courses-wrap {
+        gap: var(--gap-big);
+    }
+
+    .courses-main {
+        text-align: center;
+    }
+
+    .courses-main>h2 {
+        font-size: 30px;
+    }
+
+    .courses-info {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 2rem;
+        row-gap: 2rem;
+        align-items: start;
+    }
+
+    .course-item {
+        width: 100%;
+
+    }
+
+    .new-box {
+        flex-direction: row;
+        height: 28vh;
+    }
+
+    .new-box-header {
+        height: 100%;
+        justify-content: space-between;
+        flex: 1.4;
+        padding-left: 3rem;
+    }
+
+    .new-box-content {
+        background-color: red;
+        height: 100%;
+        flex: 0.6;
+
+    }
+
+
+    .courses-description-video-wrapper {
+        min-height: 36vw;
+    }
+
+
+    .proposed-books {
+        max-width: none;
+        width: 100%;
+        padding: 4rem 2rem;
+    }
+
+    .proposed-book-intro-container>h1 {
+        font-size: var(--h1-mid);
+    }
+
+    .card-carousel {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        overflow-x: visible;
+        -webkit-overflow-scrolling: auto;
+        scrollbar-width: auto;
+        cursor: default;
+        gap: 0;
+        padding: 0;
+    }
+
+    .card-carousel.active {
+        cursor: default;
+    }
+
+    .card {
+        flex: 0 0 calc((100% - 3rem) / 4);
+        min-width: 0;
+        cursor: pointer;
+        transition: transform 0.2s ease-out;
+    }
+
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+}

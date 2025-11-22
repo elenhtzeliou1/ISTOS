@@ -1,0 +1,156 @@
+* {
+
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+:root {
+    --nav-height: 70px;
+    --gap: 1rem;
+    --gap-mid:2rem;
+    --gap-big:4rem;
+    --border-radious: 5px;
+    --border-radius-small:3px;
+    --border-radius-big:20px;
+
+    --card-color:rgb(26, 26, 26);
+    --background-color:black;
+    --secondary-bg-color:white;
+    --card-secondary-color:rgb(234, 234, 234);
+    --intro-item-bg-color:rgb(32, 32, 32);
+    --nav-button-color:rgb(212, 212, 212);
+
+    --number-block-width:58px;
+    --number-block-height:58px;
+    --card-top-padding:calc(var(--number-block-height));
+    --card-left-padding:calc(var(--number-block-width));
+
+       
+    --max-width:  1200px;
+    --min-height: 90vh;
+    --min-height-wide:135vh;
+
+    --h1-mid:70px;
+
+    --green:greenyellow;
+
+}
+
+body {
+    padding-top: var(--nav-height);
+    background-color:var(--background-color);
+}
+
+/*no scroll when the mobile menu opens*/
+body.no-scroll {
+  overflow: hidden;
+}
+/*no scroll when the mobile menu opens*/
+
+
+h1 {
+    font-size: 40px;
+    color: white;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 22px;
+    color: white;
+    line-height: 1.1;
+}
+.logo{
+    font-size: 20px;
+}
+h3{
+    font-size: 20px;
+    color: white;
+    line-height: 1.1;
+}
+h4{
+    font-size: 22px;
+    color: white;
+}
+p {
+    font-size: 16px;
+    color: white;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.fa-solid.fa-bars {
+    font-size: 22px;
+}
+
+nav>h2 {
+    color: white;
+}
+
+a {
+    background-color: white;
+    padding: 8px 1rem;
+    box-sizing: border-box;
+    color: black;
+    border: 1px solid white;
+    text-align: center;
+}
+
+button{
+    box-sizing: border-box;
+    color: black;
+    border: none;
+    text-decoration: none;
+    background-color:white;
+    font-size: 20px;
+}
+
+.fa-brands.fa-42-group{
+    color: greenyellow;
+    font-size: 40px;
+}
+
+#openMenu,
+#closeMenu {
+  cursor: pointer;
+  font-size: 22px;
+  color: white;
+}
+span{
+    color: white;
+    font-size: 24px;
+    font-weight: 450;
+}
+.menu-span{
+    font-weight: 350;
+    font-size:18px;
+
+}
+.course-span{
+    color: black;
+}
+.menu{
+    background-color: transparent;
+    border: none;
+    padding:10px 0;
+    width: 100%;
+    color: var(--nav-button-color);
+    font-size: 18px;
+    text-align: left;
+}
+
+.a-green{
+    background-color: greenyellow;
+    border:none;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-small);
+    font-weight: 500;
+    text-transform: uppercase;
+}
