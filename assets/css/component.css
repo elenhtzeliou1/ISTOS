@@ -1120,9 +1120,9 @@ body.courses-page-active .title-container p {
 
 .modal-content {
   background: var(--card-color);
-  padding: 2rem;
-  width: 90%;
-  max-width: 650px;
+  padding: 2.5rem 3rem !important;      /* identical spacing */
+  width: 90% !important;
+  max-width: 900px !important;          /* identical modal width */
   border-radius: var(--border-radious);
   box-shadow: 0 0 25px rgba(0,0,0,0.4);
   animation: modalFadeIn 0.25s ease-out;
@@ -1142,8 +1142,8 @@ body.courses-page-active .title-container p {
 
 .modal-close {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 18px;
+  right: 24px;
   font-size: 28px;
   cursor: pointer;
   color: white;
@@ -1156,32 +1156,39 @@ body.courses-page-active .title-container p {
 
 .modal-body h2 {
   color: white;
-  margin-bottom: 1rem;
-}
-
-.modal-body p {
-  color: rgb(210,210,210);
-  margin-bottom: 1rem;
+  font-size: 26px;
+  margin-top: 0 !important;
+  margin-bottom: 1.2rem !important;
 }
 
 .modal-tags {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem !important;
 }
 
-.modal-enroll-btn {
-  background: greenyellow;
-  color: black;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius-small);
-  border: none;
+.modal-body p {
+  color: rgb(210,210,210);
+  margin-bottom: 1.8rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Shared button styling for both popups */
+.modal-enroll-btn,
+.modal-order-btn {
+  background: greenyellow !important;
+  color: black !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: var(--border-radius-small) !important;
+  border: none !important;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-top: 0.5rem !important;
 }
 
-.modal-enroll-btn:hover {
+.modal-enroll-btn:hover,
+.modal-order-btn:hover {
   filter: brightness(1.1);
 }
