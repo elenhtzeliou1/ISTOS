@@ -877,3 +877,150 @@ nav.mobile-open .nav-link-menu {
     height: 100%;
     border: 0;
 }
+
+/* ============================= */
+/*   E-COMMERCE STYLE COURSES    */
+/* ============================= */
+
+.courses-page {
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.course-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.filter-sidebar {
+  background: var(--intro-item-bg-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radious);
+  height: fit-content;
+}
+
+.filter-sidebar h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.filter-box {
+  background: var(--card-color);
+  padding: 1rem;
+  border-radius: var(--border-radious);
+  margin-bottom: 1.2rem;
+}
+
+.filter-box label {
+  color: white;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.filter-box select,
+.filter-box input {
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--border-radius-small);
+  border: none;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+/* PRODUCT GRID */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* COURSE PRODUCT CARD */
+
+.course-product {
+  background: var(--card-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radious);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: 0.2s ease;
+}
+
+.course-product:hover {
+  transform: translateY(-4px);
+}
+
+.course-thumb {
+  background: linear-gradient(135deg, #444, #222);
+  height: 140px;
+  border-radius: var(--border-radious);
+}
+
+.course-info h3 {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 0.3rem;
+}
+
+.course-info p {
+  color: rgb(190, 190, 190);
+  font-size: 14px;
+}
+
+.tag-row {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-small);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.available {
+  background: greenyellow;
+}
+
+.unavailable {
+  background: rgb(150, 40, 40);
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .course-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduce top spacing for Courses page header */
+body.courses-page-active .intro-container {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+body.courses-page-active .title-container h1 {
+  margin-bottom: 0.5rem !important;
+}
+
+body.courses-page-active .title-container p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}

@@ -12,22 +12,62 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-..."
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
     />
   </head>
-  <body>
-    <!--nav same for every page-->
+
+  <body class="courses-page-active">
     <nav id="site-nav"></nav>
     <script src="assets/js/ui/nav.js"></script>
-    <!--nav-->
+
+    <header class="intro-container" style="min-height:auto;padding:3rem 1rem;">
+      <div class="title-container">
+        <h1>All Courses</h1>
+        <p>Find the perfect learning path for your goals</p>
+      </div>
+    </header>
+
+    <section class="courses-page">
+      <div class="course-layout">
+
+        <aside class="filter-sidebar">
+          <h2>Filters</h2>
+
+          <div class="filter-box">
+            <label>Category</label>
+            <select id="filter-category">
+              <option value="all">All</option>
+              <option value="programming">Programming</option>
+              <option value="networks">Networks</option>
+              <option value="security">Cybersecurity</option>
+              <option value="databases">Databases</option>
+            </select>
+          </div>
+
+          <div class="filter-box">
+            <label>Difficulty</label>
+            <select id="filter-difficulty">
+              <option value="all">All</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div class="filter-box">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" id="filter-available" />
+              Only available
+            </label>
+          </div>
+        </aside>
+
+        <div class="course-grid" id="course-list"></div>
+
+      </div>
+    </section>
+
+    <script src="assets/js/data/courses.js"></script>
+    <script src="assets/js/courses.js"></script>
+
   </body>
 </html>
