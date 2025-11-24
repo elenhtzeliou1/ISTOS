@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const difficultyFilter = document.getElementById("filter-difficulty");
   const availabilityFilter = document.getElementById("filter-available");
 
+  const modal = document.getElementById("course-modal");
+  const modalBody = document.getElementById("modal-body");
+  const modalClose = document.getElementById("modal-close");
+
   if (!listContainer) {
     console.error("course-list element not found.");
     return;
@@ -19,6 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   categoryFilter.addEventListener("change", applyFilters);
   difficultyFilter.addEventListener("change", applyFilters);
   availabilityFilter.addEventListener("change", applyFilters);
+
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
 
   function applyFilters() {
     let filtered = COURSES;
@@ -49,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     courseArray.forEach(course => {
       const card = document.createElement("div");
       card.className = "course-product";
+      card.style.cursor = "pointer";
 
       card.innerHTML = `
         <div class="course-thumb"></div>
@@ -67,7 +77,42 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
+      // OPEN MODAL ON CLICK
+      card.addEventListener("click", () => openModal(course));
+
       listContainer.appendChild(card);
     });
+  }
+
+  /* MODAL FUNCTIONS */
+
+  function openModal(course) {
+    modalBody.innerHTML = `
+      <div class="modal-body">
+        <h2>${course.title}</h2>
+
+        <div class="modal-tags">
+          <span class="tag">${course.category}</span>
+          <span class="tag">${course.difficulty}</span>
+          ${
+            course.available
+              ? "<span class='tag available'>Available</span>"
+              : "<span class='tag unavailable'>Unavailable</span>"
+          }
+        </div>
+
+        <p>${course.description}</p>
+
+        <button class="modal-enroll-btn">Enroll Now</button>
+      </div>
+    `;
+
+    modal.classList.add("active");
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    document.body.classList.remove("no-scroll");
   }
 });
