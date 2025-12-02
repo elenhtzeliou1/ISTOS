@@ -132,7 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // update results counter
     if (resultsCount) {
       const count = courseArray.length;
-      resultsCount.textContent = count === 1 ? "Course (1)" : `Courses (${count})`;
+      resultsCount.textContent =
+        count === 1 ? "Course (1)" : `Courses (${count})`;
     }
 
     if (!courseArray.length) {
@@ -171,20 +172,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="course-info">
 
-      <div class="course-intro-info">
-      ${
-        course.available
-          ? "<span class='tag available'>Available</span>"
-          : "<span class='tag unavailable'>Unavailable</span>"
-      }
-        <h3>${course.title}</h3>
-        <p>${course.description}</p>
-      
-             <div class="tag-row">
-          <span class="tag">${course.category}</span>
-          <span class="tag">${course.difficulty}</span>
+        <div class="course-intro-info">
+          <div class="tag-row">
+            ${
+              course.available
+                ? "<span class='tag available'>Available</span>"
+                : "<span class='tag unavailable'>Unavailable</span>"
+            }
+
+            <span class="tag category">${course.category}</span>
+            <span class="tag category">${course.difficulty}</span>
           
-        </div>
+          </div>
+      
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+      
+             
         </div>
 
        

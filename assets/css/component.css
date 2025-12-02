@@ -1435,6 +1435,10 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
 
   box-sizing: border-box;
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.course-product:hover{
+    transform: translateY(-4px);
 }
 
 .course-info {
@@ -1508,10 +1512,18 @@ nav.mobile-open .nav-link-menu {
 .tag.available {
   background-color: greenyellow;
   color: black;
+  border-radius: var(--border-radius-small);
+
 }
 
 .tag.unavailable {
   background-color: brown;
+  border-radius: var(--border-radius-small);
+
+}
+.tag.category{
+  background-color: rgb(51, 51, 51);
+  border-radius: var(--border-radius-small);
 }
 
 

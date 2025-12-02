@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>${book.description.substring(0, 120)}...</p>
 
             <div class="tag-row">
-              <span class="tag">${prettyCategory(book.category)}</span>
+              <span class="tag category">${prettyCategory(book.category)}</span>
               ${
                 book.available
                   ? "<span class='tag available'>Available</span>"
