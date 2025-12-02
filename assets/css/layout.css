@@ -346,9 +346,18 @@
     .courses-presentation-wrap {
         max-width: 90%;
         min-height: 100vh;
-        background-color: red;
+    }
+    .item-course-header{
+
+
+        padding: var(--padding);
 
     }
+    .item-course-header > p{
+        font-size: 22px;
+        width: 50%;
+    }
+
 
    
 
