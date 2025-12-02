@@ -399,13 +399,16 @@ nav.mobile-open .nav-link-menu {
 }
 
 .courses-description-video-wrapper {
-  height: auto;
+  height:60vh;
   background-color: var(--card-secondary-color);
   width: 100%;
-  padding: 4rem 0;
   border-radius: var(--border-radious);
-  max-width: var(--max-width);
-  margin: auto;
+  
+}
+
+.courses-description-video-wrapper iframe {
+  height: 100%;
+  width: 100%;
 }
 
 .courses-detail-accordion {
@@ -931,9 +934,14 @@ nav.mobile-open .nav-link-menu {
 }
 
 /*end description.html intro description*/
+.courses-sticky-wrapper {
+  position: relative;
+}
+
 
 .courses-presentation-wrap {
   max-width: var(--max-width);
+    min-height: 100vh;
   height: auto;
   display: flex;
   align-items: center;
@@ -944,6 +952,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
   flex-direction: column;
   margin: auto;
+
 }
 
 .item-course-present {
@@ -955,6 +964,9 @@ nav.mobile-open .nav-link-menu {
   justify-content: var(--align-items-start);
   text-align: center;
   gap: var(--gap-mid);
+  
+  position: sticky;
+  top: 5rem;
 }
 
 .item-course-header {
@@ -1149,6 +1161,14 @@ nav.mobile-open .nav-link-menu {
   width: 95%;
   margin: auto;
   border-radius: var(--border-radius-big);
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  overflow: hidden;
+}
+.card.courses-card{
+  background-color: var( --card-grey-color);
+
 }
 
 .courses-page {

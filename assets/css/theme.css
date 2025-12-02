@@ -28,6 +28,7 @@ html {
     --border-radius-small: 3px;
     --border-radius-avrg: 10px;
     --border-radius-big: 20px;
+    --border-radius-huge:9999px;
 
     --white-bg: white;
 
@@ -39,6 +40,7 @@ html {
     --nav-button-color: rgb(212, 212, 212);
 
     --card-inside-color: rgb(24, 23, 23);
+    --card-grey-color:rgb(26, 26, 26);
 
 
 
@@ -84,7 +86,7 @@ body.no-scroll {
 
 
 h1 {
-    font-size: var(--h1-mid);
+    font-size: 40px;
     color: white;
     line-height: 1.1;
 }

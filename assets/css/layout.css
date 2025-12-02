@@ -228,7 +228,6 @@
 
     }
 
-
     .courses {
         padding: 8rem 0;
     }
@@ -277,9 +276,12 @@
 
     }
 
-
     .courses-description-video-wrapper {
         min-height: 36vw;
+        border-radius: var(--border-radius-huge);
+        width: 100%;
+        max-width: none;
+
     }
 
 
@@ -343,8 +345,13 @@
 
     .courses-presentation-wrap {
         max-width: 90%;
-        overflow: visible;
+        min-height: 100vh;
+        background-color: red;
+
     }
+
+   
+
 
     .proposed-video-carousel {
         height: 70vh;
