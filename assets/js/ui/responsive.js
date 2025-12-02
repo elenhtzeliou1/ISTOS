@@ -152,18 +152,17 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================================//
 
 //intro slider
-document.addEventListener('DOMContentLoaded', () => {
-  const slider = document.querySelector('.intro-slider');
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".intro-slider");
 
-
-  const templateItems = Array.from(slider.querySelectorAll('.intro-item'));
+  const templateItems = Array.from(slider.querySelectorAll(".intro-item"));
   const templateCount = templateItems.length || 1;
 
-  const GAP_DEG     = 22;                 // desired gap between neighbours in degrees 
-  const TILT_FACTOR = 1;                  // 1 = full tangent, <1 = softer tilt
-  const AUTO_SPEED  = 0.0015;              // radians per frame (its changes the autoplay speed)
+  const GAP_DEG = 22; // desired gap between neighbours in degrees
+  const TILT_FACTOR = 1; // 1 = full tangent, <1 = softer tilt
+  const AUTO_SPEED = 0.0015; // radians per frame (its changes the autoplay speed)
 
-  const desiredGapRad = GAP_DEG * Math.PI / 180;
+  const desiredGapRad = (GAP_DEG * Math.PI) / 180;
 
   // How many slots would we want approximately
   const approxSlots = (2 * Math.PI) / desiredGapRad;
@@ -175,10 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Actual gap used so spacing is perfectly even
   const gapAngle = (2 * Math.PI) / SLOTS;
 
-  const items = [];       // all real DOM items (templates + clones)
-  const baseAngles = [];  // base angle per slot
+  const items = []; // all real DOM items (templates + clones)
+  const baseAngles = []; // base angle per slot
 
-  let radius = 0, cx = 0, cy = 0;
+  let radius = 0,
+    cx = 0,
+    cy = 0;
   let rotationOffset = 0;
 
   let isDragging = false;
@@ -196,12 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       // extra slots are clones
       item = src.cloneNode(true);
-      item.dataset.clone = '1';
+      item.dataset.clone = "1";
       slider.appendChild(item);
     }
 
-    item.style.position = 'absolute';
-    item.style.transformOrigin = '50% 0%';
+    item.style.position = "absolute";
+    item.style.transformOrigin = "50% 0%";
     item.dataset.slotIndex = i;
 
     items.push(item);
@@ -218,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateCircle() {
     const sliderWidth = slider.clientWidth;
 
-    radius = sliderWidth / 2 + 400;  //  radius rule
+    radius = sliderWidth / 2 + 400; //  radius rule
     cx = sliderWidth / 2;
-    cy = radius;                     // so top of circle is y = 0
+    cy = radius; // so top of circle is y = 0
 
     positionAll();
   }
@@ -234,12 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const x = cx + radius * Math.cos(angle);
       const y = cy + radius * Math.sin(angle);
 
-      item.style.left = (x - itemWidth / 2) + 'px';
-      item.style.top  = y + 'px';
+      item.style.left = x - itemWidth / 2 + "px";
+      item.style.top = y + "px";
 
       // Tilt along tangent (so the top one is alligning as straight line)
       const rotationRad = (angle + Math.PI / 2) * TILT_FACTOR;
-      const rotationDeg = rotationRad * 180 / Math.PI;
+      const rotationDeg = (rotationRad * 180) / Math.PI;
       item.style.transform = `rotate(${rotationDeg}deg)`;
     });
   }
@@ -251,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return {
       x: e.clientX - bounds.left,
-      y: e.clientY - bounds.top
+      y: e.clientY - bounds.top,
     };
   }
 
@@ -262,16 +263,16 @@ document.addEventListener('DOMContentLoaded', () => {
     isDragging = true;
     draggedIndex = Number(item.dataset.slotIndex);
 
-    slider.style.cursor = 'grabbing';
-    items.forEach(it => (it.style.cursor = 'grabbing'));
+    slider.style.cursor = "grabbing";
+    items.forEach((it) => (it.style.cursor = "grabbing"));
 
     // Position immediately so there's no jump
     onDrag(evt);
 
-    document.addEventListener('mousemove', onDrag);
-    document.addEventListener('touchmove', onDrag, { passive: false });
-    document.addEventListener('mouseup', endDrag);
-    document.addEventListener('touchend', endDrag);
+    document.addEventListener("mousemove", onDrag);
+    document.addEventListener("touchmove", onDrag, { passive: false });
+    document.addEventListener("mouseup", endDrag);
+    document.addEventListener("touchend", endDrag);
   }
 
   function onDrag(evt) {
@@ -292,20 +293,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isDragging) return;
     isDragging = false;
 
-    slider.style.cursor = '';
-    items.forEach(it => (it.style.cursor = 'grab'));
+    slider.style.cursor = "";
+    items.forEach((it) => (it.style.cursor = "grab"));
 
-    document.removeEventListener('mousemove', onDrag);
-    document.removeEventListener('touchmove', onDrag);
-    document.removeEventListener('mouseup', endDrag);
-    document.removeEventListener('touchend', endDrag);
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("touchmove", onDrag);
+    document.removeEventListener("mouseup", endDrag);
+    document.removeEventListener("touchend", endDrag);
   }
 
   // --- Autoplay -  infinity rotation of the ring ---//
 
   function animate() {
     if (!isDragging) {
-      rotationOffset += AUTO_SPEED;      // change sign to reverse direction
+      rotationOffset += AUTO_SPEED; // change sign to reverse direction
 
       if (rotationOffset > Math.PI * 2) rotationOffset -= Math.PI * 2;
       if (rotationOffset < -Math.PI * 2) rotationOffset += Math.PI * 2;
@@ -317,14 +318,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize
   updateCircle();
-  window.addEventListener('resize', updateCircle);
+  window.addEventListener("resize", updateCircle);
 
   // Add listeners to all slots (templates + clones)
-  items.forEach(item => {
-    item.style.cursor = 'grab';
-    item.addEventListener('mousedown', startDrag);
-    item.addEventListener('touchstart', startDrag, { passive: false });
+  items.forEach((item) => {
+    item.style.cursor = "grab";
+    item.addEventListener("mousedown", startDrag);
+    item.addEventListener("touchstart", startDrag, { passive: false });
   });
 
   animate(); // start autoplay
 });
+
+// ==================================//
+// ==================================//
+// ==================================//
+// ==================================//

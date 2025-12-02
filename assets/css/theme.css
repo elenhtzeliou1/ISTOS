@@ -6,57 +6,85 @@
     font-style: normal;
 
 }
+
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 
 :root {
     --nav-height: 70px;
+    --padding-sm: 0.5rem;
+    --padding-avg: 1rem;
+    --padding-mid: 1.5rem;
+    --padding: 2rem;
+    --padding-big: 4rem;
+    --padding-lrg: 6rem;
     --gap: 1rem;
-    --gap-mid:2rem;
-    --gap-big:4rem;
+    --gap-mid: 2rem;
+    --gap-big: 4rem;
+
     --border-radious: 5px;
-    --border-radius-small:3px;
-    --border-radius-big:20px;
+    --border-radius-small: 3px;
+    --border-radius-avrg: 10px;
+    --border-radius-big: 20px;
 
-    --card-color:rgb(26, 26, 26);
-    --background-color:black;
-    --secondary-bg-color:white;
-    --card-secondary-color:rgb(234, 234, 234);
-    --intro-item-bg-color:rgb(32, 32, 32);
-    --nav-button-color:rgb(212, 212, 212);
+    --white-bg: white;
 
-    --number-block-width:58px;
-    --number-block-height:58px;
-    --card-top-padding:calc(var(--number-block-height));
-    --card-left-padding:calc(var(--number-block-width));
+    --card-color: rgb(26, 26, 26);
+    --background-color: black;
+    --secondary-bg-color: white;
+    --card-secondary-color: rgb(234, 234, 234);
+    --intro-item-bg-color: rgb(32, 32, 32);
+    --nav-button-color: rgb(212, 212, 212);
 
-       
-    --max-width:  1200px;
+    --card-inside-color: rgb(24, 23, 23);
+
+
+
+    --border-top-gr: rgb(128, 128, 128);
+    --border-top-new: rgb(37, 37, 37);
+    --number-block-width: 58px;
+    --number-block-height: 58px;
+    --card-top-padding: calc(var(--number-block-height));
+    --card-left-padding: calc(var(--number-block-width));
+
+
+    --max-width: 1200px;
     --min-height: 90vh;
-    --min-height-wide:135vh;
+    --min-height-small: 60vh;
+    --min-height-very-small: 40vh;
 
-    --h1-mid:70px;
+    --min-height-wide: 135vh;
+    --max-width-register: 900px;
 
-    --green:greenyellow;
+    --h1-mid: 70px;
+    --p-big: 24px;
+
+    --green: greenyellow;
+    --text-align-def: center;
+    --align-items-start: flex-start;
+
+    --small-font-size: 16px;
 
 }
 
 body {
     padding-top: var(--nav-height);
-    background-color:var(--background-color);
+    background-color: var(--background-color);
+
 }
 
 /*no scroll when the mobile menu opens*/
 body.no-scroll {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 /*no scroll when the mobile menu opens*/
 
 
 h1 {
-    font-size: 40px;
+    font-size: var(--h1-mid);
     color: white;
     line-height: 1.1;
 }
@@ -66,18 +94,22 @@ h2 {
     color: white;
     line-height: 1.1;
 }
-.logo{
+
+.logo {
     font-size: 20px;
 }
-h3{
+
+h3 {
     font-size: 20px;
     color: white;
     line-height: 1.1;
 }
-h4{
+
+h4 {
     font-size: 22px;
     color: white;
 }
+
 p {
     font-size: 16px;
     color: white;
@@ -95,59 +127,76 @@ nav>h2 {
 
 a {
     background-color: white;
-    padding: 8px 1rem;
+    padding: 8px 0.8rem;
     box-sizing: border-box;
     color: black;
     border: 1px solid white;
     text-align: center;
 }
 
-button{
+button {
     box-sizing: border-box;
     color: black;
     border: none;
     text-decoration: none;
-    background-color:white;
+    background-color: white;
     font-size: 20px;
 }
 
-.fa-brands.fa-42-group{
+.submit-btn {
+    width: 100%;
+    padding: 12px 0.8rem;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.submit-btn:hover {
+    background-color: black;
+    transition: 0.2s;
+    color: white;
+}
+
+.fa-brands.fa-42-group {
     color: greenyellow;
     font-size: 40px;
 }
 
 #openMenu,
 #closeMenu {
-  cursor: pointer;
-  font-size: 22px;
-  color: white;
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
 }
-span{
+
+span {
     color: white;
     font-size: 24px;
-    font-weight: 450;
-}
-.menu-span{
     font-weight: 350;
-    font-size:18px;
+}
+
+.menu-span {
+    font-weight: 350;
+    font-size: 18px;
 
 }
-.course-span{
+
+.course-span {
     color: black;
 }
-.menu{
+
+.menu {
     background-color: transparent;
     border: none;
-    padding:10px 0;
+    padding: 10px 0;
     width: 100%;
     color: var(--nav-button-color);
     font-size: 18px;
     text-align: left;
 }
 
-.a-green{
+.a-green {
     background-color: greenyellow;
-    border:none;
+    border: none;
     font-size: 12px;
     padding: 4px 10px;
     border-radius: var(--border-radius-small);

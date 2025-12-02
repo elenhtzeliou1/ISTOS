@@ -5,7 +5,6 @@
     /*Menu*/
     /* no show .nav-menu*/
     nav {
-
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -106,7 +105,7 @@
         display: none;
     }
 
-    
+
 
     /*Menu*/
 
@@ -142,7 +141,8 @@
         width: 260px;
         height: 200px;
     }
-    .intro-item > p{
+
+    .intro-item>p {
         font-size: 12px;
     }
 
@@ -320,5 +320,267 @@
 
     .card:hover {
         transform: translateY(-5px);
+    }
+
+    .header-categories-intro-wrap {
+        width: 80%;
+        margin: auto;
+        height: 70vh;
+    }
+
+    .categories-intro-video-wrap {
+        height: 67vh;
+    }
+
+
+    .all-categories-wrap {
+        max-width: 90%;
+    }
+
+    .card-carousel {
+        padding: var(--gap) 0;
+    }
+
+    .courses-presentation-wrap {
+        max-width: 90%;
+        overflow: visible;
+    }
+
+    .proposed-video-carousel {
+        height: 70vh;
+
+    }
+
+    .proposed-video-card {
+        width: 1000px;
+        height: 60vh;
+    }
+
+    .proposed-video-vd-wrapper {
+        height: 90%;
+    }
+
+    .proposed-courses {
+        display: flex;
+        flex-direction: row;
+        /* put children along the row */
+        flex-wrap: wrap;
+        /* allow second row */
+        align-items: flex-start;
+    }
+
+
+    .proposed-courses>h1 {
+        /* heading takes full width = its own row */
+        flex: 0 0 100%;
+        margin-bottom: var(--gap-mid);
+    }
+
+    .proposed-courses-item {
+
+        width: auto;
+        flex: 0 0 calc(33.333% - var(--gap-mid));
+        /* 3 in a row; tweak as needed */
+        align-items: flex-start;
+    }
+
+    .proposed-courses-item p {
+        font-size: 20px;
+    }
+
+    /*==============================*/
+    /*==============================*/
+    /*==============================*/
+    /*==============================*/
+
+    /*course.html*/
+    .header-more-info-courses {
+        background-color: rgb(223, 226, 226);
+        height: 80vh;
+        width: 95%;
+        border-radius: 9999px;
+    }
+
+    .courses-page {
+        width: 95%;
+        max-width: none;
+        padding: var(--padding-big) 0;
+        display: flex;
+    }
+
+
+
+    .course-layout {
+        display: flex;
+        /* important */
+        width: 100%;
+        /* fill the page */
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap);
+    }
+
+    .course-layout:has(.filter-sidebar.is-collapsed) {
+        gap: 0;
+    }
+
+    .filter-sidebar {
+        position: sticky;
+        top: var(--nav-height);
+        align-self: flex-start;
+        flex: 0 0 160px;
+        max-width: 160px;
+        height: auto;
+        max-height: calc(100vh - var(--nav-height));
+        overflow-y: auto;
+        transform: none;
+        z-index: 888;
+        padding: var(--padding) var(--padding-avg) var(--padding) 0;
+        opacity: 1;
+        transition:
+            flex-basis 0.25s ease,
+            max-width 0.25s ease,
+            opacity 0.25s ease,
+            transform 0.25s ease;
+        padding: var(--padding) 0;
+    }
+
+    /* SIDEBAR: collapsed (hidden) state */
+    .filter-sidebar.is-collapsed {
+        flex-basis: 0;
+        max-width: 0;
+        padding: var(--padding) 0;
+        opacity: 0;
+        transform: translateX(-160px);
+        pointer-events: none;
+        overflow: hidden;
+
+    }
+
+    .filters-header .fa-solid.fa-x {
+        display: none;
+    }
+
+    .course-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--gap);
+        align-items: stretch;
+        padding: var(--padding) 0;
+    }
+
+    .course-product {
+        width: 100%;
+    }
+
+    .course-info {
+        height: 100%;
+    }
+
+
+    .course-faq {
+        margin: auto auto 0 auto;
+    }
+
+    .course-intro-info>h3 {
+        font-size: 2em;
+    }
+
+    .course-intro-info>p {
+        font-size: 16px;
+    }
+
+    .filter-backdrop {
+        display: none;
+    }
+
+
+    .filter-button-results-wrapper {
+        padding: 0;
+    }
+
+    .toggle-filter-menu {
+        font-size: 18px;
+        padding: var(--padding-sm) var(--padding-avg);
+    }
+
+    .filter-toggle {
+        display: none;
+    }
+
+    .toggle-filter-menu {
+        display: block;
+    }
+
+    .course-faq-item p {
+        font-size: 18px;
+    }
+
+    .tag {
+        font-size: 14px;
+        padding: 2px var(--padding-avg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tag-row {
+        display: flex;
+        gap: var(--padding-sm);
+        flex-wrap: wrap;
+    }
+
+    .intro-container.courses {
+        height: auto;
+        padding: 6rem 0;
+        background-size: 380px;
+
+    }
+
+    .intro-container.courses .title-container {
+        height: auto;
+        gap: 0;
+        position: relative;
+        padding: 0;
+    }
+
+    .intro-container.courses .title-container>h1 {
+        font-size: 160px;
+    }
+
+    .intro-container.courses .title-container>p {
+        font-size: var(--p-big);
+    }
+
+    /*====================*/
+    /*====================*/
+    /*====================*/
+    /*register.html*/
+
+    .register-container {
+        max-width: var(--max-width-register);
+        padding: var(--padding-lrg) var(padding);
+    }
+
+    .register-container p {
+        font-size: var(--p-big);
+    }
+
+    .from-row {
+        flex-direction: row;
+    }
+
+    .form-column input {
+        font-size: 18px;
+    }
+
+    .form-column label {
+        font-size: 20px;
+    }
+
+    .form-column select {
+        font-size: 18px;
     }
 }

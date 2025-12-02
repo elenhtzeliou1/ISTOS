@@ -1,12 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   const listContainer = document.getElementById("course-list");
-  const categoryFilter = document.getElementById("filter-category");
-  const difficultyFilter = document.getElementById("filter-difficulty");
+  const resultsCount = document.getElementById("results-count");
+
+  const categoryCheckboxes = document.querySelectorAll(
+    'input[name="filter-category"]'
+  );
+  const difficultyCheckboxes = document.querySelectorAll(
+    'input[name="filter-difficulty"]'
+  );
   const availabilityFilter = document.getElementById("filter-available");
 
-  const modal = document.getElementById("course-modal");
-  const modalBody = document.getElementById("modal-body");
-  const modalClose = document.getElementById("modal-close");
+  const filterToggleBtn = document.getElementById("filter-toggle");
+  const filterSidebar = document.querySelector(".filter-sidebar");
+  const filterBackdrop = document.getElementById("filter-backdrop");
+  const filterCloseBtn = document.getElementById("filter-close");
+  const toggleFilterMenuBtn = document.getElementById("toggle-filter-menu");
+
+  if (toggleFilterMenuBtn && filterSidebar) {
+    toggleFilterMenuBtn.addEventListener("click", () => {
+      const isCollapsed = filterSidebar.classList.toggle("is-collapsed");
+
+      // Optional: toggle button text (Greek)
+      toggleFilterMenuBtn.textContent = isCollapsed
+        ? "Show Filters"
+        : "Hide Filters";
+    });
+  }
 
   if (!listContainer) {
     console.error("course-list element not found.");
@@ -20,28 +39,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCourses(COURSES);
 
-  categoryFilter.addEventListener("change", applyFilters);
-  difficultyFilter.addEventListener("change", applyFilters);
-  availabilityFilter.addEventListener("change", applyFilters);
+  // when any category checkbox changes → re-filter
+  categoryCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", applyFilters);
+  });
 
-  modalClose.addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
+  // when any difficulty checkbox changes → re-filter
+  difficultyCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", applyFilters);
+  });
+
+  if (availabilityFilter) {
+    availabilityFilter.addEventListener("change", applyFilters);
+  }
+
+  /* === FILTER BOTTOM SHEET LOGIC === */
+
+  function openFilter() {
+    if (!filterSidebar) return;
+    filterSidebar.classList.add("is-open");
+    if (filterBackdrop) filterBackdrop.classList.add("is-open");
+    document.body.classList.add("no-scroll"); // optional if you want to lock scroll
+  }
+
+  function closeFilter() {
+    if (!filterSidebar) return;
+    filterSidebar.classList.remove("is-open");
+    if (filterBackdrop) filterBackdrop.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+  }
+
+  // open on "Filters" button
+  if (filterToggleBtn) {
+    filterToggleBtn.addEventListener("click", openFilter);
+  }
+
+  // close on backdrop click
+  if (filterBackdrop) {
+    filterBackdrop.addEventListener("click", closeFilter);
+  }
+
+  // close on X icon inside the sheet
+  if (filterCloseBtn) {
+    filterCloseBtn.addEventListener("click", closeFilter);
+  }
+
+  // OPTIONAL: close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeFilter();
+    }
   });
 
   function applyFilters() {
     let filtered = COURSES;
 
-    if (categoryFilter.value !== "all") {
-      filtered = filtered.filter(c => c.category === categoryFilter.value);
+    // 1) collect selected categories
+    const selectedCategories = Array.from(categoryCheckboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
+
+    // 2) collect selected difficulties
+    const selectedDifficulties = Array.from(difficultyCheckboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
+
+    // 3) filter by category if any category is checked
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter((c) =>
+        selectedCategories.includes(c.category)
+      );
     }
 
-    if (difficultyFilter.value !== "all") {
-      filtered = filtered.filter(c => c.difficulty === difficultyFilter.value);
+    // 4) filter by difficulty if any difficulty is checked
+    if (selectedDifficulties.length > 0) {
+      filtered = filtered.filter((c) =>
+        selectedDifficulties.includes(c.difficulty)
+      );
     }
 
-    if (availabilityFilter.checked) {
-      filtered = filtered.filter(c => c.available);
+    // 5) filter by availability
+    if (availabilityFilter && availabilityFilter.checked) {
+      filtered = filtered.filter((c) => c.available);
     }
 
     renderCourses(filtered);
@@ -50,34 +129,70 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCourses(courseArray) {
     listContainer.innerHTML = "";
 
+    // update results counter
+    if (resultsCount) {
+      const count = courseArray.length;
+      resultsCount.textContent = count === 1 ? "Course (1)" : `Courses (${count})`;
+    }
+
     if (!courseArray.length) {
       listContainer.innerHTML = `<p style="color:white;">No courses found.</p>`;
       return;
     }
 
-    courseArray.forEach(course => {
+    courseArray.forEach((course) => {
       const card = document.createElement("div");
       card.className = "course-product";
       card.style.cursor = "pointer";
 
-      card.innerHTML = `
-        <div class="course-thumb"></div>
-        <div class="course-info">
-          <h3>${course.title}</h3>
-          <p>${course.description}</p>
-          <div class="tag-row">
-            <span class="tag">${course.category}</span>
-            <span class="tag">${course.difficulty}</span>
-            ${
-              course.available
-                ? "<span class='tag available'>Available</span>"
-                : "<span class='tag unavailable'>Unavailable</span>"
-            }
-          </div>
+      // build FAQ black box HTML
+      const faqHtml =
+        Array.isArray(course.faq) && course.faq.length
+          ? `
+        <div class="course-faq">
+          ${course.faq
+            .map(
+              (item, index) => `
+            <div class="course-faq-item">
+              <span class="course-faq-index">${String(index + 1).padStart(
+                2,
+                "0"
+              )}</span>
+              <p>${item.info}</p>
+            </div>
+          `
+            )
+            .join("")}
         </div>
-      `;
+      `
+          : "";
 
-      // OPEN MODAL ON CLICK
+      card.innerHTML = `
+
+      <div class="course-info">
+
+      <div class="course-intro-info">
+      ${
+        course.available
+          ? "<span class='tag available'>Available</span>"
+          : "<span class='tag unavailable'>Unavailable</span>"
+      }
+        <h3>${course.title}</h3>
+        <p>${course.description}</p>
+      
+             <div class="tag-row">
+          <span class="tag">${course.category}</span>
+          <span class="tag">${course.difficulty}</span>
+          
+        </div>
+        </div>
+
+       
+        ${faqHtml}
+      </div>
+    `;
+
+      // OPEN MODAL ON CLICK (keep as you have it)
       card.addEventListener("click", () => openModal(course));
 
       listContainer.appendChild(card);
@@ -87,32 +202,52 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MODAL FUNCTIONS */
 
   function openModal(course) {
+    // Build FAQ HTML if the course has extra info
+    let faqHtml = "";
+
+    if (Array.isArray(course.faq) && course.faq.length) {
+      faqHtml = `
+    <div class="course-faq">
+      ${course.faq
+        .map(
+          (item, index) => `
+          <div class="course-faq-item">
+            <span class="course-faq-index">${String(index + 1).padStart(
+              2,
+              "0"
+            )}</span>
+            <p>${item.info}</p>
+          </div>
+        `
+        )
+        .join("")}
+    </div>
+  `;
+    }
+
     modalBody.innerHTML = `
-      <div class="modal-body">
-        <h2>${course.title}</h2>
+    <div class="modal-body">
+      <h2>${course.title}</h2>
 
-        <div class="modal-tags">
-          <span class="tag">${course.category}</span>
-          <span class="tag">${course.difficulty}</span>
-          ${
-            course.available
-              ? "<span class='tag available'>Available</span>"
-              : "<span class='tag unavailable'>Unavailable</span>"
-          }
-        </div>
-
-        <p>${course.description}</p>
-
-        <button class="modal-enroll-btn">Enroll Now</button>
+      <div class="modal-tags">
+        <span class="tag">${course.category}</span>
+        <span class="tag">${course.difficulty}</span>
+        ${
+          course.available
+            ? "<span class='tag available'>Available</span>"
+            : "<span class='tag unavailable'>Unavailable</span>"
+        }
       </div>
-    `;
+
+      <p>${course.description}</p>
+
+      ${faqHtml}
+
+      <button class="modal-enroll-btn">Enroll Now</button>
+    </div>
+  `;
 
     modal.classList.add("active");
     document.body.classList.add("no-scroll");
-  }
-
-  function closeModal() {
-    modal.classList.remove("active");
-    document.body.classList.remove("no-scroll");
   }
 });
