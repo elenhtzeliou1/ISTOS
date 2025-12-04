@@ -37,7 +37,22 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  renderCourses(COURSES);
+  // listen to ?category from url
+  const params = new URLSearchParams(window.location.search);
+  const initialCategory = params.get("category");
+
+  if (initialCategory){
+    //check only tin katigoria pou ir8e apo to url
+    categoryCheckboxes.forEach((cb)=>{
+      cb.checked = cb.value === initialCategory;
+    });
+
+    applyFilters();
+  }else{
+    //AN DEN EXEI ER8EI KATI KANOUME APLA RENDER TA COURSES opos arxika ;)
+    renderCourses(COURSES);
+  }
+
 
   // when any category checkbox changes → re-filter
   categoryCheckboxes.forEach((checkbox) => {

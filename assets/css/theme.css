@@ -20,6 +20,10 @@ html {
     --padding: 2rem;
     --padding-big: 4rem;
     --padding-lrg: 6rem;
+
+    --padding-m: 8em;
+    --padding-l: 10em;
+
     --gap: 1rem;
     --gap-mid: 2rem;
     --gap-big: 4rem;
@@ -27,48 +31,61 @@ html {
     --border-radious: 5px;
     --border-radius-small: 3px;
     --border-radius-avrg: 10px;
+    --border-radius-m: 15px;
     --border-radius-big: 20px;
-    --border-radius-huge:9999px;
+    --border-radius-huge: 9999px;
 
     --white-bg: white;
 
     --card-color: rgb(26, 26, 26);
     --background-color: black;
-    --secondary-bg-color: white;
+    --secondary-bg-color: rgb(244, 244, 244);
+
     --card-secondary-color: rgb(234, 234, 234);
     --intro-item-bg-color: rgb(32, 32, 32);
     --nav-button-color: rgb(212, 212, 212);
 
     --card-inside-color: rgb(24, 23, 23);
-    --card-grey-color:rgb(26, 26, 26);
+    --card-grey-color: rgb(26, 26, 26);
+    --base-screen-color: rgb(212, 214, 223);
 
+    --card-vd: rgb(32, 29, 29);
 
 
     --border-top-gr: rgb(128, 128, 128);
+    --border-top-sec: rgb(223, 223, 223);
     --border-top-new: rgb(37, 37, 37);
+
     --number-block-width: 58px;
     --number-block-height: 58px;
     --card-top-padding: calc(var(--number-block-height));
     --card-left-padding: calc(var(--number-block-width));
 
-
+    --tag-color: rgb(49, 49, 49);
     --max-width: 1200px;
     --min-height: 90vh;
     --min-height-small: 60vh;
+
+    --wrapper-height: 95vh;
     --min-height-very-small: 40vh;
 
     --min-height-wide: 135vh;
     --max-width-register: 900px;
 
     --h1-mid: 70px;
+    --h1-ultra:100px;
+    --h2-b: 36px;
     --p-big: 24px;
+    --p-lrg:30px;
 
     --green: greenyellow;
+    --violet: rgb(104, 64, 255);
     --text-align-def: center;
     --align-items-start: flex-start;
 
     --small-font-size: 16px;
 
+    --screen-wrapper-height-s: 50vh;
 }
 
 body {
@@ -87,8 +104,8 @@ body.no-scroll {
 
 h1 {
     font-size: 40px;
-    color: white;
     line-height: 1.1;
+    color: white;
 }
 
 h2 {
@@ -110,12 +127,13 @@ h3 {
 h4 {
     font-size: 22px;
     color: white;
+
 }
 
 p {
     font-size: 16px;
+    line-height: 1.1;
     color: white;
-    line-height: 1.4;
     font-weight: 300;
 }
 
@@ -125,6 +143,7 @@ p {
 
 nav>h2 {
     color: white;
+
 }
 
 a {
@@ -134,6 +153,19 @@ a {
     color: black;
     border: 1px solid white;
     text-align: center;
+}
+.green-btn{
+    background-color: var(--green);
+    padding: var(--padding-sm) var(--padding);
+    box-sizing: border-box;
+    color: black;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+}
+.green-btn:hover{
+    transform: scale(0.95);
+    transition: 0.2s;
 }
 
 button {
@@ -184,6 +216,7 @@ span {
 
 .course-span {
     color: black;
+    font-size: 18px;
 }
 
 .menu {

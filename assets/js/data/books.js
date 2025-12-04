@@ -3,6 +3,7 @@ const BOOKS = [
     id: 1,
     title: "Python Crash Course",
     category: "programming",
+    difficulty: "beginner",
     available: true,
     description:
       "A fast-paced introduction to Python programming, covering variables, data structures, functions, OOP, and real-world projects. Perfect for beginners entering coding.",
@@ -12,6 +13,7 @@ const BOOKS = [
     id: 2,
     title: "Fluent Python",
     category: "programming",
+    difficulty: "advanced",
     available: false,
     description:
       "A deep dive into advanced Python concepts, including generators, decorators, concurrency, and Pythonic design. Ideal for experienced Python developers.",
@@ -21,6 +23,7 @@ const BOOKS = [
     id: 3,
     title: "Computer Networking: A Top-Down Approach",
     category: "networks",
+    difficulty: "intermediate",
     available: true,
     description:
       "The most widely used networking textbook. Covers networking layers, protocols, routing, security, and real-world packet flows from a top-down perspective.",
@@ -30,6 +33,7 @@ const BOOKS = [
     id: 4,
     title: "Cybersecurity Essentials",
     category: "security",
+    difficulty: "beginner",
     available: true,
     description:
       "A foundational introduction to cybersecurity concepts, including encryption, authentication, threats, vulnerabilities, network defense, and best practices.",
@@ -39,6 +43,7 @@ const BOOKS = [
     id: 5,
     title: "SQL for Data Analysis",
     category: "databases",
+    difficulty: "intermediate",
     available: true,
     description:
       "Learn how to query relational databases using SQL. Covers SELECT, JOIN, GROUP BY, window functions, subqueries, and practical data analysis workflows.",
