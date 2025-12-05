@@ -25,183 +25,269 @@
     />
   </head>
 
-  <body>
+  <body class="course-detail-page">
     <!--nav same for every page-->
     <nav id="site-nav"></nav>
     <script src="assets/js/ui/nav.js"></script>
     <!--nav-->
 
-    <header class="course-details-page-header">
-      <div class="course-dtls-box">
-        <h1>Add Course Title here</h1>
-        <p>Add course Description here</p>
-      </div>
-      <div class="course-dtls-box-img">
-        <!-- add course img here -->
-        <img src="/assets/images/cybersec.avif" alt="" />
-      </div>
+    <header class="crs-dtl-header">
+      <h1 id="course-title">Insert Course Title</h1>
+      <p id="course-description">
+        Insert description of the course. It's a jumble of Latin words that
+        looks like real text but is intentionally nonsensical, allowing
+        designers to focus on the aesthetics of a project.
+      </p>
     </header>
 
-    <div class="crs-descr-wrp">
-      <div class="crs-descr-box"><h1>To who is addressed to?</h1></div>
-      <div class="crs-descr-box">
-        <p>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit.
-        </p>
+    <div class="learning-goals-container">
+      <div class="tag">LEARNING GOALS</div>
+      <div class="goal-slider">
+        <div class="goal-item">
+          <span>01</span>
+          <h5>Become a python pro</h5>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus.
+          </p>
+          <div class="tag-row">
+            <div class="tag">Become</div>
+            <div class="tag">Pro</div>
+          </div>
+        </div>
+
+        <div class="goal-item">
+          <span>02</span>
+          <h5>Become a python pro</h5>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus.
+          </p>
+          <div class="tag-row">
+            <div class="tag">Become</div>
+            <div class="tag">Pro</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <span>03</span>
+          <h5>Become a python pro</h5>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus.
+          </p>
+          <div class="tag-row">
+            <div class="tag">Become</div>
+            <div class="tag">Pro</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controll-btn-row">
+        <div class="slider-cursor-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+        <div class="slider-cursor-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
       </div>
     </div>
 
-    <div class="crs-detail-acc-wrp">
-      <div class="crs-dtl-acc-img-wrp">
-        <img src="/assets/images/lukas-Gtcf4MZ2ycc-unsplash.jpg" alt="" />
+    <main class="main-description-course">
+      <!--dummy h1-->
+      <h2>
+        Explore the full structure of this course below, with each section
+        explained in detail so you know exactly what you will learn, practice,
+        and achieve.
+      </h2>
+
+      <div class="course-modules-wrapper">
+        <div class="course-module">
+          <div class="module-header">
+            <h3>Dummy title of the module</h3>
+            <span>01</span>
+          </div>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus on the
+            aesthetics.
+          </p>
+        </div>
+        <div class="course-module">
+          <div class="module-header">
+            <h3>Dummy title of the module</h3>
+            <span>01</span>
+          </div>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus on the
+            aesthetics.
+          </p>
+        </div>
+        <div class="course-module">
+          <div class="module-header">
+            <h3>Dummy title of the module</h3>
+            <span>01</span>
+          </div>
+          <p>
+            It's a jumble of Latin words that looks like real text but is
+            intentionally nonsensical, allowing designers to focus on the
+            aesthetics.
+          </p>
+        </div>
       </div>
+    </main>
 
-      <div class="crs-dtl-acc-acc-wrapper">
-        <!-- That is one Description-->
-        <div class="accordion-item crs-dtl">
-          <button
-            class="accordion-trigger"
-            aria-expanded="true"
-            aria-controls="crs-dtl-panel-1"
-            id="crs-dtl-trigger-1"
-          >
-            <span class="course-span">Databases & SQL</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
+    <div class="more-quest-wrapper">
+      <div class="more-qst-row">
+        <h1>Got More questions? We've got your answers</h1>
 
-          <div
-            class="accordion-panel"
-            id="crs-dtl-panel-1"
-            role="region"
-            aria-labelledby="crs-dtl-panel-1"
-          >
-            <div class="accordion-panel-inner crs">
-              <!-- to krimeno content-->
-              <p>
-                Learn how data is stored, queried and managed in relational
-                databases. You’ll work with tables, primary keys and
-                relationships, and practise writing SQL queries using
-                <code>SELECT</code>, <code>JOIN</code>,
-                <code>GROUP BY</code> and more. Examples are based on realistic
-                datasets, so you can connect what you learn to real
-                applications, reports and projects you might build as an
-                Informatics student.
-              </p>
+        <!--add accordion warpper here-->
+        <div class="courses-detail-accordion module">
+          <!-- That is one Description-->
+          <div class="accordion-item">
+            <button
+              class="accordion-trigger qst"
+              aria-expanded="true"
+              aria-controls="qst-detail-panel-1"
+              id="qst-detail-trigger-1"
+            >
+              <span class="course-span">Programming Fundamentals</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+
+            <div
+              class="accordion-panel"
+              id="qst-detail-panel-1"
+              role="region"
+              aria-labelledby="qst-detail-trigger-1"
+            >
+              <div class="accordion-panel-inner qst">
+                <!-- to krimeno content-->
+                <p>
+                  Start from the basics of programming with clear, step-by-step
+                  lessons. You’ll learn about variables, data types, conditions,
+                  loops and functions using beginner-friendly languages like
+                  Python and Java. Each lesson includes short examples and small
+                  exercises so you can practise as you go. By the end of this
+                  section, you’ll feel comfortable reading and writing simple
+                  programs on your own.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- End - That is one Description-->
+          <!-- End - That is one Description-->
 
-        <!-- That is one Description-->
-        <div class="accordion-item crs-dtl">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="crs-dtl-panel-2"
-            id="crs-dtl-trigger-2"
-          >
-            <span class="course-span">Databases & SQL</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
+          <!-- That is one Description-->
+          <div class="accordion-item">
+            <button
+              class="accordion-trigger qst"
+              aria-expanded="false"
+              aria-controls="qst-detail-panel-2"
+              id="qst-detail-trigger-2"
+            >
+              <span class="course-span">Programming Fundamentals</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
 
-          <div
-            class="accordion-panel"
-            id="crs-dtl-panel-2"
-            role="region"
-            aria-labelledby="crs-dtl-panel-2"
-          >
-            <div class="accordion-panel-inner crs">
-              <!-- to krimeno content-->
-              <p >
-                Learn how data is stored, queried and managed in relational
-                databases. You’ll work with tables, primary keys and
-                relationships, and practise writing SQL queries using
-                <code>SELECT</code>, <code>JOIN</code>,
-                <code>GROUP BY</code> and more. Examples are based on realistic
-                datasets, so you can connect what you learn to real
-                applications, reports and projects you might build as an
-                Informatics student.
-              </p>
+            <div
+              class="accordion-panel"
+              id="qst-detail-panel-2"
+              role="region"
+              aria-labelledby="qst-detail-trigger-2"
+            >
+              <div class="accordion-panel-inner qst">
+                <!-- to krimeno content-->
+                <p>
+                  Start from the basics of programming with clear, step-by-step
+                  lessons. You’ll learn about variables, data types, conditions,
+                  loops and functions using beginner-friendly languages like
+                  Python and Java. Each lesson includes short examples and small
+                  exercises so you can practise as you go. By the end of this
+                  section, you’ll feel comfortable reading and writing simple
+                  programs on your own.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- End - That is one Description-->
+          <!-- End - That is one Description-->
 
-        <!-- That is one Description-->
-        <div class="accordion-item crs-dtl">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="crs-dtl-panel-3"
-            id="crs-dtl-trigger-3"
-          >
-            <span class="course-span">Databases & SQL</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
+          <!-- That is one Description-->
+          <div class="accordion-item">
+            <button
+              class="accordion-trigger qst"
+              aria-expanded="false"
+              aria-controls="qst-detail-panel-3"
+              id="qst-detail-trigger-3"
+            >
+              <span class="course-span">Programming Fundamentals</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
 
-          <div
-            class="accordion-panel"
-            id="crs-dtl-panel-3"
-            role="region"
-            aria-labelledby="crs-dtl-panel-3"
-          >
-            <div class="accordion-panel-inner  crs">
-              <!-- to krimeno content-->
-              <p>
-                Learn how data is stored, queried and managed in relational
-                databases. You’ll work with tables, primary keys and
-                relationships, and practise writing SQL queries using
-                <code>SELECT</code>, <code>JOIN</code>,
-                <code>GROUP BY</code> and more. Examples are based on realistic
-                datasets, so you can connect what you learn to real
-                applications, reports and projects you might build as an
-                Informatics student.
-              </p>
+            <div
+              class="accordion-panel"
+              id="qst-detail-panel-3"
+              role="region"
+              aria-labelledby="qst-detail-trigger-3"
+            >
+              <div class="accordion-panel-inner qst">
+                <!-- to krimeno content-->
+                <p>
+                  Start from the basics of programming with clear, step-by-step
+                  lessons. You’ll learn about variables, data types, conditions,
+                  loops and functions using beginner-friendly languages like
+                  Python and Java. Each lesson includes short examples and small
+                  exercises so you can practise as you go. By the end of this
+                  section, you’ll feel comfortable reading and writing simple
+                  programs on your own.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- End - That is one Description-->
+          <!-- End - That is one Description-->
 
-        <!-- That is one Description-->
-        <div class="accordion-item crs-dtl">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="crs-dtl-panel-4"
-            id="crs-dtl-trigger-4"
-          >
-            <span class="course-span">Databases & SQL</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
+          <!-- That is one Description-->
+          <div class="accordion-item">
+            <button
+              class="accordion-trigger qst"
+              aria-expanded="false"
+              aria-controls="qst-detail-panel-4"
+              id="qst-detail-trigger-4"
+            >
+              <span class="course-span">More questions</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
 
-          <div
-            class="accordion-panel"
-            id="crs-dtl-panel-4"
-            role="region"
-            aria-labelledby="crs-dtl-panel-4"
-          >
-            <div class="accordion-panel-inner  crs">
-              <!-- to krimeno content-->
-              <p>
-                Learn how data is stored, queried and managed in relational
-                databases. You’ll work with tables, primary keys and
-                relationships, and practise writing SQL queries using
-                <code>SELECT</code>, <code>JOIN</code>,
-                <code>GROUP BY</code> and more. Examples are based on realistic
-                datasets, so you can connect what you learn to real
-                applications, reports and projects you might build as an
-                Informatics student.
-              </p>
+            <div
+              class="accordion-panel"
+              id="qst-detail-panel-4"
+              role="region"
+              aria-labelledby="qst-detail-trigger-4"
+            >
+              <div class="accordion-panel-inner qst">
+                <!-- to krimeno content-->
+                <p>
+                  Start from the basics of programming with clear, step-by-step
+                  lessons. You’ll learn about variables, data types, conditions,
+                  loops and functions using beginner-friendly languages like
+                  Python and Java. Each lesson includes short examples and small
+                  exercises so you can practise as you go. By the end of this
+                  section, you’ll feel comfortable reading and writing simple
+                  programs on your own.
+                </p>
+              </div>
             </div>
           </div>
+          <!-- End - That is one Description-->
         </div>
-        <!-- End - That is one Description-->
+
+        <a href="">Subsrcibe Now</a>
       </div>
     </div>
+    <script src="assets/js/data/courses.js"></script>
+
+    <script src="assets/js/ui/course-details.js"></script>
+    <script src="/assets/js/ui/course-detail-responsive.js"></script>
 
     <script src="assets/js/ui/responsive.js"></script>
   </body>

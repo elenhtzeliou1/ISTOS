@@ -24,6 +24,7 @@ html {
     --padding-m: 8em;
     --padding-l: 10em;
 
+    --gap-sm:0.5rem;
     --gap: 1rem;
     --gap-mid: 2rem;
     --gap-big: 4rem;
@@ -50,6 +51,7 @@ html {
     --base-screen-color: rgb(212, 214, 223);
 
     --card-vd: rgb(32, 29, 29);
+    --goal-card-height:60vh;
 
 
     --border-top-gr: rgb(128, 128, 128);
@@ -63,6 +65,7 @@ html {
 
     --tag-color: rgb(49, 49, 49);
     --max-width: 1200px;
+    --card-min-height:80vh;
     --min-height: 90vh;
     --min-height-small: 60vh;
 
@@ -129,6 +132,11 @@ h4 {
     color: white;
 
 }
+h5{
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+}
 
 p {
     font-size: 16px;
@@ -154,6 +162,7 @@ a {
     border: 1px solid white;
     text-align: center;
 }
+
 .green-btn{
     background-color: var(--green);
     padding: var(--padding-sm) var(--padding);
@@ -237,4 +246,19 @@ span {
     border-radius: var(--border-radius-small);
     font-weight: 500;
     text-transform: uppercase;
+}
+.fa-solid.fa-arrow-left{
+    font-size: 12px;
+}
+.fa-solid.fa-arrow-right{
+    font-size: 12px;
+}
+.main-description-course h2{
+    color: black;
+}
+.crs-dtl-header h1{
+    color: black;
+}
+.crs-dtl-header p{
+    color: black;
 }

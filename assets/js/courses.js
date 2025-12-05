@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleFilterMenuBtn.addEventListener("click", () => {
       const isCollapsed = filterSidebar.classList.toggle("is-collapsed");
 
-      // Optional: toggle button text (Greek)
+      // Optional: toggle button filters
       toggleFilterMenuBtn.textContent = isCollapsed
         ? "Show Filters"
         : "Hide Filters";
@@ -41,18 +41,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const initialCategory = params.get("category");
 
-  if (initialCategory){
+  if (initialCategory) {
     //check only tin katigoria pou ir8e apo to url
-    categoryCheckboxes.forEach((cb)=>{
+    categoryCheckboxes.forEach((cb) => {
       cb.checked = cb.value === initialCategory;
     });
 
     applyFilters();
-  }else{
+  } else {
     //AN DEN EXEI ER8EI KATI KANOUME APLA RENDER TA COURSES opos arxika ;)
     renderCourses(COURSES);
   }
 
+  // listeners για φίλτρα
 
   // when any category checkbox changes → re-filter
   categoryCheckboxes.forEach((checkbox) => {
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!filterSidebar) return;
     filterSidebar.classList.add("is-open");
     if (filterBackdrop) filterBackdrop.classList.add("is-open");
-    document.body.classList.add("no-scroll"); // optional if you want to lock scroll
+    document.body.classList.add("no-scroll"); // optional if want lock scroll
   }
 
   function closeFilter() {
@@ -99,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     filterCloseBtn.addEventListener("click", closeFilter);
   }
 
-  // OPTIONAL: close on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeFilter();
@@ -162,11 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.cursor = "pointer";
 
       // build FAQ black box HTML
-      const faqHtml =
-        Array.isArray(course.faq) && course.faq.length
+      const questHtml =
+        Array.isArray(course.questions) && course.questions.length
           ? `
         <div class="course-faq">
-          ${course.faq
+          ${course.questions
+            .slice(0, 2) // μόνο οι 2 πρώτες ερωτήσεις
             .map(
               (item, index) => `
             <div class="course-faq-item">
@@ -174,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 2,
                 "0"
               )}</span>
-              <p>${item.info}</p>
+              <p>${item.question}</p>
             </div>
           `
             )
@@ -203,70 +204,21 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3>${course.title}</h3>
           <p>${course.description}</p>
       
-             
         </div>
 
        
-        ${faqHtml}
+        ${questHtml}
       </div>
     `;
 
       // OPEN MODAL ON CLICK (keep as you have it)
-      card.addEventListener("click", () => openModal(course));
+      card.addEventListener("click", () => {
+        window.location.href = `course-details.html?id=${encodeURIComponent(
+          course.id
+        )}`;
+      });
 
       listContainer.appendChild(card);
     });
-  }
-
-  /* MODAL FUNCTIONS */
-
-  function openModal(course) {
-    // Build FAQ HTML if the course has extra info
-    let faqHtml = "";
-
-    if (Array.isArray(course.faq) && course.faq.length) {
-      faqHtml = `
-    <div class="course-faq">
-      ${course.faq
-        .map(
-          (item, index) => `
-          <div class="course-faq-item">
-            <span class="course-faq-index">${String(index + 1).padStart(
-              2,
-              "0"
-            )}</span>
-            <p>${item.info}</p>
-          </div>
-        `
-        )
-        .join("")}
-    </div>
-  `;
-    }
-
-    modalBody.innerHTML = `
-    <div class="modal-body">
-      <h2>${course.title}</h2>
-
-      <div class="modal-tags">
-        <span class="tag">${course.category}</span>
-        <span class="tag">${course.difficulty}</span>
-        ${
-          course.available
-            ? "<span class='tag available'>Available</span>"
-            : "<span class='tag unavailable'>Unavailable</span>"
-        }
-      </div>
-
-      <p>${course.description}</p>
-
-      ${faqHtml}
-
-      <button class="modal-enroll-btn">Enroll Now</button>
-    </div>
-  `;
-
-    modal.classList.add("active");
-    document.body.classList.add("no-scroll");
   }
 });
