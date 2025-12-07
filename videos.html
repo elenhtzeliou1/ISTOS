@@ -29,5 +29,207 @@
     <nav id="site-nav"></nav>
     <script src="assets/js/ui/nav.js"></script>
     <!--nav-->
+
+    <header class="video-header">
+      <h1>Video Collections</h1>
+      <p>Discover our library of 131 ready-to-go resources, designed to be used, tweaked and customised. Easily copy/paste to Webflow, or access the HTML/CSS to fit your preferred workflow.</p>
+      <div class="tag-row">
+        <div class="tag">New Videos</div>
+        <div class="tag">added</div>
+        <div class="tag">every week</div>
+      </div>
+      
+    </header>
+
+    <section class="videos-page">
+      <div class="filter-button-results-wrapper">
+        <span id="results-count" class="results-count">0 Αποτελέσματα</span>
+        <button id="filter-toggle" class="filter-toggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-filter"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+          Filters
+        </button>
+
+        <button id="toggle-filter-menu" class="toggle-filter-menu">
+          Hide Filters
+        </button>
+      </div>
+
+      <div id="filter-backdrop" class="filter-backdrop"></div>
+
+      <div class="course-layout">
+        <aside class="filter-sidebar">
+          <div class="filters-header">
+            <h2>Filters</h2>
+            <i class="fa-solid fa-x" id="filter-close"></i>
+          </div>
+
+          <div class="filter-box">
+            <span>Category</span>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-programming"
+                type="checkbox"
+                name="filter-category"
+                value="programming"
+              />
+              <label class="cbx" for="cat-programming">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Programming</p>
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-networks"
+                type="checkbox"
+                name="filter-category"
+                value="networks"
+              />
+              <label class="cbx" for="cat-networks">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Networks</p>
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-security"
+                type="checkbox"
+                name="filter-category"
+                value="security"
+              />
+              <label class="cbx" for="cat-security">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Cybersecurity</p>
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-databases"
+                type="checkbox"
+                name="filter-category"
+                value="databases"
+              />
+              <label class="cbx" for="cat-databases">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Databases</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-box">
+            <span>Difficulty</span>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="diff-beginner"
+                type="checkbox"
+                name="filter-difficulty"
+                value="beginner"
+              />
+              <label class="cbx" for="diff-beginner">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Beginner</p>
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="diff-intermediate"
+                type="checkbox"
+                name="filter-difficulty"
+                value="intermediate"
+              />
+              <label class="cbx" for="diff-intermediate">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Intermediate</p>
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="diff-advanced"
+                type="checkbox"
+                name="filter-difficulty"
+                value="advanced"
+              />
+              <label class="cbx" for="diff-advanced">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Advanced</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-box">
+            <div class="checkbox-wrapper">
+              <input class="inp-cbx" id="filter-available" type="checkbox" />
+              <label class="cbx" for="filter-available">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Only available</p>
+              </label>
+            </div>
+          </div>
+        </aside>
+
+        <div class="course-grid videos" id="video-list"></div>
+      </div>
+    </section>
+
+    <script src="assets/js/ui/responsive.js"></script>
+    <script src="assets/js/data/videos.js"></script>
+    <script src="assets/js/ui/menu-filters.js"></script>
+    <script src="/assets/js/videos.js"></script>
   </body>
 </html>

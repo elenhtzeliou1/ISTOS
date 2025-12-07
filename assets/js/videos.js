@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if(window.FilterUI){
+  if (window.FilterUI) {
     window.FilterUI.init();
   }
- 
-  // main grid
-  const listContainer = document.getElementById("books-list");
+
+  //main grid
+  const listContainer = document.getElementById("video-list");
   const resultsCount = document.getElementById("results-count");
 
   // filters
@@ -13,21 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const difficultyCheckboxes = document.querySelectorAll(
     'input[name="filter-difficulty"]'
-  ); // will only work if books have .difficulty
+  ); // will only work if videos have .difficulty
   const availabilityFilter = document.getElementById("filter-available");
 
   if (!listContainer) {
-    console.error("#books-list not found on books page.");
+    console.error("#video-list not found on books page.");
     return;
   }
 
-  if (typeof BOOKS === "undefined") {
-    console.error("BOOKS data is missing. Check assets/js/data/books.js");
+  if (typeof VIDEOS === "undefined") {
+    console.error("VIDEO data is missing. Check assets/js/data/video.js");
     return;
   }
 
-  //initial render  
-  renderBooks(BOOKS);
+  //initial render
+  renderVideos(VIDEOS);
 
   //filter listeners
   categoryCheckboxes.forEach((cb) =>
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyFilters() {
-    let filtered = [...BOOKS];
+    let filtered = [...VIDEOS];
 
     // categories
     const selectedCategories = Array.from(categoryCheckboxes)
@@ -51,86 +51,84 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((cb) => cb.value);
 
     if (selectedCategories.length > 0) {
-      filtered = filtered.filter((book) =>
-        selectedCategories.includes(book.category)
+      filtered = filtered.filter((video) =>
+        selectedCategories.includes(video.category)
       );
     }
 
     // difficulty (only if your BOOKS have a .difficulty property)
     const selectedDifficulties = Array.from(difficultyCheckboxes)
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value);
+      .filter((cv) => cv.checked)
+      .map((cv) => cv.value);
 
     if (selectedDifficulties.length > 0) {
-      filtered = filtered.filter((book) =>
-        selectedDifficulties.includes(book.difficulty)
+      filtered = filtered.filter((video) =>
+        selectedDifficulties.includes(video.difficulty)
       );
     }
 
     // availability
     if (availabilityFilter && availabilityFilter.checked) {
-      filtered = filtered.filter((book) => book.available);
+      filtered = filtered.filter((video) => video.available);
     }
 
-    renderBooks(filtered);
+    renderVideos(filtered);
   }
 
-  //render books
-
-  function renderBooks(bookArray) {
+  //render Videos
+  function renderVideos(videosArray) {
     listContainer.innerHTML = "";
 
     if (resultsCount) {
-      const count = bookArray.length;
+      const count = videosArray.length;
       resultsCount.textContent =
-        count === 1 ? "Book (1)" : `Books (${count})`;
+        count === 1 ? "Video (1)" : `Videos (${count})`;
     }
 
-    if (!bookArray.length) {
-      listContainer.innerHTML =
-        '<p style="color:white;">No books found.</p>';
+    if (!videosArray.length) {
+      listContainer.innerHTML = '<p style="color:white;">No books found.</p>';
       return;
     }
 
-    bookArray.forEach((book) => {
+    videosArray.forEach((video) => {
       const card = document.createElement("article");
-      card.className = "course-product book";
-      card.style.cursor = "pointer";
+      card.className = "new-box";
 
       card.innerHTML = `
-      
-
-        <div class="course-info books">
+    
+        <div class="new-box-header">
           <div class="tag-row">
           ${
-              book.available
-                ? "<span class='tag available'>Available</span>"
-                : "<span class='tag unavailable'>Unavailable</span>"
-            }
-            <span class="tag category">${prettyCategory(book.category)}</span>
+            video.available
+              ? "<span class='tag available'>Available</span>"
+              : "<span class='tag unavailable'>Unavailable</span>"
+          }
+            <span class="tag category">${prettyCategory(video.category)}</span>
             ${
-              book.difficulty
-                ? `<span class="tag category">${book.difficulty}</span>`
+              video.difficulty
+                ? `<span class="tag category">${video.difficulty}</span>`
                 : ""
             }
             
           </div>
 
-          <h3>${book.title}</h3>
-          <p>${book.description.substring(0, 120)}...</p>
+          <h4>${video.title}</h4>
+          <h3>${video.description.substring(0, 120)}...</h3>
 
            
         </div>
-         <div class="books-cat-image" style="
-          background-image:url('${book.cover}');
-          background-size:cover;
-          background-position:center;
-        "></div>
+
+         <div class="new-box-content" 
+            <img src="${video.cover || ''}" alt="${video.title || 'Video'} cover">
+     
+        </div>
       `;
 
-      card.addEventListener("click",()=>{
-        window.location.href = `book-details.html?id=${encodeURIComponent(book.id)}`;
-      })
+      card.addEventListener("click", () => {
+        window.location.href = `video-details.html?id=${encodeURIComponent(
+          video.id
+        )}`;
+      });
       listContainer.appendChild(card);
     });
   }
@@ -149,6 +147,4 @@ document.addEventListener("DOMContentLoaded", () => {
         return cat;
     }
   }
-
-  
 });

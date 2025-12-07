@@ -14,6 +14,7 @@ html {
 
 :root {
     --nav-height: 70px;
+    --pad-sm:5px;
     --padding-sm: 0.5rem;
     --padding-avg: 1rem;
     --padding-mid: 1.5rem;
@@ -26,7 +27,9 @@ html {
 
     --gap-sm:0.5rem;
     --gap: 1rem;
+    --gap-t:1.5rem;
     --gap-mid: 2rem;
+    --gap-l:3rem;
     --gap-big: 4rem;
 
     --border-radious: 5px;
@@ -52,8 +55,10 @@ html {
 
     --card-vd: rgb(32, 29, 29);
     --goal-card-height:60vh;
+    --goal-card-height-tablet:40vh;
 
 
+    --line-background:#E1E1E1;
     --border-top-gr: rgb(128, 128, 128);
     --border-top-sec: rgb(223, 223, 223);
     --border-top-new: rgb(37, 37, 37);
@@ -75,11 +80,13 @@ html {
     --min-height-wide: 135vh;
     --max-width-register: 900px;
 
+    --h1-s:56px;
     --h1-mid: 70px;
     --h1-ultra:100px;
     --h2-b: 36px;
     --p-big: 24px;
     --p-lrg:30px;
+    --p-tabl:24px;
 
     --green: greenyellow;
     --violet: rgb(104, 64, 255);
@@ -89,6 +96,10 @@ html {
     --small-font-size: 16px;
 
     --screen-wrapper-height-s: 50vh;
+    --move-top:2rem;
+    --move-left:-3rem;
+    --tilt-angle:5deg;
+    --pers-circle-laptop:80px;
 }
 
 body {
@@ -151,7 +162,6 @@ p {
 
 nav>h2 {
     color: white;
-
 }
 
 a {

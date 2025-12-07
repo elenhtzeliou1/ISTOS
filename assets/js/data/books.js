@@ -2,6 +2,7 @@ const BOOKS = [
   {
     id: 1,
     title: "Python Crash Course",
+    author: "Eric Matthes",
     category: "programming",
     difficulty: "beginner",
     available: true,
@@ -12,6 +13,7 @@ const BOOKS = [
   {
     id: 2,
     title: "Fluent Python",
+    author: "Luciano Ramalho",
     category: "programming",
     difficulty: "advanced",
     available: false,
@@ -22,6 +24,7 @@ const BOOKS = [
   {
     id: 3,
     title: "Computer Networking: A Top-Down Approach",
+    author: "James F. Kurose, Keith W. Ross",
     category: "networks",
     difficulty: "intermediate",
     available: true,
@@ -32,6 +35,7 @@ const BOOKS = [
   {
     id: 4,
     title: "Cybersecurity Essentials",
+    author: "Charles J. Brooks et al.",
     category: "security",
     difficulty: "beginner",
     available: true,
@@ -42,6 +46,7 @@ const BOOKS = [
   {
     id: 5,
     title: "SQL for Data Analysis",
+    author: "Cathy Tanimura",
     category: "databases",
     difficulty: "intermediate",
     available: true,

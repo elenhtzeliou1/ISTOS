@@ -210,7 +210,7 @@
     <!--Περιγραφή των κατηγοριών των μαθημάτων-->
     <section class="courses-description-wraper">
       <div class="courses-description-intro">
-        <h1>Explore Our Courses</h1>
+        <h1>Explore Our Categories</h1>
         <p>
           Our courses are designed to be clear, modular and practical. Each one
           combines short explanations with examples, diagrams, quizzes and small
@@ -238,7 +238,7 @@
             <img src="assets/images/vid.avif" alt="" />
           </div>
           <div class="base-screen">
-            <a href="">Explore Now</a>
+            <a href="categories.html">Explore Now</a>
           </div>
         </div>
       </div>
@@ -481,6 +481,7 @@
       <!-- add more here-->
     </section>
 
+    <!-- proposed courses-->
     <section class="courses">
       <div class="courses-wrap">
         <div class="courses-main">
@@ -495,38 +496,15 @@
 
         <div class="carousel-proposed-video-wrapper">
           <div class="proposed-video-container">
-            <div class="proposed-video-carousel">
-              <div class="proposed-video-card">
-                <div class="proposed-video-vd-wrapper"></div>
-                <div class="proposed-video-content">Programming Courses</div>
-              </div>
-
-              <div class="proposed-video-card">
-                <div class="proposed-video-vd-wrapper"></div>
-                <div class="proposed-video-content">Networking Courses</div>
-              </div>
-
-              <div class="proposed-video-card">
-                <div class="proposed-video-vd-wrapper"></div>
-                <div class="proposed-video-content">Database & SQL Courses</div>
-              </div>
-
-              <div class="proposed-video-card">
-                <div class="proposed-video-vd-wrapper"></div>
-                <div class="proposed-video-content">Cybersecurity Courses</div>
-              </div>
-
-              <div class="proposed-video-card">
-                <div class="proposed-video-vd-wrapper"></div>
-                <div class="proposed-video-content">
-                  Curated Books & Video Playlists
-                </div>
-              </div>
+            <div class="proposed-video-carousel" id="proposed-courses-carousel">
+              <!--js injects content here
+              proposed-courses.js
+              -->
             </div>
           </div>
         </div>
 
-        <a href="">View All Courses</a>
+        <a href="courses.html">View All Courses</a>
 
         <div class="courses-info">
           <div class="course-item">
@@ -584,12 +562,14 @@
         </div>
       </div>
     </section>
+    <!-- proposed courses-->
 
+    <!--proposed videos-->
     <section class="recently-added">
       <div class="rec-added-wrapper">
         <div class="rec-added-info">
-          <h2>Best books available now</h2>
-          <span>New books added every week</span>
+          <h2>Best videos available now</h2>
+          <span>New videos added every week</span>
           <p>
             Browse a hand-picked selection of books chosen for Informatics
             students at different levels. From gentle introductions to advanced
@@ -599,7 +579,7 @@
         </div>
 
         <div class="rec-added-box-wrap">
-          <a class="new-box">
+          <a href="" class="new-box">
             <div class="new-box-header">
               <span>2 days ago</span>
               <h4>Security Book Shelf</h4>
@@ -614,7 +594,8 @@
               <img src="assets/images/11-thumb.jpg" alt="" />
             </div>
           </a>
-          <a class="new-box">
+
+          <a href="" class="new-box">
             <div class="new-box-header">
               <span>2 days ago</span>
               <h4>Data & Databases Shelf</h4>
@@ -625,10 +606,13 @@
               <p>Databases</p>
             </div>
             <div class="new-box-content">
-              <img src="assets/images/programming-background-collage.jpg" alt="" />
+              <img
+                src="assets/images/programming-background-collage.jpg"
+                alt=""
+              />
             </div>
           </a>
-          <a class="new-box">
+          <a href="" class="new-box">
             <div class="new-box-header">
               <span>1 day ago</span>
               <h4>Programming Essentials Shelf</h4>
@@ -645,68 +629,104 @@
         </div>
 
         <div class="rec-added-button-row">
-          <a href="" class="green-btn">View More</a>
+          <a href="videos.html" class="green-btn">View More</a>
         </div>
       </div>
     </section>
+    <!--end proposed videos-->
 
+    <!--proposed books section-->
     <section class="proposed-books">
       <div class="proposed-book-intro-container">
-        <h1>Explore the best videos available</h1>
+        <h1>Explore the best books available</h1>
         <p>
           Learn faster with focused video lessons on programming, networks,
           databases and cybersecurity. Watch step-by-step explanations, real
           examples and practical demos tailored for Informatics students.
         </p>
-        <a href="">Explore Now</a>
+        <a href="books.html">Explore Now</a>
       </div>
 
       <div class="slider-wrapper">
         <div class="card-carousel">
           <a class="card">
-            <div class="card-top">
-              <img src="assets/images/self-desktop.webp" alt="" />
-            </div>
             <div class="card-info">
+              <div class="tag-row">
+                <div class="tag">Programming</div>
+                <div class="tag">Begginer</div>
+              </div>
+              <h2>Python Book</h2>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry.
               </p>
             </div>
+            <div class="card-img-cont">
+              <img src="assets/images/self-desktop.webp" alt="" />
+            </div>
           </a>
 
           <a class="card">
-            <div class="card-top">
-              <img src="assets/images/shutterstock_1777292972.webp" alt="" />
-            </div>
             <div class="card-info">
+              <div class="tag-row">
+                <div class="tag">Programming</div>
+                <div class="tag">Begginer</div>
+              </div>
+              <h2>Python Book</h2>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry.
               </p>
             </div>
+            <div class="card-img-cont">
+              <img src="assets/images/self-desktop.webp" alt="" />
+            </div>
           </a>
 
           <a class="card">
-            <div class="card-top">
+            <div class="card-info">
+              <div class="tag-row">
+                <div class="tag">Programming</div>
+                <div class="tag">Begginer</div>
+              </div>
+              <h2>Python Book</h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </p>
+            </div>
+            <div class="card-img-cont">
               <img src="assets/images/self-desktop.webp" alt="" />
             </div>
-            <div class="card-info"></div>
           </a>
 
           <a class="card">
-            <div class="card-top">
+            <div class="card-info">
+              <div class="tag-row">
+                <div class="tag">Programming</div>
+                <div class="tag">Begginer</div>
+              </div>
+              <h2>Python Book</h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </p>
+            </div>
+            <div class="card-img-cont">
               <img src="assets/images/self-desktop.webp" alt="" />
             </div>
-            <div class="card-info"></div>
           </a>
         </div>
       </div>
     </section>
+    <!--END proposed books section-->
 
+    <!--Used scripts-->
+    <script src="assets/js/data/courses.js"></script>
     <script src="assets/js/ui/responsive.js"></script>
     <script src="assets/js/ui/menu.js"></script>
-
-    <script src="assets/js/ui/proposed-videos.js"></script>
+    <script src="assets/js/ui/proposed-courses.js"></script>
+    <script src="assets/js/ui/proposed-courses-carousel.js"></script>
+    <!--Used scripts-->
   </body>
 </html>

@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+   if(window.FilterUI){
+    window.FilterUI.init();
+  }
+
   const listContainer = document.getElementById("course-list");
   const resultsCount = document.getElementById("results-count");
 
@@ -10,22 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const availabilityFilter = document.getElementById("filter-available");
 
-  const filterToggleBtn = document.getElementById("filter-toggle");
-  const filterSidebar = document.querySelector(".filter-sidebar");
-  const filterBackdrop = document.getElementById("filter-backdrop");
-  const filterCloseBtn = document.getElementById("filter-close");
-  const toggleFilterMenuBtn = document.getElementById("toggle-filter-menu");
 
-  if (toggleFilterMenuBtn && filterSidebar) {
-    toggleFilterMenuBtn.addEventListener("click", () => {
-      const isCollapsed = filterSidebar.classList.toggle("is-collapsed");
-
-      // Optional: toggle button filters
-      toggleFilterMenuBtn.textContent = isCollapsed
-        ? "Show Filters"
-        : "Hide Filters";
-    });
-  }
 
   if (!listContainer) {
     console.error("course-list element not found.");
@@ -69,45 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     availabilityFilter.addEventListener("change", applyFilters);
   }
 
-  /* === FILTER BOTTOM SHEET LOGIC === */
-
-  function openFilter() {
-    if (!filterSidebar) return;
-    filterSidebar.classList.add("is-open");
-    if (filterBackdrop) filterBackdrop.classList.add("is-open");
-    document.body.classList.add("no-scroll"); // optional if want lock scroll
-  }
-
-  function closeFilter() {
-    if (!filterSidebar) return;
-    filterSidebar.classList.remove("is-open");
-    if (filterBackdrop) filterBackdrop.classList.remove("is-open");
-    document.body.classList.remove("no-scroll");
-  }
-
-  // open on "Filters" button
-  if (filterToggleBtn) {
-    filterToggleBtn.addEventListener("click", openFilter);
-  }
-
-  // close on backdrop click
-  if (filterBackdrop) {
-    filterBackdrop.addEventListener("click", closeFilter);
-  }
-
-  // close on X icon inside the sheet
-  if (filterCloseBtn) {
-    filterCloseBtn.addEventListener("click", closeFilter);
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeFilter();
-    }
-  });
+  
 
   function applyFilters() {
-    let filtered = COURSES;
+    let filtered = [...COURSES];
 
     // 1) collect selected categories
     const selectedCategories = Array.from(categoryCheckboxes)

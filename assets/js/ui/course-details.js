@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  //COURSES πρέπει να προέρχεται από assets/js/data/courses.js
 
+  //courses πρέπει να προέρχεται από assets/js/data/courses.js
   if (typeof COURSES === "undefined") {
     console.error("Courses data is missing! Check courses.js path");
     return;
