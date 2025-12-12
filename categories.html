@@ -25,15 +25,11 @@
     />
   </head>
   <body>
-    <!--nav same for every page-->
     <nav id="site-nav"></nav>
-    <script src="assets/js/ui/nav.js"></script>
-    <!--nav-->
 
-    <header class="intro-container">
-      <div class="title-container">
+    <header class="intro-container categories">
+      <div class="title-container categories">
         <h1 class="categories">Discover All Available Course Categories</h1>
-        <a href="courses.html" class="a-green">Start your learning journey</a>
         <p>
           Browse our core Informatics categories — from Programming and Networks
           to Cybersecurity and Databases — and find the learning path that
@@ -41,448 +37,49 @@
         </p>
       </div>
 
-      <div class="carousel-proposed-video-wrapper">
-        <div class="proposed-video-container">
-          <div class="proposed-video-carousel">
-            <div class="proposed-video-card">
-              <div class="proposed-video-vd-wrapper">
-                <img src="/assets/images/7-thumb.jpg" alt="" />
-              </div>
-              <div class="proposed-video-content">Networks</div>
-            </div>
-
-            <div class="proposed-video-card">
-              <div class="proposed-video-vd-wrapper">
-                <img src="/assets/images/11-thumb.jpg" alt="" />
-              </div>
-              <div class="proposed-video-content">Programming</div>
-            </div>
-
-            <div class="proposed-video-card">
-              <div class="proposed-video-vd-wrapper">
-                <img
-                  src="/assets/images/steve-johnson-luT1PtFOWZU-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="proposed-video-content">Databases</div>
-            </div>
-            <div class="proposed-video-card">
-              <div class="proposed-video-vd-wrapper">
-                <img src="/assets/images/7-thumb.jpg" alt="" />
-              </div>
-              <div class="proposed-video-content">Networks</div>
-            </div>
-
-            <div class="proposed-video-card">
-              <div class="proposed-video-vd-wrapper">
-                <img src="/assets/images/cybersec.avif" alt="" />
-              </div>
-              <div class="proposed-video-content">Cybersecurity</div>
-            </div>
+      <div class="courses-description-video-wrapper">
+        <a href="courses.html" class="a-green">Start your learning journey</a>
+        <div class="courses-description-box-screen">
+          <div class="screen-wrapper">
+            <img
+              src="assets/images/main-page-images/index-categories-image.jpeg"
+              alt=""
+            />
+          </div>
+          <div class="base-screen">
+          
           </div>
         </div>
       </div>
     </header>
 
-    <!--all available courses description-->
+    <main class="categories-main-content" id="categories-full">
+      <!--all available courses description RENDERED FROM JS
+        categories-ui.js
+      -->
+    </main>
 
-    <!--Progrmaming-->
-    <section class="courses-desc-wrapper">
-      <div class="course-desc-header">
-        <h1>Programming</h1>
-        <p>
-          Build strong coding foundations, from basic syntax and problem-solving
-          to more advanced concepts like object-oriented design and algorithms.
-          It’s the ideal place to start if you want to learn how to think like a
-          developer and write real, working programs.
-        </p>
-      </div>
+    <!--Footer -->
+    <footer id="site-footer"></footer>
+    <!--Used scripts-->
 
-      <div class="course-desc-main-wrap">
-        <div class="course-desc-box-wrap">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
+    <!-- COMMON UI -->
+    <script src="assets/js/ui/common/menu.js"></script>
+    <script src="assets/js/ui/common/footer.js"></script>
+    <script src="assets/js/ui/common/footer-accordion.js"></script>
 
-          <div class="course-desc-info-main-wrapper">
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
+    <script src="assets/js/ui/common/accordion-ui.js"></script>
+    <script src="assets/js/ui/common/reveal.js"></script>
+    <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
 
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
+    <!-- DATA -->
+    <script src="assets/js/data/categories.js"></script>
+    <script src="assets/js/data/courses.js"></script>
+    <script src="assets/js/data/books.js"></script>
+    <script src="assets/js/data/videos.js"></script>
+    <!-- PAGE UI -->
+    <script src="assets/js/ui/pages/categories-ui.js"></script>
 
-            <div class="course-dsc-btn-wrp">
-              <a href="courses.html?category=programming">View Courses</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="course-desc-box-wrap">
-          <div class="round-container">
-            <img src="/assets/images/networks.avif" alt="" />
-          </div>
-        </div>
-      </div>
-
-      <div class="start">
-        <h1>Where to start</h1>
-        <p>
-          Start your programming travel with the below intro courses. Become
-          from zero to hero.
-        </p>
-      </div>
-
-      <div class="course-desc-sticky-wrapper">
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>Introduction to Python</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>Java: First Steps</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>Programming Basics</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-      </div>
-    </section>
-    <!--Programming-->
-
-    <!--Networks-->
-    <section class="courses-desc-wrapper">
-      <div class="course-desc-header">
-        <h1>Networks</h1>
-        <p>
-          Browse our core Informatics categories — from Programming and Networks
-          to Cybersecurity and Databases.
-        </p>
-      </div>
-
-      <div class="course-desc-main-wrap">
-        <div class="course-desc-box-wrap">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-
-          <div class="course-desc-info-main-wrapper">
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-dsc-btn-wrp">
-              <a href="courses.html?category=networks">View Courses</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="course-desc-box-wrap">
-          <div class="round-container">
-            <img src="/assets/images/7-thumb.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="start">
-        <h1>Where to start</h1>
-        <p>
-          Start your programming travel with the below intro courses. Become
-          from zero to hero.
-        </p>
-      </div>
-
-      <div class="course-desc-sticky-wrapper">
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For 1</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For WebFlow</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For Udemy</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-      </div>
-    </section>
-    <!--Network-->
-
-    <!--CyberSec-->
-    <section class="courses-desc-wrapper">
-      <div class="course-desc-header">
-        <h1>Cybersecurity</h1>
-        <p>
-          Browse our core Informatics categories — from Programming and Networks
-          to Cybersecurity and Databases.
-        </p>
-      </div>
-
-      <div class="course-desc-main-wrap">
-        <div class="course-desc-box-wrap">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-
-          <div class="course-desc-info-main-wrapper">
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-dsc-btn-wrp">
-              <a href="courses.html?category=security">View Courses</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="course-desc-box-wrap">
-          <div class="round-container">
-            <img src="/assets/images/11-thumb.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="start">
-        <h1>Where to start</h1>
-        <p>
-          Start your programming travel with the below intro courses. Become
-          from zero to hero.
-        </p>
-      </div>
-
-      <div class="course-desc-sticky-wrapper">
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For 1</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For WebFlow</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For Udemy</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-      </div>
-    </section>
-    <!--CyberSec-->
-
-    <!--Databases-->
-    <section class="courses-desc-wrapper">
-      <div class="course-desc-header">
-        <h1>Databases</h1>
-        <p>
-          Browse our core Informatics categories — from Programming and Networks
-          to Cybersecurity and Databases.
-        </p>
-      </div>
-
-      <div class="course-desc-main-wrap">
-        <div class="course-desc-box-wrap">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-
-          <div class="course-desc-info-main-wrapper">
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-
-            <div class="course-info-container-box">
-              <p>Browse our core Informatics categories</p>
-            </div>
-            <div class="course-dsc-btn-wrp">
-              <a href="courses.html?category=databases">View Courses</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="course-desc-box-wrap">
-          <div class="round-container">
-            <img src="/assets/images/databases.png" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="start">
-        <h1>Where to start</h1>
-        <p>
-          Start your programming travel with the below intro courses. Become
-          from zero to hero.
-        </p>
-      </div>
-
-      <div class="course-desc-sticky-wrapper">
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For 1</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For WebFlow</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-
-        <a class="course-desc-sticky-container">
-          <div class="tag-row">
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-            <div class="tag"><p>Learn</p></div>
-          </div>
-          <h1>For Udemy</h1>
-          <p>
-            Sed eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta.
-          </p>
-          <div class="vid-wrp"></div>
-        </a>
-      </div>
-    </section>
-    <!--Databases-->
-
-    <script src="assets/js/ui/proposed-courses-carousel.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>

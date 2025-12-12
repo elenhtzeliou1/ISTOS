@@ -27,24 +27,34 @@
 
   <body>
     <nav id="site-nav"></nav>
-    <script src="assets/js/ui/nav.js"></script>
 
     <header class="intro-container courses">
       <div class="title-container courses">
-        <h1>Choose From Course List</h1>
-
-        <p>Find the perfect learning path for your goals</p>
-        <a href="#choose-category">Start Now</a>
+        <h1>Course List</h1>
+        <a class="book-see-all-btn" href="#choose-category">View All</a>
+        <p>
+          There are many variations of passages of Lorem Ipsum available, but
+          the majority have suffered alteration in some form, by injected
+          humour.
+        </p>
       </div>
 
-      <video
-        class="visual-video"
-        src="assets/images/6963744-sd_960_540_25fps.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-      ></video>
+      <div class="tag-row">
+        <div class="tag">The</div>
+        <div class="tag">Most</div>
+        <div class="tag">Viewed</div>
+      </div>
+
+      <!-- change it latter to proposed courses-->
+      <div class="carousel-proposed-video-wrapper">
+        <div class="proposed-video-container">
+          <div class="proposed-video-carousel" id="proposed-courses-carousel">
+            <!--js injects content here
+              proposed-courses.js
+              -->
+          </div>
+        </div>
+      </div>
     </header>
 
     <section class="courses-page" id="choose-category">
@@ -154,6 +164,41 @@
                 <p>Databases</p>
               </label>
             </div>
+
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-web-development"
+                type="checkbox"
+                name="filter-category"
+                value="web-development"
+              />
+              <label class="cbx" for="cat-web-development">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Web development</p>
+              </label>
+            </div>
+            <div class="checkbox-wrapper">
+              <input
+                class="inp-cbx"
+                id="cat-ai"
+                type="checkbox"
+                name="filter-category"
+                value="ai"
+              />
+              <label class="cbx" for="cat-ai">
+                <span>
+                  <svg width="12" height="10" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </svg>
+                </span>
+                <p>Artificial Intelligence</p>
+              </label>
+            </div>
           </div>
 
           <div class="filter-box">
@@ -233,8 +278,29 @@
       </div>
     </section>
 
+    <!--Footer -->
+    <footer id="site-footer"></footer>
+    <!--Used scripts-->
+    <!-- COMMON UI -->
+    <script src="assets/js/ui/common/menu.js"></script>
+    <script src="assets/js/ui/common/menu-filters.js"></script>
+    <script src="assets/js/ui/common/menu.js"></script>
+    <script src="assets/js/ui/common/footer.js"></script>
+    <script src="assets/js/ui/common/footer-accordion.js"></script>
+
+    <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
+
+    <!-- DATA -->
+    <script src="assets/js/data/categories.js"></script>
+
     <script src="assets/js/data/courses.js"></script>
-    <script src="assets/js/ui/menu-filters.js"></script>
-    <script src="assets/js/courses.js"></script>
+
+    <script src="assets/js/ui/prefered/proposed-courses.js"></script>
+
+    <!-- PAGE -->
+    <script src="assets/js/ui/pages/courses.js"></script>
+
+    <!-- APP orchestrator LAST -->
+    <script src="assets/js/app.js"></script>
   </body>
 </html>

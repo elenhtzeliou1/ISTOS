@@ -25,20 +25,20 @@
     />
   </head>
   <body>
-    <!--nav same for every page-->
     <nav id="site-nav"></nav>
-    <script src="assets/js/ui/nav.js"></script>
-    <!--nav-->
 
     <header class="video-header">
       <h1>Video Collections</h1>
-      <p>Discover our library of 131 ready-to-go resources, designed to be used, tweaked and customised. Easily copy/paste to Webflow, or access the HTML/CSS to fit your preferred workflow.</p>
+      <p>
+        Discover our library of 131 ready-to-go resources, designed to be used,
+        tweaked and customised. Easily copy/paste to Webflow, or access the
+        HTML/CSS to fit your preferred workflow.
+      </p>
       <div class="tag-row">
         <div class="tag">New Videos</div>
         <div class="tag">added</div>
         <div class="tag">every week</div>
       </div>
-      
     </header>
 
     <section class="videos-page">
@@ -227,9 +227,27 @@
       </div>
     </section>
 
-    <script src="assets/js/ui/responsive.js"></script>
+    <!--Footer -->
+    <footer id="site-footer"></footer>
+    <!--Used scripts-->
+
+    <!-- COMMON UI -->
+    <script src="assets/js/ui/common/menu.js"></script>
+    <script src="assets/js/ui/common/menu-filters.js"></script>
+
+    <script src="assets/js/ui/common/footer.js"></script>
+    <script src="assets/js/ui/common/footer-accordion.js"></script>
+
+    <!-- DATA -->
+
+    <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/videos.js"></script>
-    <script src="assets/js/ui/menu-filters.js"></script>
-    <script src="/assets/js/videos.js"></script>
+
+    <!-- PAGE -->
+    <script src="assets/js/ui/pages/videos.js"></script>
+    <script src="assets/js/ui/common/footer.js"></script>
+
+    <!-- APP orchestrator LAST -->
+    <script src="assets/js/app.js"></script>
   </body>
 </html>

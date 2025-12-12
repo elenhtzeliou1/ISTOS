@@ -25,10 +25,7 @@
     />
   </head>
   <body>
-    <!--nav same for every page-->
     <nav id="site-nav"></nav>
-    <script src="assets/js/ui/nav.js"></script>
-    <!--nav-->
 
     <header class="intro-container">
       <div class="title-container">
@@ -45,35 +42,38 @@
       <div class="intro-slider">
         <div class="intro-item">
           <div class="image-wrapper">
-            <img src="assets/images/photo-1550751827-4bd374c3f58b.avif" />
+            <img src="assets/images/thumbnails/cat-networks-cover.avif" />
           </div>
           <p>Design Databases</p>
         </div>
 
         <div class="intro-item">
           <div class="image-wrapper">
-            <img src="assets/images/networks.avif" />
+            <img src="assets/images/thumbnails/main-networks-course.jpeg" />
           </div>
           <p>Discover Networks</p>
         </div>
 
         <div class="intro-item">
           <div class="image-wrapper">
-            <img src="assets/images/cybersec.avif" />
+            <img src="assets/images/thumbnails/cybersec-cover.jpeg" />
           </div>
           <p>Become Cybersecurity expert</p>
         </div>
 
         <div class="intro-item">
           <div class="image-wrapper">
-            <img src="assets/images/vid.avif" alt="" />
+            <img
+              src="assets/images/thumbnails/webdev-cover-course.jpg"
+              alt=""
+            />
           </div>
           <p>More than 1000 videos</p>
         </div>
 
         <div class="intro-item">
           <div class="image-wrapper">
-            <img src="assets/images/des.avif" />
+            <img src="assets/images/thumbnails/book-thumbnail-2.jpeg" />
           </div>
 
           <p>Become programming expert</p>
@@ -99,8 +99,8 @@
       <div class="description-wrapper">
         <div class="description-card">
           <div class="description-card-details">
-            <h1>MAIN INTRO</h1>
-            <p>
+            <h1 class="reveal-up">MAIN INTRO</h1>
+            <p class="reveal-up">
               Welcome to our Informatics E-Learning website – a space designed
               to support your studies with clear explanations, hands-on material
               and organized content. Instead of scattered notes and endless
@@ -121,15 +121,18 @@
           </div>
 
           <div class="description-image">
-            <img src="assets/images/cybersec.avif" />
+            <img
+              class="reveal-img"
+              src="assets/images/main-page-images/main-image-1.jpeg"
+            />
           </div>
         </div>
 
         <!--ADD MORE CARDS HERE-->
         <div class="description-card">
           <div class="description-card-details">
-            <h1>COURSE CATEGORIES</h1>
-            <p>
+            <h1 class="reveal-up">COURSE CATEGORIES</h1>
+            <p class="reveal-up">
               Explore carefully organized course categories covering
               programming, networks, databases, cybersecurity and more. Each
               category groups together lessons, assignments and supporting
@@ -148,13 +151,17 @@
           </div>
 
           <div class="description-image">
-            <img src="assets/images/des.avif" />
+            <img
+              class="reveal-img"
+              src="assets/images/main-page-images/main-image-2.jpeg"
+            />
           </div>
         </div>
+
         <div class="description-card">
           <div class="description-card-details">
-            <h1>BOOKS & VIDEO LISTS</h1>
-            <p>
+            <h1 class="reveal-up">BOOKS & VIDEO LISTS</h1>
+            <p class="reveal-up">
               Complement your courses with curated book and video
               recommendations selected specifically for Informatics students.
               Instead of random search results, you’ll find trusted textbooks,
@@ -174,14 +181,17 @@
           </div>
 
           <div class="description-image">
-            <img src="assets/images/networks.avif" />
+            <img
+              class="reveal-img"
+              src="assets/images/main-page-images/main-image-9.jpeg"
+            />
           </div>
         </div>
 
         <div class="description-card">
           <div class="description-card-details">
-            <h1>OUR TEAM</h1>
-            <p>
+            <h1 class="reveal-up">OUR TEAM</h1>
+            <p class="reveal-up">
               Behind the platform is a team of instructors, students and
               contributors who share a passion for Informatics and digital
               learning. We continuously review content, refresh examples and
@@ -200,7 +210,10 @@
           </div>
 
           <div class="description-image">
-            <img src="assets/images/hac.avif" />
+            <img
+              class="reveal-img"
+              src="assets/images/main-page-images/main-image-4.jpeg"
+            />
           </div>
         </div>
       </div>
@@ -235,7 +248,10 @@
       <div class="courses-description-video-wrapper">
         <div class="courses-description-box-screen">
           <div class="screen-wrapper">
-            <img src="assets/images/vid.avif" alt="" />
+            <img
+              src="assets/images/main-page-images/main-image-3.jpeg"
+              alt=""
+            />
           </div>
           <div class="base-screen">
             <a href="categories.html">Explore Now</a>
@@ -243,239 +259,12 @@
         </div>
       </div>
 
-      <div class="courses-detail-accordion">
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="true"
-            aria-controls="course-detail-panel-1"
-            id="course-detail-trigger-1"
-          >
-            <span class="course-span">Programming Fundamentals</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-1"
-            role="region"
-            aria-labelledby="course-detail-trigger-1"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Start from the basics of programming with clear, step-by-step
-                lessons. You’ll learn about variables, data types, conditions,
-                loops and functions using beginner-friendly languages like
-                Python and Java. Each lesson includes short examples and small
-                exercises so you can practise as you go. By the end of this
-                section, you’ll feel comfortable reading and writing simple
-                programs on your own.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img
-                  src="/assets/images/photo-1550751827-4bd374c3f58b.avif"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
-
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="course-detail-panel-2"
-            id="course-detail-trigger-2"
-          >
-            <span class="course-span">Web & Application Development</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-2"
-            role="region"
-            aria-labelledby="course-detail-trigger-2"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Build modern applications by combining front-end and back-end
-                skills. Explore HTML, CSS and JavaScript for the browser, then
-                move into server-side development, APIs and basic deployment
-                workflows. You’ll see how real web apps are structured, how data
-                flows between client and server, and how to organize your code
-                so it’s easy to maintain and extend.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img
-                  src="/assets/images/fotis-fotopoulos-6sAl6aQ4OWI-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
-
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="course-detail-panel-3"
-            id="course-detail-trigger-3"
-          >
-            <span class="course-span">Computer Networks</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-3"
-            role="region"
-            aria-labelledby="course-detail-trigger-3"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Understand how devices talk to each other over local and global
-                networks. This section covers IP addressing, ports, routing,
-                switching and the main network layers. Through diagrams and
-                examples, you’ll learn what actually happens when you open a
-                website, send a message or connect to Wi-Fi. Practical
-                activities and tools like <code>ping</code> and
-                <code>traceroute</code> help you see these concepts in action.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img src="/assets/images/networks.avif" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
-
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="course-detail-panel-4"
-            id="course-detail-trigger-4"
-          >
-            <span class="course-span">Databases & SQL</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-4"
-            role="region"
-            aria-labelledby="course-detail-trigger-4"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Learn how data is stored, queried and managed in relational
-                databases. You’ll work with tables, primary keys and
-                relationships, and practise writing SQL queries using
-                <code>SELECT</code>, <code>JOIN</code>,
-                <code>GROUP BY</code> and more. Examples are based on realistic
-                datasets, so you can connect what you learn to real
-                applications, reports and projects you might build as an
-                Informatics student.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img
-                  src="/assets/images/jakub-zerdzicki-vEmtcGx5nyQ-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
-
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="course-detail-panel-5"
-            id="course-detail-trigger-5"
-          >
-            <span class="course-span">Cybersecurity Basics</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-5"
-            role="region"
-            aria-labelledby="course-detail-trigger-5"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Build a solid foundation in cybersecurity by exploring common
-                threats, vulnerabilities and defense techniques. Topics include
-                passwords and authentication, encryption, network attacks and
-                safe online practices. You’ll see how security concepts link
-                back to programming and networking, and why secure design
-                matters for every kind of system you work on.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img
-                  src="/assets/images/flyd-mT7lXZPjk7U-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
-
-        <!-- That is one Description-->
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger"
-            aria-expanded="false"
-            aria-controls="course-detail-panel-6"
-            id="course-detail-trigger-6"
-          >
-            <span class="course-span">Study Tools & Projects</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-
-          <div
-            class="accordion-panel"
-            id="course-detail-panel-6"
-            role="region"
-            aria-labelledby="course-detail-trigger-6"
-          >
-            <div class="accordion-panel-inner">
-              <!-- to krimeno content-->
-              <p>
-                Turn theory into practice with guided projects, quizzes and
-                ready-made study tools. Use templates, checklists and example
-                code to prepare for exams or to build portfolio-ready
-                mini-projects. This section helps you connect all the topics
-                together—programming, networks, databases and security—so you
-                can see the bigger picture and gain confidence in your overall
-                Informatics skills.
-              </p>
-              <div class="accordion-pannel-inner-img-cont">
-                <img src="/assets/images/vid.avif" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End - That is one Description-->
+      <div
+        class="courses-detail-accordion"
+        id="categories-accordion"
+        data-mode="preview"
+      >
+        <!-- Load content via js: -->
       </div>
 
       <!-- add more here-->
@@ -493,19 +282,6 @@
             explore new topics at your own pace.
           </h2>
         </div>
-
-        <div class="carousel-proposed-video-wrapper">
-          <div class="proposed-video-container">
-            <div class="proposed-video-carousel" id="proposed-courses-carousel">
-              <!--js injects content here
-              proposed-courses.js
-              -->
-            </div>
-          </div>
-        </div>
-
-        <a href="courses.html">View All Courses</a>
-
         <div class="courses-info">
           <div class="course-item">
             <div class="item-title">
@@ -560,6 +336,18 @@
             </div>
           </div>
         </div>
+
+        <div class="carousel-proposed-video-wrapper">
+          <div class="proposed-video-container">
+            <div class="proposed-video-carousel" id="proposed-courses-carousel">
+              <!--js injects content here
+              proposed-courses.js
+              -->
+            </div>
+          </div>
+        </div>
+
+        <a href="courses.html">View All Courses</a>
       </div>
     </section>
     <!-- proposed courses-->
@@ -578,54 +366,8 @@
           </p>
         </div>
 
-        <div class="rec-added-box-wrap">
-          <a href="" class="new-box">
-            <div class="new-box-header">
-              <span>2 days ago</span>
-              <h4>Security Book Shelf</h4>
-              <h3>
-                A focused selection of titles on ethical hacking, network
-                defense and security fundamentals to help you build a solid
-                cybersecurity mindset.
-              </h3>
-              <p>Security</p>
-            </div>
-            <div class="new-box-content">
-              <img src="assets/images/11-thumb.jpg" alt="" />
-            </div>
-          </a>
-
-          <a href="" class="new-box">
-            <div class="new-box-header">
-              <span>2 days ago</span>
-              <h4>Data & Databases Shelf</h4>
-              <h3>
-                Core books for Python, Java and web development — ideal for
-                beginners who want structured explanations and lots of examples.
-              </h3>
-              <p>Databases</p>
-            </div>
-            <div class="new-box-content">
-              <img
-                src="assets/images/programming-background-collage.jpg"
-                alt=""
-              />
-            </div>
-          </a>
-          <a href="" class="new-box">
-            <div class="new-box-header">
-              <span>1 day ago</span>
-              <h4>Programming Essentials Shelf</h4>
-              <h3>
-                Resources covering SQL, data modeling and database design,
-                perfect for coursework and real-world applications.
-              </h3>
-              <p>Programming</p>
-            </div>
-            <div class="new-box-content">
-              <img src="assets/images/7-thumb.jpg" alt="" />
-            </div>
-          </a>
+        <div class="rec-added-box-wrap" id="prefered-videos-wrapper">
+          <!-- content loads here via js-->
         </div>
 
         <div class="rec-added-button-row">
@@ -648,85 +390,46 @@
       </div>
 
       <div class="slider-wrapper">
-        <div class="card-carousel">
-          <a class="card">
-            <div class="card-info">
-              <div class="tag-row">
-                <div class="tag">Programming</div>
-                <div class="tag">Begginer</div>
-              </div>
-              <h2>Python Book</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
-            <div class="card-img-cont">
-              <img src="assets/images/self-desktop.webp" alt="" />
-            </div>
-          </a>
-
-          <a class="card">
-            <div class="card-info">
-              <div class="tag-row">
-                <div class="tag">Programming</div>
-                <div class="tag">Begginer</div>
-              </div>
-              <h2>Python Book</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
-            <div class="card-img-cont">
-              <img src="assets/images/self-desktop.webp" alt="" />
-            </div>
-          </a>
-
-          <a class="card">
-            <div class="card-info">
-              <div class="tag-row">
-                <div class="tag">Programming</div>
-                <div class="tag">Begginer</div>
-              </div>
-              <h2>Python Book</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
-            <div class="card-img-cont">
-              <img src="assets/images/self-desktop.webp" alt="" />
-            </div>
-          </a>
-
-          <a class="card">
-            <div class="card-info">
-              <div class="tag-row">
-                <div class="tag">Programming</div>
-                <div class="tag">Begginer</div>
-              </div>
-              <h2>Python Book</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
-            </div>
-            <div class="card-img-cont">
-              <img src="assets/images/self-desktop.webp" alt="" />
-            </div>
-          </a>
-        </div>
+        <div class="card-carousel" id="prefered-books-wrapper">
+          <!-- 
+        the content loads with js   <script src="assets/js/ui/prefered-books.js"></script>: 
+        --></div>
       </div>
     </section>
     <!--END proposed books section-->
 
+    <!--Footer -->
+    <footer id="site-footer"></footer>
     <!--Used scripts-->
+
+    <!-- COMMON UI -->
+    <script src="assets/js/ui/common/menu.js"></script>
+    <script src="assets/js/ui/common/footer.js"></script>
+    <script src="assets/js/ui/common/footer-accordion.js"></script>
+
+    <script src="assets/js/ui/common/accordion-ui.js"></script>
+    <script src="assets/js/ui/common/card-carousel-drag.js"></script>
+    <script src="assets/js/ui/common/intro-slider.js"></script>
+    <script src="assets/js/ui/common/course-items-reveal.js"></script>
+    <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
+    <script src="assets/js/ui/common/reveal.js"></script>
+
+    <!--DATA-->
+    <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/courses.js"></script>
-    <script src="assets/js/ui/responsive.js"></script>
-    <script src="assets/js/ui/menu.js"></script>
-    <script src="assets/js/ui/proposed-courses.js"></script>
-    <script src="assets/js/ui/proposed-courses-carousel.js"></script>
+    <script src="assets/js/data/books.js"></script>
+    <script src="assets/js/data/videos.js"></script>
+
+    <!--PAGE RENDERS-->
+    <script src="assets/js/ui/pages/categories-ui.js"></script>
+    <script src="assets/js/ui/prefered/prefered-books.js"></script>
+    <script src="assets/js/ui/prefered/prefered-videos.js"></script>
+    <script src="assets/js/ui/prefered/proposed-courses.js"></script>
+
+
+
+    <script src="assets/js/app.js"></script>
+
     <!--Used scripts-->
   </body>
 </html>
