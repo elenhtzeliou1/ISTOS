@@ -6,7 +6,7 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/python-course-thumb-nail.jpeg",
+    cover: "assets/images/python-course-thumb-nail-big.jpeg",
     description:
       "Learn the fundamentals of Python, one of the most popular programming languages today. This course covers variables, data types, loops, functions, and basic problem-solving techniques. Ideal for absolute beginners looking to enter the world of coding with a friendly and powerful language.",
     learningGoals: [
@@ -60,7 +60,7 @@ const COURSES = [
     difficulty: "advanced",
     available: false,
     featured: true,
-    cover: "assets/images/thumbnails/data-analytics-cover.jpeg",
+    cover: "assets/images/main-image-9.jpeg",
     description:
       "Go beyond the basics and master advanced Python concepts including decorators, generators, object-oriented programming, memory management, and performance optimization. This course is designed for learners who already understand the core Python syntax and want to write production-level, scalable applications.",
     learningGoals: [
@@ -119,7 +119,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/networks-main-cover.jpeg",
+    cover: "assets/images/networks-cover-big.jpeg",
     description:
       "Understand how computers communicate across modern networks. Explore network layers, routing principles, TCP/IP, DNS, and protocols that power the internet. Includes practical examples, visual explanations, and insights into how data travels securely and efficiently between systems.",
     learningGoals: [
@@ -176,7 +176,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/main-networks-course.jpeg",
+    cover: "assets/images/cybersec-cover-3.jpg",
     description:
       "A comprehensive introduction to the core principles of cybersecurity. Learn about attack types, encryption fundamentals, authentication mechanisms, secure communication, and best practices for protecting systems. Perfect for learners aiming to build strong security awareness and foundational skills.",
     learningGoals: [
@@ -235,7 +235,7 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/course-cover5.jpeg",
+    cover: "assets/images/dabases-cover-2.jpg",
     description:
       "Learn how to store, organize, and query data using SQL — the standard language for relational databases. This course covers table design, relationships, CRUD operations, joins, filtering, and real-world query examples. A practical introduction for anyone working with data in modern applications.",
     learningGoals: [

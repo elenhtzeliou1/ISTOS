@@ -9,7 +9,7 @@ const BOOKS = [
     featured: true,
     description:
       "A fast-paced introduction to Python programming, covering variables, data structures, functions, OOP, and real-world projects. Perfect for beginners entering coding.",
-    cover: "assets/images/thumbnails/book-thumbnail-2.jpeg",
+    cover: "assets/images/programming-cover-small.jpg",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const BOOKS = [
     featured: true,
     description:
       "A deep dive into advanced Python concepts, including generators, decorators, concurrency, and Pythonic design. Ideal for experienced Python developers.",
-    cover: "assets/images/thumbnails/databases-book-cover.jpeg",
+    cover: "assets/images/cover-17.jpg",
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const BOOKS = [
     featured: true,
     description:
       "The most widely used networking textbook. Covers networking layers, protocols, routing, security, and real-world packet flows from a top-down perspective.",
-    cover: "assets/images/thumbnails/databases-book-thmbnail.jpeg",
+    cover: "assets/images/networks-cover-3.avif",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const BOOKS = [
     featured: true,
     description:
       "A foundational introduction to cybersecurity concepts, including encryption, authentication, threats, vulnerabilities, network defense, and best practices.",
-    cover: "assets/images/thumbnails/book-cover.jpeg",
+    cover: "assets/images/cybersec-cover-3.jpg",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const BOOKS = [
     featured: false,
     description:
       "Learn how to query relational databases using SQL. Covers SELECT, JOIN, GROUP BY, window functions, subqueries, and practical data analysis workflows.",
-    cover: "assets/img/thumbnails/book-sql.jpg",
+    cover: "assets/images/databases-cover-1.jpeg",
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ const BOOKS = [
     featured: false,
     description:
       "Learn how to query relational databases using SQL. Covers SELECT, JOIN, GROUP BY, window functions, subqueries, and practical data analysis workflows.",
-    cover: "assets/img/thumbnails/book-sql.jpg",
+    cover: "assets/images/growtika-8zB4P0eafrs-unsplash.jpg",
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ const BOOKS = [
     featured: true,
     description:
       "Practical Python for everyday tasks: files, web scraping, Excel, PDFs, and automation projects for beginners.",
-    cover: "assets/img/thumbnails/book-automate.jpg",
+    cover: "assets/images/web-dev-main.jpg",
   },
   {
     id: 8,
@@ -93,7 +93,7 @@ const BOOKS = [
     featured: false,
     description:
       "Best practices for writing readable, maintainable code with real examples and design principles.",
-    cover: "assets/img/thumbnails/book-clean-code.jpg",
+    cover: "assets/images/cover-28.jpg",
   },
   {
     id: 9,
@@ -105,7 +105,7 @@ const BOOKS = [
     featured: false,
     description:
       "Deep, practical guidance on writing robust, high-quality Java with modern patterns and pitfalls to avoid.",
-    cover: "assets/img/thumbnails/book-effective-java.jpg",
+    cover: "assets/images/cover-3.jpg",
   },
   {
     id: 10,
@@ -117,7 +117,7 @@ const BOOKS = [
     featured: false,
     description:
       "A comprehensive reference on algorithms, complexity, and data structures for strong CS foundations.",
-    cover: "assets/img/thumbnails/book-clrs.jpg",
+    cover: "assets/images/js-cover-3.jpg",
   },
   {
     id: 11,
@@ -129,7 +129,7 @@ const BOOKS = [
     featured: true,
     description:
       "Classic, detailed coverage of network architectures, protocols, and real-world communication models.",
-    cover: "assets/img/thumbnails/book-tanenbaum-networks.jpg",
+    cover: "assets/images/networks-cover-4.jpg",
   },
   {
     id: 12,
@@ -141,7 +141,7 @@ const BOOKS = [
     featured: false,
     description:
       "Security protocols and mechanisms across networks: cryptography, VPNs, authentication, and secure design.",
-    cover: "assets/img/thumbnails/book-net-sec-essentials.jpg",
+    cover: "assets/images/networks-cover-3.avif",
   },
   {
     id: 13,
@@ -153,7 +153,7 @@ const BOOKS = [
     featured: false,
     description:
       "In-depth guide to web security testing concepts, attack surfaces, and defensive thinking.",
-    cover: "assets/img/thumbnails/book-web-hacking.jpg",
+    cover: "assets/images/cybersec-cover-2-small.jpg",
   },
   {
     id: 14,
@@ -165,7 +165,7 @@ const BOOKS = [
     featured: false,
     description:
       "A hands-on introduction to understanding malicious software behavior and analysis workflows.",
-    cover: "assets/images/thumbnails/book-cover2.jpg",
+    cover: "assets/images/cybersec-cover-2-small.jpg",
   },
   {
     id: 15,
@@ -177,7 +177,7 @@ const BOOKS = [
     featured: true,
     description:
       "Strong academic foundation in relational theory, transactions, indexing, and database architecture.",
-    cover: "assets/img/thumbnails/book-db-concepts.jpg",
+    cover: "assets/images/cybersec-cover-1.jpeg",
   },
   {
     id: 16,
@@ -189,19 +189,19 @@ const BOOKS = [
     featured: true,
     description:
       "Modern view of scalable systems, data models, distributed storage, and reliability tradeoffs.",
-    cover: "assets/img/thumbnails/book-ddia.jpg",
+    cover: "assets/images/databases-cover-5.jpg",
   },
   {
     id: 17,
-    title: "SQL Antipatterns",
+    title: "Web Dev",
     author: "Bill Karwin",
-    category: "databases",
+    category: "web-development",
     difficulty: "intermediate",
     available: true,
     featured: false,
     description:
       "Common database and SQL mistakes with practical fixes for better schema and query design.",
-    cover: "assets/img/thumbnails/book-sql-antipatterns.jpg",
+    cover: "assets/images/cover-6.jpeg",
   },
 
   {
@@ -214,7 +214,7 @@ const BOOKS = [
     featured: true,
     description:
       "A modern, hands-on guide to JavaScript and web programming. Covers core language concepts, the DOM, async patterns, and practical examples for building real web apps.",
-    cover: "assets/img/thumbnails/book-eloquent-js.jpg",
+    cover: "assets/images/cover-11.jpg",
   },
   {
     id: 19,
@@ -226,6 +226,18 @@ const BOOKS = [
     featured: false,
     description:
       "Practical study techniques for mastering technical subjects. Great for exam prep, building routines, and improving retention across programming, networks, security, and databases.",
-    cover: "assets/img/thumbnails/book-learning-how-to-learn.jpg",
+    cover: "assets/images/cat-ai-cover.jpeg",
+  },
+  {
+    id: 20,
+    title: "Artificial Intelligence 2",
+    author: "Barbara Bakley",
+    category: "ai",
+    difficulty: "beginner",
+    available: true,
+    featured: false,
+    description:
+      "Practical study techniques for mastering technical subjects. Great for exam prep, building routines, and improving retention across programming, networks, security, and databases.",
+    cover: "assets/images/cover-13.jpg",
   },
 ];

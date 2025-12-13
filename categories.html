@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Κατηγορίες Μαθημάτων</title>
+    <title>InfoHub | Categories</title>
 
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/component.css" />
@@ -29,25 +29,29 @@
 
     <header class="intro-container categories">
       <div class="title-container categories">
-        <h1 class="categories">Discover All Available Course Categories</h1>
+        <h1>All Course Categories in One Place</h1>
         <p>
-          Browse our core Informatics categories — from Programming and Networks
-          to Cybersecurity and Databases — and find the learning path that
-          matches your goals.
+          Explore our core Informatics areas—Programming, Web Development,
+          Databases, Networks, Cybersecurity, and Artificial Intelligence—and
+          choose the learning path that matches your goals and level.
         </p>
       </div>
 
-      <div class="courses-description-video-wrapper">
-        <a href="courses.html" class="a-green">Start your learning journey</a>
-        <div class="courses-description-box-screen">
-          <div class="screen-wrapper">
-            <img
-              src="assets/images/main-page-images/index-categories-image.jpeg"
-              alt=""
-            />
+      <div class="learning-goals-container">
+        <div class="goal-slider" id="categories-header-preview">
+          <!-- goal items gets injected by categories.ui
+         
+           
+          </div>-->
+        </div>
+
+        <div class="controll-btn-row">
+          <div class="slider-cursor-btn">
+            <i class="fa-solid fa-arrow-left"></i>
           </div>
-          <div class="base-screen">
-          
+
+          <div class="slider-cursor-btn">
+            <i class="fa-solid fa-arrow-right"></i>
           </div>
         </div>
       </div>
@@ -70,7 +74,8 @@
 
     <script src="assets/js/ui/common/accordion-ui.js"></script>
     <script src="assets/js/ui/common/reveal.js"></script>
-    <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
+
+    <script src="/assets/js/ui/pages/detail-carousel.js"></script>
 
     <!-- DATA -->
     <script src="assets/js/data/categories.js"></script>

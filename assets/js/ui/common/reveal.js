@@ -1,4 +1,3 @@
-
 (function () {
   // ---- Description cards image direction + fade/slide ----
   function initDescriptionReveal() {

@@ -499,12 +499,14 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radius-small);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
   overflow: hidden;
+
 }
 
 .screen-wrapper img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+
 }
 
 .base-screen {
@@ -747,7 +749,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .card-carousel .card:nth-child(3) {
-  background-color: var(--violet);
+  background-color: rgb(19, 9, 51);
 }
 
 .card-carousel .card:nth-child(3) .card-info>p,
@@ -1048,16 +1050,16 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
   max-width: var(--max-width);
   margin: auto;
+  background-color: var(--card-secondary-color);
 }
 
 .title-container.categories {
   height: auto;
 }
 
-.intro-container.categories>.courses-description-video-wrapper {
-  top: 0;
-  flex-direction: column;
-  align-items: center;
+.title-container.categories h1,
+.title-container.categories p {
+  color: black;
 }
 
 .categories-main-content {
@@ -1082,6 +1084,132 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radius-big);
   font-weight: 350;
   text-transform: uppercase;
+}
+
+.learning-goals-container {
+  padding: var(--padding) 0;
+  max-width: var(--max-width);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  overflow: hidden;
+  height: auto;
+  gap: var(--gap-mid);
+  width: 100%;
+}
+
+.learning-goals-container .tag-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  padding: 0 var(--padding-avg);
+}
+
+.learning-goals-container .tag {
+  background-color: var(--card-color);
+  color: white;
+}
+
+/*caousel goals*/
+.goal-slider {
+  height: 45vh;
+  position: relative;
+  width: 100%;
+}
+
+.goal-item {
+  position: absolute;
+  width: 290px;
+  height: 45vh;
+  cursor: grab;
+  user-select: none;
+  transform-origin: 50% 0%;
+  overflow: hidden;
+
+  background-color: var(--card-color-bg);
+  padding: var(--padding-avg) var(--padding-sm) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+  flex-direction: column;
+  text-align: center;
+  border-radius: var(--border-radius-avrg);
+  border: none;
+
+}
+
+.goal-item h5 {
+  font-size: 20px;
+  color: var(--pcolor);
+}
+
+.goal-item span {
+  font-size: 14px;
+  color: var(--pcolor);
+  padding: 1px var(--padding-sm);
+  border-radius: var(--border-radius-small);
+  background-color: rgba(128, 128, 128, 0.253);
+}
+
+.goal-item p {
+  font-size: 14px;
+  color: var(--pcolor);
+  font-weight: 350;
+}
+
+.goal-item .tag-row {
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal-item__bg_img_wrapper {
+  height: 18vh;
+  width: 100%;
+  margin: auto auto 0;
+  overflow: hidden;
+}
+
+.goal-item__bg_img_wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.goal-item.active {
+  cursor: grabbing;
+}
+
+/*caousel goals*/
+
+.controll-btn-row {
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-mid);
+}
+
+.slider-cursor-btn {
+  height: 8vh;
+  width: 8vh;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
 }
 
 .carousel-proposed-video-wrapper {
@@ -1204,7 +1332,7 @@ nav.mobile-open .nav-link-menu {
 
 /*main description*/
 .courses-desc-wrapper {
-  border-top: 1px solid var(--border-top-new);
+
   width: 100%;
   padding: var(--padding-big) 0;
   height: auto;
@@ -1383,7 +1511,7 @@ nav.mobile-open .nav-link-menu {
 
   cursor: pointer;
   transition: 0.2s ease;
-
+  overflow: hidden;
 }
 
 .course-desc-sticky-container:hover {
@@ -1393,7 +1521,8 @@ nav.mobile-open .nav-link-menu {
 .course-desc-sticky-container>.tag-row {
   padding: 0;
 }
-.course-desc-sticky-container>.tag-row .tag:nth-child(3){
+
+.course-desc-sticky-container>.tag-row .tag:nth-child(2) {
   background-color: var(--green);
   color: black;
 }
@@ -1403,17 +1532,29 @@ nav.mobile-open .nav-link-menu {
 }
 
 .vid-wrp {
-  height: 24vh;
-
+  height: 16vh;
+  flex: 0 0 16vh;
   width: 100%;
   border-radius: var(--border-radius-avrg);
-  margin: auto auto 0;
+  margin-top: auto;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: left;
   gap: var(--gap);
+}
+
+.vid-wrp.vid-book img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* or 'contain' if you don't want cropping */
+  display: block;
+}
+
+.vid-wrp.questions-wrapper {
+  height: auto;
 }
 
 .vid-wrp>.qa-list {
@@ -1437,11 +1578,7 @@ nav.mobile-open .nav-link-menu {
   font-size: 18px;
 }
 
-.vid-wrp img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
+
 
 
 /*course.html*/
@@ -2007,9 +2144,14 @@ nav.mobile-open .nav-link-menu {
   pointer-events: none;
   transition: opacity 0.25s ease;
   z-index: 999;
+  
 }
-
-/* Visible state */
+#summary-content{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+/* visible state */
 .modal-overlay.active {
   opacity: 1;
   pointer-events: auto;
@@ -2017,12 +2159,12 @@ nav.mobile-open .nav-link-menu {
 
 /* Modal box */
 .modal-content {
-  background: #111;
+  background-color: var(--card-color);
   color: #fff;
-  border-radius: 12px;
+  border-radius:var(--border-radious);
   max-width: 480px;
   width: 90%;
-  padding: 1.5rem;
+  padding:var(--padding-avg);
   position: relative;
 
   transform: translateY(20px);
@@ -2031,14 +2173,23 @@ nav.mobile-open .nav-link-menu {
     opacity 0.25s ease,
     transform 0.25s ease;
 }
+.modal-content h2{
+  margin-bottom: var(--padding-avg);
+}
+.modal-enroll-btn{
+  margin-top: var(--padding-avg);
+  width: 100%;
+  padding: var(--padding-sm) 0;
+}
 
 /* Animate in when overlay is active */
 .modal-overlay.active .modal-content {
   transform: translateY(0);
   opacity: 1;
+
 }
 
-/* Close “X” */
+/* Close X */
 .modal-close {
   position: absolute;
   top: 0.75rem;
@@ -2135,94 +2286,46 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
 }
 
-
-.learning-goals-container {
-  padding: var(--padding-big) 0;
-  max-width: var(--max-width);
-  background-color: var(--card-secondary-color);
+.learning-goals-container.course-details {
+  height: auto;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  margin: auto;
-  overflow: hidden;
-  height: auto;
   gap: var(--gap-mid);
+  padding: 0 var(--padding-sm);
 }
 
-.learning-goals-container .tag {
+.learning__goals__wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: auto;
+  gap: var(--gap);
+
+  width: 100%;
+}
+
+.learning__goal__item {
+  padding: var(--padding-avg) var(--padding-sm);
   background-color: var(--card-color);
-  color: white;
-}
-
-/*caousel goals*/
-.goal-slider {
-  height: 34vh;
-  position: relative;
   width: 100%;
-}
-
-.goal-item {
-  position: absolute;
-  width: 290px;
-  height: 190px;
-  cursor: grab;
-  user-select: none;
-  transform-origin: 50% 0%;
-  overflow: hidden;
-  background-color: var(--intro-item-bg-color);
-  padding: var(--padding-sm) var(--padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  text-align: center;
-  border-radius: var(--border-radius-small);
-}
-
-.goal-item span {
-  font-size: 16px;
-}
-
-.goal-item p {
-  font-size: 14px;
-  color: var(--card-secondary-color);
-  font-weight: 200;
-}
-
-.goal-item .tag-row {
-  padding: 0;
-  margin: 0;
-  align-items: center;
-  justify-content: center;
-}
-
-.goal-item.active {
-  cursor: grabbing;
-}
-
-/*caousel goals*/
-
-.controll-btn-row {
   height: auto;
-  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: var(--gap-mid);
+  flex-direction: column;
+  gap: var(--gap);
+  border-radius: var(--border-radious);
 }
 
-.slider-cursor-btn {
-  height: 8vh;
-  width: 8vh;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 4;
+.learning__goal__item span,
+.learning__goal__item p {
+  font-size: 16px;
+  color: var(--base-screen-color);
 }
 
 
@@ -2271,13 +2374,12 @@ nav.mobile-open .nav-link-menu {
 .module-header h3 {
   color: black;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .module-header>span {
   color: grey;
   font-size: 18px;
-
 }
 
 .course-module p {
@@ -2291,12 +2393,10 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
   width: 100%;
   height: auto;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .more-qst-row {
@@ -2347,6 +2447,60 @@ nav.mobile-open .nav-link-menu {
   transition: 0.2s;
 }
 
+/* modal course susbcription */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal__dialog {
+  position: relative;
+  max-width: 520px;
+  width: calc(100% - var(--padding-avg));
+  margin: var( --intro-slider-height-mob) auto 0;
+  background-color: var(--card-inside-color);
+
+  border-radius: var(--border-radious);
+  padding: var(--padding) var(--padding-avg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap);
+  text-align: center;
+}
+
+.modal__actions {
+  display: flex;
+  gap: var(--gap);
+  justify-content: flex-end;
+}
+
+.modal__btn {
+  padding: var(--padding-sm) var(--padding-avg);
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal__btn--primary {
+  background: var(--green);
+  color: #000;
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -2378,7 +2532,6 @@ nav.mobile-open .nav-link-menu {
 .book-dtl-img-cnt {
   height: 40vh;
   width: 60%;
-  background-color: aqua;
   margin: auto;
   border-radius: var(--border-radius-small);
 }
@@ -2429,16 +2582,18 @@ nav.mobile-open .nav-link-menu {
 
 }
 
-.book-dtl-row a{
+.book-dtl-row a {
   background-color: black;
   color: white;
   border: none;
   padding: var(--padding-sm) var(--padding);
 }
-.book-dtl-row a:hover{
+
+.book-dtl-row a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
+
 .book-main-dtl {
   width: 100%;
   padding: var(--padding-avg);
@@ -2802,15 +2957,18 @@ body.team-page {
   flex-direction: column;
   gap: var(--gap);
 }
+
 .vd-content {
   width: 100%;
   height: 30vh;
   overflow: hidden;
 }
-.vd-cover{
-  height: 100%;
+
+.vd-cover {
   width: 100%;
-  object-fit: cover;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 /*=================*/

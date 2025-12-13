@@ -11,8 +11,13 @@ html {
     scroll-behavior: smooth;
 }
 
+:target {
+    scroll-margin-top: 90px;
+}
 
 :root {
+    scroll-margin-top: 90px;
+
     --nav-height: 70px;
     --pad-sm: 2px;
 
@@ -57,8 +62,8 @@ html {
     --nav-bottom: rgb(27, 27, 27);
 
     --card-vd: rgb(32, 29, 29);
-    --goal-card-height: 60vh;
-    --goal-card-height-tablet: 40vh;
+    --goal-card-height: 65vh;
+    --goal-card-height-tablet: 58vh;
 
 
 
@@ -80,9 +85,9 @@ html {
     /*proposed intro slider*/
 
     /* proposed courses carousel*/
-    --proposed-carousel-height:36vh;
-    --proposed-carousel-card-width-mob:290px;
-    --proposed-video-vd-wrapper-mob:28vh;
+    --proposed-carousel-height: 36vh;
+    --proposed-carousel-card-width-mob: 290px;
+    --proposed-video-vd-wrapper-mob: 28vh;
     /* proposed courses carousel*/
 
 
@@ -116,6 +121,7 @@ html {
     --h1-mid: 70px;
     --h1-ultra: 100px;
     --h2-b: 36px;
+    --h2-tabl: 28px;
 
 
     --p-big: 24px;
@@ -296,10 +302,13 @@ span {
 
 .fa-solid.fa-arrow-left {
     font-size: 12px;
+    color: black;
 }
 
 .fa-solid.fa-arrow-right {
     font-size: 12px;
+    color: black;
+
 }
 
 .main-description-course h2 {
@@ -312,4 +321,8 @@ span {
 
 .crs-dtl-header p {
     color: black;
+}
+
+img {
+    max-width: 100%;
 }

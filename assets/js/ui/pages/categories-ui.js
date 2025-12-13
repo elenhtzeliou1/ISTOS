@@ -1,4 +1,5 @@
 (function () {
+  //preview for index.html
   function renderPreview(container, categories) {
     container.innerHTML = categories
       .map((category, index) => {
@@ -54,6 +55,48 @@
       .join("");
   }
 
+  //preview for carousel for header categories.html
+  function headerPreview(container, categories) {
+    container.innerHTML = categories
+      .map((category, index) => {
+        const pshort =
+          category.description.length > 100
+            ? category.description.slice(0, 100) + "..."
+            : category.description;
+
+        const href = `#${category.slug}`;
+        const num = String(index + 1).padStart(2, "0");
+
+        const colors = ["#492db3", "#adadadff", "#151313", "#a1ff62"];
+
+        function hexToRgb(hex) {
+          const h = hex.replace("#", "").slice(0, 6);
+          const n = parseInt(h, 16);
+          return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+        }
+        function pickTextColor(bgHex) {
+          const { r, g, b } = hexToRgb(bgHex);
+          const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+          return brightness < 140 ? "#ffffff" : "#000000";
+        }
+        const bg = colors[index % colors.length];
+        const pcolor = pickTextColor(bg);
+
+        return `
+          <a class="goal-item" href="${href}" style="--card-color-bg:${bg}; --pcolor:${pcolor};">
+            <span>${num}</span>
+            <h5>${category.title}</h5>
+            <p>${pshort}</p>
+            <div class="goal-item__bg_img_wrapper">
+              <img src="${category.cover}" alt="">
+            </div>
+          </a>
+        `;
+      })
+      .join("");
+  }
+
+  // recomendations for categories.html main content
   function pickRecommendations(categorySlug) {
     if (typeof COURSES === "undefined" || typeof BOOKS === "undefined") {
       return { course: null, books: [] };
@@ -102,43 +145,40 @@
     let bottomHtml = "";
 
     if (kind === "book") {
-      //show book.cover
       bottomHtml = `
-        <div class="vid-wrp">
-          <img src="${item.cover}">
-        </div>
-      `;
-    } else if (kind === "course") {
-      //show the questions the first 2
+    <div class="vid-wrp vid-book">
+      <img src="${item.cover || ""}" alt="${item.title || ""}">
+    </div>
+  `;
+    } else {
       const questions = Array.isArray(item.questions)
         ? item.questions.slice(0, 2)
         : [];
-
-      bottomHtml = questions.length
-        ? `
-        <div class="vid-wrp questions-wrapper">
-          <ul class="qa-list">
-            ${questions
-              .map(
-                (q) => `
-                  <li class="q-item">
-                    <p class="q-question">${q.question}</p>
-                  </li>
-                `
-              )
-              .join("")}
-          </ul>
-        </div>
-      `
-        : "";
+      bottomHtml = `
+    <div class="vid-wrp questions-wrapper">
+      ${
+        questions.length
+          ? `<ul class="qa-list">
+              ${questions
+                .map(
+                  (q) =>
+                    `<li class="q-item"><p class="q-question">${q.question}</p></li>`
+                )
+                .join("")}
+            </ul>`
+          : `<div class="vid-placeholder"></div>`
+      }
+    </div>
+  `;
     }
 
     return `
       <a class="course-desc-sticky-container" href="${href}">
         <div class="tag-row">
           <div class="tag">${tag1}</div>
-          <div class="tag">${tag2}</div>
           <div class="tag">${tag3}</div>
+          <div class="tag">${tag2}</div>
+          
         </div>
         <h1>${item.title}</h1>
         <p>${shortedDesc}</p>
@@ -165,7 +205,7 @@
       <div class="start">
         <h1>Where to start</h1>
         <p>
-          Start with one recommended course and two books tailored to this category.
+          Start with one recommended course and two books tailored to ${category.title} category.
         </p>
       </div>
 
@@ -174,6 +214,7 @@
       </div>
     `;
   }
+  // recomendations for categories.html main content
 
   // render full content of categories for categories.html
   function renderFullContent(container, categories) {
@@ -218,6 +259,7 @@
             </div>
           </div>
         </div>
+            
 
         ${renderRecommendationsSection(category)}
       </section>
@@ -232,6 +274,13 @@
         "CATEGORIES data is missing! Load assets/js/data/categories.js first!"
       );
       return;
+    }
+    const headerPreviewCategories = document.getElementById(
+      "categories-header-preview"
+    );
+    if (headerPreviewCategories) {
+      headerPreview(headerPreviewCategories, CATEGORIES);
+      window.RevealUI?.refresh?.();
     }
 
     const preview = document.getElementById("categories-accordion");

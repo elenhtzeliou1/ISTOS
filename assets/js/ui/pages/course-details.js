@@ -31,33 +31,21 @@
     if (descCourse) descCourse.textContent = course.description;
 
     //Gemizoume ta learning goals
-    const goalItems = document.querySelectorAll(".goal-slider .goal-item");
+    const wrapper = document.getElementById("learning__goals_wrapper");
 
-    if (goalItems.length && Array.isArray(course.learningGoals)) {
-      const goals = course.learningGoals;
-
-      goalItems.forEach((item, index) => {
-        const h5 = item.querySelector("h5");
-        const p = item.querySelector("p");
-        const span = item.querySelector("span");
-
-        const goal = goals[index];
-
-        if (!goal) return;
-
-        if (h5) {
-          h5.textContent = goal.title;
-        }
-
-        if (p && goal.text) {
-          p.textContent = goal.text;
-        }
-
-        // prosarmozoume to 01,02,03
-        if (span) {
-          span.textContent = String(index + 1).padStart(2, "0");
-        }
-      });
+    if (wrapper && Array.isArray(course.learningGoals)) {
+      wrapper.innerHTML = course.learningGoals
+        .map((goal, index) => {
+          const num = String(index + 1).padStart(2, "0");
+          return `
+            <div class="learning__goal__item">
+              <span>${num}</span>
+              <h5>${goal.title}</h5>
+              <p>${goal.text}</p>
+            </div>
+          `;
+        })
+        .join("");
     }
 
     //Gemizoume ta modules (sections)
@@ -114,6 +102,64 @@
         if (answerParagraph) {
           answerParagraph.textContent = qa.answer;
         }
+      });
+    }
+
+    //subscribe modal confirmation
+    const subscribeBtn = document.getElementById("subscribeNowBtn");
+    const modal = document.getElementById("subscribeModal");
+    const titleModal = document.getElementById("subscribeTitle");
+    const descModal = document.getElementById("subscribeDesc");
+    const confirmBtn = document.getElementById("confirmSubscribeBtn");
+
+    if (subscribeBtn && modal && titleModal && descModal && confirmBtn) {
+      let lastFocus = null;
+
+      const openModal = () => {
+        lastFocus = document.activeElement;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        confirmBtn.focus();
+      };
+
+      const closeModal = () => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        lastFocus?.focus?.();
+      };
+
+      subscribeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        titleModal.textContent = "Confirm subscription";
+        descModal.textContent = `Do you want to subscribe to "${course.title}"?`;
+
+        confirmBtn.textContent = "Confirm";
+        confirmBtn.dataset.state = "confirm";
+
+        openModal();
+      });
+
+      confirmBtn.addEventListener("click", () => {
+        if (confirmBtn.dataset.state === "done") {
+          closeModal();
+          return;
+        }
+
+        titleModal.textContent = "Congratulations!";
+        descModal.textContent = `You subscribed to "${course.title}".`;
+
+        confirmBtn.textContent = "Close";
+        confirmBtn.dataset.state = "done";
+      });
+
+      modal.querySelectorAll("[data-close]").forEach((el) => {
+        el.addEventListener("click", closeModal);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (!modal.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeModal();
       });
     }
   }
