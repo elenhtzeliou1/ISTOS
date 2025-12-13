@@ -1,3 +1,5 @@
+//the carousel from the header of cateories.html
+
 (function () {
   function init() {
     const slider = document.querySelector(".goal-slider");
@@ -14,7 +16,7 @@
 
     const GAP_DEG = 20.5;
     const TILT_FACTOR = 1;
-    const DRAG_SPEED = 1;
+    const DRAG_SPEED = 1.8;
 
     const desiredGapRad = (GAP_DEG * Math.PI) / 180;
     const approxSlots = (2 * Math.PI) / desiredGapRad;
@@ -38,7 +40,7 @@
     let snapAnimationId = null;
 
     // separate click and drag
-    const DRAG_THRESHOLD_PX = 10;
+    const DRAG_THRESHOLD_PX = 5;
     let pointerDown = false;
     let moved = false;
     let startX = 0,
@@ -74,6 +76,23 @@
       item.dataset.slotIndex = i;
 
       items.push(item);
+    }
+
+    function equalizeItemHeights() {
+      // reset to natural height for measuring
+      items.forEach((it) => (it.style.height = "auto"));
+
+      // measure tallest
+      const maxH = Math.max(...items.map((it) => it.scrollHeight));
+
+      // lock all to same height
+      items.forEach((it) => (it.style.height = maxH + "px"));
+    }
+
+    // helper:  height  geometry together
+    function relayout() {
+      equalizeItemHeights();
+      updateCircle(); // this calls positionAll()
     }
 
     const mid = Math.floor(SLOTS / 2);
@@ -179,86 +198,86 @@
     }
 
     function startDrag(evt) {
-  // don’t preventDefault here (otherwise you can break normal clicks)
-  pointerDown = true;
-  moved = false;
-  isDragging = false;
+      // don’t preventDefault here (otherwise you can break normal clicks)
+      pointerDown = true;
+      moved = false;
+      isDragging = false;
 
-  const pos = getPointerPos(evt);
-  startX = pos.x;
-  startY = pos.y;
+      const pos = getPointerPos(evt);
+      startX = pos.x;
+      startY = pos.y;
 
-  dragStartAngle = Math.atan2(pos.y - cy, pos.x - cx);
-  rotationAtDragStart = rotationOffset;
+      dragStartAngle = Math.atan2(pos.y - cy, pos.x - cx);
+      rotationAtDragStart = rotationOffset;
 
-  document.addEventListener("mousemove", onDrag);
-  document.addEventListener("touchmove", onDrag, { passive: false });
-  document.addEventListener("mouseup", endDrag);
-  document.addEventListener("touchend", endDrag);
-}
-
-    function onDrag(evt) {
-  if (!pointerDown) return;
-
-  const pos = getPointerPos(evt);
-  const dx = pos.x - startX;
-  const dy = pos.y - startY;
-
-  // become a "drag" only after threshold
-  if (!moved) {
-    if (dx * dx + dy * dy < DRAG_THRESHOLD_PX * DRAG_THRESHOLD_PX) return;
-
-    moved = true;
-    isDragging = true;
-
-    // now it’s a real drag: stop scroll + stop snapping
-    evt.preventDefault();
-
-    if (snapAnimationId !== null) {
-      cancelAnimationFrame(snapAnimationId);
-      snapAnimationId = null;
+      document.addEventListener("mousemove", onDrag);
+      document.addEventListener("touchmove", onDrag, { passive: false });
+      document.addEventListener("mouseup", endDrag);
+      document.addEventListener("touchend", endDrag);
     }
 
-    items.forEach((it) => it.classList.add("active"));
-  } else {
-    evt.preventDefault();
-  }
+    function onDrag(evt) {
+      if (!pointerDown) return;
 
-  const currentAngle = Math.atan2(pos.y - cy, pos.x - cx);
-  const deltaAngle = currentAngle - dragStartAngle;
+      const pos = getPointerPos(evt);
+      const dx = pos.x - startX;
+      const dy = pos.y - startY;
 
-  rotationOffset = rotationAtDragStart + deltaAngle * DRAG_SPEED;
+      // become a "drag" only after threshold
+      if (!moved) {
+        if (dx * dx + dy * dy < DRAG_THRESHOLD_PX * DRAG_THRESHOLD_PX) return;
 
-  normalizeRotation();
-  positionAll();
-}
+        moved = true;
+        isDragging = true;
+
+        // now it’s a real drag: stop scroll + stop snapping
+        evt.preventDefault();
+
+        if (snapAnimationId !== null) {
+          cancelAnimationFrame(snapAnimationId);
+          snapAnimationId = null;
+        }
+
+        items.forEach((it) => it.classList.add("active"));
+      } else {
+        evt.preventDefault();
+      }
+
+      const currentAngle = Math.atan2(pos.y - cy, pos.x - cx);
+      const deltaAngle = currentAngle - dragStartAngle;
+
+      rotationOffset = rotationAtDragStart + deltaAngle * DRAG_SPEED;
+
+      normalizeRotation();
+      positionAll();
+    }
 
     function endDrag() {
-  if (!pointerDown) return;
-  pointerDown = false;
+      if (!pointerDown) return;
+      pointerDown = false;
 
-  document.removeEventListener("mousemove", onDrag);
-  document.removeEventListener("touchmove", onDrag);
-  document.removeEventListener("mouseup", endDrag);
-  document.removeEventListener("touchend", endDrag);
+      document.removeEventListener("mousemove", onDrag);
+      document.removeEventListener("touchmove", onDrag);
+      document.removeEventListener("mouseup", endDrag);
+      document.removeEventListener("touchend", endDrag);
 
-  // no drag -> allow normal <a> click
-  if (!moved) return;
+      // no drag -> allow normal <a> click
+      if (!moved) return;
 
-  // dragged -> block the click that fires after mouseup/touchend
-  suppressClick = true;
-  setTimeout(() => (suppressClick = false), 0);
+      // dragged -> block the click that fires after mouseup/touchend
+      suppressClick = true;
+      setTimeout(() => (suppressClick = false), 0);
 
-  isDragging = false;
+      isDragging = false;
 
-  const steps = Math.round(rotationOffset / gapAngle);
-  const targetRotation = steps * gapAngle;
+      const steps = Math.round(rotationOffset / gapAngle);
+      const targetRotation = steps * gapAngle;
 
-  normalizeRotation();
-  animateToRotation(targetRotation);
+      normalizeRotation();
+      animateToRotation(targetRotation);
 
-  items.forEach((it) => it.classList.remove("active"));
-}
+      items.forEach((it) => it.classList.remove("active"));
+    }
 
     // Button controls
     function goToStep(deltaSteps) {
@@ -283,8 +302,8 @@
     nextBtn?.addEventListener("click", () => goToStep(1));
 
     // Init
-    updateCircle();
-    window.addEventListener("resize", updateCircle);
+    requestAnimationFrame(relayout);
+    window.addEventListener("resize", () => requestAnimationFrame(relayout));
 
     slider.style.touchAction = "none";
 

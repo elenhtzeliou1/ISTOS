@@ -77,9 +77,14 @@ html {
     /* intro slider*/
 
     /*proposed book card*/
-    --book-card-width: 260px;
-    --book-card-width-laptop: 320px;
-    --book-card-width-tablet: 300px;
+    --book-card-width: calc(100dvw - 2rem);
+    --book-card-width-tablet:calc(50dvw - 1rem);
+    --book-card-width-laptop:  calc(30dvw - 4rem);
+
+    --book-card-spec-laptop:calc(45dvw - 1rem);
+
+    --goal-item-laptop:450px;
+    --cat-card-table:calc(60dvw - 1rem);
 
     --simple-card-height: 48vh;
     /*proposed intro slider*/
@@ -105,7 +110,9 @@ html {
     --tag-color: rgb(49, 49, 49);
     --max-width: 1200px;
     --max-width-laptop-larg: 1400px;
-    --card-min-height: 80vh;
+
+    --card-min-height:55vh;
+
     --min-height: 90vh;
     --min-height-small: 60vh;
 
@@ -191,7 +198,7 @@ h5 {
 }
 
 p {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.2;
     color: white;
     font-weight: 300;

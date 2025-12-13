@@ -94,7 +94,7 @@
       this.container.addEventListener("touchstart", () => {
         this.hasDragged = false;
       });
-      //cancel the click if we actually draged
+      //cancel the click if we actually dragged
       this.container.addEventListener(
         "click",
         (e) => {
@@ -224,7 +224,7 @@
 
       if (data != null) {
         this.container.classList.remove("smooth-return");
-        xDist = data.x / 850;
+        xDist = data.x / 200;   // makes the drag easiest or heaviest
 
         //if moved more thatn dragThreshhold, it was a drag
         if (Math.abs(data.x) > this.dragThreshold) {

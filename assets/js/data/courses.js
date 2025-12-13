@@ -58,7 +58,7 @@ const COURSES = [
     title: "Advanced Python",
     category: "programming",
     difficulty: "advanced",
-    available: false,
+    available: true,
     featured: true,
     cover: "assets/images/main-image-9.jpeg",
     description:
@@ -686,7 +686,7 @@ const COURSES = [
     title: "HTML & CSS Foundations",
     category: "web-development",
     difficulty: "beginner",
-    available: true,
+    available: false,
     featured: true,
     cover: "assets/images/photo-1550751827-4bd374c3f58b.avif",
     description:
@@ -777,87 +777,214 @@ const COURSES = [
   },
 
   {
-    id: "exam-prep-hub",
-    title: "Exam Prep Hub",
+    id: "ai-fundamentals-lab",
+    title: "AI Fundamentals Lab",
     category: "ai",
     difficulty: "beginner",
     available: true,
     featured: true,
     cover: "assets/images/vid.avif",
     description:
-      "Structured revision plans and topic checklists across programming, networks, security, and databases. Designed for fast, focused exam preparation.",
+      "Learn core AI concepts with simple, visual explanations and hands-on mini tasks. Focuses on understanding how models learn and how to use AI responsibly.",
     learningGoals: [
       {
-        title: "Plan smart revisions",
-        text: "Use weekly templates and checklists.",
+        title: "Understand core ideas",
+        text: "Learn data, features, models, and training.",
       },
-      { title: "Boost confidence", text: "Practice with guided mini quizzes." },
       {
-        title: "See cross-topic links",
-        text: "Understand how categories connect.",
+        title: "Build intuition",
+        text: "See why models make mistakes and how to improve them.",
+      },
+      {
+        title: "Use AI responsibly",
+        text: "Bias, privacy, and safe usage basics.",
       },
     ],
     sections: [
-      { title: "Revision Templates", summary: "Ready-to-use weekly plans." },
-      { title: "Core Checklists", summary: "Must-know concepts per category." },
-      { title: "Mini Quizzes", summary: "Fast recall practice." },
+      { title: "What is AI?", summary: "AI vs ML vs DL, real examples." },
+      {
+        title: "How Models Learn",
+        summary: "Training, validation, overfitting.",
+      },
+      {
+        title: "Evaluation & Ethics",
+        summary: "Accuracy, bias, privacy, and best practices.",
+      },
     ],
     questions: [
       {
-        question: "Is this a real course or a toolkit?",
+        question: "Do I need math to start?",
         answer:
-          "It’s a structured toolkit with short guidance modules and ready-to-use study resources.",
+          "No. We keep math light and focus on concepts, visuals, and practical understanding.",
       },
       {
-        question: "Can I use it for multiple subjects?",
+        question: "Will I code in this course?",
         answer:
-          "Yes, it’s designed to support cross-topic revision in Informatics.",
+          "Optional. You can follow concept-only, or try small guided exercises if you want.",
       },
     ],
   },
 
   {
-    id: "mini-projects",
-    title: "Mini Projects Collection",
+    id: "prompting-and-ai-tools",
+    title: "Prompting & AI Tools Workshop",
     category: "ai",
     difficulty: "intermediate",
     available: true,
     featured: false,
     cover: "assets/images/vid.avif",
     description:
-      "A guided set of short projects that combine multiple topics. Build small portfolio pieces and reinforce theory with practice.",
+      "A practical workshop on using modern AI tools effectively: prompting, workflows, evaluation, and building small AI-assisted projects.",
     learningGoals: [
       {
-        title: "Apply what you learn",
-        text: "Turn theory into working artifacts.",
+        title: "Write strong prompts",
+        text: "Structure prompts for clarity, constraints, and quality.",
       },
       {
-        title: "Combine categories",
-        text: "Blend programming with DB/network/security basics.",
+        title: "Evaluate outputs",
+        text: "Spot hallucinations, verify facts, and iterate safely.",
       },
       {
-        title: "Build portfolio",
-        text: "Create small but meaningful projects.",
+        title: "Build workflows",
+        text: "Use AI for study, coding, writing, and mini automation.",
       },
     ],
     sections: [
       {
-        title: "Project Starters",
-        summary: "Clear requirements and starter ideas.",
+        title: "Prompt Patterns",
+        summary: "Templates for summaries, coding, planning, and revision.",
       },
-      { title: "Integration Tasks", summary: "Small multi-topic challenges." },
-      { title: "Presentation Tips", summary: "How to document your work." },
+      {
+        title: "Verification & Safety",
+        summary: "Checks, citations, bias, and privacy guidelines.",
+      },
+      {
+        title: "Mini AI Projects",
+        summary: "Build small AI-assisted deliverables step-by-step.",
+      },
     ],
     questions: [
       {
-        question: "Do these projects require a team?",
+        question: "Which AI tool does this use?",
         answer:
-          "No, they’re designed to be achievable individually, with optional extensions for group work.",
+          "It’s tool-agnostic. The skills apply to most AI assistants and generative AI platforms.",
       },
       {
-        question: "What level should I be?",
+        question: "Is it okay for students?",
         answer:
-          "You should be comfortable with basics in at least one area (e.g., programming or SQL).",
+          "Yes—there’s a strong focus on ethical use, originality, and how to cite/verify properly.",
+      },
+    ],
+  },
+
+  {
+    id: "javascript-core",
+    title: "JavaScript Core",
+    category: "programming",
+    difficulty: "beginner",
+    available: true,
+    featured: true,
+    cover: "assets/images/main-image-9.jpeg",
+    description:
+      "Learn modern JavaScript from scratch: variables, functions, arrays, objects, DOM manipulation, events, and debugging. Perfect for beginners who want to build interactive web pages and understand how JS works in the browser.",
+    learningGoals: [
+      {
+        title: "Write JS confidently",
+        text: "Understand variables, types, functions, and scope.",
+      },
+      {
+        title: "Work with the DOM",
+        text: "Select elements, handle events, and update UI dynamically.",
+      },
+      {
+        title: "Debug effectively",
+        text: "Use console, breakpoints, and common debugging techniques.",
+      },
+      {
+        title: "Build mini projects",
+        text: "Create small interactive components and pages.",
+      },
+    ],
+    sections: [
+      {
+        title: "JavaScript Basics",
+        summary: "Syntax, data types, operators, and control flow.",
+      },
+      {
+        title: "DOM & Events",
+        summary: "Manipulate HTML/CSS via JS and handle user interactions.",
+      },
+      {
+        title: "Practice Projects",
+        summary: "Mini apps: counter, to-do list, and simple UI widgets.",
+      },
+    ],
+    questions: [
+      {
+        question: "Do I need HTML/CSS before this?",
+        answer:
+          "Basic HTML/CSS helps, but the course includes a quick intro so you can follow along.",
+      },
+      {
+        question: "Will this work for web development?",
+        answer:
+          "Yes—this course focuses on browser JavaScript and interactive UI building.",
+      },
+    ],
+  },
+
+  {
+    id: "javascript-modern-advanced",
+    title: "Modern JavaScript (ES6+) & Async",
+    category: "programming",
+    difficulty: "intermediate",
+    available: false,
+    featured: false,
+    cover: "assets/images/main-image-9.jpeg",
+    description:
+      "Level up your JavaScript with ES6+ features and asynchronous programming. Learn modules, destructuring, classes, promises, async/await, fetch APIs, error handling, and how to structure maintainable front-end code.",
+    learningGoals: [
+      {
+        title: "Use ES6+ features",
+        text: "Write cleaner code with modules, destructuring, and classes.",
+      },
+      {
+        title: "Master async JS",
+        text: "Work confidently with promises, async/await, and APIs.",
+      },
+      {
+        title: "Handle errors well",
+        text: "Build resilient apps with proper error handling patterns.",
+      },
+      {
+        title: "Structure code",
+        text: "Organize projects with reusable modules and patterns.",
+      },
+    ],
+    sections: [
+      {
+        title: "ES6+ Essentials",
+        summary: "Let/const, arrow functions, destructuring, spread/rest.",
+      },
+      {
+        title: "Async & APIs",
+        summary: "Promises, async/await, fetch, JSON, and network errors.",
+      },
+      {
+        title: "Project Architecture",
+        summary: "Modules, reusable utilities, and clean code patterns.",
+      },
+    ],
+    questions: [
+      {
+        question: "Is this course for complete beginners?",
+        answer:
+          "Not exactly—you should already know basic JS (variables, functions, arrays, objects).",
+      },
+      {
+        question: "Do we build something real?",
+        answer:
+          "Yes—there are guided exercises that fetch data from APIs and render it into a UI.",
       },
     ],
   },

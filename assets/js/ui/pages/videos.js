@@ -1,92 +1,78 @@
 (function () {
   function init() {
-    //main grid
     const listContainer = document.getElementById("video-list");
-    if (!listContainer) {
-      console.error("#video-list not found on books page.");
-      return;
-    }
+    if (!listContainer) return;
 
-    if (window.FilterUI) {
-      window.FilterUI.init();
-    }
-    const resultsCount = document.getElementById("results-count");
+    // Prevent double init
+    if (listContainer.dataset.videosBound === "1") return;
+    listContainer.dataset.videosBound = "1";
 
-    // filters
-    const categoryCheckboxes = document.querySelectorAll(
-      'input[name="filter-category"]'
-    );
-    const difficultyCheckboxes = document.querySelectorAll(
-      'input[name="filter-difficulty"]'
-    ); // will only work if videos have .difficulty
-    const availabilityFilter = document.getElementById("filter-available");
+    // Sidebar open/close UI
+    window.FilterUI?.init();
 
     if (typeof VIDEOS === "undefined") {
-      console.error("VIDEO data is missing. Check assets/js/data/video.js");
+      console.error("VIDEOS missing. Did you load assets/js/data/videos.js?");
       return;
     }
 
-    //initial render
-    renderVideos(VIDEOS);
+    const resultsCount = document.getElementById("results-count");
 
-    //filter listeners
-    categoryCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
+    // Grab filters from videos.html
+    const categoryCheckboxes = Array.from(
+      document.querySelectorAll('input[name="filter-category"]')
     );
-
-    difficultyCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
+    const difficultyCheckboxes = Array.from(
+      document.querySelectorAll('input[name="filter-difficulty"]')
     );
+    const availabilityFilter = document.getElementById("filter-available");
 
-    if (availabilityFilter) {
-      availabilityFilter.addEventListener("change", applyFilters);
+    const norm = (v) =>
+      String(v || "")
+        .toLowerCase()
+        .trim();
+
+    function setCount(n) {
+      if (!resultsCount) return;
+      resultsCount.textContent = n === 1 ? "Video (1)" : `Videos (${n})`;
     }
 
-    function applyFilters() {
-      let filtered = [...VIDEOS];
+    // ---------- Equal heights ----------
+    let rafId = 0;
+    function equalizeNewBoxHeights() {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const cards = Array.from(listContainer.querySelectorAll(".new-box"));
+        if (!cards.length) return;
 
-      // categories
-      const selectedCategories = Array.from(categoryCheckboxes)
-        .filter((cb) => cb.checked)
-        .map((cb) => cb.value);
-
-      if (selectedCategories.length > 0) {
-        filtered = filtered.filter((video) =>
-          selectedCategories.includes(video.category)
+        cards.forEach((c) => (c.style.height = "auto"));
+        const maxH = Math.max(
+          ...cards.map((c) => c.getBoundingClientRect().height)
         );
-      }
-
-      // difficulty (only if your BOOKS have a .difficulty property)
-      const selectedDifficulties = Array.from(difficultyCheckboxes)
-        .filter((cv) => cv.checked)
-        .map((cv) => cv.value);
-
-      if (selectedDifficulties.length > 0) {
-        filtered = filtered.filter((video) =>
-          selectedDifficulties.includes(video.difficulty)
-        );
-      }
-
-      // availability
-      if (availabilityFilter && availabilityFilter.checked) {
-        filtered = filtered.filter((video) => video.available);
-      }
-
-      renderVideos(filtered);
+        cards.forEach((c) => (c.style.height = `${maxH}px`));
+      });
     }
 
-    //render Videos
+    function equalizeAfterImages() {
+      equalizeNewBoxHeights();
+      listContainer.querySelectorAll("img").forEach((img) => {
+        if (!img.complete) {
+          img.addEventListener("load", equalizeNewBoxHeights, { once: true });
+          img.addEventListener("error", equalizeNewBoxHeights, { once: true });
+        }
+      });
+    }
+
+    window.addEventListener("resize", equalizeAfterImages);
+    window.visualViewport?.addEventListener("resize", equalizeAfterImages);
+
+    // ---------- Render ----------
     function renderVideos(videosArray) {
       listContainer.innerHTML = "";
-
-      if (resultsCount) {
-        const count = videosArray.length;
-        resultsCount.textContent =
-          count === 1 ? "Video (1)" : `Videos (${count})`;
-      }
+      setCount(videosArray.length);
 
       if (!videosArray.length) {
-        listContainer.innerHTML = '<p style="color:white;">No books found.</p>';
+        listContainer.innerHTML =
+          '<p style="color:white;">No videos found.</p>';
         return;
       }
 
@@ -95,60 +81,87 @@
         card.className = "new-box";
 
         card.innerHTML = `
-    
-        <div class="new-box-header">
-          <div class="tag-row">
-          ${
-            video.available
-              ? "<span class='tag available'>Available</span>"
-              : "<span class='tag unavailable'>Unavailable</span>"
-          }
-            <span class="tag category">${prettyCategory(video.category)}</span>
-            ${
-              video.difficulty
-                ? `<span class="tag category">${video.difficulty}</span>`
-                : ""
-            }
-            
+          <div class="new-box-header">
+            <div class="tag-row">
+              ${
+                video.available
+                  ? "<span class='tag available'>Available</span>"
+                  : "<span class='tag unavailable'>Unavailable</span>"
+              }
+              <span class="tag category">${video.category}</span>
+              ${
+                video.difficulty
+                  ? `<span class="tag category">${video.difficulty}</span>`
+                  : ""
+              }
+            </div>
+
+            <h4>${video.title || ""}</h4>
+            <h3>${(video.description || "").substring(0, 120)}...</h3>
           </div>
 
-          <h4>${video.title}</h4>
-          <h3>${video.description.substring(0, 120)}...</h3>
-
-           
-        </div>
-
-         <div class="new-box-content">
+          <div class="new-box-content">
             <img src="${video.cover || ""}" alt="${
           video.title || "Video"
         } cover">
-     
-        </div>
-      `;
+          </div>
+        `;
 
         card.addEventListener("click", () => {
           window.location.href = `video-details.html?id=${encodeURIComponent(
             video.id
           )}`;
         });
+
         listContainer.appendChild(card);
       });
+
+      equalizeAfterImages();
     }
 
-    function prettyCategory(cat) {
-      switch (cat) {
-        case "programming":
-          return "Programming";
-        case "networks":
-          return "Networks";
-        case "security":
-          return "Cybersecurity";
-        case "databases":
-          return "Databases";
-        default:
-          return cat;
+    // ---------- Filtering ----------
+    function applyFilters() {
+      let filtered = [...VIDEOS];
+
+      const selectedCats = categoryCheckboxes
+        .filter((cb) => cb.checked)
+        .map((cb) => norm(cb.value));
+
+      if (selectedCats.length) {
+        filtered = filtered.filter((v) =>
+          selectedCats.includes(norm(v.category))
+        );
       }
+
+      const selectedDiffs = difficultyCheckboxes
+        .filter((cb) => cb.checked)
+        .map((cb) => norm(cb.value));
+
+      if (selectedDiffs.length) {
+        filtered = filtered.filter((v) =>
+          selectedDiffs.includes(norm(v.difficulty))
+        );
+      }
+
+      if (availabilityFilter?.checked) {
+        filtered = filtered.filter((v) => !!v.available);
+      }
+
+      renderVideos(filtered);
     }
+
+    // Bind filter events
+    categoryCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
+    difficultyCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
+    availabilityFilter?.addEventListener("change", applyFilters);
+
+    // Initial render
+    renderVideos(VIDEOS);
   }
-  window.VideosPage = {init};
+
+  window.VideosPage = { init };
 })();

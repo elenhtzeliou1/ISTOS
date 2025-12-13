@@ -1,36 +1,70 @@
 (function () {
   function attachDrag(slider) {
+    // Avoid double-binding
+    if (slider.dataset.dragBound === "1") return;
+    slider.dataset.dragBound = "1";
+
+    const DRAG_THRESHOLD = 10; // px
     let isDown = false;
+    let isDragging = false;
+    let startX = 0;
     let lastX = 0;
     let velocity = 0;
     let momentumId = null;
+    let suppressClick = false;
 
     const getX = (e) =>
       e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
 
     const cancelMomentum = () => {
-      if (momentumId) {
-        cancelAnimationFrame(momentumId);
-        momentumId = null;
-      }
+      if (momentumId) cancelAnimationFrame(momentumId);
+      momentumId = null;
     };
 
+    // stop native drag the a-img 
+    slider.addEventListener("dragstart", (e) => e.preventDefault(), true);
+
+    // cancel click only if we dragged
+    slider.addEventListener(
+      "click",
+      (e) => {
+        if (!suppressClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+        suppressClick = false;
+      },
+      true
+    );
+
     const start = (e) => {
+      // left click only
+      if (!("touches" in e) && e.button !== 0) return;
+
       isDown = true;
-      slider.classList.add("active");
+      isDragging = false;
+      suppressClick = false;
       cancelMomentum();
 
-      lastX = getX(e);
+      startX = lastX = getX(e);
       velocity = 0;
     };
 
     const move = (e) => {
       if (!isDown) return;
-      if (e.cancelable) e.preventDefault();
 
       const x = getX(e);
-      const dx = x - lastX;
+      const total = x - startX;
 
+      //only become a drag after threshold
+      if (!isDragging) {
+        if (Math.abs(total) < DRAG_THRESHOLD) return;
+        isDragging = true;
+        slider.classList.add("active");
+      }
+
+      if (e.cancelable) e.preventDefault();
+
+      const dx = x - lastX;
       slider.scrollLeft -= dx;
       velocity = dx;
       lastX = x;
@@ -39,7 +73,15 @@
     const end = () => {
       if (!isDown) return;
       isDown = false;
+
+      // if we never dragged, allow normal click
+      if (!isDragging) return;
+
       slider.classList.remove("active");
+
+      // block the click that fires after mouseup/touchend
+      suppressClick = true;
+      setTimeout(() => (suppressClick = false), 0);
 
       let momentum = velocity;
 
@@ -53,10 +95,6 @@
 
       momentumId = requestAnimationFrame(step);
     };
-
-    // Avoid double-binding
-    if (slider.dataset.dragBound === "1") return;
-    slider.dataset.dragBound = "1";
 
     // mouse
     slider.addEventListener("mousedown", start);
@@ -72,10 +110,7 @@
   }
 
   function init(selector = ".card-carousel") {
-    const sliders = document.querySelectorAll(selector);
-    if (!sliders.length) return;
-
-    sliders.forEach(attachDrag);
+    document.querySelectorAll(selector).forEach(attachDrag);
   }
 
   window.CardCarouselDrag = { init };

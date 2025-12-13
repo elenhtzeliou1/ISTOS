@@ -124,4 +124,7 @@ const CATEGORIES = [
     ],
     cover: "assets/images/cat-ai-cover.jpeg",
   },
+
+  
 ];
+window.CATEGORIES = CATEGORIES;

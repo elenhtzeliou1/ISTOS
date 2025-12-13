@@ -401,7 +401,7 @@ nav.mobile-open .nav-link-menu {
 .courses-description-wraper {
   background-color: var(--secondary-bg-color);
   height: auto;
-  padding: var(--padding-m) var(--padding-sm) 0;
+  padding: var(--padding-lrg) var(--padding-sm) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -656,7 +656,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .proposed-book-intro-container {
-  padding: var(--padding) var(--padding-sm);
+  padding: var(--padding) var(--padding-sm) 0;
   width: 100%;
   margin: auto;
   height: auto;
@@ -709,6 +709,8 @@ nav.mobile-open .nav-link-menu {
   user-select: none;
   padding: 0 var(--padding-avg);
   height: auto;
+
+  align-items: stretch;
 }
 
 .card-carousel.active {
@@ -719,10 +721,8 @@ nav.mobile-open .nav-link-menu {
 .card-carousel .card {
   flex: 0 0 var(--book-card-width);
 
-  min-width: var(--book-card-width);
-  min-height: var(--simple-card-height);
-
-  max-width: var(var(--book-card-width));
+  width: var(--book-card-width);
+  height: auto;
 
   text-align: center;
   background-color: var(--card-secondary-color);
@@ -967,6 +967,7 @@ nav.mobile-open .nav-link-menu {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+
 }
 
 
@@ -979,6 +980,7 @@ nav.mobile-open .nav-link-menu {
   align-items: flex-start;
   justify-content: center;
   gap: var(--gap);
+  text-align: left;
   padding: var(--padding-avg) var(--padding-sm);
 }
 
@@ -1018,7 +1020,7 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
   overflow: hidden;
   height: 10vh;
-  background-color: red;
+
   border-radius: var(--border-radious);
 }
 
@@ -1099,6 +1101,7 @@ nav.mobile-open .nav-link-menu {
   height: auto;
   gap: var(--gap-mid);
   width: 100%;
+
 }
 
 .learning-goals-container .tag-row {
@@ -1118,26 +1121,28 @@ nav.mobile-open .nav-link-menu {
 
 /*caousel goals*/
 .goal-slider {
-  height: 45vh;
+  height: 55vh;
   position: relative;
   width: 100%;
+  align-items: stretch;
+
 }
 
 .goal-item {
   position: absolute;
-  width: 290px;
-  height: 45vh;
+  width: var(--book-card-width);
+  height: auto;
   cursor: grab;
   user-select: none;
   transform-origin: 50% 0%;
   overflow: hidden;
 
   background-color: var(--card-color-bg);
-  padding: var(--padding-avg) var(--padding-sm) 0;
+  padding: var(--padding-avg) var(--padding-avg) 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--gap);
+  justify-content: space-between;
+  gap: var(--gap-mid);
   flex-direction: column;
   text-align: center;
   border-radius: var(--border-radius-avrg);
@@ -1146,12 +1151,12 @@ nav.mobile-open .nav-link-menu {
 }
 
 .goal-item h5 {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--pcolor);
 }
 
 .goal-item span {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--pcolor);
   padding: 1px var(--padding-sm);
   border-radius: var(--border-radius-small);
@@ -1159,7 +1164,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .goal-item p {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--pcolor);
   font-weight: 350;
 }
@@ -1174,7 +1179,7 @@ nav.mobile-open .nav-link-menu {
 .goal-item__bg_img_wrapper {
   height: 18vh;
   width: 100%;
-  margin: auto auto 0;
+
   overflow: hidden;
 }
 
@@ -1274,7 +1279,6 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
   background-color: var(--proposed-video-vd-wrapper-mob);
   overflow: hidden;
-  background-color: slateblue;
 }
 
 .proposed-video-vd-wrapper img {
@@ -1940,6 +1944,7 @@ nav.mobile-open .nav-link-menu {
 
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 .course-product:hover {
@@ -1969,7 +1974,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .course-intro-info .tag-row {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .course-intro-info>h3 {
@@ -2088,7 +2093,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .form-column input {
-  background-color: rgb(34, 34, 34);
+  background-color: var( --intro-item-bg-color);
   padding: 10px 5px;
   border: none;
   border-radius: var(--border-radious);
@@ -2097,7 +2102,7 @@ nav.mobile-open .nav-link-menu {
 
 .form-column select {
   width: 100%;
-  background-color: rgb(34, 34, 34);
+  background-color:var( --intro-item-bg-color);
   padding: 8px 5px;
   color: white;
   font-size: 16px;
@@ -2108,7 +2113,7 @@ nav.mobile-open .nav-link-menu {
 
 .form-column textarea {
   width: 100%;
-  background-color: rgb(34, 34, 34);
+  background-color: var( --intro-item-bg-color);
   color: white;
   border: none;
   padding: 8px 5px;
@@ -2128,6 +2133,34 @@ nav.mobile-open .nav-link-menu {
 }
 
 .form-column.last input {
+  width: auto;
+}
+
+.goals-fieldset{
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  gap: var(--gap);
+}
+
+.radio-row{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: var( --intro-item-bg-color);
+  height: auto;
+  padding: var(--padding-sm) var(--padding-sm);
+  gap: var(--gap);
+  border-radius: var(--border-radious);
+}
+
+.radio-row input{
   width: auto;
 }
 
@@ -2240,7 +2273,6 @@ nav.mobile-open .nav-link-menu {
 }
 
 .books-cat-image {
-  background-color: chocolate;
   height: 20vh;
   width: 90%;
   margin: auto;
@@ -2768,12 +2800,12 @@ body.team-page {
 }
 
 .team-know-us-intro h2 {
-  font-size: 18px;
+  font-size:24px;
   color: black;
 }
 
 .team-know-us-intro p {
-  font-size: 14px;
+  font-size: 18px;
   color: black;
 
 }
@@ -2810,11 +2842,11 @@ body.team-page {
 }
 
 .team-info-box h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .team-info-box h4 {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--border-top-new);
 }
 
@@ -2823,7 +2855,7 @@ body.team-page {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
   flex-wrap: nowrap;
 }
@@ -2844,14 +2876,14 @@ body.team-page {
 .team-pres-img-box:nth-of-type(1) {
   position: relative;
   z-index: 2;
-  width: 220px;
+  width: 240px;
 }
 
 .team-pres-img-box:nth-of-type(2) {
   position: relative;
   top: var(--move-top);
   left: var(--move-left);
-  width: 180px;
+  width: 280px;
 
   z-index: 1;
   transform: rotate(var(--tilt-angle));
@@ -2898,6 +2930,9 @@ body.team-page {
   justify-content: center;
   flex-direction: column;
   gap: var(--gap-mid);
+}
+.team-project-main-dsc p{
+  font-size: 18px;
 }
 
 .team-proj-img-row {

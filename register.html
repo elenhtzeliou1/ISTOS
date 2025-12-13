@@ -86,6 +86,8 @@
             <option value="networks">Networks</option>
             <option value="security">Cybersecurity</option>
             <option value="databases">Databases</option>
+            <option value="web-dev">Web Development</option>
+            <option value="ai">Artificial Intelligence</option>
           </select>
         </div>
 
@@ -95,20 +97,35 @@
           <select id="level" required>
             <option value="" disabled selected>Experience Level</option>
             <option value="beginner">Beginner</option>
-            <option value="intermidiate">Intermidiate</option>
+            <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
           </select>
         </div>
 
         <div class="form-column">
-          <label for="goals">Learning Goals</label>
-          <textarea
-            id="goals"
-            name="goals"
-            rows="4"
-            placeholder="Tell us what you hope to achieve..."
-            required
-          ></textarea>
+          <fieldset class="goals-fieldset">
+           <label for="goal" class="goal-label">You Goal is:</label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="exam-prep" required />
+              Exam preparation (structured revision)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="portfolio" required />
+              Build a portfolio (projects & practice)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="career" required />
+              Career growth (job-ready skills)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="curiosity" required />
+              Learn out of curiosity (explore topics)
+            </label>
+          </fieldset>
         </div>
 
         <div class="form-column last">
@@ -137,13 +154,9 @@
     <!--Footer -->
     <footer id="site-footer"></footer>
     <!--Used scripts-->
+    <script src="assets/js/ui/common/shared-layout.js"></script>
 
     <script src="assets/js/forms/register-form.js"></script>
-    <script src="assets/js/ui/common/menu.js"></script>
-    <script src="assets/js/ui/common/menu.js"></script>
-   <script src="assets/js/ui/common/footer.js"></script>
-    <script src="assets/js/ui/common/footer-accordion.js"></script>
-
 
     <script src="assets/js/data/categories.js"></script>
 

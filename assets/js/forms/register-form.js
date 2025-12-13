@@ -13,20 +13,19 @@
 
     if (!modal || !modalContent || !finalSubmit) return;
 
+    // saving only non-sensitive fields (not storing passwords)
     const fields = [
       "firstName",
       "lastName",
       "userName",
       "email",
       "dob",
-      "password",
-      "confirmPassword",
       "interest",
       "level",
       "newsletter",
-      "goals",
     ];
 
+    // local storage restore
     fields.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
@@ -38,20 +37,42 @@
       else el.value = saved;
     });
 
+    // restore goal radio
+    const savedGoal = localStorage.getItem("reg_goal");
+    if (savedGoal) {
+      const radio = form.querySelector(
+        `input[name="goal"][value="${
+          CSS?.escape ? CSS.escape(savedGoal) : savedGoal
+        }"]`
+      );
+      if (radio) radio.checked = true;
+    }
+
+    // localStorage save
     fields.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
 
       const save = () => {
-        if (el.type === "checkbox")
+        if (el.type === "checkbox") {
           localStorage.setItem("reg_" + id, String(el.checked));
-        else localStorage.setItem("reg_" + id, el.value);
+        } else {
+          localStorage.setItem("reg_" + id, el.value);
+        }
       };
 
       el.addEventListener("input", save);
       el.addEventListener("change", save);
     });
 
+    // save goal radio 
+    form.querySelectorAll('input[name="goal"]').forEach((r) => {
+      r.addEventListener("change", () => {
+        if (r.checked) localStorage.setItem("reg_goal", r.value);
+      });
+    });
+
+    // Modal helpers
     function closeModal() {
       modal.classList.remove("active");
       document.body.classList.remove("no-scroll");
@@ -68,8 +89,40 @@
         closeModal();
     });
 
+    function prettyGoal(v) {
+      switch (v) {
+        case "exam-prep":
+          return "Exam preparation";
+        case "portfolio":
+          return "Build a portfolio";
+        case "career":
+          return "Career growth";
+        case "curiosity":
+          return "Learn out of curiosity";
+        default:
+          return "—";
+      }
+    }
+
+    function renderSummary(rows) {
+      // safe render (no innerHTML with user input)
+      modalContent.textContent = "";
+      rows.forEach(([label, value]) => {
+        const p = document.createElement("p");
+        const strong = document.createElement("strong");
+        strong.textContent = label + ": ";
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(value || "—"));
+        modalContent.appendChild(p);
+      });
+    }
+
+    //Submit 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+
+      // Running HTML5 validation (required/type=email/pattern/etc)
+      if (!form.reportValidity()) return;
 
       const firstName = (
         document.getElementById("firstName")?.value || ""
@@ -84,13 +137,18 @@
       ).trim();
       const email = (document.getElementById("email")?.value || "").trim();
       const dob = document.getElementById("dob")?.value || "";
+
       const password = document.getElementById("password")?.value || "";
       const confirm = document.getElementById("confirmPassword")?.value || "";
-      const interest = document.getElementById("interest")?.value || "";
-      const goals = (document.getElementById("goals")?.value || "").trim();
-      const newsletter = !!document.getElementById("newsletter")?.checked;
-      const level = document.getElementById("level")?.value || "";
 
+      const interest = document.getElementById("interest")?.value || "";
+      const level = document.getElementById("level")?.value || "";
+      const newsletter = !!document.getElementById("newsletter")?.checked;
+
+      const goal =
+        form.querySelector('input[name="goal"]:checked')?.value || "";
+
+      // Extra safety checks 
       if (!dob) {
         alert("Please enter your date of birth.");
         return;
@@ -103,8 +161,9 @@
       if (
         monthDiff < 0 ||
         (monthDiff === 0 && today.getDate() < dobDate.getDate())
-      )
+      ) {
         age--;
+      }
 
       if (age < 18) {
         alert("You must be at least 18 years old.");
@@ -123,37 +182,42 @@
 
       if (modalTitle) modalTitle.textContent = "Review Your Information";
 
-      modalContent.innerHTML = `
-        <p><strong>Name:</strong> ${fullName || "—"}</p>
-        <p><strong>Username:</strong> ${userName || "—"}</p>
-        <p><strong>Email:</strong> ${email || "—"}</p>
-        <p><strong>Preferred Category:</strong> ${interest || "—"}</p>
-        <p><strong>Experience Level:</strong> ${level || "—"}</p>
-        <p><strong>Goals:</strong> ${goals || "—"}</p>
-        <p><strong>Newsletter:</strong> ${newsletter ? "Yes" : "No"}</p>
-      `;
+      renderSummary([
+        ["Name", fullName],
+        ["Username", userName],
+        ["Email", email],
+        ["Preferred Category", interest],
+        ["Experience Level", level],
+        ["Learning Goal", prettyGoal(goal)],
+        ["Newsletter", newsletter ? "Yes" : "No"],
+      ]);
 
       finalSubmit.style.display = "inline-block";
       modal.classList.add("active");
       document.body.classList.add("no-scroll");
     });
 
+    //Final Confirmation
     finalSubmit.addEventListener("click", () => {
       fields.forEach((id) => localStorage.removeItem("reg_" + id));
+      localStorage.removeItem("reg_goal");
+
       form.reset();
 
       if (modalTitle) modalTitle.textContent = "Registration Successful!";
 
-      modalContent.innerHTML = `
-        <p>Your account has been created successfully.</p>
-        <p>Welcome to InfoHub!</p>
-      `;
+      modalContent.textContent = "";
+      const p1 = document.createElement("p");
+      p1.textContent = "Your account has been created successfully.";
+      const p2 = document.createElement("p");
+      p2.textContent = "Welcome to InfoHub!";
+      modalContent.appendChild(p1);
+      modalContent.appendChild(p2);
 
       finalSubmit.style.display = "none";
 
       setTimeout(() => {
-        modal.classList.remove("active");
-        document.body.classList.remove("no-scroll");
+        closeModal();
       }, 1500);
     });
   }

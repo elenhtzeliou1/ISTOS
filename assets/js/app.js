@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // COMMON
-  window.NavUI?.init?.();
-  window.FooterUI?.init?.();
+  window.Layout?.init?.();
+  window.CategoryUtils?.init?.();
 
   window.ResponsiveUI?.init?.();
   window.RevealUI?.init?.();
