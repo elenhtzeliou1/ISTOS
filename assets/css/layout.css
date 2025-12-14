@@ -1726,11 +1726,7 @@
         font-size: var(--h1-mid);
     }
 
-    .person {
-        height: 75px;
-        width: 75px;
-        flex: 0 0 75px;
-    }
+    
 
     .team-people-row {
         position: relative;
@@ -1742,7 +1738,7 @@
         width: 90%;
         margin: auto 0 auto auto;
         position: relative;
-        top: calc(var(--gap-l)*-2.80);
+        top: calc(var(--gap-l)*-3);
         align-items: flex-start;
         justify-content: flex-start;
         gap: var(--gap);
