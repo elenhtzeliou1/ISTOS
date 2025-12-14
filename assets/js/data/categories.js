@@ -59,7 +59,7 @@ const CATEGORIES = [
       { info: "Connect security with networks & code" },
       { info: "Build a security-first mindset" },
     ],
-    cover: "assets/images/cybersec-cover-1.jpeg",
+    cover: "assets/images/thumbnails/cybersec-cover-1.jpeg",
   },
 
   {
@@ -101,7 +101,7 @@ const CATEGORIES = [
       { info: "Work with REST APIs" },
       { info: "Practice basic deployment concepts" },
     ],
-    cover: "assets/images/web-dev-main.jpg",
+    cover: "assets/images/thumbnails/web-dev-main.jpg",
   },
 
   {
@@ -122,7 +122,7 @@ const CATEGORIES = [
       { info: "Combine topics into applied tasks" },
       { info: "Build portfolio-ready work" },
     ],
-    cover: "assets/images/cat-ai-cover.jpeg",
+    cover: "assets/images/thumbnails/cat-ai-cover.jpeg",
   },
 
   

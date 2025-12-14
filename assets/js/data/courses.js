@@ -1,4 +1,5 @@
 const COURSES = [
+
   {
     id: "python-intro",
     title: "Introduction to Python",
@@ -6,51 +7,138 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/python-course-thumb-nail-big.jpeg",
+    cover: "assets/images/thumbnails/python-course-thumb-nail-big.jpeg",
     description:
       "Learn the fundamentals of Python, one of the most popular programming languages today. This course covers variables, data types, loops, functions, and basic problem-solving techniques. Ideal for absolute beginners looking to enter the world of coding with a friendly and powerful language.",
     learningGoals: [
       {
         title: "Understand Python basics",
-        text: "Understand basic programming concepts using Python.",
+        text: "Learn core syntax and how Python code is structured.",
       },
       {
         title: "Write simple scripts",
-        text: "Write simple scripts using variables, conditions and loops.",
+        text: "Use variables, conditions, and loops to solve small problems.",
       },
       {
         title: "Reuse your code",
-        text: "Organize code into reusable functions for cleaner programs.",
+        text: "Organize logic into functions so programs stay clean and readable.",
+      },
+      {
+        title: "Build confidence",
+        text: "Practice with mini tasks that feel like real coding.",
       },
     ],
     sections: [
       {
+        id: "py-01",
         title: "Getting Started with Python",
         summary:
           "Installation, first steps with the interpreter and writing your first script.",
+        lessons: [
+          {
+            id: "py-01-01",
+            title: "Course intro + setup",
+            summary: "Install Python, choose an editor, run your first script.",
+            minutes: 15,
+          },
+          {
+            id: "py-01-02",
+            title: "Hello World + output",
+            summary: "print(), strings, and simple output formatting.",
+            minutes: 20,
+          },
+          {
+            id: "py-01-03",
+            title: "Variables & types",
+            summary: "Numbers, strings, booleans and naming rules.",
+            minutes: 30,
+          },
+        ],
       },
       {
+        id: "py-02",
         title: "Working with Data",
         summary:
           "Numbers, strings, lists and dictionaries in everyday problems.",
+        lessons: [
+          {
+            id: "py-02-01",
+            title: "Lists",
+            summary: "Indexing, slicing, append and looping over lists.",
+            minutes: 35,
+          },
+          {
+            id: "py-02-02",
+            title: "Dictionaries",
+            summary: "Key-value storage, lookup, update, iterate.",
+            minutes: 35,
+          },
+          {
+            id: "py-02-03",
+            title: "Mini practice",
+            summary: "Short tasks combining lists + dicts.",
+            minutes: 25,
+          },
+        ],
       },
       {
+        id: "py-03",
         title: "Control Flow & Functions",
-        summary: "Conditions, loops and defining your own functions.",
+        summary:
+          "Make decisions, repeat actions, and package logic into reusable functions.",
+        lessons: [
+          {
+            id: "py-03-01",
+            title: "If / elif / else",
+            summary: "Write conditions and handle multiple cases clearly.",
+            minutes: 25,
+          },
+          {
+            id: "py-03-02",
+            title: "Loops in practice",
+            summary: "for/while patterns, counters, and simple validations.",
+            minutes: 35,
+          },
+          {
+            id: "py-03-03",
+            title: "Functions",
+            summary: "Parameters, return values, and clean structure.",
+            minutes: 35,
+          },
+        ],
       },
     ],
     questions: [
       {
         question: "Do I need prior experience?",
-        answer:
-          "No, this course is designed for absolute beginners with no programming background.",
+        answer: "No. It’s designed for absolute beginners.",
       },
       {
         question: "How much time should I plan?",
-        answer:
-          "Around 3–4 hours per week for 3–4 weeks is usually enough to follow comfortably.",
+        answer: "Around 3–4 hours per week for 3–4 weeks is comfortable.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 1,
+          reason:
+            "Beginner-friendly explanations + practice that matches this course.",
+        },
+        {
+          id: 7,
+          reason:
+            "Great for mini-project ideas and automation practice after basics.",
+        },
+      ],
+      videos: [
+        { id: 1, reason: "Quick visual recap for the first steps and syntax." },
+        {
+          id: 2,
+          reason: "Extra practice on loops, conditions, and functions.",
+        },
+      ],
+    },
   },
 
   {
@@ -60,56 +148,135 @@ const COURSES = [
     difficulty: "advanced",
     available: true,
     featured: true,
-    cover: "assets/images/main-image-9.jpeg",
+    cover: "assets/images/thumbnails/main-image-9.jpeg",
     description:
-      "Go beyond the basics and master advanced Python concepts including decorators, generators, object-oriented programming, memory management, and performance optimization. This course is designed for learners who already understand the core Python syntax and want to write production-level, scalable applications.",
+      "Go beyond the basics and master advanced Python concepts including decorators, generators, object-oriented programming, memory management, and performance optimization.",
     learningGoals: [
       {
         title: "Use advanced features",
-        text: "Use advanced Python features like decorators, generators and context managers.",
+        text: "Decorators, generators, and context managers confidently.",
       },
       {
         title: "Design with OOP",
-        text: "Design applications using object-oriented patterns and clean abstractions.",
+        text: "Build cleaner abstractions with classes and patterns.",
       },
       {
         title: "Optimize performance",
-        text: "Improve performance and memory usage of Python programs.",
+        text: "Profiling mindset + common optimization techniques.",
       },
       {
         title: "Write production code",
-        text: "Write more maintainable, production-ready Python code.",
+        text: "Structure code for readability and maintainability.",
       },
     ],
     sections: [
       {
+        id: "pyA-01",
         title: "Advanced Language Features",
         summary:
           "Decorators, generators, context managers and idiomatic Python.",
+        lessons: [
+          {
+            id: "pyA-01-01",
+            title: "Iterators & generators",
+            summary: "Lazy evaluation and efficient loops.",
+            minutes: 35,
+          },
+          {
+            id: "pyA-01-02",
+            title: "Decorators",
+            summary: "Wrap behavior and build reusable tooling.",
+            minutes: 40,
+          },
+          {
+            id: "pyA-01-03",
+            title: "Context managers",
+            summary: "with-statement patterns and resource safety.",
+            minutes: 30,
+          },
+        ],
       },
       {
+        id: "pyA-02",
         title: "Object-Oriented Design",
-        summary:
-          "Classes, inheritance, composition and design patterns in practice.",
+        summary: "Classes, composition, and patterns you actually use.",
+        lessons: [
+          {
+            id: "pyA-02-01",
+            title: "Designing classes",
+            summary: "Responsibilities, cohesion, and clean APIs.",
+            minutes: 35,
+          },
+          {
+            id: "pyA-02-02",
+            title: "Composition vs inheritance",
+            summary: "When to use each and why.",
+            minutes: 35,
+          },
+          {
+            id: "pyA-02-03",
+            title: "Pythonic patterns",
+            summary: "dataclasses, properties, and readable design.",
+            minutes: 35,
+          },
+        ],
       },
       {
+        id: "pyA-03",
         title: "Performance & Optimization",
-        summary:
-          "Profiling, understanding memory usage and improving execution speed.",
+        summary: "Profiling basics and performance-aware coding.",
+        lessons: [
+          {
+            id: "pyA-03-01",
+            title: "Profiling mindset",
+            summary: "Measure first: where time really goes.",
+            minutes: 25,
+          },
+          {
+            id: "pyA-03-02",
+            title: "Common bottlenecks",
+            summary: "Loops, allocations, data structures.",
+            minutes: 35,
+          },
+          {
+            id: "pyA-03-03",
+            title: "Practical optimization",
+            summary: "Small changes with big impact.",
+            minutes: 35,
+          },
+        ],
       },
     ],
     questions: [
       {
         question: "Who is this course for?",
-        answer:
-          "Learners who are already comfortable with basic Python syntax and want to go deeper.",
+        answer: "People comfortable with Python basics who want to level up.",
       },
       {
-        question: "Is this course very time-demanding?",
-        answer:
-          "You should expect a bit more effort: 4–6 hours per week, plus optional exercises.",
+        question: "Is this time-demanding?",
+        answer: "Expect ~4–6 hours/week + optional practice.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 2,
+          reason: "Deep Pythonic design: best match for advanced concepts.",
+        },
+        {
+          id: 8,
+          reason:
+            "Clean code principles to keep advanced projects maintainable.",
+        },
+      ],
+      videos: [
+        {
+          id: 3,
+          reason:
+            "Reinforces functions/structure habits (useful at advanced level too).",
+        },
+      ],
+    },
   },
 
   {
@@ -119,315 +286,123 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/networks-cover-big.jpeg",
+    cover: "assets/images/thumbnails/networks-cover-big.jpeg",
     description:
-      "Understand how computers communicate across modern networks. Explore network layers, routing principles, TCP/IP, DNS, and protocols that power the internet. Includes practical examples, visual explanations, and insights into how data travels securely and efficiently between systems.",
+      "Understand how computers communicate across modern networks. Explore layers, routing principles, TCP/IP, DNS, and protocols that power the internet.",
     learningGoals: [
       {
         title: "See the big picture",
-        text: "Understand the basic architecture of computer networks.",
+        text: "Understand network architecture and layers.",
       },
       {
         title: "Follow the data path",
-        text: "Explain how data is encapsulated and transmitted across layers.",
+        text: "Explain encapsulation across the stack.",
       },
       {
         title: "Know key protocols",
-        text: "Recognize common network protocols such as TCP, UDP, HTTP and DNS.",
-      },
-      {
-        title: "Build a strong base",
-        text: "Build a solid foundation for more advanced networking or security courses.",
+        text: "Recognize TCP, UDP, HTTP, DNS and common behavior.",
       },
     ],
     sections: [
       {
+        id: "net-01",
         title: "Networking Basics",
         summary: "Key concepts, terminology and why networks matter.",
+        lessons: [
+          {
+            id: "net-01-01",
+            title: "LAN vs WAN",
+            summary: "What changes when distance increases.",
+            minutes: 20,
+          },
+          {
+            id: "net-01-02",
+            title: "Devices",
+            summary: "Switches, routers, APs, and what each does.",
+            minutes: 25,
+          },
+          {
+            id: "net-01-03",
+            title: "Packets",
+            summary: "What a packet is and why it matters.",
+            minutes: 25,
+          },
+        ],
       },
       {
+        id: "net-02",
         title: "The TCP/IP Model",
         summary:
           "Layers, addressing, routing and how data moves through the stack.",
+        lessons: [
+          {
+            id: "net-02-01",
+            title: "IP addressing",
+            summary: "IPv4 basics, masks, and default gateway intuition.",
+            minutes: 35,
+          },
+          {
+            id: "net-02-02",
+            title: "TCP vs UDP",
+            summary: "Reliability vs speed and when each is used.",
+            minutes: 30,
+          },
+          {
+            id: "net-02-03",
+            title: "DNS basics",
+            summary: "Names → IPs and common failure patterns.",
+            minutes: 25,
+          },
+        ],
       },
       {
+        id: "net-03",
         title: "Protocols in Practice",
-        summary: "HTTP, DNS and everyday examples of network communication.",
+        summary: "HTTP, DNS and real examples of network communication.",
+        lessons: [
+          {
+            id: "net-03-01",
+            title: "HTTP request/response",
+            summary: "What happens when you open a page.",
+            minutes: 30,
+          },
+          {
+            id: "net-03-02",
+            title: "Routing intuition",
+            summary: "How packets move across networks.",
+            minutes: 30,
+          },
+          {
+            id: "net-03-03",
+            title: "Common issues",
+            summary: "DNS down, wrong gateway, IP conflict.",
+            minutes: 30,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "What will I learn by the end?",
-        answer:
-          "You’ll understand how the internet works at a conceptual level and be able to read and discuss basic network diagrams.",
+        question: "Is there math involved?",
+        answer: "Only light binary/IP thinking—nothing heavy.",
       },
       {
-        question: "Is there any math involved?",
-        answer:
-          "Only light math (like understanding binary and IP addresses) – nothing beyond basic high-school level.",
+        question: "Will I be able to read diagrams?",
+        answer: "Yes, that’s a key outcome of the course.",
       },
     ],
-  },
-
-  {
-    id: "cybersecurity-essentials",
-    title: "Cybersecurity Essentials",
-    category: "security",
-    difficulty: "intermediate",
-    available: true,
-    featured: true,
-    cover: "assets/images/cybersec-cover-3.jpg",
-    description:
-      "A comprehensive introduction to the core principles of cybersecurity. Learn about attack types, encryption fundamentals, authentication mechanisms, secure communication, and best practices for protecting systems. Perfect for learners aiming to build strong security awareness and foundational skills.",
-    learningGoals: [
-      {
-        title: "Spot common threats",
-        text: "Recognize common cyber threats and attack types.",
-      },
-      {
-        title: "Learn core concepts",
-        text: "Understand basic concepts of encryption and authentication.",
-      },
-      {
-        title: "Protect your systems",
-        text: "Apply simple best practices to protect systems and data.",
-      },
-      {
-        title: "Prepare for more",
-        text: "Build a foundation for more specialized security topics.",
-      },
-    ],
-    sections: [
-      {
-        title: "Threats & Attacks",
-        summary:
-          "Malware, phishing, social engineering and common attack vectors.",
-      },
-      {
-        title: "Security Fundamentals",
-        summary:
-          "CIA triad, risk, vulnerabilities and basic security controls.",
-      },
-      {
-        title: "Protecting Systems",
-        summary:
-          "Passwords, multi-factor authentication, secure communication basics.",
-      },
-    ],
-    questions: [
-      {
-        question: "What’s the main goal of this course?",
-        answer:
-          "To give you a practical understanding of core cybersecurity concepts and how to apply them in everyday scenarios.",
-      },
-      {
-        question: "Will I learn practical skills?",
-        answer:
-          "Yes, you’ll see concrete examples and checklists you can apply immediately to improve your own security posture.",
-      },
-    ],
-  },
-
-  {
-    id: "sql-databases",
-    title: "Databases with SQL",
-    category: "databases",
-    difficulty: "beginner",
-    available: true,
-    featured: true,
-    cover: "assets/images/dabases-cover-2.jpg",
-    description:
-      "Learn how to store, organize, and query data using SQL — the standard language for relational databases. This course covers table design, relationships, CRUD operations, joins, filtering, and real-world query examples. A practical introduction for anyone working with data in modern applications.",
-    learningGoals: [
-      {
-        title: "Understand relational DBs",
-        text: "Understand what relational databases are and when to use them.",
-      },
-      {
-        title: "Design simple schemas",
-        text: "Design simple tables and relationships between them.",
-      },
-      {
-        title: "Write core SQL",
-        text: "Write basic SQL queries for inserting, updating and deleting data.",
-      },
-      {
-        title: "Ask questions with data",
-        text: "Use SELECT with filtering and joins to answer real questions with data.",
-      },
-    ],
-    sections: [
-      {
-        title: "Relational Database Basics",
-        summary: "Tables, rows, columns and how data is organized.",
-      },
-      {
-        title: "Core SQL Operations",
-        summary: "INSERT, UPDATE, DELETE and working with primary keys.",
-      },
-      {
-        title: "Querying & Joins",
-        summary: "SELECT, WHERE, ORDER BY and combining data across tables.",
-      },
-    ],
-    questions: [
-      {
-        question: "What kind of databases are used?",
-        answer:
-          "We use a standard relational database (π.χ. PostgreSQL ή MySQL) ώστε οι γνώσεις να μεταφέρονται εύκολα παντού.",
-      },
-      {
-        question: "Do I need to know programming?",
-        answer:
-          "Όχι απαραίτητα. Η βασική λογική είναι δηλωτική, αρκεί να μπορείς να σκέφτεσαι με όρους πινάκων και δεδομένων.",
-      },
-    ],
-  },
-
-  {
-    id: "java-first-steps",
-    title: "Java: First Steps",
-    category: "programming",
-    difficulty: "beginner",
-    available: true,
-    featured: false,
-    cover: "assets/images/des.avif",
-    description:
-      "Get started with Java fundamentals. Learn variables, control flow, methods, basic OOP, and how to build small console programs. Great for students who want a strong typed-language foundation.",
-    learningGoals: [
-      {
-        title: "Understand Java syntax",
-        text: "Write basic Java code confidently.",
-      },
-      {
-        title: "Practice OOP basics",
-        text: "Use classes, objects, and methods in simple examples.",
-      },
-      {
-        title: "Build mini programs",
-        text: "Create small console apps to reinforce logic.",
-      },
-    ],
-    sections: [
-      {
-        title: "Java Setup & Basics",
-        summary: "JDK, IDE, variables, types, operators.",
-      },
-      {
-        title: "Control Flow",
-        summary: "if/else, loops, basic problem solving.",
-      },
-      { title: "Intro to OOP", summary: "Classes, objects, fields, methods." },
-    ],
-    questions: [
-      {
-        question: "Is this beginner-friendly?",
-        answer: "Yes, no prior Java experience is needed.",
-      },
-      {
-        question: "Will this help with university labs?",
-        answer: "Yes, it matches typical first-year programming content.",
-      },
-    ],
-  },
-
-  {
-    id: "data-structures-python",
-    title: "Data Structures with Python",
-    category: "programming",
-    difficulty: "intermediate",
-    available: true,
-    featured: true,
-    cover: "assets/images/courses/python-intro.jpg",
-    description:
-      "Strengthen problem-solving by working with lists, stacks, queues, trees, and hash-based structures using Python. Includes algorithmic thinking and small coding challenges.",
-    learningGoals: [
-      {
-        title: "Use core structures",
-        text: "Work confidently with common data structures.",
-      },
-      {
-        title: "Improve logic",
-        text: "Choose the right structure for each problem.",
-      },
-      {
-        title: "Prepare for algorithms",
-        text: "Build foundations for more advanced CS topics.",
-      },
-    ],
-    sections: [
-      {
-        title: "Linear Structures",
-        summary: "Lists, stacks, queues and use cases.",
-      },
-      {
-        title: "Hashing & Dictionaries",
-        summary: "Fast lookups and real examples.",
-      },
-      {
-        title: "Trees & Intro Graphs",
-        summary: "Conceptual + beginner-friendly implementations.",
-      },
-    ],
-    questions: [
-      {
-        question: "Do I need Python basics?",
-        answer: "Yes, you should know variables, functions, and loops.",
-      },
-      {
-        question: "Is this useful for algorithms courses?",
-        answer:
-          "Definitely. It gives you the practical base needed for sorting, searching, and complexity topics.",
-      },
-    ],
-  },
-
-  {
-    id: "networking-basics",
-    title: "Networking Basics",
-    category: "networks",
-    difficulty: "beginner",
-    available: true,
-    featured: false,
-    cover: "assets/images/networks.avif",
-    description:
-      "A gentle start to networking concepts: IP addresses, ports, LAN vs WAN, basic devices, and real-world examples. Ideal before diving into TCP/IP details.",
-    learningGoals: [
-      {
-        title: "Understand core terms",
-        text: "Learn essential networking vocabulary.",
-      },
-      {
-        title: "Read simple diagrams",
-        text: "Recognize how devices connect in small networks.",
-      },
-      {
-        title: "Build confidence",
-        text: "Prepare for intermediate networking courses.",
-      },
-    ],
-    sections: [
-      {
-        title: "What is a Network?",
-        summary: "Types of networks and why they matter.",
-      },
-      {
-        title: "Addressing Basics",
-        summary: "IP, MAC, ports, and simple routing ideas.",
-      },
-      { title: "Common Devices", summary: "Routers, switches, access points." },
-    ],
-    questions: [
-      {
-        question: "Is this too basic?",
-        answer: "It’s meant as a bridge for absolute beginners.",
-      },
-      {
-        question: "Will I configure real devices?",
-        answer:
-          "You’ll focus mainly on concepts and simple tools first, then move to more practical labs later.",
-      },
-    ],
+    recommended: {
+      books: [
+        {
+          id: 3,
+          reason: "Top-down explanation style matches these modules well.",
+        },
+        { id: 11, reason: "Deeper reference for architectures and protocols." },
+      ],
+      videos: [
+        { id: 4, reason: "Fast recap of layers/protocols with visuals." },
+      ],
+    },
   },
 
   {
@@ -437,7 +412,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/networks.avif",
+    cover: "assets/images/thumbnails/networks-cover-2.jpg",
     description:
       "Hands-on troubleshooting mindset with tools like ping, traceroute, nslookup, and basic Wi-Fi diagnostics. Focused on real scenarios students face in labs.",
     learningGoals: [
@@ -455,77 +430,233 @@ const COURSES = [
       },
     ],
     sections: [
-      { title: "Toolbox", summary: "ping, traceroute, DNS checks." },
       {
-        title: "Typical Failures",
-        summary: "IP conflicts, gateway issues, DNS misconfigurations.",
+        id: "netT-01",
+        title: "Toolbox",
+        summary: "ping, traceroute, DNS checks and what outputs mean.",
+        lessons: [
+          {
+            id: "netT-01-01",
+            title: "ping",
+            summary: "Latency, packet loss, and what to test first.",
+            minutes: 25,
+          },
+          {
+            id: "netT-01-02",
+            title: "traceroute",
+            summary: "Find where the path breaks.",
+            minutes: 25,
+          },
+          {
+            id: "netT-01-03",
+            title: "nslookup",
+            summary: "Diagnose name resolution problems.",
+            minutes: 25,
+          },
+        ],
       },
       {
+        id: "netT-02",
+        title: "Typical Failures",
+        summary: "IP conflicts, gateway issues, DNS misconfigurations.",
+        lessons: [
+          {
+            id: "netT-02-01",
+            title: "IP conflict",
+            summary: "Symptoms + fast checks.",
+            minutes: 20,
+          },
+          {
+            id: "netT-02-02",
+            title: "Bad gateway",
+            summary: "Why you can’t reach outside the LAN.",
+            minutes: 25,
+          },
+          {
+            id: "netT-02-03",
+            title: "DNS failure",
+            summary: "When IP works but names don’t.",
+            minutes: 25,
+          },
+        ],
+      },
+      {
+        id: "netT-03",
         title: "Wi-Fi Basics",
-        summary: "Signal, interference, security settings.",
+        summary: "Signal, interference, and secure configuration.",
+        lessons: [
+          {
+            id: "netT-03-01",
+            title: "Signal strength",
+            summary: "Distance, walls, and real limits.",
+            minutes: 20,
+          },
+          {
+            id: "netT-03-02",
+            title: "Interference",
+            summary: "Channels and common causes of instability.",
+            minutes: 25,
+          },
+          {
+            id: "netT-03-03",
+            title: "Secure setup",
+            summary: "WPA2/WPA3, strong passwords, safe defaults.",
+            minutes: 25,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "Is this a theory or practice course?",
-        answer:
-          "It’s practice-focused. You’ll learn methods and apply them to realistic network problems.",
+        question: "Is this theory or practice?",
+        answer: "Practice-focused: realistic scenarios and tool outputs.",
       },
       {
-        question: "Do I need prior networking knowledge?",
-        answer:
-          "Basic familiarity with IP and DNS helps, but the early modules refresh the essentials.",
+        question: "Do I need networking basics?",
+        answer: "Yes, knowing IP/DNS basics helps a lot.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 11,
+          reason: "Solid reference when you want deeper protocol explanations.",
+        },
+        {
+          id: 12,
+          reason: "Adds security context for troubleshooting secure networks.",
+        },
+      ],
+      videos: [{ id: 4, reason: "Useful refresh before doing labs." }],
+    },
   },
 
   {
-    id: "security-basics",
-    title: "Cybersecurity Basics",
+    id: "cybersecurity-essentials",
+    title: "Cybersecurity Essentials",
     category: "security",
-    difficulty: "beginner",
+    difficulty: "intermediate",
     available: true,
-    featured: false,
-    cover: "assets/images/cybersec.avif",
+    featured: true,
+    cover: "assets/images/thumbnails/cybersec-cover-3.jpg",
     description:
-      "Start with practical security awareness: safe passwords, phishing recognition, basic encryption concepts, and everyday defense strategies.",
+      "A comprehensive introduction to core cybersecurity principles: attack types, encryption fundamentals, authentication, secure communication, and best practices.",
     learningGoals: [
-      { title: "Recognize threats", text: "Identify common attacks quickly." },
       {
-        title: "Apply safe habits",
-        text: "Use practical security best practices.",
+        title: "Spot common threats",
+        text: "Recognize typical attacks quickly.",
       },
       {
-        title: "Understand fundamentals",
-        text: "Build a base for deeper security topics.",
+        title: "Learn core concepts",
+        text: "Encryption, authentication, and safe habits.",
+      },
+      {
+        title: "Protect systems",
+        text: "Apply practical defenses and checklists.",
       },
     ],
     sections: [
       {
-        title: "Threat Landscape",
-        summary: "Phishing, malware, social engineering.",
+        id: "sec-01",
+        title: "Threats & Attacks",
+        summary: "Malware, phishing, social engineering and attack vectors.",
+        lessons: [
+          {
+            id: "sec-01-01",
+            title: "Phishing",
+            summary: "Common patterns and how to detect them.",
+            minutes: 25,
+          },
+          {
+            id: "sec-01-02",
+            title: "Malware types",
+            summary: "Ransomware, trojans, spyware, and symptoms.",
+            minutes: 30,
+          },
+          {
+            id: "sec-01-03",
+            title: "Social engineering",
+            summary: "Why humans are the easiest target.",
+            minutes: 25,
+          },
+        ],
       },
       {
-        title: "Authentication",
-        summary: "Passwords, MFA, secure access habits.",
+        id: "sec-02",
+        title: "Security Fundamentals",
+        summary: "CIA triad, risk, vulnerabilities and security controls.",
+        lessons: [
+          {
+            id: "sec-02-01",
+            title: "CIA triad",
+            summary: "Confidentiality, integrity, availability with examples.",
+            minutes: 25,
+          },
+          {
+            id: "sec-02-02",
+            title: "Risk basics",
+            summary: "Threats × vulnerabilities × impact.",
+            minutes: 25,
+          },
+          {
+            id: "sec-02-03",
+            title: "Controls",
+            summary: "Prevent, detect, respond—how teams think.",
+            minutes: 30,
+          },
+        ],
       },
       {
-        title: "Basic Crypto Concepts",
-        summary: "What encryption does (and doesn’t) do.",
+        id: "sec-03",
+        title: "Protecting Systems",
+        summary: "Passwords, MFA, and secure communication basics.",
+        lessons: [
+          {
+            id: "sec-03-01",
+            title: "Passwords & MFA",
+            summary: "Strong passwords and why MFA matters.",
+            minutes: 25,
+          },
+          {
+            id: "sec-03-02",
+            title: "Updates",
+            summary: "Patch management and why delays hurt.",
+            minutes: 20,
+          },
+          {
+            id: "sec-03-03",
+            title: "Safe browsing",
+            summary: "Practical everyday defense habits.",
+            minutes: 20,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "Is this suitable for non-technical learners?",
-        answer:
-          "Yes. The course focuses on practical understanding and everyday security behavior.",
+        question: "Will I learn practical skills?",
+        answer: "Yes—checklists and real scenarios are included.",
       },
       {
-        question: "Will this help me protect my own devices?",
-        answer:
-          "Absolutely. You’ll gain checklists and habits you can apply immediately.",
+        question: "Is it beginner-friendly?",
+        answer: "It’s accessible, but it assumes basic computer familiarity.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 4,
+          reason: "Perfect foundation and matches the scope of this course.",
+        },
+        {
+          id: 13,
+          reason: "Next step when you want to understand web attack surfaces.",
+        },
+      ],
+      videos: [
+        { id: 5, reason: "Short security explanations to reinforce concepts." },
+      ],
+    },
   },
 
   {
@@ -535,49 +666,260 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/cybersec.avif",
+    cover: "assets/images/thumbnails/cover-6.jpg",
     description:
       "Learn how to write safer code by understanding common vulnerabilities such as injection, insecure authentication, and poor input validation.",
     learningGoals: [
       {
         title: "Avoid common bugs",
-        text: "Understand typical security pitfalls in code.",
+        text: "Recognize patterns that lead to vulnerabilities.",
       },
       {
         title: "Validate inputs",
-        text: "Use safe patterns for input handling.",
+        text: "Apply safe validation and data handling patterns.",
       },
       {
         title: "Think like a defender",
-        text: "Connect programming decisions with security outcomes.",
+        text: "Connect code choices to real security outcomes.",
       },
     ],
     sections: [
       {
+        id: "sc-01",
         title: "Risk in Code",
-        summary: "Why small mistakes become big vulnerabilities.",
+        summary: "How small bugs become big vulnerabilities.",
+        lessons: [
+          {
+            id: "sc-01-01",
+            title: "Threat modeling basics",
+            summary: "What could go wrong and why.",
+            minutes: 25,
+          },
+          {
+            id: "sc-01-02",
+            title: "Trust boundaries",
+            summary: "User input is never trusted.",
+            minutes: 25,
+          },
+          {
+            id: "sc-01-03",
+            title: "Security mindset",
+            summary: "Defensive thinking while coding.",
+            minutes: 25,
+          },
+        ],
       },
       {
+        id: "sc-02",
         title: "Input & Validation",
         summary: "Sanitization and safe data flows.",
+        lessons: [
+          {
+            id: "sc-02-01",
+            title: "Validation rules",
+            summary: "Allow-lists vs deny-lists and patterns.",
+            minutes: 30,
+          },
+          {
+            id: "sc-02-02",
+            title: "Injection basics",
+            summary: "Why concatenation is dangerous.",
+            minutes: 30,
+          },
+          {
+            id: "sc-02-03",
+            title: "Safe output",
+            summary: "Escaping and encoding in practice.",
+            minutes: 30,
+          },
+        ],
       },
       {
+        id: "sc-03",
         title: "Auth & Sessions",
         summary: "Safer login and session concepts.",
+        lessons: [
+          {
+            id: "sc-03-01",
+            title: "Authentication mistakes",
+            summary: "Common failures and how to avoid them.",
+            minutes: 25,
+          },
+          {
+            id: "sc-03-02",
+            title: "Sessions",
+            summary: "Cookies, expiry, and secure defaults.",
+            minutes: 25,
+          },
+          {
+            id: "sc-03-03",
+            title: "Password storage",
+            summary: "Hashing, salts, and why plaintext is fatal.",
+            minutes: 25,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "Do I need web development knowledge?",
-        answer:
-          "It helps, but examples are explained step-by-step with security context.",
+        question: "Is this ethical hacking?",
+        answer: "It’s defensive: focused on writing code that resists attacks.",
       },
       {
-        question: "Is this about ethical hacking?",
-        answer:
-          "It’s more defensive than offensive — focused on writing code that resists attacks.",
+        question: "Do I need web dev knowledge?",
+        answer: "It helps, but examples are explained step-by-step.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 13,
+          reason:
+            "Great for understanding web vulnerabilities and testing mindset.",
+        },
+        {
+          id: 8,
+          reason:
+            "Clean code habits reduce mistakes and improve maintainability.",
+        },
+      ],
+      videos: [
+        { id: 5, reason: "Reinforces security concepts and common pitfalls." },
+      ],
+    },
+  },
+
+  {
+    id: "sql-databases",
+    title: "Databases with SQL",
+    category: "databases",
+    difficulty: "beginner",
+    available: true,
+    featured: false,
+    cover: "assets/images/thumbnails/dabases-cover-2.jpg",
+    description:
+      "Learn how to store, organize, and query data using SQL. Covers table design, relationships, CRUD, joins, filtering, and real query examples.",
+    learningGoals: [
+      {
+        title: "Understand relational DBs",
+        text: "Know what tables/relations are and why they work.",
+      },
+      {
+        title: "Write core SQL",
+        text: "INSERT, UPDATE, DELETE and SELECT queries.",
+      },
+      {
+        title: "Use joins",
+        text: "Combine data across tables to answer real questions.",
+      },
+    ],
+    sections: [
+      {
+        id: "db-01",
+        title: "Relational Database Basics",
+        summary: "Tables, rows, keys and relationships.",
+        lessons: [
+          {
+            id: "db-01-01",
+            title: "Tables & keys",
+            summary: "Primary keys and why uniqueness matters.",
+            minutes: 25,
+          },
+          {
+            id: "db-01-02",
+            title: "Relationships",
+            summary: "1–1, 1–many, many–many with examples.",
+            minutes: 30,
+          },
+          {
+            id: "db-01-03",
+            title: "Modeling practice",
+            summary: "Turn a real scenario into tables.",
+            minutes: 30,
+          },
+        ],
+      },
+      {
+        id: "db-02",
+        title: "Core SQL Operations",
+        summary: "CRUD + filtering and sorting.",
+        lessons: [
+          {
+            id: "db-02-01",
+            title: "SELECT basics",
+            summary: "SELECT, WHERE, ORDER BY, LIMIT.",
+            minutes: 35,
+          },
+          {
+            id: "db-02-02",
+            title: "INSERT/UPDATE/DELETE",
+            summary: "Write safe and correct updates.",
+            minutes: 35,
+          },
+          {
+            id: "db-02-03",
+            title: "Aggregations",
+            summary: "GROUP BY, COUNT, SUM, AVG.",
+            minutes: 30,
+          },
+        ],
+      },
+      {
+        id: "db-03",
+        title: "Joins & Practical Queries",
+        summary: "Join tables and build realistic queries.",
+        lessons: [
+          {
+            id: "db-03-01",
+            title: "INNER JOIN",
+            summary: "Combine matching rows with confidence.",
+            minutes: 35,
+          },
+          {
+            id: "db-03-02",
+            title: "LEFT JOIN",
+            summary: "Include missing data and handle NULLs.",
+            minutes: 35,
+          },
+          {
+            id: "db-03-03",
+            title: "Mini report",
+            summary: "Create a small report query for a dataset.",
+            minutes: 35,
+          },
+        ],
+      },
+    ],
+    questions: [
+      {
+        question: "Do I need programming?",
+        answer: "No. SQL is declarative—focus on tables and data.",
+      },
+      {
+        question: "Which DB do you use?",
+        answer:
+          "Any relational DB (e.g., PostgreSQL/MySQL). Skills transfer easily.",
+      },
+    ],
+    recommended: {
+      books: [
+        {
+          id: 5,
+          reason: "Practical SQL for analysis and real query workflows.",
+        },
+        {
+          id: 15,
+          reason:
+            "Strong foundation for concepts like keys, constraints, and transactions.",
+        },
+      ],
+      videos: [
+        {
+          id: 6,
+          reason: "Short explanations to reinforce joins + query logic.",
+        },
+      ],
+    },
   },
 
   {
@@ -587,7 +929,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/databases.png",
+    cover: "assets/images/thumbnails/databases-cover-5.jpg",
     description:
       "Move beyond queries and learn how to model data properly. Covers normalization, relationships, schema design, and real-use cases from web applications.",
     learningGoals: [
@@ -601,84 +943,111 @@ const COURSES = [
       },
       {
         title: "Build for real apps",
-        text: "Connect design choices to app performance.",
+        text: "Connect design choices to performance and reliability.",
       },
     ],
     sections: [
       {
+        id: "dbD-01",
         title: "Modeling Data",
-        summary: "Entities, relationships, cardinality.",
+        summary: "Entities, relationships and common patterns.",
+        lessons: [
+          {
+            id: "dbD-01-01",
+            title: "Entities & attributes",
+            summary: "Turn real objects into structured tables.",
+            minutes: 30,
+          },
+          {
+            id: "dbD-01-02",
+            title: "Cardinality",
+            summary: "1–many, many–many modeling correctly.",
+            minutes: 30,
+          },
+          {
+            id: "dbD-01-03",
+            title: "Constraints",
+            summary: "NOT NULL, UNIQUE, FK and why they matter.",
+            minutes: 30,
+          },
+        ],
       },
-      { title: "Normalization", summary: "1NF to 3NF with real examples." },
       {
+        id: "dbD-02",
+        title: "Normalization",
+        summary: "1NF → 3NF with clear examples.",
+        lessons: [
+          {
+            id: "dbD-02-01",
+            title: "1NF/2NF",
+            summary: "Eliminate repeating groups and partial dependencies.",
+            minutes: 35,
+          },
+          {
+            id: "dbD-02-02",
+            title: "3NF",
+            summary: "Remove transitive dependencies for cleaner design.",
+            minutes: 35,
+          },
+          {
+            id: "dbD-02-03",
+            title: "Practical normalization",
+            summary: "Normalize a messy dataset step-by-step.",
+            minutes: 35,
+          },
+        ],
+      },
+      {
+        id: "dbD-03",
         title: "Schema in Practice",
-        summary: "Patterns for typical applications.",
+        summary: "Design tradeoffs for real apps.",
+        lessons: [
+          {
+            id: "dbD-03-01",
+            title: "Indexing intuition",
+            summary: "Why indexes matter (conceptually).",
+            minutes: 25,
+          },
+          {
+            id: "dbD-03-02",
+            title: "Transactions",
+            summary: "ACID basics and safe updates.",
+            minutes: 30,
+          },
+          {
+            id: "dbD-03-03",
+            title: "Case study",
+            summary: "Design a small schema for a web app.",
+            minutes: 35,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "Do I need to know SQL first?",
-        answer:
-          "Basic SQL helps, but the focus here is design logic rather than heavy querying.",
+        question: "Do I need SQL first?",
+        answer: "Basic SQL helps, but this is mainly design logic.",
       },
       {
         question: "Will this help with ER diagrams?",
-        answer:
-          "Yes. You’ll practice interpreting and building ER-style models that translate into clean schemas.",
+        answer: "Yes—this course is built around modeling.",
       },
     ],
-  },
-
-  {
-    id: "sql-advanced",
-    title: "Advanced SQL Queries",
-    category: "databases",
-    difficulty: "advanced",
-    available: true,
-    featured: false,
-    cover: "assets/images/databases.png",
-    description:
-      "Master advanced querying with window functions, CTEs, performance-aware joins, and complex reporting patterns used in real analytics scenarios.",
-    learningGoals: [
-      {
-        title: "Write advanced reports",
-        text: "Use CTEs and window functions confidently.",
-      },
-      {
-        title: "Optimize thinking",
-        text: "Understand query cost and structure.",
-      },
-      {
-        title: "Level up analytics",
-        text: "Build skills useful for data-heavy projects.",
-      },
-    ],
-    sections: [
-      {
-        title: "CTEs & Subqueries",
-        summary: "Readable, powerful query structures.",
-      },
-      {
-        title: "Window Functions",
-        summary: "Ranking, partitioning, moving metrics.",
-      },
-      {
-        title: "Performance Patterns",
-        summary: "Smarter joins and filtering.",
-      },
-    ],
-    questions: [
-      {
-        question: "Is this for data analytics or backend dev?",
-        answer:
-          "Both. The techniques are valuable for reporting, dashboards, and performance-critical applications.",
-      },
-      {
-        question: "Do you cover indexing?",
-        answer:
-          "You’ll get a practical introduction to performance thinking, including when indexing matters conceptually.",
-      },
-    ],
+    recommended: {
+      books: [
+        {
+          id: 15,
+          reason: "Academic base for schema/transactions/architecture.",
+        },
+        { id: 16, reason: "Modern view of real systems and design tradeoffs." },
+      ],
+      videos: [
+        {
+          id: 6,
+          reason: "Good reinforcement for advanced query/design thinking.",
+        },
+      ],
+    },
   },
 
   {
@@ -687,14 +1056,14 @@ const COURSES = [
     category: "web-development",
     difficulty: "beginner",
     available: false,
-    featured: true,
-    cover: "assets/images/photo-1550751827-4bd374c3f58b.avif",
+    featured: false,
+    cover: "assets/images/thumbnails/cover-2.jpg",
     description:
       "Learn modern HTML structure and responsive CSS layouts. Includes flexbox, grid basics, and small page-building exercises.",
     learningGoals: [
       {
         title: "Build layouts",
-        text: "Create clean page structure with semantic HTML.",
+        text: "Use semantic HTML and clean structure.",
       },
       {
         title: "Style confidently",
@@ -702,29 +1071,112 @@ const COURSES = [
       },
       {
         title: "Ship small pages",
-        text: "Complete mini-projects to solidify skills.",
+        text: "Finish mini layouts you can reuse later.",
       },
     ],
     sections: [
       {
+        id: "web-01",
         title: "Semantic HTML",
-        summary: "Clean structure and accessibility basics.",
+        summary: "Structure, headings, sections, forms basics.",
+        lessons: [
+          {
+            id: "web-01-01",
+            title: "Semantic tags",
+            summary: "header/nav/main/section/footer and why they matter.",
+            minutes: 25,
+          },
+          {
+            id: "web-01-02",
+            title: "Accessible structure",
+            summary: "Labels, alt text, and clean hierarchy.",
+            minutes: 25,
+          },
+          {
+            id: "web-01-03",
+            title: "Mini page build",
+            summary: "Build a simple page with proper sections.",
+            minutes: 35,
+          },
+        ],
       },
-      { title: "Modern CSS", summary: "Flexbox, grid, spacing systems." },
-      { title: "Responsive Design", summary: "Mobile-first layout thinking." },
+      {
+        id: "web-02",
+        title: "Modern CSS",
+        summary: "Spacing, flexbox, grid and consistent UI.",
+        lessons: [
+          {
+            id: "web-02-01",
+            title: "Box model + spacing",
+            summary: "Margin/padding and consistent spacing scale.",
+            minutes: 25,
+          },
+          {
+            id: "web-02-02",
+            title: "Flexbox",
+            summary: "Row/column layouts and alignment patterns.",
+            minutes: 35,
+          },
+          {
+            id: "web-02-03",
+            title: "Grid basics",
+            summary: "Two-column layouts and responsive grids.",
+            minutes: 35,
+          },
+        ],
+      },
+      {
+        id: "web-03",
+        title: "Responsive Design",
+        summary: "Mobile-first approach + breakpoints.",
+        lessons: [
+          {
+            id: "web-03-01",
+            title: "Media queries",
+            summary: "Breakpoints and typical device layouts.",
+            minutes: 25,
+          },
+          {
+            id: "web-03-02",
+            title: "Fluid UI",
+            summary: "Percentages, max-width, and flexible images.",
+            minutes: 25,
+          },
+          {
+            id: "web-03-03",
+            title: "Mini responsive project",
+            summary: "Turn your layout into a responsive page.",
+            minutes: 40,
+          },
+        ],
+      },
     ],
     questions: [
       {
-        question: "Do I need any design background?",
-        answer:
-          "No. You’ll learn layout and structure from scratch with practical examples.",
+        question: "Do I need design background?",
+        answer: "No—everything is built step-by-step.",
       },
       {
         question: "Will I build real pages?",
-        answer:
-          "Yes, small responsive pages that can be used in your portfolio.",
+        answer: "Yes, small responsive pages.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 18,
+          reason: "Great companion once you add JavaScript to your pages.",
+        },
+        {
+          id: 17,
+          reason:
+            "Helpful for common mistakes around data/DB thinking in web apps.",
+        },
+      ],
+      videos: [
+        { id: 8, reason: "Quick CSS recap (useful during layout practice)." },
+      ],
+    },
   },
 
   {
@@ -734,46 +1186,125 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: false,
-    cover: "assets/images/des.avif",
+    cover: "assets/images/thumbnails/js-cover-3.jpg",
     description:
       "Make websites interactive by mastering events, DOM manipulation, basic state patterns, and browser APIs.",
     learningGoals: [
       {
         title: "Manipulate UI",
-        text: "Update elements dynamically and safely.",
+        text: "Update the DOM safely and dynamically.",
       },
       {
         title: "Handle events",
-        text: "Build interactive flows with clean event logic.",
+        text: "Build clean interactive flows and behaviors.",
       },
       {
-        title: "Prepare for apps",
-        text: "Get ready for larger front-end projects.",
+        title: "Use browser APIs",
+        text: "LocalStorage, basic async patterns, and utilities.",
       },
     ],
     sections: [
       {
+        id: "dom-01",
         title: "DOM Foundations",
-        summary: "Selectors, nodes, creating elements.",
+        summary: "Selectors, nodes and creating elements.",
+        lessons: [
+          {
+            id: "dom-01-01",
+            title: "Selecting elements",
+            summary: "querySelector, querySelectorAll, and safe patterns.",
+            minutes: 25,
+          },
+          {
+            id: "dom-01-02",
+            title: "Creating nodes",
+            summary: "createElement, append, remove, and templates.",
+            minutes: 35,
+          },
+          {
+            id: "dom-01-03",
+            title: "Updating UI",
+            summary: "classList, textContent vs innerHTML, and why it matters.",
+            minutes: 35,
+          },
+        ],
       },
-      { title: "Events", summary: "Click, input, delegation patterns." },
       {
+        id: "dom-02",
+        title: "Events",
+        summary: "Click/input events and delegation.",
+        lessons: [
+          {
+            id: "dom-02-01",
+            title: "Event basics",
+            summary: "Handlers, preventDefault, stopPropagation.",
+            minutes: 30,
+          },
+          {
+            id: "dom-02-02",
+            title: "Event delegation",
+            summary: "One listener for many items.",
+            minutes: 30,
+          },
+          {
+            id: "dom-02-03",
+            title: "UI patterns",
+            summary: "Toggle, filter, and small state patterns.",
+            minutes: 35,
+          },
+        ],
+      },
+      {
+        id: "dom-03",
         title: "Browser APIs",
-        summary: "LocalStorage and simple async patterns.",
+        summary: "Storage + basic async.",
+        lessons: [
+          {
+            id: "dom-03-01",
+            title: "LocalStorage",
+            summary: "Persist UI state and user choices.",
+            minutes: 25,
+          },
+          {
+            id: "dom-03-02",
+            title: "Fetch basics",
+            summary: "Get data and render it (concept + demo).",
+            minutes: 35,
+          },
+          {
+            id: "dom-03-03",
+            title: "Mini project",
+            summary: "Build a small interactive widget/page.",
+            minutes: 45,
+          },
+        ],
       },
     ],
     questions: [
       {
-        question: "Do I need to know HTML/CSS first?",
-        answer:
-          "Yes, basic familiarity helps because you’ll manipulate real elements and layouts.",
+        question: "Do I need HTML/CSS first?",
+        answer: "Yes, basic familiarity helps a lot.",
       },
       {
         question: "Will this prepare me for frameworks?",
-        answer:
-          "Yes. Understanding DOM and state concepts makes React/Vue much easier later.",
+        answer: "Yes—DOM + state concepts translate well to React/Vue.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 18,
+          reason: "Hands-on JavaScript + DOM explanations with practice.",
+        },
+        {
+          id: 8,
+          reason: "Better structure and readability for bigger front-end code.",
+        },
+      ],
+      videos: [
+        { id: 8, reason: "Helpful alongside UI work (layout + polish)." },
+      ],
+    },
   },
 
   {
@@ -783,46 +1314,129 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/vid.avif",
+    cover: "assets/images/thumbnails/cat-ai-cover.jpeg",
     description:
-      "Learn core AI concepts with simple, visual explanations and hands-on mini tasks. Focuses on understanding how models learn and how to use AI responsibly.",
+      "Learn core AI concepts with simple, visual explanations and hands-on mini tasks. Focuses on how models learn and how to use AI responsibly.",
     learningGoals: [
       {
         title: "Understand core ideas",
-        text: "Learn data, features, models, and training.",
+        text: "Data, features, models, training.",
       },
       {
         title: "Build intuition",
-        text: "See why models make mistakes and how to improve them.",
+        text: "Why models fail and how to improve them.",
       },
       {
         title: "Use AI responsibly",
-        text: "Bias, privacy, and safe usage basics.",
+        text: "Bias, privacy and safe usage basics.",
       },
     ],
     sections: [
-      { title: "What is AI?", summary: "AI vs ML vs DL, real examples." },
       {
-        title: "How Models Learn",
-        summary: "Training, validation, overfitting.",
+        id: "ai-01",
+        title: "What is AI?",
+        summary: "AI vs ML vs DL and practical examples.",
+        lessons: [
+          {
+            id: "ai-01-01",
+            title: "AI vs ML",
+            summary: "Definitions and what each one means.",
+            minutes: 20,
+          },
+          {
+            id: "ai-01-02",
+            title: "Real examples",
+            summary: "Where AI appears in apps you already use.",
+            minutes: 25,
+          },
+          {
+            id: "ai-01-03",
+            title: "Limits",
+            summary: "What AI can’t do reliably (and why).",
+            minutes: 25,
+          },
+        ],
       },
       {
-        title: "Evaluation & Ethics",
-        summary: "Accuracy, bias, privacy, and best practices.",
+        id: "ai-02",
+        title: "How Models Learn",
+        summary: "Training, validation and overfitting intuition.",
+        lessons: [
+          {
+            id: "ai-02-01",
+            title: "Training loop",
+            summary: "Inputs → predictions → feedback → improvements.",
+            minutes: 30,
+          },
+          {
+            id: "ai-02-02",
+            title: "Overfitting",
+            summary: "When a model memorizes instead of generalizing.",
+            minutes: 30,
+          },
+          {
+            id: "ai-02-03",
+            title: "Evaluation",
+            summary: "Accuracy, precision/recall in simple terms.",
+            minutes: 30,
+          },
+        ],
+      },
+      {
+        id: "ai-03",
+        title: "Ethics & Safety",
+        summary: "Bias, privacy and responsible use.",
+        lessons: [
+          {
+            id: "ai-03-01",
+            title: "Bias basics",
+            summary: "How biased data creates biased outcomes.",
+            minutes: 25,
+          },
+          {
+            id: "ai-03-02",
+            title: "Privacy",
+            summary: "What to avoid sharing with AI tools.",
+            minutes: 20,
+          },
+          {
+            id: "ai-03-03",
+            title: "Verification habits",
+            summary: "How to check outputs and reduce hallucinations.",
+            minutes: 25,
+          },
+        ],
       },
     ],
     questions: [
       {
         question: "Do I need math to start?",
-        answer:
-          "No. We keep math light and focus on concepts, visuals, and practical understanding.",
+        answer: "No—math is kept light and intuitive.",
       },
       {
-        question: "Will I code in this course?",
+        question: "Will I code?",
         answer:
-          "Optional. You can follow concept-only, or try small guided exercises if you want.",
+          "Optional—concept-only is fine, with small guided tasks available.",
       },
     ],
+    recommended: {
+      books: [
+        {
+          id: 19,
+          reason: "Beginner-friendly AI-themed learning support content.",
+        },
+        {
+          id: 20,
+          reason: "Extra reading for building routine and confidence.",
+        },
+      ],
+      videos: [
+        {
+          id: 7,
+          reason: "Short visual AI explanations + responsible use reminders.",
+        },
+      ],
+    },
   },
 
   {
@@ -832,160 +1446,129 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: false,
-    cover: "assets/images/vid.avif",
+    cover: "assets/images/thumbnails/cover-25.jpg",
     description:
       "A practical workshop on using modern AI tools effectively: prompting, workflows, evaluation, and building small AI-assisted projects.",
     learningGoals: [
       {
         title: "Write strong prompts",
-        text: "Structure prompts for clarity, constraints, and quality.",
+        text: "Structure prompts for clarity and constraints.",
       },
       {
         title: "Evaluate outputs",
-        text: "Spot hallucinations, verify facts, and iterate safely.",
+        text: "Spot hallucinations and verify safely.",
       },
       {
         title: "Build workflows",
-        text: "Use AI for study, coding, writing, and mini automation.",
+        text: "Use AI for study, coding, and planning with good habits.",
       },
     ],
     sections: [
       {
+        id: "pr-01",
         title: "Prompt Patterns",
         summary: "Templates for summaries, coding, planning, and revision.",
+        lessons: [
+          {
+            id: "pr-01-01",
+            title: "Clear constraints",
+            summary: "How to get consistent outputs.",
+            minutes: 25,
+          },
+          {
+            id: "pr-01-02",
+            title: "Step-by-step prompts",
+            summary: "Break tasks into reliable steps.",
+            minutes: 30,
+          },
+          {
+            id: "pr-01-03",
+            title: "Quality iteration",
+            summary: "Refine prompts with feedback loops.",
+            minutes: 30,
+          },
+        ],
       },
       {
+        id: "pr-02",
         title: "Verification & Safety",
-        summary: "Checks, citations, bias, and privacy guidelines.",
+        summary: "Checks, citations, bias and privacy.",
+        lessons: [
+          {
+            id: "pr-02-01",
+            title: "Verification checklist",
+            summary: "How to verify facts and outputs quickly.",
+            minutes: 25,
+          },
+          {
+            id: "pr-02-02",
+            title: "Bias awareness",
+            summary: "Recognize bias and improve prompts.",
+            minutes: 25,
+          },
+          {
+            id: "pr-02-03",
+            title: "Privacy rules",
+            summary: "What not to share and safe usage habits.",
+            minutes: 20,
+          },
+        ],
       },
       {
+        id: "pr-03",
         title: "Mini AI Projects",
         summary: "Build small AI-assisted deliverables step-by-step.",
+        lessons: [
+          {
+            id: "pr-03-01",
+            title: "Study helper workflow",
+            summary: "Summaries + flashcards + revision routine.",
+            minutes: 35,
+          },
+          {
+            id: "pr-03-02",
+            title: "Coding assistant workflow",
+            summary: "Prompts for debugging and safe refactoring.",
+            minutes: 40,
+          },
+          {
+            id: "pr-03-03",
+            title: "Final mini project",
+            summary: "Create a small AI-assisted output with verification.",
+            minutes: 45,
+          },
+        ],
       },
     ],
     questions: [
       {
         question: "Which AI tool does this use?",
-        answer:
-          "It’s tool-agnostic. The skills apply to most AI assistants and generative AI platforms.",
+        answer: "Tool-agnostic. Skills apply across most assistants.",
       },
       {
         question: "Is it okay for students?",
-        answer:
-          "Yes—there’s a strong focus on ethical use, originality, and how to cite/verify properly.",
+        answer: "Yes—strong focus on ethics, originality, and verification.",
       },
     ],
-  },
-
-  {
-    id: "javascript-core",
-    title: "JavaScript Core",
-    category: "programming",
-    difficulty: "beginner",
-    available: true,
-    featured: true,
-    cover: "assets/images/main-image-9.jpeg",
-    description:
-      "Learn modern JavaScript from scratch: variables, functions, arrays, objects, DOM manipulation, events, and debugging. Perfect for beginners who want to build interactive web pages and understand how JS works in the browser.",
-    learningGoals: [
-      {
-        title: "Write JS confidently",
-        text: "Understand variables, types, functions, and scope.",
-      },
-      {
-        title: "Work with the DOM",
-        text: "Select elements, handle events, and update UI dynamically.",
-      },
-      {
-        title: "Debug effectively",
-        text: "Use console, breakpoints, and common debugging techniques.",
-      },
-      {
-        title: "Build mini projects",
-        text: "Create small interactive components and pages.",
-      },
-    ],
-    sections: [
-      {
-        title: "JavaScript Basics",
-        summary: "Syntax, data types, operators, and control flow.",
-      },
-      {
-        title: "DOM & Events",
-        summary: "Manipulate HTML/CSS via JS and handle user interactions.",
-      },
-      {
-        title: "Practice Projects",
-        summary: "Mini apps: counter, to-do list, and simple UI widgets.",
-      },
-    ],
-    questions: [
-      {
-        question: "Do I need HTML/CSS before this?",
-        answer:
-          "Basic HTML/CSS helps, but the course includes a quick intro so you can follow along.",
-      },
-      {
-        question: "Will this work for web development?",
-        answer:
-          "Yes—this course focuses on browser JavaScript and interactive UI building.",
-      },
-    ],
-  },
-
-  {
-    id: "javascript-modern-advanced",
-    title: "Modern JavaScript (ES6+) & Async",
-    category: "programming",
-    difficulty: "intermediate",
-    available: false,
-    featured: false,
-    cover: "assets/images/main-image-9.jpeg",
-    description:
-      "Level up your JavaScript with ES6+ features and asynchronous programming. Learn modules, destructuring, classes, promises, async/await, fetch APIs, error handling, and how to structure maintainable front-end code.",
-    learningGoals: [
-      {
-        title: "Use ES6+ features",
-        text: "Write cleaner code with modules, destructuring, and classes.",
-      },
-      {
-        title: "Master async JS",
-        text: "Work confidently with promises, async/await, and APIs.",
-      },
-      {
-        title: "Handle errors well",
-        text: "Build resilient apps with proper error handling patterns.",
-      },
-      {
-        title: "Structure code",
-        text: "Organize projects with reusable modules and patterns.",
-      },
-    ],
-    sections: [
-      {
-        title: "ES6+ Essentials",
-        summary: "Let/const, arrow functions, destructuring, spread/rest.",
-      },
-      {
-        title: "Async & APIs",
-        summary: "Promises, async/await, fetch, JSON, and network errors.",
-      },
-      {
-        title: "Project Architecture",
-        summary: "Modules, reusable utilities, and clean code patterns.",
-      },
-    ],
-    questions: [
-      {
-        question: "Is this course for complete beginners?",
-        answer:
-          "Not exactly—you should already know basic JS (variables, functions, arrays, objects).",
-      },
-      {
-        question: "Do we build something real?",
-        answer:
-          "Yes—there are guided exercises that fetch data from APIs and render it into a UI.",
-      },
-    ],
+    recommended: {
+      books: [
+        {
+          id: 19,
+          reason: "Supports building study routines around technical topics.",
+        },
+        {
+          id: 20,
+          reason: "Extra practice for goals and structured learning habits.",
+        },
+      ],
+      videos: [
+        {
+          id: 7,
+          reason: "Helpful visual reinforcement for AI concepts + safe use.",
+        },
+      ],
+    },
   },
 ];
+
+window.COURSES = COURSES;

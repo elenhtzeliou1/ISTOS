@@ -21,7 +21,7 @@
       momentumId = null;
     };
 
-    // stop native drag the a-img 
+    // stop native drag the a-img
     slider.addEventListener("dragstart", (e) => e.preventDefault(), true);
 
     // cancel click only if we dragged
@@ -109,7 +109,7 @@
     window.addEventListener("touchcancel", end);
   }
 
-  function init(selector = ".card-carousel") {
+  function init(selector = ".card-carousel,  .course-model-slider") {
     document.querySelectorAll(selector).forEach(attachDrag);
   }
 
