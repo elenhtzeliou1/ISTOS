@@ -2608,6 +2608,7 @@ nav.mobile-open .nav-link-menu {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: var(--gap-mid);
 }
 
 .more-quest-wrapper {
