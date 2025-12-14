@@ -61,15 +61,15 @@ const BOOKS = [
   },
   {
     id: 6,
-    title: "Give me a name",
-    author: "Cathy Tanimura",
+    title: "Database System Concepts",
+    author: "Abraham Silberschatz",
     category: "databases",
     difficulty: "intermediate",
     available: true,
     featured: false,
     description:
-      "Learn how to query relational databases using SQL. Covers SELECT, JOIN, GROUP BY, window functions, subqueries, and practical data analysis workflows.",
-    cover: "assets/images/growtika-8zB4P0eafrs-unsplash.jpg",
+      "It presents the fundamental concepts of database management in an intuitive manner geared toward allowing students to begin working with databases as quickly as possible.",
+    cover: "assets/images/thumbnails/databases-cover-5.jpg",
   },
   {
     id: 7,

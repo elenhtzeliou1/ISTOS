@@ -199,7 +199,7 @@
       });
     }
 
-    // ---- PROPOSED BOOKS -----//
+    // ---- 2 PROPOSED BOOKS -----//
     const proposedBooksSec = document.getElementById("proposed__bks");
     if (proposedBooksSec) {
       const recBooks = Array.isArray(course?.recommended?.books)

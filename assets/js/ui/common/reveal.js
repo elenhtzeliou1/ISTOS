@@ -49,14 +49,14 @@
         obs.unobserve(entry.target);
       });
     }, {
-      threshold: 0.05,
+      threshold: 0.10,
       rootMargin: "0px 0px 10% 0px"
     });
 
     itemsToObserve.forEach(el => observer.observe(el));
   }
 
-  // ---- Categories accordion reveal (tablet + laptop) ----
+  // ---- Categories accordion reveal (tablet + laptop) ----//
   function initCategoriesAccordionReveal() {
     const mq = window.matchMedia("(min-width: 768px)");
     if (!mq.matches) return;
@@ -83,7 +83,7 @@
         obs.unobserve(entry.target);
       });
     }, {
-      threshold: 0.1,
+      threshold: 0.15,
       rootMargin: "0px 0px 20% 0px"
     });
 

@@ -91,7 +91,7 @@ const VIDEOS = [
     featured: true,
     description:
        "A fast introduction to CSS fundamentals—selectors, the box model, flexbox, and responsive styling—so you can start building clean layouts with confidence.",
-    cover: "assets/images/thumbnails/cover-1.jpeg",
+    cover: "assets/images/thumbnails/cover-2.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=1PnVor36_40",
   },
