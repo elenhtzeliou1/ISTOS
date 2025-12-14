@@ -4,7 +4,7 @@
     if (slider.dataset.dragBound === "1") return;
     slider.dataset.dragBound = "1";
 
-    const DRAG_THRESHOLD = 10; // px
+    const DRAG_THRESHOLD = 5; // px
     let isDown = false;
     let isDragging = false;
     let startX = 0;
@@ -21,7 +21,7 @@
       momentumId = null;
     };
 
-    // stop native drag the a-img
+    // stop native drag the a&&img
     slider.addEventListener("dragstart", (e) => e.preventDefault(), true);
 
     // cancel click only if we dragged
