@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // COMMON
+
   window.Layout?.init?.();
   window.CategoryUtils?.init?.();
 
@@ -10,17 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.FilterUI?.init?.();
 
-  // PAGES (lists)
   window.CategoriesPage?.init?.();
+  window.GoalSliderHeight?.init?.(".goal-slider");
+
   window.CoursesPage?.init?.();
   window.BooksPage?.init?.();
   window.VideosPage?.init?.();
 
-  // DETAILS
+
   window.BookDetailsPage?.init?.();
   window.CourseDetailsPage?.init?.();
   window.VideoDetailsPage?.init?.();
   window.CourseDetailResponsive?.init?.();
+
 
   window.PreferedBooksPage?.init?.();
   window.PreferedVideosPage?.init?.();
@@ -33,5 +35,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.Modals?.init?.();
   window.RegisterForm?.init?.();
-
 });

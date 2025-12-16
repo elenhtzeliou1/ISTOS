@@ -286,6 +286,7 @@
     );
     if (headerPreviewCategories) {
       headerPreview(headerPreviewCategories, CATEGORIES);
+      window.GoalSliderHeight?.init?.(".goal-slider");
       window.RevealUI?.refresh?.();
     }
 

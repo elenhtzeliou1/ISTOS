@@ -1,5 +1,5 @@
 /* INTRO PAGE*/
-.index-page-intro{
+.index-page-intro {
   height: auto;
   width: 100%;
   padding: var(--padding-big) var(--padding-avg);
@@ -11,28 +11,33 @@
   text-align: center;
   margin: auto;
 }
-.index-page-exercise-row{
+
+.index-page-exercise-row {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: var(--gap); 
+  gap: var(--gap);
 }
-.index-page-exercise-row a{
+
+.index-page-exercise-row a {
   background-color: var(--green);
   color: black;
   border: none;
   font-weight: 500;
 }
-.index-page-exercise-row a:hover{
+
+.index-page-exercise-row a:hover {
   transform: scale(0.98);
   transition: 0.2s;
 }
-.index-page-exercise-row h2{
+
+.index-page-exercise-row h2 {
   font-size: 18px;
   font-weight: 200;
 }
+
 /* END INTRO PAGE*/
 
 /* main content starts*/
@@ -633,7 +638,7 @@ nav.mobile-open .nav-link-menu {
   padding: 0 0 var(--padding-avg) 0;
   background-color: red;
   background-color: transparent;
-  border:none;
+  border: none;
   text-align: left;
 }
 
@@ -642,14 +647,16 @@ nav.mobile-open .nav-link-menu {
   font-size: 16px;
   color: black;
 }
-.accordion-panel-inner .h2-arrow{
+
+.accordion-panel-inner .h2-arrow {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   color: black;
   font-size: 18px;
 }
-.h2-arrow .arrow{
+
+.h2-arrow .arrow {
   display: inline-block;
   opacity: 0;
   transform: translateX(0);
@@ -657,7 +664,7 @@ nav.mobile-open .nav-link-menu {
   margin-top: 4px;
 }
 
-.h2-arrow:is(:hover, :focus-visible) .arrow{
+.h2-arrow:is(:hover, :focus-visible) .arrow {
   opacity: 1;
   transform: translateX(10px);
 }
@@ -1135,7 +1142,6 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
   flex-direction: column;
   margin: auto;
-  gap: var(--gap);
 }
 
 .tag {
@@ -1160,9 +1166,8 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
   overflow: hidden;
   height: auto;
-  gap: var(--gap-mid);
   width: 100%;
-
+  gap: var(--gap-mid);
 }
 
 .learning-goals-container .tag-row {
@@ -1180,13 +1185,12 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
-/*caousel goals*/
+/*intro carousel categories.html */
 .goal-slider {
-  height: 55vh;
   position: relative;
   width: 100%;
   align-items: stretch;
-
+  height: var(--goal-slider-h, clamp(360px, 60vh, 720px));
 }
 
 .goal-item {
@@ -1255,7 +1259,6 @@ nav.mobile-open .nav-link-menu {
   cursor: grabbing;
 }
 
-/*caousel goals*/
 
 .controll-btn-row {
   height: auto;
@@ -1278,6 +1281,7 @@ nav.mobile-open .nav-link-menu {
   position: relative;
   z-index: 4;
 }
+/*intro carousel categories.html */
 
 .carousel-proposed-video-wrapper {
   width: 100%;
@@ -1398,16 +1402,16 @@ nav.mobile-open .nav-link-menu {
 
 /*main description*/
 .courses-desc-wrapper {
-
+  border-top: 1px solid var(--nav-bottom);
   width: 100%;
-  padding: var(--padding-big) 0;
+  padding: var(--padding-big) 0 ;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin: auto;
-  gap: var(--gap-big);
+  gap: var(--gap);
 
 }
 
@@ -1430,7 +1434,7 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  gap: var(--gap-big);
+  gap: var(--gap-mid);
   padding: var(--padding) 0;
 }
 
@@ -1500,7 +1504,7 @@ nav.mobile-open .nav-link-menu {
   height: 40vh;
   width: 100%;
   margin: auto;
-  border-radius: 1250px;
+  border-radius: var( --border-radius-m);
   overflow: hidden;
 }
 
@@ -1546,27 +1550,25 @@ nav.mobile-open .nav-link-menu {
 /*sticky container*/
 .course-desc-sticky-wrapper {
   width: 100%;
-  min-height: 100vh;
+  height:auto;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   flex-direction: column;
-  gap: var(--gap-big);
+  gap: var(--gap);
   position: relative;
-
 }
 
-
 .course-desc-sticky-container {
-  height: 45vh;
+  height:auto;
   width: 100%;
-  position: sticky;
+
   top: var(--padding-lrg);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: var(--padding) var(--padding-sm) var(--padding-avg);
+  padding: var(--padding) var(--padding-sm) var(--padding-sm);
   text-align: center;
   gap: var(--gap);
 
@@ -1596,7 +1598,9 @@ nav.mobile-open .nav-link-menu {
 .course-desc-sticky-container>p {
   font-size: 14px;
 }
-
+.q-question{
+  font-size: 16px;
+}
 .vid-wrp {
   height: 16vh;
   flex: 0 0 16vh;
@@ -1638,10 +1642,6 @@ nav.mobile-open .nav-link-menu {
   border-top: 1px solid var(--tag-color);
 
   width: 100%;
-}
-
-.vid-wrp>.qa-list li p {
-  font-size: 18px;
 }
 
 
@@ -2386,7 +2386,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .crs-dtl-header h1 {
-  font-size: var(--h1-s);
+  font-size: var(--h1-hd);
 }
 
 .learning-goals-container.course-details {
@@ -2597,7 +2597,7 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
   flex-direction: column;
   gap: var(--gap);
-  padding:0 var(--padding-sm);
+  padding: 0 var(--padding-sm);
 
 
 }
@@ -2613,7 +2613,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .__proposed__books_title p {
-  color:white
+  color: white
 }
 
 .__proposed__books__main {
@@ -2629,7 +2629,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .__proposed__books__main .card {
-  background-color: var( --secondary-bg-color);
+  background-color: var(--secondary-bg-color);
   width: 100%;
   height: auto;
   border: none;
@@ -2643,7 +2643,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
-.__course__prop_video{
+.__course__prop_video {
   padding: var(--padding-big) var(--pad-sm);
   height: auto;
   width: 100%;
@@ -2653,17 +2653,21 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
   gap: var(--gap-mid);
 }
-.__course__prop_video_title{
+
+.__course__prop_video_title {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: var(--gap);
 }
-.__course__prop_video_title p,.__course__prop_video_title h1{
+
+.__course__prop_video_title p,
+.__course__prop_video_title h1 {
   color: black;
 }
-.__inject_prop_vd{
+
+.__inject_prop_vd {
   width: 100%;
   height: auto;
   display: flex;
@@ -3006,7 +3010,8 @@ body.team-page {
 
 .person {
   height: 100px;
-  width:100px;  display: flex;
+  width: 100px;
+  display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;

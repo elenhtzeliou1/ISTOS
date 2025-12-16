@@ -17,7 +17,14 @@
     }
 
     .intro-slider {
-        height: 28vh;
+        height: clamp(320px, 44vh, 560px);
+    }
+
+    @supports (height: 1svh) {
+        .intro-slider {
+            /* iPad Safari-friendly */
+            height: clamp(320px, 32svh, 560px);
+        }
     }
 
     .description-wrapper {
@@ -138,19 +145,19 @@
     }
 
     .proposed-video-carousel {
-        height: 50vh;
+        height: 60vh;
         width: 100%;
 
     }
 
     .proposed-video-card {
         width: 550px;
-        height: 40vh;
+        height: 55vh;
         background-color: black;
     }
 
     .proposed-video-vd-wrapper {
-        height: 42vh;
+        height: 52vh;
     }
 
 
@@ -361,13 +368,15 @@
         text-align: center;
     }
 
-    /* learning goals updated */
+    /* learning goals updated  */
+    .learning-goals-container {
+        padding: 0;
+        gap: var(--gap-big);
+    }
 
     .goal-slider {
-        height: calc(var(--goal-card-height-tablet));
-        top: calc(var(--goal-card-height-tablet)/10);
-        display: flex;
-        align-items: stretch;
+        /* JS sets --goal-slider-h (px). If not set, fallback is tablet var. */
+        height: clamp(320px, var(--goal-slider-h, var(--goal-card-height-tablet)), 700px);
     }
 
     .goal-item {
@@ -395,9 +404,11 @@
         padding: var(--padding-big) 0 0;
         gap: 0;
     }
-    .course-section{
+
+    .course-section {
         padding-bottom: var(--padding-big);
     }
+
     .main-description-course h2 {
         width: 90%;
     }
@@ -407,7 +418,8 @@
         padding-right: var(--padding-avg);
 
     }
-    .__course__prop_video{
+
+    .__course__prop_video {
         padding-left: var(--padding-avg);
         padding-right: var(--padding-avg);
 
@@ -979,7 +991,7 @@
         flex: 1 1 calc(33.333% - var(--gap-mid));
         display: flex;
         flex-direction: column;
-    
+
     }
 
     .courses-detail-accordion:not(.module) .accordion-trigger .fa-chevron-down {
@@ -1462,7 +1474,7 @@
     }
 
     .crs-dtl-header h1 {
-        font-size: 52px;
+        font-size: var(--h1-s);
     }
 
     .crs-dtl-header p {
@@ -1545,17 +1557,16 @@
         max-width: none;
         width: 100%;
         padding-top: 0;
+        padding-bottom: var(--padding-big);
+        gap: var(--gap-big);
+        height: auto;
+        overflow: visible;
     }
 
     .learning-goals-container .tag-row {
         align-items: center;
         justify-content: center;
         gap: 0;
-    }
-
-    .goal-slider {
-        height: 85vh;
-        top: calc(var(--card-min-height)/8);
     }
 
     .goal-item {
@@ -1721,7 +1732,7 @@
         font-size: var(--h1-mid);
     }
 
-    
+
 
     .team-people-row {
         position: relative;
@@ -1966,10 +1977,6 @@
 
     .title-container.courses p {
         width: 80%;
-    }
-
-    .goal-slider {
-        height: 60vh;
     }
 
     .goal-item {
