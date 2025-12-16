@@ -1,3 +1,4 @@
+// the function for the reveal -up and side reveal that is used in the website
 (function () {
   // ---- Description cards image direction + fade/slide ----
   function initDescriptionReveal() {

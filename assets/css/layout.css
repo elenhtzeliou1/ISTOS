@@ -89,13 +89,12 @@
     .courses-detail-accordion:not(.module) .accordion-panel,
     .courses-detail-accordion:not(.module) .accordion-panel-inner {
         flex: 1;
-
     }
 
     .courses-detail-accordion:not(.module) .accordion-panel-inner {
         height: 100%;
-        align-items: stretch;
         justify-content: space-between;
+        padding-bottom: 0;
     }
 
     .courses-detail-accordion:not(.module) .accordion-trigger .fa-chevron-down {
@@ -977,15 +976,12 @@
         align-items: stretch;
     }
 
-    .courses-detail-accordion:not(.module) .accordion-trigger {
-        cursor: default;
-    }
 
     .courses-detail-accordion:not(.module) .accordion-item {
         flex: 1 1 calc(33.333% - var(--gap-mid));
         display: flex;
         flex-direction: column;
-        cursor: default;
+    
     }
 
     .courses-detail-accordion:not(.module) .accordion-trigger .fa-chevron-down {
@@ -1008,10 +1004,11 @@
         flex-direction: column;
         flex: 1 1 auto;
         height: 100%;
-        gap: var(--gap-mid);
+        gap: var(--gap);
 
         align-items: flex-start;
         justify-content: space-between;
+        padding-bottom: 0;
     }
 
     .courses-detail-accordion:not(.module) .accordion-pannel-inner-img-cont {

@@ -1,3 +1,4 @@
+//video list page generator
 (function () {
   function init() {
     const listContainer = document.getElementById("video-list");

@@ -31,5 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.CardCarouselDrag?.init?.();
   window.AccordionUI?.init?.();
 
+  window.Modals?.init?.();
   window.RegisterForm?.init?.();
+
 });

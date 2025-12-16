@@ -1,3 +1,6 @@
+//this js page handles all the logic and the function of the categories.html page and the categories that
+// are revealed in the index.html page
+
 (function () {
   //preview for index.html
   function renderPreview(container, categories) {
@@ -28,11 +31,12 @@
             role="region"
             aria-labelledby="${triggerId}"
           >
-            <div class="accordion-panel-inner">
+            <a class="accordion-panel-inner" href="categories.html#${category.slug}">
               <!-- to krimeno content-->
               <p>
                 ${pshort}
               </p>
+              <h2 class="h2-arrow"> Learn More <i class="fa-solid fa-arrow-right arrow"></i></h2>
               ${
                 category.cover
                   ? `   
@@ -42,11 +46,13 @@
                         alt="${category.title}"
                     />
                 </div>
+
+              
                 `
                   : "No cover found!"
               }
            
-            </div>
+            </a>
           </div>
         </div>
     

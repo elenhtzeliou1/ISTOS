@@ -1,3 +1,4 @@
+//accordion function (it helps the css)
 (function () {
   function setupInitialState(triggers) {
     triggers.forEach((btn) => {

@@ -586,19 +586,41 @@ nav.mobile-open .nav-link-menu {
 .accordion-panel-inner {
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   height: auto;
   gap: var(--gap);
-  padding-bottom: var(--padding-avg);
-
+  padding: 0 0 var(--padding-avg) 0;
+  background-color: red;
+  background-color: transparent;
+  border:none;
+  text-align: left;
 }
 
 .accordion-panel-inner>p {
   line-height: 1.1;
   font-size: 16px;
   color: black;
+}
+.accordion-panel-inner .h2-arrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: black;
+  font-size: 18px;
+}
+.h2-arrow .arrow{
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 300ms ease, opacity 300ms ease;
+  margin-top: 4px;
+}
+
+.h2-arrow:is(:hover, :focus-visible) .arrow{
+  opacity: 1;
+  transform: translateX(10px);
 }
 
 .accordion-pannel-inner-img-cont {
