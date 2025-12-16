@@ -1,3 +1,4 @@
+//ta proteinomena videos pou emfanizontai sto index.htm kai sto videos.html
 (function () {
   function init() {
     const prefered_videos_wrapper = document.getElementById(

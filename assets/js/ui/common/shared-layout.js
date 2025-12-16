@@ -1,4 +1,4 @@
-//menu and footer
+//menu (nav)and footer
 (function () {
   const NAV_HTML = `
     <!-- TOP BAR -->
@@ -95,8 +95,8 @@
 </div>
 
 <div class="footer__team-info-wrapper">
-  <p>Napoleon Haralampidis p333333 - Eleni Tzeliou p33333</p>
-  <p>Προγραμματισμός Εφαρμογών στον Ιστό 2025-2020</p>
+  <p>Napoleon Haralampidis 3220225 - Eleni Tzeliou 3220200</p>
+  <p>Προγραμματισμός Εφαρμογών στον Ιστό 2025-2026</p>
 </div>
 
 
@@ -182,7 +182,7 @@
           const li = document.createElement("li");
           const a = document.createElement("a");
 
-          a.href = `categories.html?category=${encodeURIComponent(c.slug)}`;
+          a.href = `categories.html#${encodeURIComponent(c.slug)}`;
           a.textContent = c.title;
 
           li.appendChild(a);

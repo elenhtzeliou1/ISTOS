@@ -1,3 +1,4 @@
+//the carosel that need dragging (book carousel and in course-details the sections carousel)
 (function () {
   function attachDrag(slider) {
     // Avoid double-binding

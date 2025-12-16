@@ -44,7 +44,7 @@ const CATEGORIES = [
   {
     id: 3,
     title: "Cybersecurity",
-    slug: "security",
+    slug: "cybersecurity",
     description:
       "Explore core cybersecurity concepts including authentication, encryption, network defense, and safe system design. Learn how attacks work and how modern systems protect data and users.",
     label_list: [

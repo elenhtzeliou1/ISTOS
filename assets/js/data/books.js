@@ -1,6 +1,6 @@
 const BOOKS = [
   {
-    id:1,
+    id: 1,
     title: "Python Crash Course",
     author: "Eric Matthes",
     category: "programming",
@@ -8,11 +8,11 @@ const BOOKS = [
     available: true,
     featured: true,
     description:
-      "A fast-paced introduction to Python programming, covering variables, data structures, functions, OOP, and real-world projects. Perfect for beginners entering coding.",
+      "Python Crash Course is the world s bestselling programming book, with over 1,500,000 copies sold to date!Since its initial debut in 2015, this critically acclaimed quick-start guide to programming has taught millions of people all over the world to write clean code, solve problems, and build custom applications in the popular language of Python. The highly anticipated third edition of Python Crash Course has been completely revised with updated code, practices, and projects making it the ultimate launchpad for beginners to start their engines and code in Python 3!In addition to detailed step-by-step instructions, illustrated explanations of code snippets, and fun, hands-on exercises that lock in learning, the new edition features enhanced coverage of variables, error-handling, and object-oriented programming, as well as fresh data for each chapter s coding projects, better app deployment, and the latest libraries and tools, such as Plotly, Django, and the Tailwind CSS framework.As you go from software installation tutorials and language-navigation basics to mastering syntax and troubleshooting, you ll develop a solid programming foundation for the book s increasingly complex array of projects. Create responsive 2D games, design your own web apps, and even generate interactive visualisations all while you pick up and practice clean, universally applicable programming skills!",
     cover: "assets/images/thumbnails/programming-cover-small.jpg",
   },
   {
-    id:2,
+    id: 2,
     title: "Fluent Python",
     author: "Luciano Ramalho",
     category: "programming",
@@ -20,7 +20,7 @@ const BOOKS = [
     available: false,
     featured: true,
     description:
-      "A deep dive into advanced Python concepts, including generators, decorators, concurrency, and Pythonic design. Ideal for experienced Python developers.",
+      "Don't waste time bending Python to fit patterns you've learned in other languages. Python's simplicity lets you become productive quickly, but often this means you aren't using everything the language has to offer. With the updated edition of this hands-on guide, you'll learn how to write effective, modern Python 3 code by leveraging its best ideas. Discover and apply idiomatic Python 3 features beyond your past experience. Author Luciano Ramalho guides you through Python's core language features and libraries and teaches you how to make your code shorter, faster, and more readable.",
     cover: "assets/images/thumbnails/cover-17.jpg",
   },
   {
@@ -32,19 +32,19 @@ const BOOKS = [
     available: true,
     featured: true,
     description:
-      "The most widely used networking textbook. Covers networking layers, protocols, routing, security, and real-world packet flows from a top-down perspective.",
+      "Unique among computer networking texts, the Seventh Edition of the popular Computer Networking: A Top Down Approach builds on the author’s long tradition of teaching this complex subject through a layered approach in a “top-down manner.” The text works its way from the application layer down toward the physical layer, motivating readers by exposing them to important concepts early in their study of networking. Focusing on the Internet and the fundamentally important issues of networking, this text provides an excellent foundation for readers interested in computer science and electrical engineering, without requiring extensive knowledge of programming or mathematics. The Seventh Edition has been updated to reflect the most important and exciting recent advances in networking.",
     cover: "assets/images/thumbnails/networks-cover-3.avif",
   },
   {
     id: 4,
     title: "Cybersecurity Essentials",
     author: "Charles J. Brooks et al.",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "beginner",
     available: true,
     featured: true,
     description:
-      "A foundational introduction to cybersecurity concepts, including encryption, authentication, threats, vulnerabilities, network defense, and best practices.",
+      "Cybersecurity Essentials provides a comprehensive introduction to the field, with expert coverage of essential topics required for entry-level cybersecurity certifications. An effective defense consists of four distinct challenges: securing the infrastructure, securing devices, securing local networks, and securing the perimeter. Overcoming these challenges requires a detailed understanding of the concepts and practices within each realm. This book covers each challenge individually for greater depth of information, with real-world scenarios that show what vulnerabilities look like in everyday computing scenarios. Each part concludes with a summary of key concepts, review questions, and hands-on exercises, allowing you to test your understanding while exercising your new critical skills. Cybersecurity jobs range from basic configuration to advanced systems analysis and defense assessment. This book provides the foundational information you need to understand the basics of the field, identify your place within it, and start down the security certification path.",
     cover: "assets/images/thumbnails/cybersec-cover-3.jpg",
   },
   {
@@ -92,7 +92,7 @@ const BOOKS = [
     available: true,
     featured: false,
     description:
-      "Best practices for writing readable, maintainable code with real examples and design principles.",
+      "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way. Noted software expert Robert C. Martin presents a revolutionary paradigm with Clean Code: A Handbook of Agile Software Craftsmanship. Martin has teamed up with his colleagues from Object Mentor to distill their best agile practice of cleaning code 'on the fly' into a book that will instill within you the values of a software craftsman and make you a better programmer-but only if you work at it. What kind of work will you be doing? You'll be reading code-lots of code. And you will be challenged to think about what's right about that code, and what's wrong with it. More importantly, you will be challenged to reassess your professional values and your commitment to your craft. Clean Code is divided into three parts. The first describes the principles, patterns, and practices of writing clean code. The second part consists of several case studies of increasing complexity. Each case study is an exercise in cleaning up code-of transforming a code base that has some problems into one that is sound and efficient. The third part is the payoff: a single chapter containing a list of heuristics and 'smells' gathered while creating the case studies. The result is a knowledge base that describes the way we think when we write, read, and clean code. Readers will come away from this book understanding How to tell the difference between good and bad code How to write good code and how to transform bad code into good code How to create good names, good functions, good objects, and good classes How to format code for maximum readability How to implement complete error handling without obscuring code logic How to unit test and practice test-driven development This book is a must for any developer, software engineer, project manager, team lead, or systems analyst with an interest in producing better code.",
     cover: "assets/images/thumbnails/cover-28.jpg",
   },
   {
@@ -104,7 +104,7 @@ const BOOKS = [
     available: true,
     featured: false,
     description:
-      "Deep, practical guidance on writing robust, high-quality Java with modern patterns and pitfalls to avoid.",
+      "Since this Jolt-award winning classic was last updated in 2008, the Java programming environment has changed dramatically. Java 7 and Java 8 introduced new features and functions including, forEach() method in Iterable interface, default and static methods in Interfaces, Functional Interfaces and Lambda Expressions, Java Stream API for Bulk Data Operations on Collections, Java Time API, Collection API improvements, Concurrency API improvements, and Java IO improvements. In this new edition of Effective Java, Bloch explores new design patterns and language idioms that have been introduced since the second edition was released in 2008 shortly after Java SE6, including Lambda, streams, generics and collections, as well as selected Java 9 features. As in previous editions, each chapter consists of several 'items' presented in the form of a short, standalone essay that provides specific advice, insight into Java platform subtleties, and updated code examples. The comprehensive descriptions and explanations for each item illuminate what to do, what not to do, and why. Updated techniques and best practices on classic topics, including objects, classes, libraries, methods, and serialization How to avoid the traps and pitfalls of commonly misunderstood subtleties of the language Focus on the language and its most fundamental libraries: java.lang, java.util, and, to a lesser extent, java.util.concurrent and java.io",
     cover: "assets/images/thumbnails/cover-5.jpg",
   },
   {
@@ -116,7 +116,7 @@ const BOOKS = [
     available: true,
     featured: false,
     description:
-      "A comprehensive reference on algorithms, complexity, and data structures for strong CS foundations.",
+      "A new edition of the essential text and professional reference, with substantial new material on such topics as vEB trees, multithreaded algorithms, dynamic programming, and edge-based flow. Some books on algorithms are rigorous but incomplete; others cover masses of material but lack rigor. Introduction to Algorithms uniquely combines rigor and comprehensiveness. The book covers a broad range of algorithms in depth, yet makes their design and analysis accessible to all levels of readers. Each chapter is relatively self-contained and can be used as a unit of study. The algorithms are described in English and in a pseudocode designed to be readable by anyone who has done a little programming. The explanations have been kept elementary without sacrificing depth of coverage or mathematical rigor. The first edition became a widely used text in universities worldwide as well as the standard reference for professionals. The second edition featured new chapters on the role of algorithms, probabilistic analysis and randomized algorithms, and linear programming. The third edition has been revised and updated throughout. It includes two completely new chapters, on van Emde Boas trees and multithreaded algorithms, substantial additions to the chapter on recurrence (now called 'Divide-and-Conquer'), and an appendix on matrices. It features improved treatment of dynamic programming and greedy algorithms and a new notion of edge-based flow in the material on flow networks. Many new exercises and problems have been added for this edition. The international paperback edition is no longer available; the hardcover is available worldwide.",
     cover: "assets/images/thumbnails/js-cover-3.jpg",
   },
   {
@@ -128,7 +128,7 @@ const BOOKS = [
     available: true,
     featured: true,
     description:
-      "Classic, detailed coverage of network architectures, protocols, and real-world communication models.",
+      "Unique among computer networking texts, the 8th Edition of the popular Computer Networking: A Top Down Approach builds on the authors’ long tradition of teaching this complex subject through a layered approach in a “top-down manner.” The text works its way from the application layer down toward the physical layer, motivating students by exposing them to important concepts early in their study of networking. Focusing on the Internet and the fundamentally important issues of networking, this text provides an excellent foundation for students in computer science and electrical engineering, without requiring extensive knowledge of programming or mathematics. The 8th Edition has been updated to reflect the most important and exciting recent advances in networking, including the importance of software-defined networking (SDN) and the rapid adoption of 4G/5G networks and the mobile applications they enable.",
     cover: "assets/images/thumbnails/networks-cover-4.jpg",
   },
   {
@@ -147,7 +147,7 @@ const BOOKS = [
     id: 13,
     title: "The Web Application Hacker's Handbook",
     author: "Dafydd Stuttard, Marcus Pinto",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "advanced",
     available: false,
     featured: false,
@@ -159,7 +159,7 @@ const BOOKS = [
     id: 14,
     title: "Practical Malware Analysis",
     author: "Michael Sikorski, Andrew Honig",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "advanced",
     available: true,
     featured: false,
@@ -218,26 +218,26 @@ const BOOKS = [
   },
   {
     id: 19,
-    title: "Artificial Intelligence",
+    title: "A Mind for Numbers: How to Excel at Math and Science",
     author: "Barbara Oakley",
     category: "ai",
     difficulty: "beginner",
     available: true,
     featured: false,
     description:
-      "Practical study techniques for mastering technical subjects. Great for exam prep, building routines, and improving retention across programming, networks, security, and databases.",
+      "A practical guide to learning challenging technical subjects. Covers effective study habits, avoiding procrastination, building problem-solving intuition, and improving long-term retention—great for CS and engineering students.",
     cover: "assets/images/thumbnails/cat-ai-cover.jpeg",
   },
   {
     id: 20,
-    title: "Artificial Intelligence 2",
-    author: "Barbara Bakley",
+    title: "Artificial Intelligence: A Modern Approach",
+    author: "Norvig & Russell",
     category: "ai",
     difficulty: "beginner",
     available: true,
     featured: false,
     description:
-      "Practical study techniques for mastering technical subjects. Great for exam prep, building routines, and improving retention across programming, networks, security, and databases.",
+      "A comprehensive introduction to AI fundamentals, covering intelligent agents, search and planning, knowledge representation, probabilistic reasoning, machine learning, and ethical considerations. Widely used as a core textbook with clear examples and exercises.",
     cover: "assets/images/thumbnails/cover-13.jpg",
   },
 ];

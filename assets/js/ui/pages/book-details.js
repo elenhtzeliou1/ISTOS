@@ -1,3 +1,4 @@
+//book-details page
 (function () {
   function init() {
       if(typeof BOOKS === "undefined"){

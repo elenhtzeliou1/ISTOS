@@ -1,3 +1,4 @@
+// footer accordion function
 (function () {
   function renderFooterCategories(root) {
     if (typeof CATEGORIES === "undefined") return;

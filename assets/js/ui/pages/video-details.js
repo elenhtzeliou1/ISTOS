@@ -1,3 +1,4 @@
+//video-details.html page
 (function () {
   function init() {
     if (typeof VIDEOS === "undefined") {

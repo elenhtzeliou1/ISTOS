@@ -50,7 +50,7 @@ const VIDEOS = [
   {
     id: 5,
     title: "Cybersecurity: Common Attacks You Must Know",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "beginner",
     featured: false,
     description:

@@ -1,3 +1,4 @@
+//course-details.html page
 (function () {
   function escapeHTML(v) {
     return String(v ?? "")
@@ -33,6 +34,9 @@
     const confirmBtn = document.getElementById("confirmSubscribeBtn");
     const subscribeBtn = document.getElementById("subscribeNowBtn");
 
+    const cancelBtn =
+      modal?.querySelector(".modal__actions [data-close]") || null;
+
     let lastFocus = null;
 
     const openModal = ({ title, desc, mode, buttonText }) => {
@@ -49,16 +53,27 @@
       descModal.textContent = desc || "";
       confirmBtn.textContent = buttonText || "Close";
 
+      // Only show Cancel on confirm mode; hide it on info/lesson modes
+      if (cancelBtn) {
+        const m = modal.dataset.mode;
+        const showCancel = m === "subscribe-confirm";
+        cancelBtn.style.display = showCancel ? "" : "none";
+      }
+
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       confirmBtn.focus();
     };
 
-    const closeModal = () => {
+     const closeModal = () => {
       if (!modal) return;
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       modal.dataset.mode = "info";
+
+      // reset Cancel visibility for th next time
+      if (cancelBtn) cancelBtn.style.display = "";
+
       lastFocus?.focus?.();
     };
 
@@ -89,7 +104,7 @@
           return;
         }
 
-        // lesson/info mode 
+        // lesson/info mode
         closeModal();
       });
     }
@@ -172,7 +187,7 @@
       window.CardCarouselDrag?.init?.(".course-model-slider");
     }
 
-    // ✅ Start Learning → modal (bind AFTER HTML injected)
+    // Start Learning -> modal (bind AFTER HTML injected)
     if (sectionWrapper && sectionWrapper.dataset.lessonModalBound !== "1") {
       sectionWrapper.dataset.lessonModalBound = "1";
 
@@ -302,7 +317,9 @@
         }
 
         const questionSpan = item.querySelector(".course-span");
-        const answerParagraph = item.querySelector(".accordion-panel-inner.qst p");
+        const answerParagraph = item.querySelector(
+          ".accordion-panel-inner.qst p"
+        );
 
         if (questionSpan) questionSpan.textContent = qa.question;
         if (answerParagraph) answerParagraph.textContent = qa.answer;

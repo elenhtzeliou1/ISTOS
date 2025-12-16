@@ -534,7 +534,7 @@ const COURSES = [
   {
     id: "cybersecurity-essentials",
     title: "Cybersecurity Essentials",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "intermediate",
     available: true,
     featured: true,
@@ -662,7 +662,7 @@ const COURSES = [
   {
     id: "secure-coding",
     title: "Secure Coding Fundamentals",
-    category: "security",
+    category: "cybersecurity",
     difficulty: "intermediate",
     available: true,
     featured: true,

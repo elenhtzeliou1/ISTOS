@@ -1,3 +1,4 @@
+// proteinomena courses carousel
 (function () {
   class DraggingEvent {
     constructor(target = undefined) {

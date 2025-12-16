@@ -1,4 +1,4 @@
-// assets/js/ui/common/intro-slider.js
+// intro-slider (ring carousel)
 (function () {
   function init() {
     const slider = document.querySelector(".intro-slider");

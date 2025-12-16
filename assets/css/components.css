@@ -1,3 +1,42 @@
+/* INTRO PAGE*/
+.index-page-intro{
+  height: auto;
+  width: 100%;
+  padding: var(--padding-big) var(--padding-avg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap-mid);
+  text-align: center;
+  margin: auto;
+}
+.index-page-exercise-row{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: var(--gap); 
+}
+.index-page-exercise-row a{
+  background-color: var(--green);
+  color: black;
+  border: none;
+  font-weight: 500;
+}
+.index-page-exercise-row a:hover{
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+.index-page-exercise-row h2{
+  font-size: 18px;
+  font-weight: 200;
+}
+/* END INTRO PAGE*/
+
+/* main content starts*/
+
 nav {
   background-color: black;
   padding: 15px 10px;
@@ -1519,7 +1558,7 @@ nav.mobile-open .nav-link-menu {
 
 
 .course-desc-sticky-container {
-  height: 65vh;
+  height: 45vh;
   width: 100%;
   position: sticky;
   top: var(--padding-lrg);
@@ -1527,7 +1566,7 @@ nav.mobile-open .nav-link-menu {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: var(--padding-avg) var(--padding-sm);
+  padding: var(--padding) var(--padding-sm) var(--padding-avg);
   text-align: center;
   gap: var(--gap);
 
@@ -1998,6 +2037,7 @@ nav.mobile-open .nav-link-menu {
 
 .course-intro-info .tag-row {
   justify-content: flex-start;
+  padding: 0;
 }
 
 .course-intro-info>h3 {

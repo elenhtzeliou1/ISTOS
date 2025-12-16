@@ -1,3 +1,4 @@
+// handling register form logic
 (function () {
   function init() {
     const form = document.getElementById("register-form");

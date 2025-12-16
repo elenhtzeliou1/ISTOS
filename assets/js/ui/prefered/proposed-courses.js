@@ -1,3 +1,4 @@
+// ta proteinomena courses pou emfanizontai sto index.html aki sthn arxi tou courses.html
 (function () {
   function init() {
     const carousel = document.getElementById("proposed-courses-carousel");

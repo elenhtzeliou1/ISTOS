@@ -368,7 +368,6 @@
         top: calc(var(--goal-card-height-tablet)/10);
         display: flex;
         align-items: stretch;
-        background-color: seagreen;
     }
 
     .goal-item {
@@ -559,7 +558,6 @@
     }
 
     .team-project-main-dsc {
-        background-color: sandybrown;
         flex-direction: row-reverse;
     }
 
@@ -1949,7 +1947,6 @@
     .card-carousel .card {
         width: var(--book-card-spec-laptop);
         flex: 0 0 var(--book-card-spec-laptop);
-        background-color: cadetblue;
         gap: var(--gap-t);
         padding-top: var(--padding);
     }

@@ -1,4 +1,4 @@
-//books-filter-page
+//books-filter-page (books.html)
 (function () {
   function init() {
     if (window.FilterUI) {
@@ -128,14 +128,16 @@
       renderBooks(filtered);
     }
 
-    renderBooks(BOOKS);
+   // Render based on current checkbox state (works on first load too)
+    requestAnimationFrame(applyFilters);
 
-    categoryCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
-    );
-    difficultyCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
-    );
+    // Re-apply filters when coming back via browser back/forward cache
+    window.addEventListener("pageshow", () => {
+      requestAnimationFrame(applyFilters);
+    });
+
+    categoryCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
+    difficultyCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
     availabilityFilter?.addEventListener("change", applyFilters);
   }
 

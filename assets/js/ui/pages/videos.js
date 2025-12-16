@@ -151,17 +151,17 @@
       renderVideos(filtered);
     }
 
-    // Bind filter events
-    categoryCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
-    );
-    difficultyCheckboxes.forEach((cb) =>
-      cb.addEventListener("change", applyFilters)
-    );
+     categoryCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
+    difficultyCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
     availabilityFilter?.addEventListener("change", applyFilters);
 
-    // Initial render
-    renderVideos(VIDEOS);
+    // Initial render based on current checkbox state
+    requestAnimationFrame(applyFilters);
+
+    //When returning via Back/Forward cache, re-sync the list with checkbox state
+    window.addEventListener("pageshow", () => {
+      requestAnimationFrame(applyFilters);
+    });
   }
 
   window.VideosPage = { init };
