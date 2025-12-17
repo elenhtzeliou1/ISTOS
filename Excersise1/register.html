@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfoHub | Register</title>
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="register-page-active">
+    <nav id="site-nav"></nav>
+
+    <main class="register-container">
+      <h1>Create Your Account</h1>
+      <p>Join our learning community and start your journey today.</p>
+
+      <form id="register-form" class="register-form">
+        <!-- USER INFORMATION -->
+
+        <div class="from-row">
+          <div class="form-column">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" required />
+          </div>
+          <div class="form-column">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" required />
+          </div>
+        </div>
+
+        <div class="form-column">
+          <label for="userName">Username</label>
+          <input type="text" id="userName" required />
+        </div>
+
+        <div class="form-column">
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+        </div>
+
+        <div class="form-column">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" required />
+        </div>
+
+        <!-- ACCOUNT DETAILS -->
+
+        <div class="from-row">
+          <div class="form-column">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              required
+              pattern="(?=.*[A-Za-z])(?=.*[0-9]).{6,}"
+              title="Must contain at least 6 characters, one letter, and one number."
+            />
+          </div>
+          <div class="form-column">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" required />
+          </div>
+        </div>
+
+        <!-- LEARNING PREFERENCES -->
+
+        <div class="form-column">
+          <label for="interest">Choose Category</label>
+
+          <select id="interest" required>
+            <option value="" disabled selected>Preferred Category</option>
+            <option value="programming">Programming</option>
+            <option value="networks">Networks</option>
+            <option value="security">Cybersecurity</option>
+            <option value="databases">Databases</option>
+            <option value="web-dev">Web Development</option>
+            <option value="ai">Artificial Intelligence</option>
+          </select>
+        </div>
+
+        <div class="form-column">
+          <label for="level">Experience level</label>
+
+          <select id="level" required>
+            <option value="" disabled selected>Experience Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div class="form-column">
+          <fieldset class="goals-fieldset">
+            <label for="goal" class="goal-label">You Goal is:</label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="exam-prep" required />
+              Exam preparation (structured revision)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="portfolio" required />
+              Build a portfolio (projects & practice)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="career" required />
+              Career growth (job-ready skills)
+            </label>
+
+            <label class="radio-row">
+              <input type="radio" name="goal" value="curiosity" required />
+              Learn out of curiosity (explore topics)
+            </label>
+          </fieldset>
+        </div>
+
+        <div class="form-column last">
+          <input type="checkbox" id="newsletter" />
+          <label> Receive course recommendations</label>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+    </main>
+
+    <!-- SUMMARY POPUP 
+    <div id="summary-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span id="summary-close" class="modal-close">&times;</span>
+
+        <h2>Review Your Information</h2>
+        <div id="summary-content" class="modal-body"></div>
+
+        <button id="final-submit" class="modal-enroll-btn">
+          Confirm Registration
+        </button>
+      </div>
+    </div>-->
+
+    <!--Footer -->
+    <footer id="site-footer"></footer>
+    <!--Used scripts-->
+    <script src="assets/js/ui/common/shared-layout.js"></script>
+    <script src="assets/js/ui/common/modal.js"></script>
+    <script src="assets/js/forms/register-form.js"></script>
+
+    <script src="assets/js/data/categories.js"></script>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
