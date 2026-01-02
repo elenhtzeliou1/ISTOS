@@ -1281,6 +1281,7 @@ nav.mobile-open .nav-link-menu {
   position: relative;
   z-index: 4;
 }
+
 /*intro carousel categories.html */
 
 .carousel-proposed-video-wrapper {
@@ -1404,7 +1405,7 @@ nav.mobile-open .nav-link-menu {
 .courses-desc-wrapper {
   border-top: 1px solid var(--nav-bottom);
   width: 100%;
-  padding: var(--padding-big) 0 ;
+  padding: var(--padding-big) 0;
   height: auto;
   display: flex;
   align-items: center;
@@ -1504,7 +1505,7 @@ nav.mobile-open .nav-link-menu {
   height: 40vh;
   width: 100%;
   margin: auto;
-  border-radius: var( --border-radius-m);
+  border-radius: var(--border-radius-m);
   overflow: hidden;
 }
 
@@ -1550,7 +1551,7 @@ nav.mobile-open .nav-link-menu {
 /*sticky container*/
 .course-desc-sticky-wrapper {
   width: 100%;
-  height:auto;
+  height: auto;
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1560,7 +1561,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 .course-desc-sticky-container {
-  height:auto;
+  height: auto;
   width: 100%;
 
   top: var(--padding-lrg);
@@ -1598,9 +1599,11 @@ nav.mobile-open .nav-link-menu {
 .course-desc-sticky-container>p {
   font-size: 14px;
 }
-.q-question{
+
+.q-question {
   font-size: 16px;
 }
+
 .vid-wrp {
   height: 16vh;
   flex: 0 0 16vh;
@@ -2112,7 +2115,7 @@ nav.mobile-open .nav-link-menu {
 /*register.html*/
 .register-container {
   max-width: var(--max-width);
-  padding: var(--padding-big) var(--padding-avg);
+  padding: var(--padding-big) var(--padding-avg) var(--padding);
   height: auto;
   margin: auto;
   display: flex;
@@ -2211,6 +2214,10 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+.goals-fieldset .goal-label {
+  padding-bottom: var(--padding-sm);
+}
+
 .radio-row {
   display: flex;
   align-items: center;
@@ -2306,7 +2313,62 @@ nav.mobile-open .nav-link-menu {
 /*register modal content*/
 
 
+.enrollments-panel {
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 0 var(--padding-sm) var(--padding);
+}
+
+.enrollments-panel ul {
+  height: auto;
+  width: 100%;
+  display: grid;
+  align-items: flex-start;
+  justify-content: flex-start;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.enrollments-panel ul li {
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--gap-sm);
+  padding: var(--padding-sm) 0;
+  border-top: 1px solid var(--border-top-gr);
+  color: white;
+}
+
+.enrollments-panel ul li small {
+  color: rgb(182, 182, 182);
+}
+
+.enrollments-panel ul li a {
+  width: auto;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding-left: 0;
+  padding-bottom: 0;
+  border-bottom: 1px solid black;
+}
+
+.enrollments-panel ul li a:hover {
+  border-bottom: 1px solid white;
+  transition: 0.2s ease;
+}
+
 /*======================*/
+
 /*books.html*/
 .course-product.book {
   padding-bottom: 0;
@@ -2790,6 +2852,181 @@ nav.mobile-open .nav-link-menu {
   background: var(--green);
   color: #000;
 }
+
+/* reviews section */
+
+.reviews-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap);
+  padding: var(--padding) var(--padding-sm);
+}
+
+.reviews-section h1 {
+  color: black;
+}
+
+.overall-rating-wrapper {
+  height: auto;
+  background-color: var(--review-card);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-avg) var(--padding-sm);
+  justify-content: center;
+  width: 100%;
+  border-radius: var(--border-radious);
+}
+
+.overall-rating-wrapper .empty-state {
+  color: black;
+}
+
+.overall-rating {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.overall-rating h2 {
+  color: black;
+}
+
+.overall-rating__value {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-sm);
+}
+
+.overall-rating__value strong {
+  font-size: 18px;
+}
+
+.overall-rating__count {
+  font-size: 16px;
+  color: black;
+}
+
+.ratings-wrapper {
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--gap);
+
+}
+
+.ratings-wrapper .empty-state {
+  color: black;
+}
+
+.rating-item {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-avg) var(--padding-sm);
+  justify-content: center;
+  background-color: var(--review-card);
+  border-radius: var(--border-radious);
+  gap: var(--gap-sm);
+}
+
+.rating-item h2 {
+  color: black;
+}
+
+.rating-item p {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.stars {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stars .fa-solid.fa-star {
+  color: rgb(230, 195, 0);
+  font-size: 16px;
+}
+
+#review-form[hidden] {
+  display: none !important;
+}
+
+.review-form-section {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex;
+  gap: var(--gap);
+  padding: var(--padding) var(--padding-sm);
+}
+
+.review-form-section h1 {
+  color: black;
+}
+
+.review-gate {
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.review-gate p {
+  color: black;
+}
+
+.review-gate a {
+  background-color: black;
+  color: white;
+}
+
+.review-form-section .review-form {
+  width: 100%;
+  gap: var(--gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-form-section .review-form .form-column label {
+  font-size: 18px;
+}
+
+.review-form-section .review-form .form-column textarea {
+  border-radius: var(--border-radious);
+  font-size: 16px;
+}
+
+.review-form-section .review-form .submit-btn {
+  color: white;
+  background-color: var(--card-color);
+}
+
 
 /*====================*/
 /*====================*/

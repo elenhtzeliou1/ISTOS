@@ -1,0 +1,132 @@
+<header class="video-header">
+    <h1>Video Collections</h1>
+    <p>
+        Browse curated videos across Programming, Networks, Databases, Web
+        Development, AI, and Cybersecurity. Use filters to find videos by topic
+        and level. Open your desired video, view its details and start learning
+        at your own pace.
+    </p>
+    <div class="tag-row">
+        <div class="tag">New Videos</div>
+        <div class="tag">added</div>
+        <div class="tag">every week</div>
+    </div>
+</header>
+
+<section class="videos-page">
+    <div class="filter-button-results-wrapper">
+        <span class="results-count">
+            Videos ({{ filteredVideos.length }})
+        </span>
+        <button id="filter-toggle" class="filter-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-filter"
+                viewBox="0 0 16 16">
+                <path
+                    d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
+            </svg>
+            Filters
+        </button>
+
+        <button id="toggle-filter-menu" class="toggle-filter-menu">
+            Hide Filters
+        </button>
+    </div>
+
+    <div id="filter-backdrop" class="filter-backdrop"></div>
+
+    <div class="course-layout">
+        <aside class="filter-sidebar">
+            <div class="filters-header">
+                <h2>Filters</h2>
+                <i class="fa-solid fa-x" id="filter-close"></i>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="filter-box">
+                <span>Category</span>
+
+                <div class="checkbox-wrapper" *ngFor="let cat of categoryOptions">
+                    <input class="inp-cbx" [id]="'cat-' + cat.value" type="checkbox" [value]="cat.value"
+                        (change)="onCategoryChange(cat.value, $event)" />
+                    <label class="cbx" [for]="'cat-' + cat.value">
+                        <span>
+                            <svg width="12" height="10" viewBox="0 0 12 10">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <p>{{ cat.label }}</p>
+                    </label>
+                </div>
+            </div>
+
+            <!-- DIFFICULTY -->
+            <div class="filter-box">
+                <span>Difficulty</span>
+
+                <div class="checkbox-wrapper" *ngFor="let lvl of levelOptions">
+
+                    <input class="inp-cbx" [id]="'diff-' + lvl.value" type="checkbox" [value]="lvl.value"
+                        (change)="onLevelChange(lvl.value, $event)" />
+                    <label class="cbx" [for]="'diff-' + lvl.value">
+                        <span>
+                            <svg width="12" height="10" viewBox="0 0 12 10">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <p>{{ lvl.label }}</p>
+                    </label>
+                </div>
+            </div>
+
+            <!-- AVAILABLE -->
+            <div class="filter-box">
+                <div class="checkbox-wrapper">
+                    <input class="inp-cbx" id="filter-available" type="checkbox" (change)="onAvailableChange($event)" />
+                    <label class="cbx" for="filter-available">
+                        <span>
+                            <svg width="12" height="10" viewBox="0 0 12 10">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                        </span>
+                        <p>Only available</p>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <div class="course-grid videos" id="video-list" #videoList>
+
+
+            <p *ngIf="loading">Loading...</p>
+            <p *ngIf="error">{{ error }}</p>
+
+            <a class="new-box" *ngFor="let video of filteredVideos; trackBy: trackById" 
+                [routerLink]="['/video-details', video._id]">
+                <div class="new-box-header">
+                    <div class="tag-row">
+                        <span class="tag" [ngClass]="video.available ? 'available' : 'unavailable'">
+                            {{ video.available ? 'Available' : 'Unavailable' }}
+                        </span>
+                        <span class="tag category">{{ video.category }}</span>
+                        <span class="tag category">{{ video.difficulty }}</span>
+                    </div>
+
+                    <h4>{{ video.title }}</h4>
+                    <h3>{{ sliceWords(video.description, 26) }}</h3>
+
+
+
+                </div>
+                <div class="new-box-content">
+                    <img [src]="video.cover" [alt]="video.title" draggable="false" />
+                </div>
+            </a>
+
+            <p *ngIf="!loading && !error && filteredVideos.length === 0" style="color:white;">
+                No videos found.
+            </p>
+        </div>
+
+
+    </div>
+</section>

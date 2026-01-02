@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const course = require('./course');
 
 const ReviewSchema = new mongoose.Schema(
     {
@@ -10,5 +9,8 @@ const ReviewSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+// one review per user per course
+ReviewSchema.index({user:1, course:1}, {unique:true});
 
 module.exports = mongoose.model('Review', ReviewSchema);

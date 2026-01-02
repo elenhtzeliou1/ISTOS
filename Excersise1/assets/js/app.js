@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   window.Layout?.init?.();
+  window.Modals?.init?.();
+
   window.CategoryUtils?.init?.();
 
   window.ResponsiveUI?.init?.();
@@ -17,12 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.BooksPage?.init?.();
   window.VideosPage?.init?.();
 
-
   window.BookDetailsPage?.init?.();
   window.CourseDetailsPage?.init?.();
   window.VideoDetailsPage?.init?.();
   window.CourseDetailResponsive?.init?.();
-
 
   window.PreferedBooksPage?.init?.();
   window.PreferedVideosPage?.init?.();
@@ -33,6 +32,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.CardCarouselDrag?.init?.();
   window.AccordionUI?.init?.();
 
-  window.Modals?.init?.();
   window.RegisterForm?.init?.();
 });

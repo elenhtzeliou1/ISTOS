@@ -1,0 +1,47 @@
+<nav [class.mobile-open]="mobileOpen">
+
+  <!-- TOP BAR -->
+  <div class="nav-top">
+    <!-- MOBILE MENU ICON -->
+    <div class="nav-menu" (click)="toggleMenu()" [class.active]="mobileOpen">
+      <div class="menu-bars">
+        <div class="menu-line" id="line1"></div>
+        <div class="menu-line" id="line2"></div>
+      </div>
+      <span class="menu-span">Menu</span>
+    </div>
+
+    <!-- LOGO -->
+    <h2 class="logo">
+      <a routerLink="/">InfoHub</a>
+    </h2>
+
+    <!-- SIGN UP / PROFILE BUTTON -->
+    <!-- Not logged in -->
+    <a *ngIf="!auth.isLoggedIn" routerLink="/register" (click)="closeMenu()">Register</a>
+
+    <!-- Logged in -->
+    <a *ngIf="auth.isLoggedIn" routerLink="/register" (click)="closeMenu()">Profile</a>
+
+  </div>
+
+  <!-- EXPANDABLE MENU (DESKTOP + MOBILE) -->
+  <div class="nav-link-menu" [class.mobile-open]="mobileOpen">
+    <div class="group-link">
+      <span>Explore</span>
+      <a class="menu" routerLink="/categories">Categories</a>
+      <a class="menu" routerLink="/courses">Courses</a>
+    </div>
+
+    <div class="group-link">
+      <span>Resources</span>
+      <a class="menu" routerLink="/books">Book List</a>
+      <a class="menu" routerLink="/videos">Video List</a>
+    </div>
+
+    <div class="group-link">
+      <span>About Us</span>
+      <a class="menu" routerLink="/team">Team</a>
+    </div>
+  </div>
+</nav>

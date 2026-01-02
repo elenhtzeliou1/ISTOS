@@ -227,8 +227,6 @@
         <a href="#" id="subscribeNowBtn">Subscribe Now</a>
       </div>
     </div>
-    <!--Footer -->
-    <footer id="site-footer"></footer>
 
     <div class="modal" id="subscribeModal" aria-hidden="true">
       <div class="modal__backdrop" data-close></div>
@@ -256,6 +254,49 @@
       </div>
     </div>
 
+    <section class="reviews-section" id="reviews-section">
+      <h1>Reviews</h1>
+      <div class="overall-rating-wrapper"><!--overall rating--></div>
+
+      <div class="ratings-wrapper">
+        <!-- reviews will be displayed here via js-->
+      </div>
+    </section>
+
+    
+    <section class="review-form-section">
+      <h1>Leave Your Review</h1>
+      <!-- This thing shows messages depending on user state -->
+      <div id="review-gate" class="review-gate"></div>
+
+      <!-- This form is only shown if (registered + enrolled) -->
+      <form id="review-form" class="review-form" hidden>
+        <div class="form-column">
+          <label for="review-rating">Rating</label>
+          <select id="review-rating" required>
+            <option value="" disabled selected>Select rating</option>
+            <option value="5">5 - Excellent</option>
+            <option value="4">4 - Very good</option>
+            <option value="3">3 - Good</option>
+            <option value="2">2 - Ok</option>
+            <option value="1">1 - Bad</option>
+          </select>
+        </div>
+
+        <div class="form-column">
+          <label for="review-comment">Comment</label>
+          <textarea id="review-comment" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="review-submit">
+          Submit review
+        </button>
+      </form>
+    </section>
+
+    <!--Footer -->
+    <footer id="site-footer"></footer>
+
     <!--Used scripts-->
 
     <script src="assets/js/ui/common/shared-layout.js"></script>
@@ -268,6 +309,9 @@
     <script src="assets/js/data/categories.js"></script>
 
     <script src="assets/js/data/courses.js"></script>
+
+    <script src="assets/js/data/reviews.js"></script>
+    <script src="assets/js/ui/pages/reviews.js"></script>
 
     <script src="assets/js/ui/pages/course-details.js"></script>
 

@@ -18,7 +18,7 @@
   </h2>
 
   <!-- SIGN UP BUTTON -->
-  <a href="register.html">Register</a>
+ <a href="register.html" id="account-link">Register</a>
 </div>
 
 <!-- EXPANDABLE MENU (DESKTOP + MOBILE) -->
@@ -48,7 +48,7 @@
 <div class="footer-box">
   <div class="footer__reg">
     <h2>Join E-learning today</h2>
-    <a href="register.html">Register</a>
+   <a href="register.html" id="footer-account-link">Register</a>
   </div>
 </div>
 
@@ -101,6 +101,22 @@
 
 
 `;
+
+  function refreshAccountUI() {
+    const activeId = localStorage.getItem("ih_activeUserId");
+    const accountLink = document.getElementById("account-link");
+    const footerLink = document.getElementById("footer-account-link");
+
+    const isActive = !!activeId;
+
+    if (accountLink)
+      accountLink.textContent = isActive ? "Profile" : "Register";
+    if (footerLink) footerLink.textContent = isActive ? "Profile" : "Register";
+
+    // same URL is fine: register.html becomes profile editor when active user exists
+    if (accountLink) accountLink.href = "register.html";
+    if (footerLink) footerLink.href = "register.html";
+  }
 
   function initNav(navRoot) {
     if (!navRoot || navRoot.dataset.navBound === "1") return;
@@ -158,7 +174,7 @@
       });
     });
 
-    // fill categories list 
+    // fill categories list
     const list = footerRoot.querySelector("#footer-cat-list");
     if (list) {
       const fill = () => {
@@ -207,7 +223,9 @@
       footer.innerHTML = FOOTER_HTML;
       initFooter(footer);
     }
+    refreshAccountUI();
+
   }
 
-  window.Layout = { init };
+  window.Layout = { init,refreshAccountUI  };
 })();

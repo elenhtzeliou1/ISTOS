@@ -1,0 +1,146 @@
+<header class="intro-container categories">
+  <div class="title-container categories">
+    <h1>All Course Categories in One Place</h1>
+    <p>
+      Explore our core Informatics areas—Programming, Web Development, Databases,
+      Networks, Cybersecurity, and Artificial Intelligence—and choose the learning
+      path that matches your goals and level.
+    </p>
+  </div>
+
+  <div class="learning-goals-container">
+    <div class="goal-slider" id="categories-header-preview">
+      <a
+        class="goal-item"
+        *ngFor="let cat of categories; let i = index; trackBy: trackByMongoId"
+        [attr.href]="'#' + cat.slug"
+        [ngStyle]="goalItemStyle(i)"
+        draggable="false"
+      >
+        <span>{{ pad2(i + 1) }}</span>
+        <h5>{{ cat.title }}</h5>
+        <p>{{ shortText(cat.description, 100) }}</p>
+
+        <div class="goal-item__bg_img_wrapper">
+          <img [src]="cat.cover" [alt]="cat.title" draggable="false" />
+        </div>
+      </a>
+    </div>
+
+    <div class="controll-btn-row">
+      <div class="slider-cursor-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+
+      <div class="slider-cursor-btn">
+        <i class="fa-solid fa-arrow-right"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="categories-main-content" id="categories-full">
+  <p *ngIf="loading" style="color:white;">Loading...</p>
+  <p *ngIf="error" style="color:white;">{{ error }}</p>
+
+  <section
+    class="courses-desc-wrapper"
+    *ngFor="let cat of categories; trackBy: trackByMongoId"
+    [id]="cat.slug"
+  >
+    <div class="course-desc-header">
+      <h1>{{ cat.title }}</h1>
+      <p>{{ cat.description }}</p>
+    </div>
+
+    <div class="course-desc-main-wrap">
+      <div class="course-desc-box-wrap">
+        <div class="tag-row">
+          <div class="tag" *ngFor="let lab of cat.label_list">
+            <p>{{ lab.label }}</p>
+          </div>
+        </div>
+
+        <div class="course-desc-info-main-wrapper">
+          <div class="course-info-container-box" *ngFor="let inf of cat.info_list">
+            <p>{{ inf.info }}</p>
+          </div>
+
+          <div class="course-dsc-btn-wrp">
+            <a [routerLink]="['/courses']" [queryParams]="{ category: cat.slug }">
+              View Courses
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-desc-box-wrap">
+        <div class="round-container">
+          <img [src]="cat.cover" [alt]="cat.title" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <ng-container *ngIf="recommendations[cat.slug] as rec">
+      <ng-container *ngIf="rec.course || (rec.books && rec.books.length)">
+        <div class="start">
+          <h1>Where to start</h1>
+          <p>
+            Start with one recommended course and two books tailored to
+            {{ cat.title }}.
+          </p>
+        </div>
+
+        <div class="course-desc-sticky-wrapper">
+          <!-- COURSE CARD -->
+          <a
+            *ngIf="rec.course as course"
+            class="course-desc-sticky-container"
+            [routerLink]="['/courses', course._id]"
+          >
+            <div class="tag-row">
+              <div class="tag">Course</div>
+              <div class="tag">{{ course.available ? 'Available' : 'Coming soon' }}</div>
+              <div class="tag">{{ course.difficulty || 'All levels' }}</div>
+            </div>
+
+            <h1>{{ course.title }}</h1>
+            <p>{{ sliceWords(course.description, 26) }}</p>
+
+            <div class="vid-wrp questions-wrapper">
+              <ul class="qa-list" *ngIf="course.questions?.length; else noQs">
+                <li class="q-item" *ngFor="let q of (course.questions | slice:0:2)">
+                  <p class="q-question">{{ q.question }}</p>
+                </li>
+              </ul>
+              <ng-template #noQs>
+                <div class="vid-placeholder"></div>
+              </ng-template>
+            </div>
+          </a>
+
+          <!-- BOOK CARDS -->
+          <a
+            class="course-desc-sticky-container"
+            *ngFor="let b of rec.books; trackBy: trackByMongoId"
+            [routerLink]="['/books', b._id]"
+          >
+            <div class="tag-row">
+              <div class="tag">Book</div>
+              <div class="tag">{{ b.available ? 'Available' : 'Coming soon' }}</div>
+              <div class="tag">{{ b.difficulty || 'All levels' }}</div>
+            </div>
+
+            <h1>{{ b.title }}</h1>
+            <p>{{ sliceWords(b.description, 26) }}</p>
+
+            <div class="vid-wrp vid-book">
+              <img [src]="b.cover" [alt]="b.title" draggable="false" />
+            </div>
+          </a>
+        </div>
+      </ng-container>
+    </ng-container>
+  </section>
+</main>

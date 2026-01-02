@@ -1,0 +1,40 @@
+<div class="video-details-body-page">
+
+    <p *ngIf="loading">Loading...</p>
+    <p *ngIf="!loading && error">{{ error }}</p>
+
+    <ng-container *ngIf="!loading && !error && video as v">
+        <header class="vd__header">
+            <h1 id="vd__title">{{ v.title }}</h1>
+            <p id="vd__description">{{ v.description }}</p>
+        </header>
+
+        <main class="vd__main-content">
+            <div class="vd-content">
+
+                <iframe *ngIf="safeEmbedUrl; else openOnYoutube" id="vd-cover" class="vd-cover" title="Video player"
+                    loading="lazy" frameborder="0" [src]="safeEmbedUrl"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+                <ng-template #openOnYoutube>
+                    <p>
+                        Video link is invalid for embedding.
+                        <a [href]="v.youtubeUrl" target="_blank" rel="noopener">Open on YouTube</a>
+                    </p>
+                </ng-template>
+
+            </div>
+
+            <div class="vd-conent-bottom">
+                <div class="tag-row">
+                    <div class="tag" id="vd-category">{{ v.category }}</div>
+                    <div class="tag" id="vd-diff">{{ v.difficulty }}</div>
+                </div>
+            </div>
+        </main>
+
+    </ng-container>
+
+</div>

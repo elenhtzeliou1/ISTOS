@@ -354,6 +354,23 @@
         height: 100%;
     }
 
+    /* ratings course-details.html */
+    .ratings-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .enrollments-panel {
+        padding-left: var(--padding);
+        padding-right: var(--padding);
+    }
+
+    .enrollments-panel ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ratings course-details.html */
+
+
     /* course-details.html */
 
     /* learning goals updated */
@@ -1627,6 +1644,33 @@
         font-size: 20px;
     }
 
+    .reviews-section {
+        padding-left: var(--padding-big);
+        padding-right: var(--padding-big);
+
+    }
+
+    .ratings-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .review-form-section {
+        width: 50%;
+        padding-left: var(--padding-big);
+        padding-right: var(--padding-big);
+    }
+
+
+    .enrollments-panel {
+        padding-top: var(--padding);
+        padding-left: var(--padding);
+        padding-right: var(--padding);
+    }
+
+    .enrollments-panel ul {
+        grid-template-columns: repeat(3, 1fr);
+        grid-area: var(--gap-t);
+    }
 
 
     /*====================*/
