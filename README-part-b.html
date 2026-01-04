@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Part B &ndash; MEAN E-Learning Platform</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="part-b--mean-e-learning-platform">Part B – MEAN E-Learning Platform</h1>
+<p>This repository contains <strong>Part B</strong> of the Web Development project, extending <strong>Part A</strong>
+into a full <strong>client–server application</strong> following the <strong>MEAN architecture</strong>
+(MongoDB, Express, Angular/Modular JS, Node.js).</p>
+<p>The application implements a simple <strong>e-learning platform</strong>, where:</p>
+<ul>
+<li>the <strong>backend</strong> provides a REST API (Node.js + Express + MongoDB),</li>
+<li>the <strong>frontend</strong> consumes the API and renders dynamic content,</li>
+<li><strong>no HTML is served by the server</strong>, only JSON data.</li>
+</ul>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before running the project, ensure you have:</p>
+<ul>
+<li><strong>Node.js ≥ 18</strong></li>
+<li><strong>npm ≥ 9</strong></li>
+<li><strong>MongoDB</strong> (local installation or MongoDB Atlas)</li>
+</ul>
+<p>Verify installation:</p>
+<pre><code class="language-bash">node -v
+npm -v
+</code></pre>
+<hr>
+<h2 id="backend--server-setup">Backend – Server Setup</h2>
+<h3 id="1-navigate-to-the-server-folder">1) Navigate to the server folder</h3>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> part-b-mean/server
+</code></pre>
+<h3 id="2-install-dependencies">2) Install dependencies</h3>
+<pre><code class="language-bash">npm install
+</code></pre>
+<h3 id="3-environment-variables">3) Environment variables</h3>
+<p>Create a <code>.env</code> file and set your values (example):</p>
+<pre><code class="language-env">PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/elearning
+</code></pre>
+<blockquote>
+<p>If you use MongoDB Atlas, set <code>MONGODB_URI</code> to your Atlas connection string.</p>
+</blockquote>
+<hr>
+<h3 id="4-seed-the-database-initial-data">4) Seed the database (initial data)</h3>
+<p>The project includes seed scripts to populate the database with example data.</p>
+<pre><code class="language-bash">npm run seed:courses
+npm run seed:categories
+npm run seed:books
+npm run seed:reviews
+npm run seed:videos
+</code></pre>
+<p>(These commands insert sample courses and books into MongoDB.)</p>
+<hr>
+<h3 id="5-start-the-server">5) Start the server</h3>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<p>The server will run at:</p>
+<pre><code class="language-text">http://localhost:5000
+</code></pre>
+<hr>
+<h2 id="backend--available-api-endpoints">Backend – Available API Endpoints</h2>
+<blockquote>
+<p>The backend returns <strong>JSON</strong> and uses appropriate HTTP status codes (200/201/400/404/500).</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/api/courses</code></td>
+<td>Retrieve all courses</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/courses/:id</code></td>
+<td>Retrieve course details</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/users</code></td>
+<td>Register a new user</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/enrollments</code></td>
+<td>Enroll a user in a course</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/reviews</code></td>
+<td>Submit a course review</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="frontend--client-setup">Frontend – Client Setup</h2>
+<h3 id="1-navigate-to-the-client-folder">1) Navigate to the client folder</h3>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> part-b-mean/client
+</code></pre>
+<h3 id="2-install-dependencies-1">2) Install dependencies</h3>
+<pre><code class="language-bash">npm install
+</code></pre>
+<h3 id="3-start-the-client">3) Start the client</h3>
+<pre><code class="language-bash">npm start
+</code></pre>
+<p>The client will run at:</p>
+<pre><code class="language-text">http://localhost:4200
+</code></pre>
+<hr>
+<h2 id="clientserver-communication">Client–Server Communication</h2>
+<ul>
+<li>The frontend <strong>does not contain hardcoded data</strong> for entities stored in MongoDB.</li>
+<li>All dynamic content (courses list, course details, registration, enrollments, reviews) is handled via REST API calls.</li>
+<li>API requests are centralized in:</li>
+</ul>
+<pre><code class="language-text">client/src/app/services/api.service.ts
+</code></pre>
+<hr>
+<h2 id="application-flow-high-level">Application Flow (High Level)</h2>
+<ol>
+<li>User opens the frontend (client)</li>
+<li>Frontend requests data via REST API</li>
+<li>Server queries MongoDB</li>
+<li>Server returns JSON responses</li>
+<li>Frontend renders content dynamically</li>
+</ol>
+<hr>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li>Invalid requests return proper HTTP error codes (e.g., <code>400</code>, <code>404</code>)</li>
+<li>Client displays success or failure messages based on server responses</li>
+<li>Server includes centralized error handling middleware</li>
+</ul>
+<hr>
+
+            
+            
+        </body>
+        </html>
