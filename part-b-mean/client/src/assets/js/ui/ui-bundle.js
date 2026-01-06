@@ -1,0 +1,10 @@
+import './common/accordion-ui.js';
+import './common/card-carousel-drag.js';
+import './common/categories-intro-slider-height.js';
+import './common/intro-slider.js';
+import './common/categories-intro-slider.js';
+import './common/course-items-reveal.js';
+import './common/proposed-courses-carousel.js';
+import './common/reveal.js';
+//import './common/menu-filters.js';
+//import './common/modal.js';

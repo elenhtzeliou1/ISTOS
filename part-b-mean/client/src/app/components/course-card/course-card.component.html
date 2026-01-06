@@ -1,0 +1,27 @@
+<a
+  class="course-product"
+  [routerLink]="['/course-details', course._id]"
+  style="cursor: pointer"
+>
+  <div class="course-info">
+    <div class="course-intro-info">
+      <div class="tag-row">
+        <span class="tag" [ngClass]="course.available ? 'available' : 'unavailable'">
+          {{ course.available ? 'Available' : 'Unavailable' }}
+        </span>
+        <span class="tag category">{{ course.category }}</span>
+        <span class="tag category">{{ course.difficulty }}</span>
+      </div>
+
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.description }}</p>
+    </div>
+
+    <div class="course-faq" *ngIf="course.questions?.length">
+      <div class="course-faq-item" *ngFor="let q of course.questions | slice:0:2; let i = index">
+        <span class="course-faq-index">{{ (i + 1) | number:'2.0' }}</span>
+        <p>{{ q.question }}</p>
+      </div>
+    </div>
+  </div>
+</a>

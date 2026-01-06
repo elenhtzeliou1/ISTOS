@@ -1,0 +1,24 @@
+<a
+  class="course-product book"
+  style="cursor: pointer"
+  [routerLink]="['/book-details', book.bookId]"
+>
+  <div class="course-info">
+    <div class="course-intro-info">
+      <div class="tag-row">
+        <span class="tag" [ngClass]="book.available ? 'available' : 'unavailable'">
+          {{ availabilityLabel }}
+        </span>
+        <span class="tag category">{{ book.category }}</span>
+        <span class="tag category">{{ book.difficulty }}</span>
+      </div>
+
+      <h3>{{ book.title }}</h3>
+      <p>{{ sliceWords(book.description, 26) }}</p>
+    </div>
+
+    <div class="card-img-cont">
+      <img [src]="book.cover" [alt]="book.title" draggable="false" />
+    </div>
+  </div>
+</a>
