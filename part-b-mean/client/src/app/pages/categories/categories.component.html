@@ -97,7 +97,7 @@
           <a
             *ngIf="rec.course as course"
             class="course-desc-sticky-container"
-            [routerLink]="['/courses', course._id]"
+            [routerLink]="['/course-details', course._id]"
           >
             <div class="tag-row">
               <div class="tag">Course</div>
@@ -124,7 +124,7 @@
           <a
             class="course-desc-sticky-container"
             *ngFor="let b of rec.books; trackBy: trackByMongoId"
-            [routerLink]="['/books', b._id]"
+            [routerLink]="['/book-details', b._id]"
           >
             <div class="tag-row">
               <div class="tag">Book</div>

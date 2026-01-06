@@ -2,8 +2,8 @@
 Άνοιξτε πρώτα τον server (npm run dev στο server).
 Μετά τρέτξε τον client (npm run dev στο client).
 Αν δεν εμφανίζονται δεδομένα, έλεγξε ότι:
-    -έγινε seed (npm run seed:all)
-    -το MongoDB URI είναι σωστό στο server/.env
+    - έγινε seed (npm run seed:all)
+    - το MongoDB URI είναι σωστό στο server/.env
 
 
 ------------------------------------------------------------------------------------------------------
@@ -12,86 +12,139 @@
 # InfoHub — Part B (MEAN Client–Server)
 
 Στόχος του Part B είναι η μετάβαση από στατικό frontend (Part A) σε πλήρη client–server εφαρμογή:
-- Backend με Node.js + Express
-- MongoDB για αποθήκευση δεδομένων (Mongoose)
-- Client σε Angular που αντλεί δεδομένα μέσω REST API
-- Επικοινωνία Client ↔ Server μέσω endpoints `/api/...`
+- **MongoDB (mongoose)** : αποθήκευση δεδομένων (users, courses, books, videos, categories, enrollments, reviews)
+- **Express/Node.js**: REST API
+- **Angular + Vite**: η client εφαρμογή που αντλεί δεδομένα από το API
 
-------------------------------------------------------------------------------------------------------
+## Δομή φακέλων project
+- `server/` → Node/Express API + MongoDB (Mongoose)
+- `client/` → Angular (standalone components) + Vite dev server
 
-## Δομή Project
-- `server/` : Express API + MongoDB models + routes/controllers + seed scripts
-- `client/` : Angular app με pages + components + services (ApiService/AuthService)
+## Για γρήγορη εκκίνηση, ακολουθήστε τα παρακάτω βήματα:
 
-------------------------------------------------------------------------------------------------------
-
-## Γρήγορη Εκκίνηση 
-
-### Server
+### 1) Server
 ```bash
 cd server
 npm install
-# δημιουργία server/.env (δες .env.example)
+cp .env.example .env   # συμπληρώστε το .env με τα κατάλληλα στοιχεία -> δείτε .env.example
 npm run seed:all
 npm run dev
 
+Ο server τρέχει στο URL: http://localhost:5000
 
-Server URL: http://localhost:5000
 
-Client
+### 2)  Client
 cd client
 npm install
 npm run dev
 
-Client URL: http://localhost:5173
+Ο Client τρέχει στο URL: http://localhost:5173
 
-Ροή Δεδομένων (Data Flow)
+Ροή δεδομένων (Data flow)
 
-Ο client φορτώνει σελίδες (Courses/Books/Videos/Categories).
+Ο client ζητά δεδομένα (π.χ. Courses/Books/Videos/Categories) μέσω GET /api/...
 
-Τα δεδομένα έρχονται από REST endpoints (π.χ. GET /api/courses).
+Ο server απαντά με JSON από MongoDB (Mongoose models)
+Για actions χρήστη:
+    - Register: POST /api/users
+    - Login: POST /api/auth/login (επιστρέφει JWT)
+    - Enroll: POST /api/enrollments (απαιτεί JWT)
+    - Review: PUT /api/reviews/course/:courseId (απαιτεί JWT + enrolled)
 
-Το Angular ApiService κάνει HTTP calls προς /api/....
+Ο client χρησιμοποιεί proxy του Vite ώστε να καλεί /api/* χωρίς hardcoded backend URL.
 
-Το Vite proxy προωθεί αυτά τα calls στον backend server (localhost:5000).
+Η λειτουργικότητα που υλοποιήθηκε: 
 
-Το backend κάνει queries στη MongoDB και επιστρέφει JSON στον client.
+    - Δυναμική φόρτωση λιστών (courses, books, videos, categories) από MongoDB μέσω REST API
 
-Η λειτουργικότητα που υλοποιήθηκε
+    - Προτεινόμενο περιεχόμενο (proposed endpoints για courses/books/videos)
 
-Προβολή λιστών: Categories / Courses / Books / Videos από MongoDB
+    - Εγγραφή χρήστη (register) + login (JWT)
 
-Προτεινόμενα (proposed) endpoints για home sections / carousels
+    - Προφίλ χρήστη (GET/PUT /me)
 
-Register χρήστη (POST /api/users) με βασικούς ελέγχους (π.χ. ηλικία, password length)
+    - Enrollment σε course (JWT protected)
 
-Login (POST /api/auth/login) με JWT
-
-Protected endpoints:
-
-GET/PUT /api/users/me
-
-Enroll σε course (POST /api/enrollments)
-
-Reviews (read public, write μόνο για enrolled + logged in)
+    - Reviews ανά course (public read + protected write/update)
 
 Endpoints (Σύνοψη)
 
-/api/categories (GET)
+Auth: POST /api/auth/login
 
-/api/courses (GET, GET by id, GET proposed)
+Users: POST /api/users, GET /api/users/check, GET/PUT /api/users/me
 
-/api/books (GET, GET by id, GET by bookId, GET proposed, GET by ids)
+Categories: 
+GET /api/categories, 
+GET /api/categories/:id
 
-/api/videos (GET, GET by id, GET proposed, GET by ids)
+Courses: 
+GET /api/courses, 
+GET /api/courses/proposed, ή και GET /api/courses/proposed?limit=4
+GET /api/courses/:id
 
-/api/users (POST register, GET check, GET/PUT me)
+Books:
+GET /api/books, 
+GET /api/books/proposed, 
+GET /api/books/by-book-id/:bookId, 
+GET /api/books/:id
 
-/api/auth/login (POST)
+Videos: 
+GET /api/videos, 
+GET /api/videos/proposed, 
+GET /api/videos/:id
+GET /api/videos/by-ids?ids=1 
 
-/api/enrollments (POST enroll, GET my enrollments)
 
-/api/reviews/course/:courseId (GET public, GET/PUT “my review” protected)
+Users: 
+Register: 
+POST /api/users, 
+BODY: {
+  "firstName": "John", 
+  "lastName": "Doe",
+  "userName": "JohnDoe", 
+  "email":"johnDoe@gmail.com", 
+  "dob": "2000-03-01", 
+  "interest": "Programming", 
+  "level": "Beginner", 
+  "goal": "Learn web development", 
+  "newsletter": false, 
+  "password": "123456e" 
+ }
+
+
+Login:
+POST /api/auth/login
+BODY: {
+  "email": "johnDoe@gmail.com",
+  "password": "123456e"
+}
+save the token, will be need it for next endpoints
+
+GET /api/users/me
+
+Enrollments: 
+Create an enrollment:
+Body {
+    "course" : "694b365abc0529f3daed8b9f"
+    }
+POST /api/enrollments, 
+
+Get all the enrollments for the user that is logged in:
+GET /api/enrollments/me/enrollments
+
+Reviews: 
+GET /api/reviews/course/:courseId, 
+
+Create a review (needs to be enrolled to the course that you want to leave a review):
+body {
+   "rating": 4,
+    "comment": "I find the course very helpful—well done!"
+}
+PUT /api/reviews/course/:courseId
+
+Get your reviews: 
+GET /api/reviews/course/:courseId/me, 
+--------------------------------------------
 
 Ρυθμίσεις Περιβάλλοντος
 

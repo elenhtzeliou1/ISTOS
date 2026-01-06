@@ -7,8 +7,6 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
    "seed:all": "node src/seed/seedCategories.js && node src/seed/seedCourses.js && node src/seed/seedBooks.js && node src/seed/seedVideos.js && node src/seed/seedReviews.js"
-
-
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
