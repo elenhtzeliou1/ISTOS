@@ -2037,6 +2037,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
   height: auto;
   width: 100%;
+  text-align: left;
 }
 
 .course-intro-info .tag-row {

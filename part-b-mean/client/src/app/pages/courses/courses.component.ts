@@ -1,4 +1,11 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  NgZone,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -12,10 +19,9 @@ type Option = { label: string; value: string };
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, RouterLink,CourseCardComponent,FilterSidebarComponent],
+  imports: [CommonModule, RouterLink, CourseCardComponent, FilterSidebarComponent],
   templateUrl: './courses.component.html',
 })
-
 export class CoursesComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   error = '';
@@ -50,7 +56,7 @@ export class CoursesComponent implements OnInit, AfterViewInit, OnDestroy {
     private ui: UiInitService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadCourses();
@@ -115,7 +121,7 @@ export class CoursesComponent implements OnInit, AfterViewInit, OnDestroy {
       // Fonts can shift widths after first paint
       const fonts: any = (document as any).fonts;
       if (fonts?.ready) {
-        fonts.ready.then(() => call()).catch(() => { });
+        fonts.ready.then(() => call()).catch(() => {});
       }
     });
   }
@@ -142,9 +148,7 @@ export class CoursesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get filteredCourses(): Course[] {
     const noFilters =
-      this.selectedCategories.size === 0 &&
-      this.selectedLevels.size === 0 &&
-      !this.onlyAvailable;
+      this.selectedCategories.size === 0 && this.selectedLevels.size === 0 && !this.onlyAvailable;
 
     if (noFilters) return this.courses;
 
@@ -160,6 +164,6 @@ export class CoursesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   trackById(_: number, c: Course): string {
-  return c._id;
-}
+    return c._id;
+  }
 }
