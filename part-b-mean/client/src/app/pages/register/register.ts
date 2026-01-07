@@ -18,18 +18,36 @@ import {
   templateUrl: './register.html',
 })
 export class Register implements OnInit {
-  loading = false;
-  error = '';
-  success = '';
+  // ---------------------------
+  // UI state
+  // ---------------------------
+  loading = false; // shows "Creating..." / "Updating..." spinner states
+  error = '';      // shows error message in UI
+  success = '';    // shows success message in UI
 
+  /**
+   * When true, this page acts as "Profile" page instead of registration:
+   * - loads /me
+   * - allows updating profile info (PUT /me)
+   * - shows user enrollments
+   */
   isProfileMode = false;
+
+  // User enrollments shown only in profile mode
   enrollments: any[] = [];
 
-  //summary-modal
+  // ---------------------------
+  // Summary modal state (used in register mode)
+  // ---------------------------
   modalOpen = false;
   modalTitle = 'Review Your Information';
   summaryRows: SummaryRow[] = [];
 
+  /**
+   * Template-driven form model (ngModel binds to these fields).
+   * Includes extra UI-only fields:
+   * - confirmPassword (client-side validation only)
+   */
   form = {
     firstName: '',
     lastName: '',
@@ -44,26 +62,46 @@ export class Register implements OnInit {
     confirmPassword: '',
   };
 
-  //keeping the payload that will be sent after confirmation
+  /**
+   * Stores the payload that will be sent to the backend after user confirms
+   * the summary modal. This prevents sending data before the final confirmation.
+   */
   private pendingRegisterPayload: any = null;
 
   constructor(
+    // Service for REST API calls
     private api: ApiService,
+
+    // For navigation (redirects after register/login/logout)
     private router: Router,
+
+    // Auth/session state (token + active user)
     public auth: AuthService,
+
+    // Helps force UI refresh after async operations
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    // If user is logged in, this page becomes "Profile" mode
     this.isProfileMode = this.auth.isLoggedIn;
 
     if (this.isProfileMode) {
+      /**
+       * PROFILE MODE:
+       * 1) Load current user profile (/me)
+       * 2) Load user enrollments list
+       */
+
       // Load profile
       this.api
         .getMe()
         .pipe(
           catchError((err) => {
-            // token might be expired -> logout and stay in register mode
+            /**
+             * If token is expired/invalid, backend returns 401.
+             * In that case log out and fall back to registration mode.
+             */
             if (err?.status === 401) this.auth.logout();
             this.isProfileMode = false;
             return of(null);
@@ -72,6 +110,7 @@ export class Register implements OnInit {
         .subscribe((me: any) => {
           if (!me) return;
 
+          // Fill form with server profile data (password fields remain empty)
           this.form = {
             ...this.form,
             ...me,
@@ -80,33 +119,39 @@ export class Register implements OnInit {
             confirmPassword: '',
           };
 
-          this.cdr.detectChanges(); //force UI update
+          // Force UI update (template-driven forms sometimes benefit from this)
+          this.cdr.detectChanges();
         });
 
-      // Load enrollments list
+      // Load enrollments list (GET /api/enrollments/me/enrollments)
       this.api.getMyEnrollments().subscribe({
         next: (rows: any[]) => {
           console.log('enrollments response:', rows);
           this.enrollments = rows || [];
-          this.cdr.detectChanges(); //force UI update
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('getMyEnrollments failed:', err);
           this.enrollments = [];
-          this.cdr.detectChanges(); //force UI update
+          this.cdr.detectChanges();
         },
       });
     }
   }
 
+  /**
+   * Handles form submit for BOTH modes:
+   * - Profile mode: updates user profile (PUT /me) with no confirmation modal
+   * - Register mode: validates -> checks availability -> shows summary modal
+   */
   submit(f: any): void {
     this.error = '';
     this.success = '';
     this.modalOpen = false;
 
-    //show error instead of silently disabling
+    // If the Angular form is invalid, show an explicit message
     if (f?.invalid) {
-      // if password pattern fails, show that message instead
+      // If password fails the pattern validator, show a specific hint
       if (f?.controls?.password?.errors?.['pattern']) {
         this.error = 'Password must contain at least one letter and one number.';
       } else {
@@ -115,13 +160,16 @@ export class Register implements OnInit {
       return;
     }
 
-    // normalize DOB if present
+    // Normalize DOB to ISO string if present (backend expects a date)
     const dobIso = this.form.dob ? new Date(this.form.dob).toISOString() : '';
 
-    //profile mode: no modal
+    // ---------------------------
+    // PROFILE MODE (UPDATE /me)
+    // ---------------------------
     if (this.isProfileMode) {
       this.loading = true;
-      // PROFILE UPDATE no passwords here
+
+      // Build payload excluding password fields (profile update only)
       const payload = {
         firstName: this.form.firstName,
         lastName: this.form.lastName,
@@ -135,66 +183,81 @@ export class Register implements OnInit {
       };
 
       this.api
-    .updateMe(payload)
-    .pipe(
-      timeout(8000),
-      finalize(() => {
-        this.loading = false;         // ✅ always stop "Updating..."
-        this.cdr.detectChanges();     // ✅ update UI instantly
-      })
-    )
-    .subscribe({
-      next: (user: any) => {
-        this.success = 'Profile updated successfully.';
+        .updateMe(payload)
+        .pipe(
+          // If server/proxy hangs, throw error after 8s
+          timeout(8000),
 
-        //update the UI form immediately with server truth
-        this.form = {
-          ...this.form,
-          ...user,
-          dob: user?.dob ? String(user.dob).slice(0, 10) : this.form.dob,
-          password: '',
-          confirmPassword: '',
-        };
+          /**
+           * finalize runs for both success and error:
+           * ensures spinner always stops and UI refreshes.
+           */
+          finalize(() => {
+            this.loading = false;
+            this.cdr.detectChanges();
+          })
+        )
+        .subscribe({
+          next: (user: any) => {
+            this.success = 'Profile updated successfully.';
 
-        //keep local storage in sync 
-        localStorage.setItem('activeUser', JSON.stringify(user));
-      },
-      error: (err) => {
-        this.error = this.serverMessage(err);
-      },
-    });
+            // Update form immediately with server "source of truth"
+            this.form = {
+              ...this.form,
+              ...user,
+              dob: user?.dob ? String(user.dob).slice(0, 10) : this.form.dob,
+              password: '',
+              confirmPassword: '',
+            };
+
+            // Keep localStorage user profile in sync
+            localStorage.setItem('activeUser', JSON.stringify(user));
+          },
+          error: (err) => {
+            this.error = this.serverMessage(err);
+          },
+        });
 
       return;
     }
 
-    // REGISTER MODE validations
+    // ---------------------------
+    // REGISTER MODE (validations + modal confirmation)
+    // ---------------------------
+
+    // Age validation before server request
     if (!this.isAtLeast18(this.form.dob)) {
       this.loading = false;
       this.error = 'You must be at least 18 years old to register.';
       return;
     }
 
+    // Password confirmation validation
     if (this.form.password !== this.form.confirmPassword) {
       this.loading = false;
       this.error = 'Passwords do not match.';
       return;
     }
-    //check duplicates (email / username) before opening the modal
+
+    /**
+     * Before opening the modal, check username/email availability
+     * so we can show conflicts early (better UX).
+     */
     this.loading = true;
-    //Ask server first: show conflict errors BEFORE modal
+
     this.api
       .checkUserAvailability(this.form.email, this.form.userName)
       .pipe(
-        timeout(8000), // if server/proxy hangs, throw error after 8s
+        timeout(8000),
         finalize(() => {
-          // ALWAYS stop spinner, even if error happens somewhere unexpected
-          this.loading = false; // stop creating
+          // Stop spinner no matter what happens
+          this.loading = false;
           this.cdr.detectChanges();
         })
       )
       .subscribe({
         next: () => {
-          // build payload (not submit yet)
+          // Build payload but DO NOT submit yet (wait for modal confirmation)
           this.pendingRegisterPayload = {
             firstName: this.form.firstName,
             lastName: this.form.lastName,
@@ -208,6 +271,7 @@ export class Register implements OnInit {
             password: this.form.password,
           };
 
+          // Build summary rows shown in the confirmation modal
           const fullName = `${this.form.firstName} ${this.form.lastName}`.trim();
           this.summaryRows = [
             { label: 'Name', value: fullName },
@@ -222,25 +286,33 @@ export class Register implements OnInit {
           this.modalTitle = 'Review Your Information';
           this.modalOpen = true;
 
-          this.cdr.detectChanges(); // force UI update
+          this.cdr.detectChanges();
         },
         error: (err) => {
+          // If availability check fails, do not open modal
           this.modalOpen = false;
           this.error = this.serverMessage(err);
         },
       });
   }
 
+  /**
+   * Closes the confirmation modal without submitting.
+   */
   closeModal(): void {
     this.modalOpen = false;
   }
 
+  /**
+   * Called when user confirms registration inside the summary modal.
+   * Actually sends POST /api/users with pendingRegisterPayload.
+   */
   confirmRegistration(): void {
-    //user clicked confirm registration on modal
     if (!this.pendingRegisterPayload) {
       this.modalOpen = false;
       return;
     }
+
     this.modalOpen = false;
     this.loading = true;
     this.error = '';
@@ -251,7 +323,8 @@ export class Register implements OnInit {
         this.loading = false;
         this.success = 'Registration successful! Please log in.';
         this.pendingRegisterPayload = null;
-        // avoid fake logged in without a token
+
+        // Redirect to login page (no token is created by register)
         this.router.navigate(['/login']);
       },
       error: (err) => {
@@ -261,10 +334,17 @@ export class Register implements OnInit {
       },
     });
   }
+
+  /**
+   * Extracts a friendly message from different error shapes.
+   */
   private serverMessage(err: any): string {
     return err?.error?.message || err?.message || 'Request failed.';
   }
 
+  /**
+   * Returns true if the given DOB is at least 18 years ago.
+   */
   private isAtLeast18(dob: string): boolean {
     const d = new Date(dob);
     if (isNaN(d.getTime())) return false;
@@ -276,12 +356,21 @@ export class Register implements OnInit {
     return age >= 18;
   }
 
+  /**
+   * Logs out user and redirects to home.
+   */
   logout() {
     this.auth.logout();
     this.router.navigate(['/']);
   }
 
-  // pretty methods
+  // ---------------------------
+  // Pretty/Display helpers
+  // ---------------------------
+
+  /**
+   * Converts goal codes (stored in form) into a user-friendly label.
+   */
   private prettyGoal(v: string): string {
     switch (v) {
       case 'exam-prep':

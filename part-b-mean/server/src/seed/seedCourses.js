@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Course = require('../models/course');
 const COURSES = require('./courses.data');
 
+
+/**
+ * Transforms course seed data into MongoDB document
+ */
 function toDoc(c) {
   return {
     slug: c.id,                
@@ -24,6 +28,8 @@ function toDoc(c) {
   await mongoose.connect(process.env.MONGODB_URI);
 
   let count = 0;
+  
+  // Insert or update courses by slug
   for (const c of COURSES) {
     const doc = toDoc(c);
     await Course.updateOne({ slug: doc.slug }, { $set: doc }, { upsert: true });

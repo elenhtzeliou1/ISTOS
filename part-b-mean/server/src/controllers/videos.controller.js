@@ -1,5 +1,11 @@
 const Video = require('../models/video');
 
+
+/**
+ * GET /api/videos
+ * Returns all videos.
+ * Normalizes difficulty field for compatibility.
+ */
 exports.getAllVideos = async(req,res,next) =>{
     try{
         const videos = await Video.find().lean();
@@ -14,6 +20,11 @@ exports.getAllVideos = async(req,res,next) =>{
     }
 };
 
+
+/**
+ * GET /api/videos/:id
+ * Returns a video by MongoDB _id.
+ */
 exports.getVideoById = async (req,res,next)=>{
     try{
         const video = await Video.findById(req.params.id);
@@ -25,6 +36,11 @@ exports.getVideoById = async (req,res,next)=>{
         res.status(400).json({message:'Invalid Video id'});
     }
 };
+
+/**
+ * GET /api/videos/by-ids?ids=1,2,3
+ * Returns videos by legacy/external `videoId` list.
+ */
 exports.getVideosByIds = async (req, res, next) => {
   try {
     const ids = String(req.query.ids || '')
@@ -41,7 +57,15 @@ exports.getVideosByIds = async (req, res, next) => {
   }
 };
 
-//get proposed videos
+/**
+ * GET /api/videos/proposed?limit=3
+ * Returns proposed/recommended videos.
+ *
+ * Strategy:
+ * - Prefer featured videos first
+ * - Fill remaining with non-featured if needed
+ * - Cap limit at 20
+ */
 exports.getProposedVideos = async(req,res,next)=>{
     try{
         const limit = Math.min(parseInt(req.query.limit || '3',10),20);

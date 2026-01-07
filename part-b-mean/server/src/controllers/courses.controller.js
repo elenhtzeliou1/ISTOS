@@ -1,14 +1,17 @@
-const Course = require('../models/course');
+const Course = require("../models/course");
 
-
-//get All courses for course-page
+/**
+ * GET /api/courses
+ * Returns all courses.
+ * Uses .lean() for performance and normalizes difficulty field.
+ */
 exports.getAllCourses = async (req, res, next) => {
   try {
     const courses = await Course.find().lean();
-    // normalize for safety
-    const normalized = courses.map(c => ({
+    // Normalize difficulty field (fallback to "level" if needed)
+    const normalized = courses.map((c) => ({
       ...c,
-      difficulty: c.difficulty || c.level
+      difficulty: c.difficulty || c.level,
     }));
     res.status(200).json(normalized);
   } catch (error) {
@@ -16,39 +19,49 @@ exports.getAllCourses = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /api/courses/:id
+ * Returns a course by MongoDB _id.
+ */
 exports.getCourseById = async (req, res, next) => {
   try {
     const course = await Course.findById(req.params.id);
     if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
+      return res.status(404).json({ message: "Course not found" });
     }
     res.status(200).json(course);
   } catch (error) {
-    res.status(400).json({ message: 'Invalid course ID' });
+    res.status(400).json({ message: "Invalid course ID" });
   }
 };
 
-
-//get only proposed courses
+/**
+ * GET /api/courses/proposed?limit=5
+ * Returns proposed/recommended courses.
+ *
+ * Strategy:
+ * - Prefer featured courses first
+ * - If not enough, fill with non-featured
+ * - Cap limit at 20
+ */
 exports.getProposedCourses = async (req, res, next) => {
-
   try {
-    const limit = Math.min(parseInt(req.query.limit || '5', 10), 20);
+    const limit = Math.min(parseInt(req.query.limit || "5", 10), 20);
 
-
-    // first prefer featured = true only
+    // 1) featured first
     let proposed = await Course.find({ featured: true }).limit(limit).lean();
 
-
-    //fallback if fewer that limit
+    // 2) fill remaining if needed
     if (proposed.length < limit) {
       const remaining = limit - proposed.length;
-      const excludeIds = proposed.map(c => c._id);
+      const excludeIds = proposed.map((c) => c._id);
 
       const extras = await Course.find({
         featured: { $ne: true },
         _id: { $nin: excludeIds },
-      }).limit(remaining).lean();
+      })
+        .limit(remaining)
+        .lean();
 
       proposed = proposed.concat(extras);
     }
@@ -56,6 +69,4 @@ exports.getProposedCourses = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-
-
 };

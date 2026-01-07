@@ -1,8 +1,15 @@
+// Load environment variables from .env
 require('dotenv').config();
+
+// Import dependencies
 const mongoose = require('mongoose');
 const Video = require('../models/video');
 const VIDEOS = require('./videos.data');
 
+
+/**
+ * Converts text to URL-friendly slug
+ */
 function slugify(s) {
     return String(s || '')
         .toLowerCase()
@@ -10,6 +17,10 @@ function slugify(s) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
 }
+
+/**
+ * Maps video seed data to MongoDB document
+ */
 function toDoc(v) {
     return {
         videoId: v.id,
@@ -26,9 +37,12 @@ function toDoc(v) {
 }
 
 (async () => {
-
+    // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI);
+    
     let count = 0;
+
+     // Insert or update video (idempotent seeding)
     for (const v of VIDEOS) {
         const doc = toDoc(v);
         await Video.updateOne({ videoId: doc.videoId }, { $set: doc }, { upsert: true });
@@ -36,6 +50,8 @@ function toDoc(v) {
     }
 
     console.log(`Seeded/updated ${count} videos`);
+    
+     // Close DB connection
     await mongoose.disconnect();
     process.exit(0);
 })().catch((e) => {

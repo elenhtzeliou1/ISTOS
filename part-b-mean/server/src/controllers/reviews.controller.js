@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const Review = require("../models/review");
 
-// GET /reviews/course/:courseId  (public)
+/**
+ * GET /api/reviews/course/:courseId (public)
+ * Returns all reviews for a course (latest first).
+ * Populates user's userName for display.
+ */
 exports.getCourseReviews = async (req, res) => {
   const { courseId } = req.params;
 
+  // Validate courseId
   if (!mongoose.isValidObjectId(courseId)) {
     return res.status(400).json({ message: "Invalid course id" });
   }
@@ -13,6 +18,7 @@ exports.getCourseReviews = async (req, res) => {
     .populate("user", "userName")
     .sort({ createdAt: -1 });
 
+  // Return only safe fields (avoid returning full user object)
   res.json(
     reviews.map((r) => ({
       _id: r._id,
@@ -24,7 +30,10 @@ exports.getCourseReviews = async (req, res) => {
   );
 };
 
-// GET /reviews/course/:courseId/me (auth+enrolled)
+/**
+ * GET /api/reviews/course/:courseId/me (protected + enrolled)
+ * Returns the logged-in user's review for that course, or null if none.
+ */
 exports.getMyReviewForCourse = async (req, res) => {
   const { courseId } = req.params;
   const userId = req.userId;
@@ -37,7 +46,13 @@ exports.getMyReviewForCourse = async (req, res) => {
   res.json(review || null);
 };
 
-// PUT /reviews/course/:courseId (auth+enrolled)  create-or-update
+/**
+ * PUT /api/reviews/course/:courseId (protected + enrolled)
+ * Creates or updates the logged-in user's review.
+ *
+ * Body:
+ * - { "rating": number(1-5), "comment": string }
+ */
 exports.upsertMyReview = async (req, res) => {
   const { courseId } = req.params;
   const userId = req.userId;
@@ -47,16 +62,19 @@ exports.upsertMyReview = async (req, res) => {
     return res.status(400).json({ message: "Invalid course id" });
   }
 
+  // Validate rating
   const r = Number(rating);
   if (!Number.isFinite(r) || r < 1 || r > 5) {
     return res.status(400).json({ message: "Rating must be 1-5." });
   }
 
+  // Validate comment
   const text = String(comment || "").trim();
   if (!text) {
     return res.status(400).json({ message: "Comment is required." });
   }
 
+  // Upsert review (one review per user per course)
   const doc = await Review.findOneAndUpdate(
     { user: userId, course: courseId },
     { $set: { rating: r, comment: text } },

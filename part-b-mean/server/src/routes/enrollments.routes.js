@@ -5,9 +5,19 @@ const requireAuth = require("../middleware/requireAuth");
 const enrollmentsController = require("../controllers/enrollments.controller"); 
 const Enrollment = require("../models/enrollment");
 
-// POST /api/enrollments  body: { course: courseId }
+
+// Enrollment routes (JWT protected)
+
+// POST /api/enrollments
+// Creates an enrollment for the logged-in user
+// Body: { "course": "<courseId>" }
 router.post("/", requireAuth, enrollmentsController.createEnrollment);
 
+
+// GET /api/enrollments/me/enrollments
+// Returns all enrollments for the logged-in user
+// Includes basic course info via populate()
+// Sorted by newest first
 router.get("/me/enrollments", requireAuth, async (req, res) => {
   const rows = await Enrollment.find({ user: req.userId })
     .populate("course", "title slug cover")

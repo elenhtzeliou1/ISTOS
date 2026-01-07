@@ -8,6 +8,10 @@ const User = require("../models/user");
 
 const REVIEWS = require("./reviews.data");
 
+/**
+ * Splits a username into first and last name
+ * Used when creating seed users
+ */
 function splitName(userName = "") {
   const parts = String(userName).trim().split(/\s+/);
   const firstName = parts[0] || "Seed";
@@ -18,9 +22,11 @@ function splitName(userName = "") {
 async function run() {
   await mongoose.connect(process.env.MONGODB_URI);
 
+  // Default password for auto-created seed users
   const defaultPasswordHash = await bcrypt.hash("ChangeMe123!", 10);
 
   for (const r of REVIEWS) {
+     // Try to locate course using multiple identifiers
     const course =
       (await Course.findOne({ slug: r.courseId })) ||
       (await Course.findOne({ courseId: r.courseId })) ||
@@ -31,6 +37,7 @@ async function run() {
       continue;
     }
 
+    // Find or create user
     let user = await User.findOne({ userName: r.userName });
 
     if (!user) {
@@ -54,6 +61,7 @@ async function run() {
       });
     }
 
+    // Create or update review
     await Review.findOneAndUpdate(
       { user: user._id, course: course._id },
       {

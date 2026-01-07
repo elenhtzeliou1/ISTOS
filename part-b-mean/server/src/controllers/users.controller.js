@@ -1,15 +1,21 @@
 const bcrypt = require("bcryptjs");
 const User = require('../models/user');
 
-
-// GET /api/users/me
+/**
+ * GET /api/users/me (protected)
+ * Returns the logged-in user's profile.
+ */
 exports.getMe = async (req, res) => {
     const user = await User.findById(req.userId);
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
 };
 
-// PUT /api/users/me
+/**
+ * PUT /api/users/me (protected)
+ * Updates the logged-in user's profile.
+ * Only fields in the allowlist can be changed.
+ */
 exports.updateMe = async (req, res) => {
     const allowed = [
         "firstName",
@@ -23,11 +29,15 @@ exports.updateMe = async (req, res) => {
         "newsletter",
     ];
 
+    
+  // Build patch object only with allowed keys
     const patch = {};
     for (const k of allowed) {
         if (req.body[k] !== undefined) patch[k] = req.body[k];
     }
 
+    
+  // Update and return updated user (excluding passwordHash)
     const user = await User.findByIdAndUpdate(req.userId, patch, {
         new: true,
         runValidators: true,
@@ -38,6 +48,9 @@ exports.updateMe = async (req, res) => {
     res.json(user);
 };
 
+/**
+ * Removes sensitive/private fields from user documents before returning them.
+ */
 const sanitizeUser = (u) => ({
     _id: u._id,
     firstName: u.firstName,
@@ -53,6 +66,9 @@ const sanitizeUser = (u) => ({
     updatedAt: u.updatedAt,
 });
 
+/**
+ * Simple age check: ensures user is at least 18.
+ */
 function isAtLeast18(dob) {
     const d = new Date(dob);
     if (Number.isNaN(d.getTime())) return false;
@@ -64,7 +80,14 @@ function isAtLeast18(dob) {
     return age >= 18;
 }
 
-// GET /api/users/check?email=...&userName=...
+/**
+ * GET /api/users/check?email=...&userName=...
+ * Checks whether email and/or userName already exist.
+ *
+ * Returns:
+ * - 409 if taken
+ * - { ok: true } if available
+ */
 exports.checkAvailability = async (req, res, next) => {
   try {
     const email = (req.query.email || "").toString().toLowerCase().trim();
@@ -94,6 +117,15 @@ exports.checkAvailability = async (req, res, next) => {
   }
 };
 
+/**
+ * POST /api/users
+ * Registers a new user.
+ *
+ * Validations:
+ * - Must be at least 18 years old
+ * - Password length >= 6
+ * - Unique email + userName (handled by MongoDB unique index)
+ */
 exports.registerUser = async (req, res, next) => {
 
     try {
@@ -119,6 +151,7 @@ exports.registerUser = async (req, res, next) => {
             return res.status(400).json({ message: "Password must be at least 6 charachters," });
         }
 
+         // Hash password before storing
         const passwordHash = await bcrypt.hash(password, 10);
 
         const user = await User.create({
@@ -136,7 +169,7 @@ exports.registerUser = async (req, res, next) => {
 
         res.status(201).json(sanitizeUser(user));
     } catch (error) {
-        // duplicated email or username
+        // Handle duplicate key errors (unique indexes) (email or username)
         if (error?.code === 11000) {
             const field = Object.keys(error.keyPattern || {})[0] || "field";
             return res.status(409).json({ message: `${field} already exists. Choose something Else` });

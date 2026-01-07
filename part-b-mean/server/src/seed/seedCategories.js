@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const Category = require('../models/category');
 const CATEGORIES = require('./categories.data');
 
+/**
+ * Maps raw category data to MongoDB schema
+ */
 function toDoc(cat){
     return {
         legacyId: cat.id,
@@ -22,6 +25,7 @@ function toDoc(cat){
     await mongoose.connect(process.env.MONGODB_URI);
     let count = 0;
 
+     // Upsert categories based on slug
     for (const cat of CATEGORIES){
         const doc = toDoc(cat);
         await Category.updateOne({slug:doc.slug},{$set:doc},{upsert:true});
