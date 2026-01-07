@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subject, of, combineLatest } from 'rxjs';
-import { catchError, switchMap, takeUntil, take } from 'rxjs/operators';
+import { catchError, switchMap, takeUntil, take, finalize } from 'rxjs/operators';
 import { ApiService, Course } from '../../services/api.service';
 import { UiInitService } from '../../services/ui-init.service';
 
@@ -39,7 +39,6 @@ type Lesson = {
   imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './course-details.components.html',
 })
-
 export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   error = '';
@@ -75,7 +74,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     private ui: UiInitService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     document.body.classList.add('course-detail-page');
@@ -118,7 +117,6 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
           this.loadReviews(courseId);
           this.loadMyReviewGate(courseId);
           this.loadEnrollmentStatus(courseId);
-
         } else {
           this.reviews = [];
           this.avgRating = 0;
@@ -159,39 +157,42 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
   private loadMyReviewGate(courseId: string): void {
     this.reviewError = '';
 
-    this.api.getMyReview(courseId).pipe(takeUntil(this.destroy$)).subscribe({
-      next: (mine: any | null) => {
-        // success means authed + enrolled
-        this.canReview = true;
-        this.myReview = mine;
+    this.api
+      .getMyReview(courseId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (mine: any | null) => {
+          // success means authed + enrolled
+          this.canReview = true;
+          this.myReview = mine;
 
-        if (mine) {
-          this.reviewRating = String(mine.rating ?? '');
-          this.reviewComment = String(mine.comment ?? '');
-        } else {
+          if (mine) {
+            this.reviewRating = String(mine.rating ?? '');
+            this.reviewComment = String(mine.comment ?? '');
+          } else {
+            this.reviewRating = '';
+            this.reviewComment = '';
+          }
+
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          // 401/403 means NOT allowed to review
+          this.canReview = false;
+          this.myReview = null;
           this.reviewRating = '';
           this.reviewComment = '';
-        }
 
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        // 401/403 means NOT allowed to review
-        this.canReview = false;
-        this.myReview = null;
-        this.reviewRating = '';
-        this.reviewComment = '';
+          // optional message
+          if (err?.status === 401) this.reviewError = 'Register first!';
+          else if (err?.status === 403)
+            this.reviewError = 'Enroll in this course to leave a review.';
+          else this.reviewError = 'Could not load review status.';
 
-        // optional message
-        if (err?.status === 401) this.reviewError = 'Register first!';
-        else if (err?.status === 403) this.reviewError = 'Enroll in this course to leave a review.';
-        else this.reviewError = 'Could not load review status.';
-
-        this.cdr.detectChanges();
-      }
-    });
+          this.cdr.detectChanges();
+        },
+      });
   }
-
 
   private recomputeAvg(): void {
     const nums = (this.reviews ?? [])
@@ -235,14 +236,14 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       .pipe(
         takeUntil(this.destroy$),
         catchError((err) => {
-          // handle 401/403 and validation errors gracefully
+          // handle 401/403 and validation errors
           const msg =
             err?.error?.message ||
             (err?.status === 401
               ? 'Please log in to leave a review.'
               : err?.status === 403
-                ? 'You must be enrolled to leave a review.'
-                : 'Could not save review.');
+              ? 'You must be enrolled to leave a review.'
+              : 'Could not save review.');
           this.reviewError = msg;
           this.reviewSaving = false;
           this.cdr.detectChanges();
@@ -270,26 +271,29 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       .filter((n: number) => Number.isFinite(n));
 
     if (bookIds.length) {
-      this.api.getBooksByIds(bookIds).pipe(takeUntil(this.destroy$)).subscribe({
-        next: (books: any[]) => {
-          const reasonById = new Map<number, string>(
-            recBooks.map((r: any) => [Number(r.id), r.reason])
-          );
+      this.api
+        .getBooksByIds(bookIds)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (books: any[]) => {
+            const reasonById = new Map<number, string>(
+              recBooks.map((r: any) => [Number(r.id), r.reason])
+            );
 
-          this.recommendedBooks = (books ?? []).map((b: any) => ({
-            ...b,
-            reason: reasonById.get(Number(b.bookId)) || '',
-          }));
+            this.recommendedBooks = (books ?? []).map((b: any) => ({
+              ...b,
+              reason: reasonById.get(Number(b.bookId)) || '',
+            }));
 
-          this.cdr.detectChanges();
-          this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-            (window as any).AccordionUI?.init?.();
-          });
-        },
-        error: () => {
-          this.recommendedBooks = [];
-        },
-      });
+            this.cdr.detectChanges();
+            this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
+              (window as any).AccordionUI?.init?.();
+            });
+          },
+          error: () => {
+            this.recommendedBooks = [];
+          },
+        });
     } else {
       this.recommendedBooks = [];
     }
@@ -301,26 +305,29 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       .filter((n: number) => Number.isFinite(n));
 
     if (videoIds.length) {
-      this.api.getVideosByIds(videoIds).pipe(takeUntil(this.destroy$)).subscribe({
-        next: (videos: any[]) => {
-          const reasonById = new Map<number, string>(
-            recVideos.map((r: any) => [Number(r.id), r.reason])
-          );
+      this.api
+        .getVideosByIds(videoIds)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (videos: any[]) => {
+            const reasonById = new Map<number, string>(
+              recVideos.map((r: any) => [Number(r.id), r.reason])
+            );
 
-          this.recommendedVideos = (videos ?? []).map((v: any) => ({
-            ...v,
-            reason: reasonById.get(Number(v.videoId)) || '',
-          }));
+            this.recommendedVideos = (videos ?? []).map((v: any) => ({
+              ...v,
+              reason: reasonById.get(Number(v.videoId)) || '',
+            }));
 
-          this.cdr.detectChanges();
-          this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-            (window as any).AccordionUI?.init?.();
-          });
-        },
-        error: () => {
-          this.recommendedVideos = [];
-        },
-      });
+            this.cdr.detectChanges();
+            this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
+              (window as any).AccordionUI?.init?.();
+            });
+          },
+          error: () => {
+            this.recommendedVideos = [];
+          },
+        });
     } else {
       this.recommendedVideos = [];
     }
@@ -341,7 +348,10 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   sliceWords(text: string, maxWords = 26): string {
-    const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+    const words = String(text || '')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
     if (words.length <= maxWords) return words.join(' ');
     return words.slice(0, maxWords).join(' ') + '…';
   }
@@ -361,13 +371,13 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     return [1, 2, 3, 4, 5];
   }
 
-
   // ----- Subscribe modal state -----///
   modalOpen = false;
   modalTitle = '';
   modalDesc = '';
   modalMode: 'info' | 'subscribe-confirm' | 'go-register' = 'info';
   modalConfirmText = 'Close';
+  modalBusy = false;
 
   openSubscribeModal(): void {
     const c = this.course;
@@ -385,7 +395,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       });
       return;
     }
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     if (!token) {
       this.openModal({
         title: 'Account required',
@@ -426,10 +436,11 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onConfirmModal(): void {
+    if (this.modalBusy) return;
     if (this.modalMode === 'go-register') {
       // route to register page (adjust route)
       // this.router.navigate(['/register']);
-      window.location.href = '/register'; 
+      window.location.href = '/register';
       return;
     }
 
@@ -446,30 +457,48 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       }
 
       // all backend enroll endpoint
-      this.api.enroll(courseId).subscribe({
-        next: () => {
-          this.isEnrolled = true;
-          this.cdr.detectChanges();
+      this.modalBusy = true;
+      this.api
+        .enroll(courseId)
+        .pipe(
+          catchError((err) => {
+            const msg =
+              err?.error?.message ||
+              (err?.status === 401 ? 'Please log in first.' : 'Could not subscribe.');
 
-          this.openModal({
-            title: 'Congratulations!',
-            desc: `You subscribed to "${this.course?.title}".`,
-            mode: 'info',
-            buttonText: 'Close',
-          });
-        },
-        error: (err) => {
-          const msg =
-            err?.error?.message ||
-            (err?.status === 401 ? 'Please log in first.' : 'Could not subscribe.');
-          this.openModal({
-            title: 'Subscription failed',
-            desc: msg,
-            mode: 'info',
-            buttonText: 'Close',
-          });
-        },
-      });
+            this.modalBusy = false;
+            this.openModal({
+              title: 'Subscription failed',
+              desc: msg,
+              mode: 'info',
+              buttonText: 'Close',
+            });
+
+            this.cdr.detectChanges();
+            return of(null);
+          })
+        )
+        .subscribe((res) => {
+          if (!res) return;
+
+          //enrolled instantly
+          this.isEnrolled = true;
+
+          // close modal, dont show a second one
+          this.closeModal();
+
+          //unlock review instantly (re-run gate nd fetch)
+          this.loadMyReviewGate(courseId);
+          this.loadReviews(courseId);
+
+          // scroll to review form ;)
+          setTimeout(() => {
+            document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+
+          this.modalBusy = false;
+          this.cdr.detectChanges();
+        });
 
       return;
     }
@@ -512,7 +541,9 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     // 3) Enrolled
     this.openModal({
       title: 'Hey!',
-      desc: `You can start learning: Lesson: "${lesson?.title}".  Duration: ${lesson?.minutes ?? 0} min`,
+      desc: `You can start learning: Lesson: "${lesson?.title}".  Duration: ${
+        lesson?.minutes ?? 0
+      } min`,
       mode: 'info',
       buttonText: 'Close',
     });
@@ -525,9 +556,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     if (!el) return;
 
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
   }
-
 
   private loadEnrollmentStatus(courseId: string): void {
     // not logged in => not enrolled
@@ -540,21 +569,19 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.enrollCheckLoading = true;
 
-    this.api.getMyEnrollments().pipe(
-      takeUntil(this.destroy$),
-      catchError(() => of([]))
-    ).subscribe((rows: any[]) => {
-      const set = new Set(
-        (rows || []).map((r: any) => String(r.course?._id || r.course))
-      );
+    this.api
+      .getMyEnrollments()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => of([]))
+      )
+      .subscribe((rows: any[]) => {
+        const set = new Set((rows || []).map((r: any) => String(r.course?._id || r.course)));
 
-      this.isEnrolled = set.has(String(courseId));
-      this.enrollCheckLoading = false;
+        this.isEnrolled = set.has(String(courseId));
+        this.enrollCheckLoading = false;
 
-      this.cdr.detectChanges();
-    });
+        this.cdr.detectChanges();
+      });
   }
-
 }
-
-

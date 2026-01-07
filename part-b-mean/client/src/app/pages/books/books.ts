@@ -5,13 +5,15 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { ApiService, Book } from '../../services/api.service';
 import { UiInitService } from '../../services/ui-init.service';
+import { BookCardComponent } from '../../components/book-card/book-card.component';
+import { FilterSidebarComponent } from '../../components/filter-sidebar/filter-sidebar.component';
 
 type Option = { label: string; value: string };
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, BookCardComponent,FilterSidebarComponent],
   templateUrl: './books.html',
 })
 

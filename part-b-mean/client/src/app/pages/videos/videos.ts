@@ -5,13 +5,15 @@ import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { ApiService, Video } from '../../services/api.service';
 import { UiInitService } from '../../services/ui-init.service';
+import { VideoCardComponent } from '../../components/video-card/video-card.component';
+import { FilterSidebarComponent } from '../../components/filter-sidebar/filter-sidebar.component';
 
 type Option = { label: string; value: string };
 
 @Component({
   selector: 'app-videos',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,VideoCardComponent,FilterSidebarComponent],
   templateUrl: './videos.html',
 })
 

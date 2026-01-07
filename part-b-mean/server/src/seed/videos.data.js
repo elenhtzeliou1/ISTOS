@@ -7,7 +7,7 @@ const VIDEOS = [
     featured: true,
     description:
       "A fast, clear introduction to Python syntax, variables, data types, and simple I/O. Great as a first step before starting an intro course.",
-    cover: "assets/images/thumbnails/cover-18.jpg",
+    cover: "/images/thumbnails/cover-18.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=fWjsdhR3z3c",
   },
@@ -19,7 +19,7 @@ const VIDEOS = [
     featured: true,
     description:
       "Learn if/else, for, and while with practical mini-problems. Includes common mistakes and how to avoid them.",
-    cover: "assets/images/thumbnails/cover-17.jpg",
+    cover: "/images/thumbnails/cover-17.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=KWgYha0clzw",
   },
@@ -31,7 +31,7 @@ const VIDEOS = [
     featured: true,
     description:
       "Understand parameters, return values, scope, and how to structure code into reusable blocks. A bridge between beginner and advanced Python.",
-    cover: "assets/images/thumbnails/cover-28.jpg",
+    cover: "/images/thumbnails/cover-28.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=mvgTQAVRpKA",
   },
@@ -43,7 +43,7 @@ const VIDEOS = [
     featured: false,
     description:
       "A visual explanation of the TCP/IP model, packets, routing, DNS, and what happens when you load a webpage.",
-    cover: "assets/images/thumbnails/networks-cover-4.jpg",
+    cover: "/images/thumbnails/networks-cover-4.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=PpsEaqJV_A0",
   },
@@ -55,7 +55,7 @@ const VIDEOS = [
     featured: false,
     description:
       "Covers phishing, malware, password attacks, and social engineering with real-world examples and simple prevention tips.",
-    cover: "assets/images/thumbnails/cybersec-cover-2-small.jpg",
+    cover: "/images/thumbnails/cybersec-cover-2-small.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=Dk-ZqQ-bfy4",
   },
@@ -67,7 +67,7 @@ const VIDEOS = [
     featured: false,
     description:
       "A step-by-step guide to INNER, LEFT, RIGHT, and FULL joins with diagrams and query patterns used in real database tasks.",
-    cover: "assets/images/thumbnails/cover-21.jpg",
+    cover: "/images/thumbnails/cover-21.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=Yh4CrPHVBdE",
   },
@@ -79,7 +79,7 @@ const VIDEOS = [
     featured: true,
     description:
       "Learn what machine learning is, how models learn from data, and the difference between training and prediction. A friendly starting point before diving into algorithms.",
-    cover: "assets/images/thumbnails/igor-omilaev-eGGFZ5X2LnA-unsplash.jpg",
+    cover: "/images/thumbnails/igor-omilaev-eGGFZ5X2LnA-unsplash.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=qYNweeDHiyU",
   },
@@ -90,8 +90,8 @@ const VIDEOS = [
     difficulty: "beginner",
     featured: true,
     description:
-       "A fast introduction to CSS fundamentals—selectors, the box model, flexbox, and responsive styling—so you can start building clean layouts with confidence.",
-    cover: "assets/images/thumbnails/cover-2.jpg",
+      "A fast introduction to CSS fundamentals—selectors, the box model, flexbox, and responsive styling—so you can start building clean layouts with confidence.",
+    cover: "/images/thumbnails/cover-2.jpg",
     available: true,
     youtubeUrl: "https://www.youtube.com/watch?v=1PnVor36_40",
   },

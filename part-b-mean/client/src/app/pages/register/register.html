@@ -1,42 +1,69 @@
 <main class="register-container">
   <h1>{{ auth.isLoggedIn ? 'Your Profile' : 'Create Your Account' }}</h1>
   <p>
-    {{ auth.isLoggedIn
-    ? 'Update your information and see the courses you’re subscribed to.'
-    : 'Join our learning community and start your journey today.' }}
+    {{
+      auth.isLoggedIn
+        ? 'Update your information and see the courses you’re subscribed to.'
+        : 'Join our learning community and start your journey today.'
+    }}
   </p>
-  <a *ngIf="auth.isLoggedIn" (click)="logout()" style="cursor: pointer;">Logout</a>
+  <a *ngIf="auth.isLoggedIn" (click)="logout()" style="cursor: pointer">Logout</a>
   <div class="form-column login__col" *ngIf="!auth.isLoggedIn">
-    <p>Already having an account? </p>
+    <p>Already having an account?</p>
     <a class="login__btn" routerLink="/login">Login Here</a>
   </div>
 
-
-  <form (ngSubmit)="submit()" #f="ngForm" id="register-form" class="register-form">
+  <form (ngSubmit)="submit(f)" #f="ngForm" id="register-form" class="register-form" novalidate>
     <!-- USER INFORMATION -->
 
     <div class="from-row">
       <div class="form-column">
         <label for="firstName">First Name</label>
-        <input name="firstName" [(ngModel)]="form.firstName" type="text" id="firstName" autocomplete="given-name"
-          required />
+        <input
+          name="firstName"
+          [(ngModel)]="form.firstName"
+          type="text"
+          id="firstName"
+          autocomplete="given-name"
+          required
+        />
       </div>
 
       <div class="form-column">
         <label for="lastName">Last Name</label>
-        <input name="lastName" [(ngModel)]="form.lastName" type="text" id="lastName" autocomplete="family-name"
-          required />
+        <input
+          name="lastName"
+          [(ngModel)]="form.lastName"
+          type="text"
+          id="lastName"
+          autocomplete="family-name"
+          required
+        />
       </div>
     </div>
 
     <div class="form-column">
       <label for="userName">Username</label>
-      <input name="userName" [(ngModel)]="form.userName" type="text" id="userName" autocomplete="username" required />
+      <input
+        name="userName"
+        [(ngModel)]="form.userName"
+        type="text"
+        id="userName"
+        autocomplete="username"
+        required
+      />
     </div>
 
     <div class="form-column">
       <label for="email">Email</label>
-      <input name="email" [(ngModel)]="form.email" type="email" id="email" autocomplete="email" required />
+      <input
+        name="email"
+        [(ngModel)]="form.email"
+        type="email"
+        id="email"
+        autocomplete="email"
+        required
+      />
     </div>
 
     <div class="form-column">
@@ -49,14 +76,36 @@
     <div class="from-row" *ngIf="!auth.isLoggedIn">
       <div class="form-column">
         <label for="password">Password</label>
-        <input name="password" [(ngModel)]="form.password" type="password" id="password" required minlength="6"
+        <input
+          #pw="ngModel"
+          name="password"
+          [(ngModel)]="form.password"
+          type="password"
+          id="password"
+          required
+          minlength="6"
           pattern="(?=.*[A-Za-z])(?=.*[0-9]).{6,}"
-          title="Must contain at least 6 characters, one letter, and one number." autocomplete="new-password" />
+          autocomplete="new-password"
+        />
+        <p *ngIf="pw.invalid && (pw.dirty || pw.touched)" class="form-error">
+          <span *ngIf="pw.errors?.['required']"  class="form-error">Password is required.</span>
+          <span *ngIf="pw.errors?.['minlength']"  class="form-error">Password must be at least 6 characters.</span>
+          <span *ngIf="pw.errors?.['pattern']"  class="form-error">
+            Password must contain at least one letter and one number.
+          </span>
+        </p>
       </div>
       <div class="form-column">
         <label for="confirmPassword">Confirm Password</label>
-        <input name="confirmPassword" [(ngModel)]="form.confirmPassword" type="password" id="confirmPassword"
-          autocomplete="new-password" required />
+        <input
+          #cpw="ngModel"
+          name="confirmPassword"
+          [(ngModel)]="form.confirmPassword"
+          type="password"
+          id="confirmPassword"
+          required
+          autocomplete="new-password"
+        />
       </div>
     </div>
 
@@ -111,7 +160,6 @@
       </fieldset>
     </div>
 
-
     <div class="form-column last">
       <input type="checkbox" id="newsletter" name="newsletter" [(ngModel)]="form.newsletter" />
       <label for="newsletter"> Receive course recommendations</label>
@@ -122,16 +170,28 @@
     <p *ngIf="success" class="form-success">{{ success }}</p>
     <!-- Messages -->
 
-    <button type="submit" class="submit-btn"
-      [disabled]="loading || f.invalid || (!auth.isLoggedIn && form.password !== form.confirmPassword)">
-      {{ loading ? (auth.isLoggedIn ? 'Updating...' : 'Creating...') : (auth.isLoggedIn ? 'Update Profile' : 'Create
-      Account') }}
+    <button
+      type="submit"
+      class="submit-btn"
+      [disabled]="loading || (!auth.isLoggedIn && form.password !== form.confirmPassword)"
+    >
+      {{
+        loading
+          ? auth.isLoggedIn
+            ? 'Updating...'
+            : 'Creating...'
+          : auth.isLoggedIn
+          ? 'Update Profile'
+          : 'Create Account'
+      }}
     </button>
 
-    <p *ngIf="form.password && form.confirmPassword && form.password !== form.confirmPassword" class="form-error">
+    <p
+      *ngIf="form.password && form.confirmPassword && form.password !== form.confirmPassword"
+      class="form-error"
+    >
       Passwords do not match.
     </p>
-
   </form>
 </main>
 
@@ -154,14 +214,19 @@
     <ng-template #hasEnrollments>
       <ul>
         <li *ngFor="let e of enrollments">
-          <a [routerLink]="['/course-details', (e.course?._id || e.course)]">
+          <a [routerLink]="['/course-details', e.course?._id || e.course]">
             {{ e.course?.title || e.course }}
           </a>
-          <small *ngIf="e.createdAt">
-            (enrolled: {{ e.createdAt | date:'mediumDate' }})
-          </small>
+          <small *ngIf="e.createdAt"> (enrolled: {{ e.createdAt | date : 'mediumDate' }}) </small>
         </li>
       </ul>
     </ng-template>
   </ng-template>
 </section>
+<app-summary-modal
+  [open]="modalOpen"
+  [title]="modalTitle"
+  [rows]="summaryRows"
+  (close)="closeModal()"
+  (confirm)="confirmRegistration()"
+></app-summary-modal>

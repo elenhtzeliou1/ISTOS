@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 export interface CategoryLabelList {
   label: string;
 }
@@ -81,10 +80,9 @@ export interface Category {
   cover?: string;
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>('/api/courses');
@@ -165,8 +163,7 @@ export class ApiService {
   getMyEnrollments() {
     return this.http.get<any[]>('/api/enrollments/me/enrollments');
   }
-
-
+  //----------------------------------------------------//
 
   enroll(courseId: string) {
     return this.http.post('/api/enrollments', { course: courseId });
@@ -178,7 +175,12 @@ export class ApiService {
   login(body: { email: string; password: string }) {
     return this.http.post<{ token: string; user: any }>('/api/auth/login', body);
   }
-
-
-
+  checkUserAvailability(email: string, userName: string) {
+    return this.http.get('/api/users/check', {
+      params: {
+        email: (email || '').trim(),
+        userName: (userName || '').trim(),
+      },
+    });
+  }
 }

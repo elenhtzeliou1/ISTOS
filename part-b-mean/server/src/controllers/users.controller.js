@@ -64,6 +64,36 @@ function isAtLeast18(dob) {
     return age >= 18;
 }
 
+// GET /api/users/check?email=...&userName=...
+exports.checkAvailability = async (req, res, next) => {
+  try {
+    const email = (req.query.email || "").toString().toLowerCase().trim();
+    const userName = (req.query.userName || "").toString().trim();
+
+    if (!email && !userName) {
+      return res.status(400).json({ message: "Provide email or userName" });
+    }
+
+    if (email) {
+      const emailExists = await User.exists({ email });
+      if (emailExists) {
+        return res.status(409).json({ message: "email already exists. Choose something Else" });
+      }
+    }
+
+    if (userName) {
+      const userNameExists = await User.exists({ userName });
+      if (userNameExists) {
+        return res.status(409).json({ message: "userName already exists. Choose something Else" });
+      }
+    }
+
+    return res.json({ ok: true });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.registerUser = async (req, res, next) => {
 
     try {

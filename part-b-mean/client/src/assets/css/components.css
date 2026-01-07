@@ -2010,7 +2010,7 @@ nav.mobile-open .nav-link-menu {
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-
+  border: none;
 }
 
 .course-product:hover {
@@ -2037,6 +2037,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
   height: auto;
   width: 100%;
+  text-align: left;
 }
 
 .course-intro-info .tag-row {
@@ -3711,4 +3712,8 @@ footer {
 .footer__team-info-wrapper p {
   font-size: 12px;
   color: black;
+}
+.form-error{
+  font-size: 14px;
+  color: red;
 }

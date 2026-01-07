@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const Video = require('../models/video');
 const VIDEOS = require('./videos.data');
 
-
 function slugify(s) {
     return String(s || '')
         .toLowerCase()

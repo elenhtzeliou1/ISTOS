@@ -17,7 +17,7 @@ const CATEGORIES = [
       { info: "Explore routing & switching basics" },
       { info: "Build strong networking foundations" },
     ],
-    cover: "assets/images/networks-main-cover.jpeg",
+    cover: "/images/networks-main-cover.jpeg",
   },
 
   {
@@ -38,7 +38,7 @@ const CATEGORIES = [
       { info: "Build small portfolio projects" },
       { info: "Progress from beginner to advanced" },
     ],
-    cover: "assets/images/cat-programming-cover-big.jpg",
+    cover: "/images/cat-programming-cover-big.jpg",
   },
 
   {
@@ -59,7 +59,7 @@ const CATEGORIES = [
       { info: "Connect security with networks & code" },
       { info: "Build a security-first mindset" },
     ],
-    cover: "assets/images/thumbnails/cybersec-cover-1.jpeg",
+    cover: "/images/thumbnails/cybersec-cover-1.jpeg",
   },
 
   {
@@ -80,7 +80,7 @@ const CATEGORIES = [
       { info: "Work with realistic datasets" },
       { info: "Connect databases to apps" },
     ],
-    cover: "assets/images/database-cover-course-main.jpg",
+    cover: "/images/database-cover-course-main.jpg",
   },
 
   {
@@ -101,7 +101,7 @@ const CATEGORIES = [
       { info: "Work with REST APIs" },
       { info: "Practice basic deployment concepts" },
     ],
-    cover: "assets/images/thumbnails/web-dev-main.jpg",
+    cover: "/images/thumbnails/web-dev-main.jpg",
   },
 
   {
@@ -122,7 +122,7 @@ const CATEGORIES = [
       { info: "Combine topics into applied tasks" },
       { info: "Build portfolio-ready work" },
     ],
-    cover: "assets/images/thumbnails/cat-ai-cover.jpeg",
+    cover: "/images/thumbnails/cat-ai-cover.jpeg",
   },
 
   

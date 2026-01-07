@@ -1,3 +1,4 @@
+
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -5,6 +6,11 @@ import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@a
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { AuthInterceptor } from './app/services/auth.interceptor';
+
+import './styles.css';
+
+import './assets/js/ui/ui-bundle.js';
+
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -1,160 +1,132 @@
 <header class="intro-container courses">
-    <div class="title-container courses">
-        <h1>Book List</h1>
+  <div class="title-container courses">
+    <h1>Book List</h1>
 
-        <a class="book-see-all-btn" href="#book-menu">See all</a>
+    <a class="book-see-all-btn" href="#book-menu">See all</a>
 
-        <p>
-            Browse our curated selection of Informatics books and choose the
-            titles you want to explore. Use the filters to find books by topic and
-            level, and open any book to view its details.
-        </p>
-    </div>
+    <p>
+      Browse our curated selection of Informatics books and choose the titles you want to explore.
+      Use the filters to find books by topic and level, and open any book to view its details.
+    </p>
+  </div>
 
-    <div class="tag-row books">
-        <div class="tag">The</div>
-        <div class="tag">Best</div>
-        <div class="tag">Sellers</div>
-    </div>
+  <div class="tag-row books">
+    <div class="tag">The</div>
+    <div class="tag">Best</div>
+    <div class="tag">Sellers</div>
+  </div>
 
-    <div class="slider-wrapper">
-        <div class="card-carousel" id="prefered-books-wrapper">
-            <a class="card" *ngFor="let book of proposed; trackBy: trackById" [routerLink]="['/book-details', book.bookId]">
-                <div class="card-info">
-                    <div class="tag-row">
-                        <div class="tag">{{ book.category }}</div>
-                        <div class="tag">{{ book.difficulty }}</div>
-                    </div>
+  <div class="slider-wrapper">
+    <div class="card-carousel" id="prefered-books-wrapper">
+      <a
+        class="card"
+        *ngFor="let book of proposed; trackBy: trackById"
+        [routerLink]="['/book-details', book.bookId]"
+      >
+        <div class="card-info">
+          <div class="tag-row">
+            <div class="tag">{{ book.category }}</div>
+            <div class="tag">{{ book.difficulty }}</div>
+          </div>
 
-                    <h2>{{ book.title }}</h2>
-                    <p>{{ sliceWords(book.description, 26) }}</p>
-                </div>
-
-                <div class="card-img-cont">
-                    <img [src]="book.cover" [alt]="book.title" draggable="false" />
-                </div>
-            </a>
+          <h2>{{ book.title }}</h2>
+          <p>{{ sliceWords(book.description, 26) }}</p>
         </div>
 
+        <div class="card-img-cont">
+          <img [src]="book.cover" [alt]="book.title" draggable="false" />
+        </div>
+      </a>
     </div>
+  </div>
 </header>
 
 <section class="courses-page" id="book-menu">
-    <div class="filter-button-results-wrapper">
-        <span id="results-count" class="results-count">
-            Books ({{ filteredBooks.length }})
-        </span>
-        <button id="filter-toggle" class="filter-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-filter"
-                viewBox="0 0 16 16">
-                <path
-                    d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
-            </svg>
-            Filters
-        </button>
 
-        <button id="toggle-filter-menu" class="toggle-filter-menu">
-            Hide Filters
-        </button>
-    </div>
+  <app-filter-sidebar label="Books" [count]="filteredBooks.length">
 
-    <div id="filter-backdrop" class="filter-backdrop"></div>
+    <div filters>
+      <!-- CATEGORY -->
+      <div class="filter-box">
+        <span>Category</span>
 
-    <div class="course-layout">
-        <aside class="filter-sidebar">
-            <div class="filters-header">
-                <h2>Filters</h2>
-                <i class="fa-solid fa-x" id="filter-close"></i>
-            </div>
-
-            <!-- CATEGORY -->
-            <div class="filter-box">
-                <span>Category</span>
-
-                <div class="checkbox-wrapper" 
-                *ngFor="let cat of categoryOptions">
-                    <input class="inp-cbx" 
-                    [id]="'cat-' + cat.value" 
-                    type="checkbox" 
-                    [value]="cat.value"
-                        (change)="onCategoryChange(cat.value, $event)" />
-                    <label class="cbx" [for]="'cat-' + cat.value">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>{{ cat.label }}</p>
-                    </label>
-                </div>
-            </div>
-
-            <!-- DIFFICULTY -->
-            <div class="filter-box">
-                <span>Difficulty</span>
-
-                <div class="checkbox-wrapper" 
-                *ngFor="let lvl of levelOptions">
-                
-                    <input class="inp-cbx" 
-                    [id]="'diff-' + lvl.value" 
-                    type="checkbox" 
-                    [value]="lvl.value"
-                    (change)="onLevelChange(lvl.value, $event)" 
-                    />
-                    <label class="cbx" [for]="'diff-' + lvl.value">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>{{ lvl.label }}</p>
-                    </label>
-                </div>
-            </div>
-
-            <!-- AVAILABLE -->
-            <div class="filter-box">
-                <div class="checkbox-wrapper">
-                    <input class="inp-cbx" id="filter-available" type="checkbox" (change)="onAvailableChange($event)" />
-                    <label class="cbx" for="filter-available">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>Only available</p>
-                    </label>
-                </div>
-            </div>
-        </aside>
-
-
-        <div class="course-grid" id="books-list">
-            <p *ngIf="loading">Loading...</p>
-            <p *ngIf="error">{{ error }}</p>
-
-            <a class="course-product book" *ngFor="let book of filteredBooks; trackBy: trackById" style="cursor: pointer"
-                [routerLink]="['/book-details', book.bookId]">
-                <div class="course-info">
-                    <div class="course-intro-info">
-                        <div class="tag-row">
-                            <span class="tag" [ngClass]="book.available ? 'available' : 'unavailable'">
-                                {{ book.available ? 'Available' : 'Unavailable' }}
-                            </span>
-                            <span class="tag category">{{ book.category }}</span>
-                            <span class="tag category">{{ book.difficulty }}</span>
-                        </div>
-
-                        <h3>{{ book.title }}</h3>
-                        <p>{{ sliceWords(book.description, 26)}}</p>
-                    </div>
-                    <div class="card-img-cont">
-                        <img [src]="book.cover" [alt]="book.title" draggable="false" />
-                    </div>
-                </div>
-            </a>
+        <div class="checkbox-wrapper" *ngFor="let cat of categoryOptions">
+          <input
+            class="inp-cbx"
+            [id]="'cat-' + cat.value"
+            type="checkbox"
+            [value]="cat.value"
+            (change)="onCategoryChange(cat.value, $event)"
+          />
+          <label class="cbx" [for]="'cat-' + cat.value">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>{{ cat.label }}</p>
+          </label>
         </div>
+      </div>
 
+      <!-- DIFFICULTY -->
+      <div class="filter-box">
+        <span>Difficulty</span>
+
+        <div class="checkbox-wrapper" *ngFor="let lvl of levelOptions">
+          <input
+            class="inp-cbx"
+            [id]="'diff-' + lvl.value"
+            type="checkbox"
+            [value]="lvl.value"
+            (change)="onLevelChange(lvl.value, $event)"
+          />
+          <label class="cbx" [for]="'diff-' + lvl.value">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>{{ lvl.label }}</p>
+          </label>
+        </div>
+      </div>
+
+      <!-- AVAILABLE -->
+      <div class="filter-box">
+        <div class="checkbox-wrapper">
+          <input
+            class="inp-cbx"
+            id="filter-available"
+            type="checkbox"
+            (change)="onAvailableChange($event)"
+          />
+          <label class="cbx" for="filter-available">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>Only available</p>
+          </label>
+        </div>
+      </div>
     </div>
+
+    <div grid class="course-grid" id="books-list">
+      <p *ngIf="loading">Loading...</p>
+      <p *ngIf="error">{{ error }}</p>
+
+      <app-book-card
+        *ngFor="let book of filteredBooks; trackBy: trackById"
+        [book]="book"
+      ></app-book-card>
+
+      <p *ngIf="!loading && !error && filteredBooks.length === 0" style="color:white;">
+        No books found.
+      </p>
+    </div>
+
+  </app-filter-sidebar>
+
 </section>

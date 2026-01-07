@@ -13,7 +13,6 @@ const usersRoutes = require("./routes/users.routes");
 const enrollmentsRoutes = require("./routes/enrollments.routes");
 const reviewsRoutes = require("./routes/reviews.routes");
 const errorHandler = require("./middleware/errorHandler");
-const userRoutes = require("./routes/users.routes");
 const authRoutes = require("./routes/auth.routes");
 
 const app = express();

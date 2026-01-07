@@ -6,7 +6,7 @@ import {
   NgZone,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Subject, forkJoin } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
@@ -26,7 +26,6 @@ import { UiInitService } from '../../services/ui-init.service';
   imports: [CommonModule, RouterLink],
   templateUrl: './categories.component.html',
 })
-
 export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   error = '';
@@ -47,47 +46,70 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
   private pendingFragment: string | null = null;
 
   private scrollToFragmentIfAny(): void {
-    const frag = (this.pendingFragment || '').trim();
+    const frag = (this.pendingFragment || '').trim().toLowerCase();
     if (!frag) return;
 
-    const doScroll = () => {
-      const el = document.getElementById(frag);
-      if (!el) return;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+    const scrollNow = () => this.scrollToAnchorWithOffset(frag);
+    // If it's already there, scroll immediately
+    if (document.getElementById(frag)) {
+      scrollNow();
+      return;
+    }
 
-    // 1) after Angular renders
-    this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-      doScroll();
+    // Otherwise observe DOM until it appears (max ~5s)
+    const root = document.getElementById('categories-full') || document.body;
 
-      // 2) after your slider scripts change layout
-      setTimeout(doScroll, 250);
-      setTimeout(doScroll, 700);
+    const obs = new MutationObserver(() => {
+      if (document.getElementById(frag)) {
+        obs.disconnect();
+        scrollNow();
+
+        // one extra retry after layout scripts (slider/reveal) settle
+        setTimeout(scrollNow, 300);
+        setTimeout(scrollNow, 900);
+      }
     });
+
+    obs.observe(root, { childList: true, subtree: true });
+
+    // Safety stop
+    setTimeout(() => obs.disconnect(), 5000);
+  }
+
+  private getNavOffsetPx(): number {
+    const css = getComputedStyle(document.documentElement).getPropertyValue('--nav-height');
+    const n = parseFloat(css) + 50;
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  private scrollToAnchorWithOffset(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const offset = this.getNavOffsetPx();
+    const y = window.scrollY + el.getBoundingClientRect().top - offset - 10; // extra 10px padding
+    window.scrollTo({ top: y, behavior: 'smooth' });
   }
   // ---------------------------------------------------------------//
   // ---------------------------------------------------------------//
   // ---------------------------------------------------------------//
-
-
 
   constructor(
     private api: ApiService,
     private ui: UiInitService,
     private zone: NgZone,
     private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private viewportScroller: ViewportScroller
+  ) {}
 
   ngOnInit(): void {
     // watch #fragment changes (works even when navigating from footer)
-    this.route.fragment
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((frag) => {
-        this.pendingFragment = frag;
-        // if already loaded, scroll now
-        if (!this.loading) this.scrollToFragmentIfAny();
-      });
+    this.route.fragment.pipe(takeUntil(this.destroy$)).subscribe((frag) => {
+      this.pendingFragment = frag;
+      // if already loaded, scroll now
+      if (!this.loading) this.scrollToFragmentIfAny();
+    });
 
     this.loadAll();
   }
@@ -122,16 +144,18 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
           // normalize categories to always match your template (objects with {label}/{info})
           this.categories = (cats ?? []).map((c: any) => ({
             ...c,
-            slug: String(c.slug || '').trim().toLowerCase(),
+            slug: String(c.slug || '')
+              .trim()
+              .toLowerCase(),
             label_list: Array.isArray(c.label_list)
               ? c.label_list.map((x: any) =>
-                typeof x === 'string' ? ({ label: x } as CategoryLabelList) : x
-              )
+                  typeof x === 'string' ? ({ label: x } as CategoryLabelList) : x
+                )
               : [],
             info_list: Array.isArray(c.info_list)
               ? c.info_list.map((x: any) =>
-                typeof x === 'string' ? ({ info: x } as CategoryInfoList) : x
-              )
+                  typeof x === 'string' ? ({ info: x } as CategoryInfoList) : x
+                )
               : [],
           }));
 
@@ -165,7 +189,9 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
     const rec: Record<string, { course: Course | null; books: Book[] }> = {};
 
     for (const cat of this.categories) {
-      const slug = String(cat.slug || '').trim().toLowerCase();
+      const slug = String(cat.slug || '')
+        .trim()
+        .toLowerCase();
 
       // 1 course: available in same category, prefer featured
       const courseCandidates = this.courses.filter(
@@ -187,6 +213,14 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.recommendations = rec;
   }
+  private scrollToFragmentAfterRender() {
+    const frag = this.route.snapshot.fragment;
+    if (!frag) return;
+
+    this.zone.onStable.pipe(take(1)).subscribe(() => {
+      this.viewportScroller.scrollToAnchor(frag);
+    });
+  }
 
   // --- UI helpers ---
   pad2(n: number): string {
@@ -207,7 +241,9 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private pickTextColor(hex: string): string {
-    const h = String(hex || '').replace('#', '').slice(0, 6);
+    const h = String(hex || '')
+      .replace('#', '')
+      .slice(0, 6);
     const n = parseInt(h, 16);
     const r = (n >> 16) & 255;
     const g = (n >> 8) & 255;
@@ -217,7 +253,10 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sliceWords(text: string, maxWords = 26): string {
-    const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+    const words = String(text || '')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
     if (words.length <= maxWords) return words.join(' ');
     return words.slice(0, maxWords).join(' ') + '…';
   }
@@ -242,7 +281,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit, OnDestroy {
       setTimeout(call, 500);
 
       const fonts: any = (document as any).fonts;
-      if (fonts?.ready) fonts.ready.then(call).catch(() => { });
+      if (fonts?.ready) fonts.ready.then(call).catch(() => {});
     });
   }
 }

@@ -7,7 +7,7 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/python-course-thumb-nail-big.jpeg",
+    cover: "/images/thumbnails/python-course-thumb-nail-big.jpeg",
     description:
       "Learn the fundamentals of Python, one of the most popular programming languages today. This course covers variables, data types, loops, functions, and basic problem-solving techniques. Ideal for absolute beginners looking to enter the world of coding with a friendly and powerful language.",
     learningGoals: [
@@ -148,7 +148,7 @@ const COURSES = [
     difficulty: "advanced",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/main-image-9.jpeg",
+    cover: "/images/thumbnails/main-image-9.jpeg",
     description:
       "Go beyond the basics and master advanced Python concepts including decorators, generators, object-oriented programming, memory management, and performance optimization.",
     learningGoals: [
@@ -286,7 +286,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/networks-cover-big.jpeg",
+    cover: "/images/thumbnails/networks-cover-big.jpeg",
     description:
       "Understand how computers communicate across modern networks. Explore layers, routing principles, TCP/IP, DNS, and protocols that power the internet.",
     learningGoals: [
@@ -412,7 +412,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/networks-cover-2.jpg",
+    cover: "/images/thumbnails/networks-cover-2.jpg",
     description:
       "Hands-on troubleshooting mindset with tools like ping, traceroute, nslookup, and basic Wi-Fi diagnostics. Focused on real scenarios students face in labs.",
     learningGoals: [
@@ -538,7 +538,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/cybersec-cover-3.jpg",
+    cover: "/images/thumbnails/cybersec-cover-3.jpg",
     description:
       "A comprehensive introduction to core cybersecurity principles: attack types, encryption fundamentals, authentication, secure communication, and best practices.",
     learningGoals: [
@@ -666,7 +666,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/cover-6.jpg",
+    cover: "/images/thumbnails/cover-6.jpg",
     description:
       "Learn how to write safer code by understanding common vulnerabilities such as injection, insecure authentication, and poor input validation.",
     learningGoals: [
@@ -796,7 +796,7 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: false,
-    cover: "assets/images/thumbnails/dabases-cover-2.jpg",
+    cover: "/images/thumbnails/dabases-cover-2.jpg",
     description:
       "Learn how to store, organize, and query data using SQL. Covers table design, relationships, CRUD, joins, filtering, and real query examples.",
     learningGoals: [
@@ -929,7 +929,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/databases-cover-5.jpg",
+    cover: "/images/thumbnails/databases-cover-5.jpg",
     description:
       "Move beyond queries and learn how to model data properly. Covers normalization, relationships, schema design, and real-use cases from web applications.",
     learningGoals: [
@@ -1057,7 +1057,7 @@ const COURSES = [
     difficulty: "beginner",
     available: false,
     featured: false,
-    cover: "assets/images/thumbnails/cover-2.jpg",
+    cover: "/images/thumbnails/cover-2.jpg",
     description:
       "Learn modern HTML structure and responsive CSS layouts. Includes flexbox, grid basics, and small page-building exercises.",
     learningGoals: [
@@ -1186,7 +1186,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: false,
-    cover: "assets/images/thumbnails/js-cover-3.jpg",
+    cover: "/images/thumbnails/js-cover-3.jpg",
     description:
       "Make websites interactive by mastering events, DOM manipulation, basic state patterns, and browser APIs.",
     learningGoals: [
@@ -1314,7 +1314,7 @@ const COURSES = [
     difficulty: "beginner",
     available: true,
     featured: true,
-    cover: "assets/images/thumbnails/cat-ai-cover.jpeg",
+    cover: "/images/thumbnails/cat-ai-cover.jpeg",
     description:
       "Learn core AI concepts with simple, visual explanations and hands-on mini tasks. Focuses on how models learn and how to use AI responsibly.",
     learningGoals: [
@@ -1446,7 +1446,7 @@ const COURSES = [
     difficulty: "intermediate",
     available: true,
     featured: false,
-    cover: "assets/images/thumbnails/cover-25.jpg",
+    cover: "/images/thumbnails/cover-25.jpg",
     description:
       "A practical workshop on using modern AI tools effectively: prompting, workflows, evaluation, and building small AI-assisted projects.",
     learningGoals: [

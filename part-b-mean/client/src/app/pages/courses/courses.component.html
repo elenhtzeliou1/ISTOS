@@ -1,150 +1,116 @@
 <header class="intro-container courses">
-    <div class="title-container courses">
-        <h1>Course List</h1>
-        <a class="book-see-all-btn" href="#choose-category">View All</a>
-        <p>
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, by injected
-            humour.
-        </p>
-    </div>
+  <div class="title-container courses">
+    <h1>Course List</h1>
+    <a class="book-see-all-btn" href="#choose-category">View All</a>
+    <p>
+      There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+      alteration in some form, by injected humour.
+    </p>
+  </div>
 
-    <div class="tag-row">
-        <div class="tag">The</div>
-        <div class="tag">Most</div>
-        <div class="tag">Viewed</div>
-    </div>
+  <div class="tag-row">
+    <div class="tag">The</div>
+    <div class="tag">Most</div>
+    <div class="tag">Viewed</div>
+  </div>
 
-    <div class="carousel-proposed-video-wrapper">
-        <div class="proposed-video-container">
-            <div class="proposed-video-carousel" id="proposed-courses-carousel" #proposedCarousel>
-                <a #proposedCard class="proposed-video-card" *ngFor="let c of proposed; trackBy: trackById"
-                    [routerLink]="['/course-details', c._id]" 
-                    draggable="false">
-                    <div class="proposed-video-vd-wrapper">
-                        <img [src]="c.cover" [alt]="c.title" draggable="false" />
-                    </div>
-                    <div class="proposed-video-content">
-                        <p>{{ c.title }}</p>
-                    </div>
-                </a>
-            </div>
-
-        </div>
+  <div class="carousel-proposed-video-wrapper">
+    <div class="proposed-video-container">
+      <div class="proposed-video-carousel" id="proposed-courses-carousel" #proposedCarousel>
+        <a
+          #proposedCard
+          class="proposed-video-card"
+          *ngFor="let c of proposed; trackBy: trackById"
+          [routerLink]="['/course-details', c._id]"
+          draggable="false"
+        >
+          <div class="proposed-video-vd-wrapper">
+            <img [src]="c.cover" [alt]="c.title" draggable="false" />
+          </div>
+          <div class="proposed-video-content">
+            <p>{{ c.title }}</p>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
 </header>
 
 <section class="courses-page" id="choose-category">
-    <div class="filter-button-results-wrapper">
-        <span id="results-count" class="results-count">
-            Courses ({{ filteredCourses.length }})
-        </span>
-        <button id="filter-toggle" class="filter-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-filter"
-                viewBox="0 0 16 16">
-                <path
-                    d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
-            </svg>
-            Filters
-        </button>
 
-        <button id="toggle-filter-menu" class="toggle-filter-menu">
-            Hide Filters
-        </button>
-    </div>
+  <app-filter-sidebar label="Courses" [count]="filteredCourses.length">
 
-    <div id="filter-backdrop" class="filter-backdrop"></div>
-
-    <div class="course-layout">
-        <aside class="filter-sidebar">
-            <div class="filters-header">
-                <h2>Filters</h2>
-                <i class="fa-solid fa-x" id="filter-close"></i>
-            </div>
-
-            <div class="filter-box">
-                <span>Category</span>
-
-                <div class="checkbox-wrapper" *ngFor="let cat of categoryOptions">
-                    <input class="inp-cbx" [id]="'cat-' + cat.value" type="checkbox" name="filter-category"
-                        [value]="cat.value" (change)="onCategoryChange(cat.value, $event)" />
-                    <label class="cbx" [for]="'cat-' + cat.value">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>{{ cat.label }}</p>
-                    </label>
-                </div>
-            </div>
-
-
-            <div class="filter-box">
-                <span>Difficulty</span>
-
-                <div class="checkbox-wrapper" *ngFor="let lvl of levelOptions">
-                    <input class="inp-cbx" [id]="'diff-' + lvl.value" type="checkbox" name="filter-difficulty"
-                        [value]="lvl.value" (change)="onLevelChange(lvl.value, $event)" />
-                    <label class="cbx" [for]="'diff-' + lvl.value">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>{{ lvl.label }}</p>
-                    </label>
-                </div>
-            </div>
-
-            <div class="filter-box">
-                <div class="checkbox-wrapper">
-                    <input class="inp-cbx" id="filter-available" type="checkbox" (change)="onAvailableChange($event)" />
-
-                    <label class="cbx" for="filter-available">
-                        <span>
-                            <svg width="12" height="10" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                        </span>
-                        <p>Only available</p>
-                    </label>
-                </div>
-            </div>
-        </aside>
-
-        <div class="course-grid" id="course-list">
-            <p *ngIf="loading">Loading...</p>
-            <p *ngIf="error">{{ error }}</p>
-
-            <div class="course-product" *ngFor="let course of filteredCourses" 
-                [routerLink]="['/course-details', course._id]">
-                
-                <div class="course-info">
-                    <div class="course-intro-info">
-                        <div class="tag-row">
-                            <span class="tag" [ngClass]="course.available ? 'available' : 'unavailable'">
-                                {{ course.available ? 'Available' : 'Unavailable' }}
-                            </span>
-                            <span class="tag category">{{ course.category }}</span>
-                            <span class="tag category">{{ course.difficulty }}</span>
-                        </div>
-
-                        <h3>{{ course.title }}</h3>
-                        <p>{{ course.description }}</p>
-                    </div>
-
-                    <!-- 2 qest-->
-                    <div class="course-faq" *ngIf="course.questions?.length">
-                        <div class="course-faq-item" *ngFor="let q of course.questions | slice:0:2; let i = index">
-                            <span class="course-faq-index">{{ (i + 1) | number:'2.0' }}</span>
-                            <p>{{ q.question }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div filters>
+      <!-- Category -->
+      <div class="filter-box">
+        <span>Category</span>
+        <div class="checkbox-wrapper" *ngFor="let cat of categoryOptions">
+          <input class="inp-cbx"
+            [id]="'cat-' + cat.value"
+            type="checkbox"
+            [value]="cat.value"
+            (change)="onCategoryChange(cat.value, $event)" />
+          <label class="cbx" [for]="'cat-' + cat.value">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>{{ cat.label }}</p>
+          </label>
         </div>
+      </div>
 
+      <!-- Difficulty -->
+      <div class="filter-box">
+        <span>Difficulty</span>
+        <div class="checkbox-wrapper" *ngFor="let lvl of levelOptions">
+          <input class="inp-cbx"
+            [id]="'diff-' + lvl.value"
+            type="checkbox"
+            [value]="lvl.value"
+            (change)="onLevelChange(lvl.value, $event)" />
+          <label class="cbx" [for]="'diff-' + lvl.value">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>{{ lvl.label }}</p>
+          </label>
+        </div>
+      </div>
 
+      <!-- Available -->
+      <div class="filter-box">
+        <div class="checkbox-wrapper">
+          <input class="inp-cbx" id="filter-available" type="checkbox" (change)="onAvailableChange($event)" />
+          <label class="cbx" for="filter-available">
+            <span>
+              <svg width="12" height="10" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </svg>
+            </span>
+            <p>Only available</p>
+          </label>
+        </div>
+      </div>
     </div>
+
+    <div grid class="course-grid" id="course-list" #courseList>
+      <p *ngIf="loading">Loading...</p>
+      <p *ngIf="error">{{ error }}</p>
+
+      <app-course-card
+        *ngFor="let course of filteredCourses; trackBy: trackById"
+        [course]="course"
+      ></app-course-card>
+
+      <p *ngIf="!loading && !error && filteredCourses.length === 0" style="color:white;">
+        No courses found.
+      </p>
+    </div>
+
+  </app-filter-sidebar>
+
 </section>
