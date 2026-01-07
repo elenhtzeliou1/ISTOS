@@ -1,56 +1,88 @@
-
-## `client/README-client.md`
-
-```md
 # InfoHub Frontend (Client) — Part B
 
-Frontend της πλατφόρμας e-learning, φτιαγμένο με Angular (standalone components) και Vite.
-Τα δεδομένα (courses/books/videos/categories/users) **δεν είναι hardcoded** — έρχονται από το backend REST API.
+This repository contains the **frontend** of the InfoHub e-learning platform, built with **Angular (standalone components)** and **Vite**.
 
-Αντί για fetch() έχει χρησιμοποιηθεί Angular http client
+All data (courses, books, videos, categories, users, reviews, enrollments) is **fetched dynamically** from the backend **REST API** — nothing is hardcoded.
 
-Στον φακελο /components/ υπάρχουν πλέον τα:  navbar,footer,book-card, course-card, video-card, filter-sidebar, στοιχεία που επαναχρησιμοποιούνται στην σελίδα και το summary modal που χρησιμοποιείται στο register page.
-
-Έχει δημιουργηθεί και σελίδα Login
+The Angular **HttpClient** is used instead of the native `fetch()` API.
 
 ---
 
-## Προαπαιτούμενα
+## Project Structure
+
+Inside the `/components` directory you will find reusable UI components such as:
+
+- `navbar`
+- `footer`
+- `book-card`
+- `course-card`
+- `video-card`
+- `filter-sidebar`
+- Shared UI elements used across pages
+- `summary-modal` (used on the Register page)
+
+A dedicated **Login page** has also been implemented.
+
+---
+
+## Prerequisites
+
 - Node.js / npm
-- Ο server να τρέχει στο `http://localhost:5000`
+- Backend server running at: http://localhost:5000
 
 ---
 
-## Εγκατάσταση & Εκκίνηση
+## Installation & Running the Client
 
 ### 1) Install dependencies
 ```bash
-cd client
+cd part-b-mean/client
 npm install
+```
 
-Εκκίνηση dev server (Vite) με: 
+---
+
+### 2) Start Development Server (Vite)
+```bash
 npm run dev
+```
 
-Ο client τρέχει συνήθως στο:
+The client usually runs at:
 http://localhost:5173
 
-Σύνδεση Client -> Server (Proxy)
-Ο client χρησιμοποιεί relative URLs τύπου /api/....
+---
 
-Στο vite.config.ts έχει proxy:
+Client <-> Server Connection (Vite Proxy)
+The client uses relative API URLs (e.g. /api/...) instead of hardcoded backend URLs.
+
+
+In vite.config.ts, a proxy is configured as follows:
+```bash
 /api → http://localhost:5000
-Όλα τα requests που ξεκινάνε με /api προωθούνται σε http:localhost:5000
-Άρα όταν ο client κάνει:
-GET /api/courses  στην πραγματικότητα πηγαίνει στον backend server.
+```
+Example
+When the client makes a request such as:
+```bash
+GET /api/courses
+```
+It is internally forwarded to:
 
-Συνεπως ο client καλεί endpoints όπως:
+```bash
+http://localhost:5000/api/courses
+```
 
-    - /api/courses
+This allows the frontend to call endpoints like:
+ - /api/courses
+ - /api/books
+ - /api/videos
 
-    - /api/books
+ ---
 
-    - /api/videos
+## Troubleshooting
+If data does not load correctly, make sure that:
 
-χωρίς να γράφει hardcoded backend URL.
+The backend server is running
 
-Αν δεν φορτώνουν τα δεδομένα βεβαιωθείται πως έχετε εκινήσει τον server.
+The server is available at http://localhost:5000
+
+The Vite dev server is running (npm run dev)
