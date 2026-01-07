@@ -1,103 +1,222 @@
-Παρατηρήσεις για αξιολογητή
-Άνοιξτε πρώτα τον server (npm run dev στο server).
-Μετά τρέτξε τον client (npm run dev στο client).
-Αν δεν εμφανίζονται δεδομένα, έλεγξε ότι:
-    - έγινε seed (npm run seed:all)
-    - το MongoDB URI είναι σωστό στο server/.env
+# Part B – MEAN E-Learning Platform
 
+This repository contains **Part B** of the Web Development project, extending **Part A**
+into a full **client–server application** following the **MEAN architecture**
+(MongoDB, Express, Angular/Modular JS, Node.js).
 
-------------------------------------------------------------------------------------------------------
+The application implements a simple **e-learning platform**, where:
+- the **backend** provides a REST API (Node.js + Express + MongoDB),
+- the **frontend** consumes the API and renders dynamic content,
+- **no HTML is served by the server**, only JSON data.
 
-## `README-part-b.md` (στο root του `part-b-mean/`)
-# InfoHub — Part B (MEAN Client–Server)
+---
 
-Στόχος του Part B είναι η μετάβαση από στατικό frontend (Part A) σε πλήρη client–server εφαρμογή:
-- **MongoDB (mongoose)** : αποθήκευση δεδομένων (users, courses, books, videos, categories, enrollments, reviews)
-- **Express/Node.js**: REST API
-- **Angular + Vite**: η client εφαρμογή που αντλεί δεδομένα από το API
-
-## Δομή φακέλων project
+## Folder Stracture
 - `server/` → Node/Express API + MongoDB (Mongoose)
 - `client/` → Angular (standalone components) + Vite dev server
 
-## Για γρήγορη εκκίνηση, ακολουθήστε τα παρακάτω βήματα:
+---
 
-### 1) Server
+## Prerequisites
+
+Before running the project, ensure you have:
+
+- **Node.js ≥ 18**
+- **npm ≥ 9**
+- **MongoDB** (local installation or MongoDB Atlas)
+
+Verify installation:
+
 ```bash
-cd server
+node -v
+npm -v
+```
+
+---
+
+## Backend – Server Setup: 
+
+### 1) Navigate to server Folder
+```bash
+cd part-b-mean/server
+```
+
+### 2) Install dependencies
+```bash
 npm install
-cp .env.example .env   # συμπληρώστε το .env με τα κατάλληλα στοιχεία -> δείτε .env.example
+```
+
+### 3) Environment variables
+
+cp .env.example .env   # set the .env with proper values -> see .env.example
+
+> If you use MongoDB Atlas, set `MONGODB_URI` to your Atlas connection string. For more information see the given .env.example
+
+---
+
+### 4) Seed the database (initial data)
+
+The project includes seed scripts to populate the database with example data.
+
+```bash
 npm run seed:all
-npm run dev
+```
 
-Ο server τρέχει στο URL: http://localhost:5000
+(This command, will insert sample courses, categories, reviews, videos, books and some users into MongoDB.)
 
+---
 
-### 2)  Client
-cd client
+### 5) Start the server
+```bash
+-Development (nodemon):
+    npm run dev για 
+or 
+-για Production mode
+npm start 
+```
+
+(we reccomend npm start)
+
+```
+
+The server will run at:
+
+```text
+http://localhost:5000
+```
+
+---
+
+## Backend – Available API Endpoints
+
+> The backend returns **JSON** and uses appropriate HTTP status codes (200/201/400/404/500).
+
+Some example endpoints:
+
+| Method | Endpoint           | Description               |
+|------- |------------------- |------------------------   |
+| GET    | `/api/courses`     | Retrieve all courses      |
+| GET    | `/api/courses/:id` | Retrieve course details   |
+| POST   | `/api/users`       | Register a new user       |
+| POST   | `/api/enrollments` | Enroll a user in a course |
+| POST   | `/api/reviews`     | Submit a course review    |
+
+For more information about the working endpoints, check README-server.md
+
+---
+
+## Frontend – Client Setup
+
+### 1) Navigate to the client folder
+
+```bash
+cd part-b-mean/client
+```
+
+### 2) Install dependencies
+
+```bash
 npm install
+```
+
+
+### 3) Start the client
+
+```bash
 npm run dev
+```
 
-Ο Client τρέχει στο URL: http://localhost:5173
+The client will run at:
 
-Ροή δεδομένων (Data flow)
+```text
+http://localhost:5173
+```
 
-Ο client ζητά δεδομένα (π.χ. Courses/Books/Videos/Categories) μέσω GET /api/...
+--- 
 
-Ο server απαντά με JSON από MongoDB (Mongoose models)
-Για actions χρήστη:
-    - Register: POST /api/users
-    - Login: POST /api/auth/login (επιστρέφει JWT)
-    - Enroll: POST /api/enrollments (απαιτεί JWT)
-    - Review: PUT /api/reviews/course/:courseId (απαιτεί JWT + enrolled)
+## Client–Server Communication
 
-Ο client χρησιμοποιεί proxy του Vite ώστε να καλεί /api/* χωρίς hardcoded backend URL.
+- The frontend **does not contain hardcoded data** for entities stored in MongoDB.
+- All dynamic content (courses list,book-list,video-list, course details, book-details, video-details, registration,login, enrollments, reviews) is handled via REST API calls.
+- API requests are centralized in:
 
-Η λειτουργικότητα που υλοποιήθηκε: 
+```text
+client/src/app/services/api.service.ts
+```
 
-    - Δυναμική φόρτωση λιστών (courses, books, videos, categories) από MongoDB μέσω REST API
+---
 
-    - Προτεινόμενο περιεχόμενο (proposed endpoints για courses/books/videos)
+## Application Flow (High Level)
 
-    - Εγγραφή χρήστη (register) + login (JWT)
+1. User opens the frontend (client)
+2. Frontend requests data via REST API
+3. Server queries MongoDB
+4. Server returns JSON responses from MongoDB (via Mongoose models)
+5. Frontend renders content dynamically
 
-    - Προφίλ χρήστη (GET/PUT /me)
+---
 
-    - Enrollment σε course (JWT protected)
+## User Actions:
 
-    - Reviews ανά course (public read + protected write/update)
+ - Register: POST /api/users
+ - Login: POST /api/auth/login (returns JWT)
+ - Enroll: POST /api/enrollments (JWT required)
+ - Review: PUT /api/reviews/course/:courseId (JWT + enrollment required)
 
-Endpoints (Σύνοψη)
+The client uses Vite’s proxy so it can call /api/* without a hardcoded backend URL.
 
-Auth: POST /api/auth/login
+---
 
-Users: POST /api/users, GET /api/users/check, GET/PUT /api/users/me
+##  Implemented Functionality
+
+ - Dynamic loading of lists (courses, books, videos, categories) from MongoDB via REST API
+ - Recommended content (proposed endpoints for courses/books/videos)
+ - User registration and login (JWT-based authentication)
+ - User profile management (GET/PUT /me)
+
+ - Course enrollment (JWT-protected)
+
+ - Course reviews (public read + protected create/update)
+
+--- 
+
+## Endpoints (Summary)
+
+Auth: 
+ - POST /api/auth/login
+
+Users: 
+ - POST /api/users, 
+ - GET /api/users/check, 
+ - GET/PUT /api/users/me
 
 Categories: 
-GET /api/categories, 
-GET /api/categories/:id
+ - GET /api/categories, 
+ - GET /api/categories/:id
 
 Courses: 
-GET /api/courses, 
-GET /api/courses/proposed, ή και GET /api/courses/proposed?limit=4
-GET /api/courses/:id
+ - GET /api/courses, 
+ - GET /api/courses/proposed, ή και GET /api/courses/proposed?limit=4
+ - GET /api/courses/:id
 
 Books:
-GET /api/books, 
-GET /api/books/proposed, 
-GET /api/books/by-book-id/:bookId, 
-GET /api/books/:id
+ - GET /api/books, 
+ - GET /api/books/proposed, 
+ - GET /api/books/by-book-id/:bookId, 
+ - GET /api/books/:id
 
 Videos: 
-GET /api/videos, 
-GET /api/videos/proposed, 
-GET /api/videos/:id
-GET /api/videos/by-ids?ids=1 
+ - GET /api/videos, 
+ - GET /api/videos/proposed, 
+ - GET /api/videos/:id
+ - GET /api/videos/by-ids?ids=1 
 
+---
 
 Users: 
 Register: 
-POST /api/users, 
+ - POST /api/users, 
+ required body: 
 BODY: {
   "firstName": "John", 
   "lastName": "Doe",
@@ -109,53 +228,77 @@ BODY: {
   "goal": "Learn web development", 
   "newsletter": false, 
   "password": "123456e" 
- }
+}
 
+---
 
 Login:
-POST /api/auth/login
+ - POST /api/auth/login
+required body: 
 BODY: {
   "email": "johnDoe@gmail.com",
   "password": "123456e"
 }
-save the token, will be need it for next endpoints
 
-GET /api/users/me
+Save the returned token — it is required for subsequent endpoints.
+
+---
+
+User Profile
+ - GET /api/users/me
+
+---
 
 Enrollments: 
 Create an enrollment:
 Body {
     "course" : "694b365abc0529f3daed8b9f"
     }
-POST /api/enrollments, 
+ - POST /api/enrollments, 
 
-Get all the enrollments for the user that is logged in:
-GET /api/enrollments/me/enrollments
+Get all the enrollments for the logged in user:
+ - GET /api/enrollments/me/enrollments
+
+---
 
 Reviews: 
-GET /api/reviews/course/:courseId, 
+Get reviews for a course:
+ - GET /api/reviews/course/:courseId, 
 
-Create a review (needs to be enrolled to the course that you want to leave a review):
+Create a review (User must be enrolled in the course):
 body {
    "rating": 4,
     "comment": "I find the course very helpful—well done!"
 }
 PUT /api/reviews/course/:courseId
 
-Get your reviews: 
-GET /api/reviews/course/:courseId/me, 
---------------------------------------------
+Get your own review for a course 
+ - GET /api/reviews/course/:courseId/me, 
 
-Ρυθμίσεις Περιβάλλοντος
+---
 
-Ο server χρησιμοποιεί:
+## Environment Configuration
 
-MONGODB_URI
+The server uses the following environment variables:
 
-PORT
+ - MONGODB_URI
+ - PORT
+ - JWT_SECRET
+ - JWT_EXPIRES_IN
 
-JWT_SECRET
+See: server/.env.example
 
-JWT_EXPIRES_IN
+--- 
 
-Δες: server/.env.example
+## Error Handling
+
+- Invalid requests return proper HTTP error codes (e.g., `400`, `404`)
+- Client displays success or failure messages based on server responses
+- Server includes centralized error handling middleware
+
+---
+
+ELENI TZELIOU: 3220200
+NAPOLEON HARALAMPIDIS: 3220225
+
+---
