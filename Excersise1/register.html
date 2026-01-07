@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta information ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Register</title>
 
-    <!-- Shared styles -->
+    <!-- ===== Shared global styles ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
 
-    <!-- Google Font -->
+    <!-- ===== Google Font ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,14 +22,18 @@
   </head>
 
   <body class="register-page-active">
+    <!-- ===== Main navigation (injected dynamically) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Registration main container ===== -->
     <main class="register-container">
       <h1>Create Your Account</h1>
       <p>Join our learning community and start your journey today.</p>
 
+      <!-- ===== Registration form ===== -->
+      <!-- Handles user creation and preferences via register-form.js -->
       <form id="register-form" class="register-form">
-        <!-- USER INFORMATION -->
+        <!-- ===== USER INFORMATION ===== -->
 
         <div class="from-row">
           <div class="form-column">
@@ -66,7 +71,7 @@
           <input type="date" id="dob" autocomplete="bday" required />
         </div>
 
-        <!-- ACCOUNT DETAILS -->
+        <!-- ===== ACCOUNT DETAILS ===== -->
 
         <div class="from-row">
           <div class="form-column">
@@ -91,7 +96,7 @@
           </div>
         </div>
 
-        <!-- LEARNING PREFERENCES -->
+        <!-- ===== LEARNING PREFERENCES ===== -->
 
         <div class="form-column">
           <label for="interest">Choose Category</label>
@@ -118,6 +123,8 @@
           </select>
         </div>
 
+        <!-- ===== USER GOALS ===== -->
+        <!-- Used to personalize learning suggestions -->
         <div class="form-column">
           <fieldset class="goals-fieldset">
             <legend class="goal-label">Your goal is:</legend>
@@ -144,35 +151,44 @@
           </fieldset>
         </div>
 
+        <!-- ===== OPTIONAL PREFERENCES ===== -->
         <div class="form-column last">
           <input type="checkbox" id="newsletter" name="newsletter" />
           <label for="newsletter"> Receive course recommendations</label>
         </div>
 
+        <!-- ===== FORM ACTIONS ===== -->
         <button type="submit" class="submit-btn">Create Account</button>
 
+        <!-- Shown only if an account already exists locally -->
         <button type="button" class="submit-btn" id="reset-account-btn" hidden>
           Reset account (start over)
         </button>
       </form>
     </main>
 
-    <!-- This section here shows in which course the user is subscribed/enrolled -->
+    <!-- ===== Enrollments summary ===== -->
+    <!-- Displays courses the user has subscribed to -->
     <section id="enrollments-panel" class="enrollments-panel" hidden>
       <h2>Courses you’ve subscribed to:</h2>
       <ul id="enrollments-list"></ul>
     </section>
 
-    <!--Footer -->
+    <!-- ===== Footer (injected dynamically) ===== -->
     <footer id="site-footer"></footer>
-    <!--Used scripts-->
+
+    <!-- ===== JavaScript ===== -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
     <script src="assets/js/ui/common/modal.js"></script>
+
+    <!-- Handles validation, storage, and registration logic -->
     <script src="assets/js/forms/register-form.js"></script>
 
+    <!-- Data dependencies -->
     <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/courses.js"></script>
 
+    <!-- App orchestrator -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

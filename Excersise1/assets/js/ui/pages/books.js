@@ -1,24 +1,29 @@
-//books-filter-page (books.html)
+// Books filter page logic (books.html)
+// Wrapped in an IIFE to avoid polluting the global scope
 (function () {
   function init() {
+    // Initialize shared filter UI (sidebar / mobile filters) if available
     if (window.FilterUI) {
       window.FilterUI.init();
     }
 
-    // main grid
+    // Main results grid and results counter
     const listContainer = document.getElementById("books-list");
     const resultsCount = document.getElementById("results-count");
 
+    // Guard: required container must exist
     if (!listContainer) {
       console.error("#books-list not found on books page.");
       return;
     }
 
+    // Guard: ensure books data is loaded
     if (typeof BOOKS === "undefined") {
       console.error("BOOKS data is missing. Check assets/js/data/books.js");
       return;
     }
-    // filters
+
+    // Filter controls
     const categoryCheckboxes = document.querySelectorAll(
       'input[name="filter-category"]'
     );
@@ -27,6 +32,7 @@
     );
     const availabilityFilter = document.getElementById("filter-available");
 
+    // Maps internal category keys to human-readable labels
     function prettyCategory(category) {
       switch (category) {
         case "programming":
@@ -44,20 +50,24 @@
       }
     }
 
+    // Renders the list of books into the grid
     function renderBooks(bookArray) {
       listContainer.innerHTML = "";
 
+      // Update results counter
       if (resultsCount) {
         const count = bookArray.length;
         resultsCount.textContent =
           count === 1 ? "Book (1)" : `Books (${count})`;
       }
 
+      // Empty state
       if (!bookArray.length) {
         listContainer.innerHTML = '<p style="color:white;">No books found.</p>';
         return;
       }
 
+      // Create and append a card for each book
       bookArray.forEach((book) => {
         const card = document.createElement("article");
         card.className = "course-product book";
@@ -88,6 +98,7 @@
           "></div>
         `;
 
+        // Navigate to book details page on click
         card.addEventListener("click", () => {
           window.location.href = `book-details.html?id=${encodeURIComponent(
             book.id
@@ -98,9 +109,11 @@
       });
     }
 
+    // Applies all active filters to the BOOKS dataset
     function applyFilters() {
       let filtered = [...BOOKS];
 
+      // Category filtering
       const selectedCategories = Array.from(categoryCheckboxes)
         .filter((cb) => cb.checked)
         .map((cb) => cb.value);
@@ -111,6 +124,7 @@
         );
       }
 
+      // Difficulty filtering
       const selectedDifficulties = Array.from(difficultyCheckboxes)
         .filter((cb) => cb.checked)
         .map((cb) => cb.value);
@@ -121,6 +135,7 @@
         );
       }
 
+      // Availability filtering
       if (availabilityFilter && availabilityFilter.checked) {
         filtered = filtered.filter((b) => b.available);
       }
@@ -128,18 +143,24 @@
       renderBooks(filtered);
     }
 
-   // Render based on current checkbox state (works on first load too)
+    // Initial render based on current checkbox state (handles first load)
     requestAnimationFrame(applyFilters);
 
-    // Re-apply filters when coming back via browser back/forward cache
+    // Re-apply filters when returning via browser back/forward cache
     window.addEventListener("pageshow", () => {
       requestAnimationFrame(applyFilters);
     });
 
-    categoryCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
-    difficultyCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
+    // Bind filter change listeners
+    categoryCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
+    difficultyCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
     availabilityFilter?.addEventListener("change", applyFilters);
   }
 
-  window.BooksPage = {init};
+  // Expose page initializer
+  window.BooksPage = { init };
 })();

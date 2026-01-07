@@ -1,5 +1,7 @@
-//menu (nav)and footer
+// Navigation (menu) and footer UI initializer
+// Wrapped in an IIFE to avoid polluting the global scope
 (function () {
+  // HTML template for the top navigation bar and expandable menu
   const NAV_HTML = `
     <!-- TOP BAR -->
 <div class="nav-top">
@@ -17,7 +19,7 @@
     <a href="index.html">InfoHub</a>
   </h2>
 
-  <!-- SIGN UP BUTTON -->
+  <!-- SIGN UP / PROFILE BUTTON -->
  <a href="register.html" id="account-link">Register</a>
 </div>
 
@@ -43,6 +45,7 @@
 
     `;
 
+  // HTML template for the footer, including accordion sections
   const FOOTER_HTML = `
 
 <div class="footer-box">
@@ -102,6 +105,7 @@
 
 `;
 
+  // Updates navigation and footer account links based on login state
   function refreshAccountUI() {
     const activeId = localStorage.getItem("ih_activeUserId");
     const accountLink = document.getElementById("account-link");
@@ -109,21 +113,24 @@
 
     const isActive = !!activeId;
 
+    // Update link text depending on whether a user is logged in
     if (accountLink)
       accountLink.textContent = isActive ? "Profile" : "Register";
     if (footerLink) footerLink.textContent = isActive ? "Profile" : "Register";
 
-    // same URL is fine: register.html becomes profile editor when active user exists
+    // Same URL is reused: register.html acts as profile editor when user exists
     if (accountLink) accountLink.href = "register.html";
     if (footerLink) footerLink.href = "register.html";
   }
 
+  // Initializes navigation behavior (mobile menu + hover effects)
   function initNav(navRoot) {
     if (!navRoot || navRoot.dataset.navBound === "1") return;
     navRoot.dataset.navBound = "1";
 
     const menuBtn = navRoot.querySelector("#openMenu");
     if (menuBtn) {
+      // Toggle mobile menu open/close state
       menuBtn.addEventListener("click", () => {
         navRoot.classList.toggle("mobile-open");
         menuBtn.classList.toggle("active");
@@ -131,7 +138,7 @@
       });
     }
 
-    // underline hover effect (μόνο αν έχεις αντίστοιχα CSS classes)
+    // Underline hover animation for navigation links (if CSS supports it)
     const links = navRoot.querySelectorAll(".group-link > a");
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
@@ -145,11 +152,12 @@
     });
   }
 
+  // Initializes footer behavior (accordion + dynamic category list)
   function initFooter(footerRoot) {
     if (!footerRoot || footerRoot.dataset.footerBound === "1") return;
     footerRoot.dataset.footerBound = "1";
 
-    // accordion logic
+    // Footer accordion toggle logic
     const triggers = footerRoot.querySelectorAll(".footer-accordion-trigger");
     triggers.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -159,22 +167,23 @@
 
         const isOpen = btn.getAttribute("aria-expanded") === "true";
 
+        // Update ARIA state and visibility
         btn.setAttribute("aria-expanded", String(!isOpen));
         panel.hidden = isOpen;
 
         if (!isOpen) {
-          // opening
+          // Opening panel
           panel.classList.add("is-open");
           panel.style.maxHeight = panel.scrollHeight + "px";
         } else {
-          // closing
+          // Closing panel
           panel.classList.remove("is-open");
           panel.style.maxHeight = "0px";
         }
       });
     });
 
-    // fill categories list
+    // Populate footer categories list dynamically
     const list = footerRoot.querySelector("#footer-cat-list");
     if (list) {
       const fill = () => {
@@ -184,6 +193,7 @@
 
         list.textContent = "";
 
+        // Fallback if no categories are available
         if (!Array.isArray(cats) || !cats.length) {
           const li = document.createElement("li");
           const a = document.createElement("a");
@@ -194,6 +204,7 @@
           return;
         }
 
+        // Render each category as a footer link
         cats.forEach((c) => {
           const li = document.createElement("li");
           const a = document.createElement("a");
@@ -211,6 +222,7 @@
     }
   }
 
+  // Main layout initializer: injects nav/footer HTML and binds behavior
   function init() {
     const nav = document.getElementById("site-nav");
     if (nav) {
@@ -223,9 +235,11 @@
       footer.innerHTML = FOOTER_HTML;
       initFooter(footer);
     }
-    refreshAccountUI();
 
+    // Sync account-related UI after layout injection
+    refreshAccountUI();
   }
 
-  window.Layout = { init,refreshAccountUI  };
+  // Expose layout initialization and account UI refresh
+  window.Layout = { init, refreshAccountUI };
 })();

@@ -1,23 +1,27 @@
-//the carousel from the header of categories.html
-
+// Ring-style carousel used in the header of categories.html
+// Wrapped in an IIFE to keep the global scope clean and avoid collisions
 (function () {
   function init() {
+    // Main slider container
     const slider = document.querySelector(".goal-slider");
     if (!slider) return;
 
-    // prevent double init
+    // Prevent double initialization (important if scripts are reloaded)
     if (slider.dataset.ringBound === "1") return;
     slider.dataset.ringBound = "1";
 
+    // Base items used as templates for building the circular ring
     const templateItems = Array.from(slider.querySelectorAll(".goal-item"));
     if (!templateItems.length) return;
 
     const templateCount = templateItems.length;
 
-    const GAP_DEG = 20.5;
-    const TILT_FACTOR = 1;
-    const DRAG_SPEED = 1.8;
+    // Configuration constants
+    const GAP_DEG = 20.5;     // angular gap between items (degrees)
+    const TILT_FACTOR = 1;   // tangent rotation strength
+    const DRAG_SPEED = 1.8;  // multiplier for drag sensitivity
 
+    // Compute how many slots are needed to fill the full circle
     const desiredGapRad = (GAP_DEG * Math.PI) / 180;
     const approxSlots = (2 * Math.PI) / desiredGapRad;
     let repeatCount = Math.max(2, Math.round(approxSlots / templateCount));
@@ -25,21 +29,25 @@
 
     const gapAngle = (2 * Math.PI) / SLOTS;
 
+    // Arrays holding all rendered items and their base angles
     const items = [];
     const baseAngles = [];
 
+    // Geometry and rotation state
     let radius = 0,
       cx = 0,
       cy = 0;
     let rotationOffset = 0;
 
+    // Drag state
     let isDragging = false;
     let dragStartAngle = 0;
     let rotationAtDragStart = 0;
 
+    // Snap animation tracking
     let snapAnimationId = null;
 
-    // separate click and drag
+    // Separate click vs drag handling
     const DRAG_THRESHOLD_PX = 5;
     let pointerDown = false;
     let moved = false;
@@ -47,7 +55,7 @@
       startY = 0;
     let suppressClick = false;
 
-    // cancel link navigation only after a drag happened
+    // Cancel link navigation only if a drag actually occurred
     slider.addEventListener(
       "click",
       (e) => {
@@ -58,7 +66,7 @@
       true
     );
 
-    // Build ring: clone templates into SLOTS
+    // --- Build ring: clone templates into SLOTS positions ---
     for (let i = 0; i < SLOTS; i++) {
       const src = templateItems[i % templateCount];
       let item;
@@ -71,6 +79,7 @@
         slider.appendChild(item);
       }
 
+      // Absolute positioning allows circular placement
       item.style.position = "absolute";
       item.style.transformOrigin = "50% 0%";
       item.dataset.slotIndex = i;
@@ -78,28 +87,31 @@
       items.push(item);
     }
 
+    // Equalize heights so all items align visually
     function equalizeItemHeights() {
-      // reset to natural height for measuring
+      // Reset to natural height for measurement
       items.forEach((it) => (it.style.height = "auto"));
 
-      // measure tallest
+      // Measure tallest item
       const maxH = Math.max(...items.map((it) => it.scrollHeight));
 
-      // lock all to same height
+      // Lock all items to the same height
       items.forEach((it) => (it.style.height = maxH + "px"));
     }
 
-    // helper:  height  geometry together
+    // Helper: recompute geometry and layout together
     function relayout() {
       equalizeItemHeights();
-      updateCircle(); // this calls positionAll()
+      updateCircle(); // also calls positionAll()
     }
 
+    // Base angles so one item is centered at the top
     const mid = Math.floor(SLOTS / 2);
     for (let i = 0; i < SLOTS; i++) {
       baseAngles[i] = (i - mid) * gapAngle - Math.PI / 2;
     }
 
+    // Keeps rotation offset within a reasonable range
     function normalizeRotation() {
       const twoPi = Math.PI * 2;
       if (rotationOffset > twoPi || rotationOffset < -twoPi) {
@@ -108,18 +120,17 @@
       }
     }
 
-    // Geometry & positioning
+    // Computes circle geometry based on container size
     function updateCircle() {
       const sliderWidth = slider.clientWidth;
 
       const baseRadius = sliderWidth / 2 + 1000;
-
       const itemWidth = items[0]?.offsetWidth || 0;
 
       const SPACING_FACTOR = 1.65;
-
       let r = baseRadius;
 
+      // Ensure enough arc length so items do not overlap
       if (itemWidth > 0) {
         const minArc = itemWidth * SPACING_FACTOR;
         const currentArc = r * gapAngle;
@@ -136,24 +147,27 @@
       positionAll();
     }
 
+    // Positions and rotates all items along the circle
     function positionAll() {
       items.forEach((item, index) => {
         const angle = baseAngles[index] + rotationOffset;
         const itemWidth = item.offsetWidth;
 
+        // Convert polar coordinates to screen coordinates
         const x = cx + radius * Math.cos(angle);
         const y = cy + radius * Math.sin(angle);
 
         item.style.left = x - itemWidth / 2 + "px";
         item.style.top = y + "px";
 
+        // Rotate item tangentially to the circle
         const rotationRad = (angle + Math.PI / 2) * TILT_FACTOR;
         const rotationDeg = (rotationRad * 180) / Math.PI;
         item.style.transform = `rotate(${rotationDeg}deg)`;
       });
     }
 
-    // Smooth snap back animation
+    // Smooth snapping animation to the nearest slot
     function animateToRotation(targetRotation) {
       if (snapAnimationId !== null) {
         cancelAnimationFrame(snapAnimationId);
@@ -168,6 +182,7 @@
         const elapsed = now - startTime;
         const t = Math.min(1, elapsed / duration);
 
+        // Smoothstep easing
         const eased = t * t * (3 - 2 * t);
 
         rotationOffset =
@@ -186,8 +201,9 @@
       snapAnimationId = requestAnimationFrame(frame);
     }
 
-    //drag logic: spin & snap
+    // ---- Drag logic: spin & snap ----
 
+    // Normalizes pointer position to slider-local coordinates
     function getPointerPos(evt) {
       const e = evt.touches ? evt.touches[0] : evt;
       const bounds = slider.getBoundingClientRect();
@@ -198,7 +214,7 @@
     }
 
     function startDrag(evt) {
-      // don’t preventDefault here (otherwise you can break normal clicks)
+      // Do not preventDefault immediately (keeps normal clicks working)
       pointerDown = true;
       moved = false;
       isDragging = false;
@@ -223,14 +239,14 @@
       const dx = pos.x - startX;
       const dy = pos.y - startY;
 
-      // become a "drag" only after threshold
+      // Become a drag only after passing threshold
       if (!moved) {
         if (dx * dx + dy * dy < DRAG_THRESHOLD_PX * DRAG_THRESHOLD_PX) return;
 
         moved = true;
         isDragging = true;
 
-        // now it’s a real drag: stop scroll + stop snapping
+        // Now it is a real drag: stop scrolling and snapping
         evt.preventDefault();
 
         if (snapAnimationId !== null) {
@@ -261,15 +277,16 @@
       document.removeEventListener("mouseup", endDrag);
       document.removeEventListener("touchend", endDrag);
 
-      // no drag -> allow normal <a> click
+      // No drag -> allow normal anchor click
       if (!moved) return;
 
-      // dragged -> block the click that fires after mouseup/touchend
+      // Dragged -> suppress the synthetic click
       suppressClick = true;
       setTimeout(() => (suppressClick = false), 0);
 
       isDragging = false;
 
+      // Snap to nearest slot
       const steps = Math.round(rotationOffset / gapAngle);
       const targetRotation = steps * gapAngle;
 
@@ -279,7 +296,7 @@
       items.forEach((it) => it.classList.remove("active"));
     }
 
-    // Button controls
+    // Button controls (previous / next)
     function goToStep(deltaSteps) {
       if (snapAnimationId !== null) {
         cancelAnimationFrame(snapAnimationId);
@@ -301,16 +318,18 @@
     prevBtn?.addEventListener("click", () => goToStep(-1));
     nextBtn?.addEventListener("click", () => goToStep(1));
 
-    // Init
+    // Initial layout and responsive handling
     requestAnimationFrame(relayout);
     window.addEventListener("resize", () => requestAnimationFrame(relayout));
 
+    // Disable browser touch gestures that interfere with dragging
     slider.style.touchAction = "none";
 
+    // Bind dragging behavior to each item
     items.forEach((item) => {
       item.style.cursor = "grab";
 
-      // prevent native link/image dragging
+      // Prevent native link/image dragging
       item.setAttribute("draggable", "false");
       item.addEventListener("dragstart", (e) => e.preventDefault());
       item.querySelectorAll("img").forEach((img) => {
@@ -323,5 +342,6 @@
     });
   }
 
+  // Expose initializer
   window.CourseDetailResponsive = { init };
 })();

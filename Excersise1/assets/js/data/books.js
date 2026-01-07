@@ -1,3 +1,17 @@
+/**
+ * books.js
+ * ----------
+ * Static dataset representing books available in the e-learning platform.
+ *
+ * Purpose:
+ * - Acts as a client-side data source for rendering book lists and book details.
+ * - Used for filtering by category, difficulty, availability, and featured status.
+ *
+ * Notes:
+ * - This file contains NO logic; it only exports structured data.
+ * - Data is attached to the global `window` object for accessibility across pages.
+ * - In Part B, this structure mirrors backend MongoDB collections.
+ */
 const BOOKS = [
   {
     id: 1,
@@ -241,4 +255,11 @@ const BOOKS = [
     cover: "assets/images/thumbnails/cover-13.jpg",
   },
 ];
+
+/**
+ * Expose the dataset globally so it can be accessed by:
+ * - UI rendering scripts
+ * - Filtering and search logic
+ * - Detail page scripts
+ */
 window.BOOKS = BOOKS;

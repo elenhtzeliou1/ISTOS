@@ -1,3 +1,13 @@
+/*
+  Purpose:
+  - Provide a minimal, predictable baseline across browsers.
+  - Remove default margins/paddings and normalize common elements.
+
+  Notes:
+  - This is intentionally small. More opinionated styling belongs in theme/layout/components.
+*/
+
+/* Apply border-box sizing everywhere so width/height calculations are predictable */
 *,
 *::before,
 *::after {
@@ -6,18 +16,20 @@
   padding: 0;
 }
 
-
+/* Remove default list bullets/numbers (we style lists explicitly in components) */
 ul,
 ol {
   list-style: none;
 }
 
+/* Make images responsive by default and avoid inline-image whitespace issues */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
+/* Links inherit text color and remove underline; component styles decide visuals */
 a {
   text-decoration: none;
   color: inherit;

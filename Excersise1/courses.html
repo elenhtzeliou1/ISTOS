@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Courses</title>
 
+    <!-- ===== Core CSS ===== -->
     <link rel="stylesheet" href="assets/css/reset.css"/>
     <link rel="stylesheet" href="assets/css/components.css"/>
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
 
+    <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ===== Icons ===== -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -26,12 +31,18 @@
   </head>
 
   <body>
+    <!-- ===== Navigation (Injected via shared-layout.js) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Page Header / Intro ===== -->
     <header class="intro-container courses">
       <div class="title-container courses">
         <h1>Course List</h1>
+
+        <!-- Anchor link to main course grid -->
         <a class="book-see-all-btn" href="#choose-category">View All</a>
+
+        <!-- Introductory description -->
         <p>
           There are many variations of passages of Lorem Ipsum available, but
           the majority have suffered alteration in some form, by injected
@@ -39,27 +50,31 @@
         </p>
       </div>
 
+      <!-- Decorative / highlight tags -->
       <div class="tag-row">
         <div class="tag">The</div>
         <div class="tag">Most</div>
         <div class="tag">Viewed</div>
       </div>
 
-      <!-- change it latter to proposed courses-->
+      <!-- ===== Proposed / Highlighted Courses Carousel ===== -->
+      <!-- NOTE: content is injected dynamically via proposed-courses.js -->
       <div class="carousel-proposed-video-wrapper">
         <div class="proposed-video-container">
           <div class="proposed-video-carousel" id="proposed-courses-carousel">
-            <!--js injects content here
-              proposed-courses.js
-              -->
+            <!-- JS injects proposed courses here -->
           </div>
         </div>
       </div>
     </header>
 
+    <!-- ===== Main Courses Section ===== -->
     <section class="courses-page" id="choose-category">
+      <!-- Filter toggle & results counter -->
       <div class="filter-button-results-wrapper">
         <span id="results-count" class="results-count">0 Αποτελέσματα</span>
+
+        <!-- Open filter sidebar -->
         <button id="filter-toggle" class="filter-toggle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -76,23 +91,29 @@
           Filters
         </button>
 
+        <!-- Hide filter sidebar -->
         <button id="toggle-filter-menu" class="toggle-filter-menu">
           Hide Filters
         </button>
       </div>
 
+      <!-- Overlay for mobile filter sidebar -->
       <div id="filter-backdrop" class="filter-backdrop"></div>
 
+      <!-- ===== Layout: Filters + Course Grid ===== -->
       <div class="course-layout">
+        <!-- ===== Filter Sidebar ===== -->
         <aside class="filter-sidebar">
           <div class="filters-header">
             <h2>Filters</h2>
             <i class="fa-solid fa-x" id="filter-close"></i>
           </div>
 
+          <!-- ===== Category Filters ===== -->
           <div class="filter-box">
             <span>Category</span>
 
+            <!-- Each checkbox filters courses by category -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -182,6 +203,7 @@
                 <p>Web development</p>
               </label>
             </div>
+
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -201,6 +223,7 @@
             </div>
           </div>
 
+          <!-- ===== Difficulty Filters ===== -->
           <div class="filter-box">
             <span>Difficulty</span>
 
@@ -259,6 +282,7 @@
             </div>
           </div>
 
+          <!-- ===== Availability Filter ===== -->
           <div class="filter-box">
             <div class="checkbox-wrapper">
               <input class="inp-cbx" id="filter-available" type="checkbox" />
@@ -274,32 +298,33 @@
           </div>
         </aside>
 
+        <!-- ===== Course Cards Grid ===== -->
+        <!-- Courses are rendered dynamically via courses.js -->
         <div class="course-grid" id="course-list"></div>
       </div>
     </section>
 
-    <!--Footer -->
+    <!-- ===== Footer (Injected via shared-layout.js) ===== -->
     <footer id="site-footer"></footer>
-    <!--Used scripts-->
+
+    <!-- ===== JavaScript ===== -->
+
     <!-- COMMON UI -->
-
     <script src="assets/js/ui/common/shared-layout.js"></script>
-
     <script src="assets/js/ui/common/menu-filters.js"></script>
-
     <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
 
     <!-- DATA -->
     <script src="assets/js/data/categories.js"></script>
-
     <script src="assets/js/data/courses.js"></script>
 
+    <!-- FEATURED CONTENT -->
     <script src="assets/js/ui/prefered/proposed-courses.js"></script>
 
-    <!-- PAGE -->
+    <!-- PAGE LOGIC -->
     <script src="assets/js/ui/pages/courses.js"></script>
 
-    <!-- APP orchestrator LAST -->
+    <!-- APP BOOTSTRAP (must be last) -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Course Description Page</title>
 
+    <!-- ===== Core CSS ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
+
+    <!-- ===== Icons ===== -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,6 +21,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,34 +31,46 @@
   </head>
 
   <body class="course-detail-page">
+    <!-- ===== Navigation (Injected via shared-layout.js) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Course Header ===== -->
     <header class="crs-dtl-header">
+      <!-- Course title (injected via course-details.js) -->
       <h1 id="course-title">Insert Course Title</h1>
+
+      <!-- Course description (injected via course-details.js) -->
       <p id="course-description">Insert description of the course.</p>
     </header>
 
+    <!-- ===== Learning Goals Section ===== -->
     <div class="learning-goals-container course-details">
       <div class="tag">LEARNING GOALS</div>
+
+      <!-- Learning goals injected dynamically -->
       <div class="learning__goals__wrapper" id="learning__goals_wrapper">
-        <!-- inject the course learning goals here via course-details.js-->
+        <!-- populated via course-details.js -->
       </div>
     </div>
 
+    <!-- ===== Main Course Content ===== -->
     <main class="main-description-course">
-      <!--dummy h1-->
+      <!-- Intro / explanation text -->
       <h2>
         Explore the full structure of this course below, with each section
         explained in detail so you know exactly what you will learn, practice,
         and achieve.
       </h2>
 
+      <!-- ===== Sections & Lessons ===== -->
       <section class="course-section" id="course___section">
-        <!-- inject more course-module here via js-->
-
-        <!-- inject more course-modules-wrapper here -->
+        <!--
+          Course sections and lesson modules
+          are injected dynamically via course-details.js
+        -->
       </section>
 
+      <!-- ===== Recommended Books ===== -->
       <section class="course__more__details">
         <div class="course__proposed__book__sec">
           <div class="__proposed__books_title">
@@ -61,33 +78,41 @@
             <p>Here are a few books we recommend for this course.</p>
           </div>
 
+          <!-- Proposed books injected dynamically -->
           <div class="__proposed__books__main" id="proposed__bks">
-            <!--inject the proposed books here!
-            
-            -->
+            <!-- populated via course-details.js -->
           </div>
         </div>
-        <!--inject proposed books-->
       </section>
 
+      <!-- ===== Recommended Video ===== -->
       <section class="__course__prop_video">
         <div class="__course__prop_video_title">
           <h1>Get even better</h1>
           <p>Here is one video we recommend for this course.</p>
         </div>
+
+        <!-- Proposed video injected dynamically -->
         <div class="__inject_prop_vd" id="__prop__vd">
-          <!--inject proposed video here-->
+          <!-- populated via course-details.js -->
         </div>
       </section>
     </main>
 
+    <!-- ===== FAQ / Questions Section ===== -->
     <div class="more-quest-wrapper">
       <div class="more-qst-row">
         <h1>Got More questions? We've got your answers</h1>
 
-        <!--add accordion warpper here-->
+        <!-- Accordion container -->
         <div class="courses-detail-accordion module">
-          <!-- That is one Description-->
+          <!--
+            Accordion items below act as placeholders.
+            Their content is replaced with real Q&A data
+            via course-details.js
+          -->
+
+          <!-- Accordion item -->
           <div class="accordion-item">
             <button
               class="accordion-trigger qst"
@@ -224,10 +249,12 @@
           <!-- End - That is one Description-->
         </div>
 
+        <!-- Subscribe button -->
         <a href="#" id="subscribeNowBtn">Subscribe Now</a>
       </div>
     </div>
 
+    <!-- ===== Subscription / Lesson Modal ===== -->
     <div class="modal" id="subscribeModal" aria-hidden="true">
       <div class="modal__backdrop" data-close></div>
 
@@ -254,22 +281,25 @@
       </div>
     </div>
 
+    <!-- ===== Reviews Section ===== -->
     <section class="reviews-section" id="reviews-section">
       <h1>Reviews</h1>
-      <div class="overall-rating-wrapper"><!--overall rating--></div>
 
-      <div class="ratings-wrapper">
-        <!-- reviews will be displayed here via js-->
-      </div>
+      <!-- Overall rating injected via reviews.js -->
+      <div class="overall-rating-wrapper"></div>
+
+      <!-- Individual reviews injected via reviews.js -->
+      <div class="ratings-wrapper"></div>
     </section>
 
-    
+    <!-- ===== Review Form ===== -->
     <section class="review-form-section">
       <h1>Leave Your Review</h1>
-      <!-- This thing shows messages depending on user state -->
+
+      <!-- Gate message (depends on user state) -->
       <div id="review-gate" class="review-gate"></div>
 
-      <!-- This form is only shown if (registered + enrolled) -->
+      <!-- Review form (shown only if registered + enrolled) -->
       <form id="review-form" class="review-form" hidden>
         <div class="form-column">
           <label for="review-rating">Rating</label>
@@ -294,27 +324,27 @@
       </form>
     </section>
 
-    <!--Footer -->
+    <!-- ===== Footer (Injected via shared-layout.js) ===== -->
     <footer id="site-footer"></footer>
 
-    <!--Used scripts-->
+    <!-- ===== JavaScript ===== -->
 
+    <!-- COMMON UI -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
-
     <script src="assets/js/ui/common/accordion-ui.js"></script>
 
+    <!-- DATA -->
     <script src="assets/js/data/books.js"></script>
     <script src="assets/js/data/videos.js"></script>
-
     <script src="assets/js/data/categories.js"></script>
-
     <script src="assets/js/data/courses.js"></script>
-
     <script src="assets/js/data/reviews.js"></script>
-    <script src="assets/js/ui/pages/reviews.js"></script>
 
+    <!-- PAGE LOGIC -->
+    <script src="assets/js/ui/pages/reviews.js"></script>
     <script src="assets/js/ui/pages/course-details.js"></script>
 
+    <!-- APP BOOTSTRAP (last) -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

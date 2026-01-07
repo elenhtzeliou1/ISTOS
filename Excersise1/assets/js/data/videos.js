@@ -1,3 +1,17 @@
+/**
+ * videos.js
+ * ----------
+ * Static dataset of educational videos linked to the platform.
+ *
+ * Purpose:
+ * - Used to populate the videos listing page
+ * - Supports category and difficulty-based filtering
+ * - Each video links to an external YouTube resource
+ *
+ * Fields:
+ * - youtubeUrl is used for embedding or redirection
+ * - featured controls homepage visibility
+ */
 const VIDEOS = [
   {
     id: 1,
@@ -96,4 +110,8 @@ const VIDEOS = [
     youtubeUrl: "https://www.youtube.com/watch?v=1PnVor36_40",
   },
 ];
+
+/**
+ * Attach dataset to global scope
+ */
 window.VIDEOS = VIDEOS;

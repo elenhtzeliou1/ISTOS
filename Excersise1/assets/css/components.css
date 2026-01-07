@@ -1,4 +1,23 @@
-/* INTRO PAGE*/
+/* --------------------------------------------------------------------------
+   Purpose:
+   - Component/page-level styling for the e-learning UI (Part A/B frontend).
+   - Contains styles for navigation, hero/intro sections, sliders/carousels,
+     accordions, course/book/video pages, forms, modals, and footer UI.
+
+   Notes:
+   - This file assumes CSS variables (custom properties) are defined elsewhere
+     (e.g., theme.css) such as: --padding-avg, --max-width, --green, etc.
+   - “Reveal” animations (.reveal-up / .reveal-img) are driven by JS by toggling
+     the `.is-visible` class and setting direction classes (from-left/from-right).
+   - Mobile navigation uses `nav.mobile-open` toggled by JS.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   INTRO PAGE (index)
+   ========================================================================== */
+
+/* Intro section container on index page */
 .index-page-intro {
   height: auto;
   width: 100%;
@@ -12,6 +31,7 @@
   margin: auto;
 }
 
+/* Wrapper for links/buttons to exercises on the index page */
 .index-page-exercise-row {
   width: 100%;
   display: flex;
@@ -21,6 +41,7 @@
   gap: var(--gap);
 }
 
+/* Exercise CTA buttons */
 .index-page-exercise-row a {
   background-color: var(--green);
   color: black;
@@ -28,19 +49,24 @@
   font-weight: 500;
 }
 
+/* Hover feedback for exercise CTA buttons */
 .index-page-exercise-row a:hover {
   transform: scale(0.98);
   transition: 0.2s;
 }
 
+/* Intro subtitle styling */
 .index-page-exercise-row h2 {
   font-size: 18px;
   font-weight: 200;
 }
 
-/* END INTRO PAGE*/
+/* END INTRO PAGE */
 
-/* main content starts*/
+
+/* ==========================================================================
+   NAVIGATION (fixed top nav + mobile menu)
+   ========================================================================== */
 
 nav {
   background-color: black;
@@ -60,9 +86,7 @@ nav {
   transition: height 0.3s ease;
 }
 
-
-
-/* TOP BAR */
+/* TOP BAR (logo + hamburger on mobile) */
 .nav-top {
   display: flex;
   align-items: center;
@@ -71,11 +95,12 @@ nav {
   flex-shrink: 0;
 }
 
+/* When mobile menu is open, nav expands full viewport height */
 nav.mobile-open {
   height: 100vh;
 }
 
-/* MOBILE MENU */
+/* MOBILE MENU container (collapsible list of links) */
 .nav-link-menu {
   width: 100%;
   display: flex;
@@ -87,6 +112,7 @@ nav.mobile-open {
   transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
+/* Expanded state of mobile menu */
 nav.mobile-open .nav-link-menu {
   max-height: 100vh;
   opacity: 1;
@@ -94,7 +120,7 @@ nav.mobile-open .nav-link-menu {
   overflow-y: auto;
 }
 
-/* MOBILE TOGGLE BUTTON */
+/* MOBILE TOGGLE BUTTON container */
 .nav-menu {
   width: auto;
   height: auto;
@@ -106,6 +132,7 @@ nav.mobile-open .nav-link-menu {
   padding: 2px 6px;
 }
 
+/* Hamburger icon wrapper */
 .menu-bars {
   position: relative;
   width: 20px;
@@ -113,6 +140,7 @@ nav.mobile-open .nav-link-menu {
   display: block;
 }
 
+/* Hamburger icon lines */
 .menu-line {
   position: absolute;
   left: 0;
@@ -132,7 +160,7 @@ nav.mobile-open .nav-link-menu {
   bottom: 4px;
 }
 
-/* transform to X */
+/* Transform hamburger into an “X” when active (JS toggles .active) */
 .nav-menu.active .menu-line:nth-child(1) {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
@@ -144,6 +172,7 @@ nav.mobile-open .nav-link-menu {
   transform: translateY(-50%) rotate(-45deg);
 }
 
+/* Grouped link section inside the nav */
 .group-link {
   width: 100%;
   height: auto;
@@ -153,8 +182,8 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
-/* LOGO */
-.logo>a {
+/* LOGO link styling */
+.logo > a {
   padding: 0 !important;
   font-size: 20px;
   background-color: transparent !important;
@@ -163,7 +192,9 @@ nav.mobile-open .nav-link-menu {
 }
 
 
-/* --- Title Section ---*/
+/* ==========================================================================
+   TITLE / HERO SECTION (home-like intro)
+   ========================================================================== */
 
 .intro-container {
   min-height: var(--min-height);
@@ -179,7 +210,7 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
-
+/* Centered title/description block */
 .title-container {
   margin: auto;
   z-index: 1;
@@ -194,12 +225,14 @@ nav.mobile-open .nav-link-menu {
   padding: 0 var(--padding-avg);
 }
 
-.title-container>h1 {
+.title-container > h1 {
   font-size: var(--h1-hd);
 }
 
-/* --- Intro slider ---*/
 
+/* ==========================================================================
+   INTRO SLIDER (stack of draggable cards)
+   ========================================================================== */
 
 .intro-slider {
   width: 100%;
@@ -211,6 +244,7 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
 }
 
+/* Individual slider card positioned absolutely (stack layout controlled via JS) */
 .intro-item {
   position: absolute;
   width: var(--intro-item-width-mob);
@@ -231,12 +265,14 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-ultra-sm);
 }
 
-.intro-item>p {
+/* Small caption text inside intro card */
+.intro-item > p {
   font-size: 8px;
   font-weight: 300;
   padding: 0 var(--pad-sm);
 }
 
+/* Image container inside intro card */
 .image-wrapper {
   border-radius: var(--border-radius-small);
   width: 100%;
@@ -244,26 +280,24 @@ nav.mobile-open .nav-link-menu {
   overflow: hidden;
 }
 
-.image-wrapper>img {
+.image-wrapper > img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
+/* “grabbing” cursor on drag */
 .intro-item:active {
   cursor: grabbing;
 }
 
-/* --- End  Intro slider ---*/
+/* END INTRO SLIDER */
 
 
+/* ==========================================================================
+   DESCRIPTION SECTION (cards + reveal effects)
+   ========================================================================== */
 
-
-
-
-/* --- End Title Section ---*/
-
-/*-- Description --*/
 .description {
   height: auto;
   max-width: var(--max-width);
@@ -275,6 +309,7 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
+/* Section header area */
 .description-intro {
   width: 100%;
   margin: auto;
@@ -293,6 +328,7 @@ nav.mobile-open .nav-link-menu {
   font-size: var(--h1-intro);
 }
 
+/* Cards container */
 .description-wrapper {
   height: auto;
   width: 100%;
@@ -302,9 +338,9 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
   flex-direction: column;
   padding: var(--padding) 0 0;
-
 }
 
+/* Single card (text + optional image + number block) */
 .description-card {
   position: relative;
   height: auto;
@@ -316,6 +352,7 @@ nav.mobile-open .nav-link-menu {
   padding-bottom: var(--padding);
 }
 
+/* Text content of card */
 .description-card-details {
   flex: 1.2;
   padding: var(--card-top-padding) var(--padding-avg) var(--padding-mid) var(--card-left-padding);
@@ -328,11 +365,12 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
-.description-card-details>h1 {
+.description-card-details > h1 {
   font-style: 24px;
   font-weight: 400;
 }
 
+/* Vertical number indicator container */
 .card-number-block {
   position: absolute;
   left: 0;
@@ -348,6 +386,7 @@ nav.mobile-open .nav-link-menu {
   z-index: 1;
 }
 
+/* Card image container */
 .description-image {
   height: auto;
   flex: 1.2;
@@ -363,12 +402,14 @@ nav.mobile-open .nav-link-menu {
   object-fit: cover;
 }
 
+/* Vertical line for number block */
 .block-line {
   height: 100%;
   width: 1px;
   background-color: white;
 }
 
+/* Number circle at the top of the number block */
 .number-circle {
   background-color: white;
   width: var(--number-block-width);
@@ -378,17 +419,20 @@ nav.mobile-open .nav-link-menu {
   align-items: center;
   justify-content: center;
   place-items: center;
-
 }
 
-.number-circle>h1 {
+.number-circle > h1 {
   color: black;
   font-size: 20px;
   font-weight: 600;
-
 }
 
-/*reveal*/
+
+/* --------------------------
+   REVEAL ANIMATIONS (JS adds .is-visible)
+   -------------------------- */
+
+/* Vertical reveal animation (fade + slide up) */
 .reveal-up {
   opacity: 0;
   transform: translateY(30px);
@@ -401,13 +445,14 @@ nav.mobile-open .nav-link-menu {
   transform: translateY(0);
 }
 
+/* Image reveal animation (fade + slide in direction) */
 .reveal-img {
   opacity: 0;
   transition: opacity 0.7s ease, transform 0.7s ease;
   will-change: transform, opacity;
 }
 
-/* Direction is set by js */
+/* Direction is set by JS */
 .reveal-img.from-left {
   transform: translateX(-80px);
 }
@@ -421,16 +466,17 @@ nav.mobile-open .nav-link-menu {
   transform: translateX(0);
 }
 
+/* Stagger effect inside card details */
 .description-card-details .reveal-up {
   transition-delay: 0.08s;
 }
 
-.description-card-details .reveal-up+.reveal-up {
+.description-card-details .reveal-up + .reveal-up {
   transition-delay: 0.12s;
 }
 
+/* Accessibility: respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-
   .reveal-up,
   .reveal-img {
     transition: none;
@@ -439,9 +485,14 @@ nav.mobile-open .nav-link-menu {
   }
 }
 
-/*-- End Description --*/
+/* END DESCRIPTION SECTION */
 
-/*courses description*/
+
+/* ==========================================================================
+   COURSES DESCRIPTION (showcase + accordion)
+   ========================================================================== */
+
+/* Note: class name has a small typo in codebase: “wraper” (kept as-is) */
 .courses-description-wraper {
   background-color: var(--secondary-bg-color);
   height: auto;
@@ -454,6 +505,7 @@ nav.mobile-open .nav-link-menu {
   max-width: var(--max-width);
 }
 
+/* Section header */
 .courses-description-intro {
   display: flex;
   align-items: center;
@@ -464,22 +516,22 @@ nav.mobile-open .nav-link-menu {
 
   max-width: var(--max-width);
   margin: auto;
-
 }
 
-.courses-description-intro>h1,
-.courses-description-intro>p {
+.courses-description-intro > h1,
+.courses-description-intro > p {
   color: black;
 }
 
-.courses-description-intro>h1 {
+.courses-description-intro > h1 {
   font-size: 55px;
 }
 
-.courses-description-intro>p {
+.courses-description-intro > p {
   line-height: 1.2;
 }
 
+/* Tag row above the “screen” mock */
 .courses-above-wrapper-row {
   width: 100%;
   height: auto;
@@ -491,25 +543,25 @@ nav.mobile-open .nav-link-menu {
   z-index: 2;
 }
 
-.courses-above-wrapper-row>.tag {
+.courses-above-wrapper-row > .tag {
   background-color: var(--card-grey-color);
   padding: 2px 4px;
 }
 
-.courses-above-wrapper-row>.tag:first-child {
+.courses-above-wrapper-row > .tag:first-child {
   border-radius: var(--border-radius-small);
 }
 
-.courses-above-wrapper-row>.tag>p {
+.courses-above-wrapper-row > .tag > p {
   color: white;
   font-size: 10px;
-
 }
 
+/* Video/screen mock wrapper */
 .courses-description-video-wrapper {
   position: relative;
   z-index: 1;
-  top: calc(-1*(var(--gap-big) + var(--gap)/2));
+  top: calc(-1 * (var(--gap-big) + var(--gap) / 2));
 
   height: var(--screen-wrapper-height-s);
 
@@ -519,12 +571,12 @@ nav.mobile-open .nav-link-menu {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-
 }
 
+/* “Screen” container */
 .courses-description-box-screen {
-  height: calc(var(--screen-wrapper-height-s)* 2/3);
-  --height-box-screen: calc(var(--screen-wrapper-height-s)* 2/3);
+  height: calc(var(--screen-wrapper-height-s) * 2 / 3);
+  --height-box-screen: calc(var(--screen-wrapper-height-s) * 2 / 3);
 
   width: 88%;
   margin: auto auto 0;
@@ -535,6 +587,7 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
+/* The screen area itself */
 .screen-wrapper {
   height: 74%;
   width: 100%;
@@ -543,16 +596,15 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radius-small);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
   overflow: hidden;
-
 }
 
 .screen-wrapper img {
   height: 100%;
   width: 100%;
   object-fit: cover;
-
 }
 
+/* Base/stand under the screen */
 .base-screen {
   width: 29%;
   background-color: var(--base-screen-color);
@@ -565,23 +617,23 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
 }
 
-.base-screen>a {
+/* CTA inside base (hidden on mobile here) */
+.base-screen > a {
   display: none;
-
 
   color: white;
   background-color: rgb(104, 64, 255);
   padding: 5px var(--padding-avg);
   margin-top: var(--padding);
   border: none;
-
 }
 
-.base-screen>a:hover {
+.base-screen > a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
 
+/* Accordion wrapper */
 .courses-detail-accordion {
   height: auto;
   max-width: var(--max-width);
@@ -592,14 +644,16 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 
   position: relative;
-  top: calc(-1*(var(--gap-big) + var(--gap)/2));
+  top: calc(-1 * (var(--gap-big) + var(--gap) / 2));
 }
 
+/* Each accordion item */
 .accordion-item {
   width: 100%;
   cursor: pointer;
 }
 
+/* Accordion button/trigger */
 .accordion-trigger {
   width: 100%;
   display: flex;
@@ -615,18 +669,21 @@ nav.mobile-open .nav-link-menu {
   font-size: 14px;
 }
 
-.courses-detail-accordion .accordion-trigger>i {
+/* Rotate chevron when expanded */
+.courses-detail-accordion .accordion-trigger > i {
   transition: transform 0.2s ease;
 }
 
-.accordion-trigger[aria-expanded="true"]+.accordion-panel {
+/* Basic “expanded” display switch (paired with JS class .is-open below) */
+.accordion-trigger[aria-expanded="true"] + .accordion-panel {
   display: block;
 }
 
-.courses-detail-accordion .accordion-trigger[aria-expanded="true"]>i {
+.courses-detail-accordion .accordion-trigger[aria-expanded="true"] > i {
   transform: rotate(180deg);
 }
 
+/* Panel body */
 .accordion-panel-inner {
   overflow: hidden;
   display: flex;
@@ -642,12 +699,13 @@ nav.mobile-open .nav-link-menu {
   text-align: left;
 }
 
-.accordion-panel-inner>p {
+.accordion-panel-inner > p {
   line-height: 1.1;
   font-size: 16px;
   color: black;
 }
 
+/* “Arrow on hover” heading style */
 .accordion-panel-inner .h2-arrow {
   display: inline-flex;
   align-items: center;
@@ -669,6 +727,7 @@ nav.mobile-open .nav-link-menu {
   transform: translateX(10px);
 }
 
+/* Panel image container */
 .accordion-pannel-inner-img-cont {
   height: 30vh;
   width: 100%;
@@ -679,38 +738,42 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
-.accordion-pannel-inner-img-cont>img {
+.accordion-pannel-inner-img-cont > img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-.accordion-trigger[aria-expanded="true"]+.accordion-panel {
-  /*expanded*/
+.accordion-trigger[aria-expanded="true"] + .accordion-panel {
+  /* expanded */
   grid-template-rows: 1fr;
 }
 
+/* Collapsing animation container */
 .accordion-panel {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition:
-    max-height 0.25s ease,
-    opacity 0.25s ease;
+  transition: max-height 0.25s ease, opacity 0.25s ease;
 }
 
+/* Open state (JS toggles .is-open) */
 .accordion-panel.is-open {
   opacity: 1;
 }
 
+/* Focus ring */
 .accordion-trigger:focus-visible {
   outline-offset: 2px;
 }
 
-/* end courses description*/
+/* END courses description */
 
 
-/*proposed books*/
+/* ==========================================================================
+   PROPOSED BOOKS SECTION (header + CTA)
+   ========================================================================== */
+
 .proposed-books {
   height: auto;
   width: 100%;
@@ -736,16 +799,15 @@ nav.mobile-open .nav-link-menu {
   text-align: center;
 }
 
-.proposed-book-intro-container>h1 {
+.proposed-book-intro-container > h1 {
   color: black;
 }
 
-.proposed-book-intro-container>p {
+.proposed-book-intro-container > p {
   color: black;
 }
 
-
-.proposed-book-intro-container>a {
+.proposed-book-intro-container > a {
   color: white;
   background-color: black;
   border: 1px solid black;
@@ -756,16 +818,21 @@ nav.mobile-open .nav-link-menu {
   transition: 0.2s;
 }
 
-/*end proposed books*/
+/* END proposed books */
 
 
-/*slider*/
+/* ==========================================================================
+   HORIZONTAL CARD SLIDER (books carousel)
+   ========================================================================== */
+
+/* Outer wrapper for horizontal scrolling content */
 .slider-wrapper {
   width: 100%;
   overflow: hidden;
   padding: var(--padding) 0;
 }
 
+/* Scrollable row (mouse/touch drag) */
 .card-carousel {
   display: flex;
   overflow-x: auto;
@@ -781,14 +848,14 @@ nav.mobile-open .nav-link-menu {
   align-items: stretch;
 }
 
+/* Dragging state */
 .card-carousel.active {
   cursor: grabbing;
 }
 
-
+/* Card styling inside carousel */
 .card-carousel .card {
   flex: 0 0 var(--book-card-width);
-
   width: var(--book-card-width);
   height: auto;
 
@@ -807,12 +874,13 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding-mid) var(--padding-mid) 0;
 }
 
+/* Special color variants for specific cards */
 .card-carousel .card:nth-child(2) {
   background-color: #242424;
 }
 
-.card-carousel .card:nth-child(2) .card-info>p,
-.card-carousel .card:nth-child(2) .card-info>h2 {
+.card-carousel .card:nth-child(2) .card-info > p,
+.card-carousel .card:nth-child(2) .card-info > h2 {
   color: white;
 }
 
@@ -820,8 +888,8 @@ nav.mobile-open .nav-link-menu {
   background-color: rgb(19, 9, 51);
 }
 
-.card-carousel .card:nth-child(3) .card-info>p,
-.card-carousel .card:nth-child(3) .card-info>h2 {
+.card-carousel .card:nth-child(3) .card-info > p,
+.card-carousel .card:nth-child(3) .card-info > h2 {
   color: white;
 }
 
@@ -829,11 +897,12 @@ nav.mobile-open .nav-link-menu {
   background-color: var(--card-color);
 }
 
-.card-carousel .card:nth-child(4) .card-info>p,
-.card-carousel .card:nth-child(4) .card-info>h2 {
+.card-carousel .card:nth-child(4) .card-info > p,
+.card-carousel .card:nth-child(4) .card-info > h2 {
   color: white;
 }
 
+/* Card image wrapper */
 .card-img-cont {
   height: 22vh;
   width: 100%;
@@ -847,6 +916,7 @@ nav.mobile-open .nav-link-menu {
   object-fit: cover;
 }
 
+/* Text area inside card */
 .card-info {
   height: auto;
   width: 100%;
@@ -858,8 +928,8 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
-.card-info>p,
-.card-info>h2 {
+.card-info > p,
+.card-info > h2 {
   color: black;
 }
 
@@ -868,10 +938,13 @@ nav.mobile-open .nav-link-menu {
   padding: 0;
 }
 
+/* END slider */
 
-/*end slider*/
 
-/* Courses Section*/
+/* ==========================================================================
+   COURSES SECTION (home list with reveal-on-scroll)
+   ========================================================================== */
+
 .courses {
   padding: var(--padding-big) 0;
   max-width: var(--max-width);
@@ -902,13 +975,13 @@ nav.mobile-open .nav-link-menu {
   text-align: center;
 }
 
-.courses-wrap>a {
+.courses-wrap > a {
   width: 70%;
   background-color: var(--green);
   border: none;
 }
 
-.courses-wrap>a:hover {
+.courses-wrap > a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
@@ -923,9 +996,9 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
   gap: var(--gap-mid);
   padding: 0 var(--padding-avg);
-
 }
 
+/* Each course item fades/slides in when .visible is added */
 .course-item {
   border-top: 1px solid rgb(66, 66, 66);
   padding: 2rem 0 0 0;
@@ -956,7 +1029,7 @@ nav.mobile-open .nav-link-menu {
   justify-content: space-between;
 }
 
-.item-title>span {
+.item-title > span {
   color: rgb(109, 109, 109);
   font-size: 18px;
   font-weight: 550;
@@ -967,14 +1040,16 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
-.item-main>p {
+.item-main > p {
   color: rgb(197, 197, 197);
 }
 
-/* End Courses Section*/
+/* END Courses Section */
 
 
-/* Recently Added*/
+/* ==========================================================================
+   RECENTLY ADDED (feature cards)
+   ========================================================================== */
 
 .recently-added {
   height: auto;
@@ -1004,11 +1079,11 @@ nav.mobile-open .nav-link-menu {
   padding-bottom: 2rem;
 }
 
-.rec-added-info>h2 {
+.rec-added-info > h2 {
   font-size: 40px;
 }
 
-.rec-added-info>span {
+.rec-added-info > span {
   color: greenyellow;
   font-size: 16px;
   font-weight: 200;
@@ -1024,6 +1099,7 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
+/* Feature card */
 .new-box {
   height: auto;
   width: 100%;
@@ -1035,9 +1111,7 @@ nav.mobile-open .nav-link-menu {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-
 }
-
 
 .new-box-header {
   width: 100%;
@@ -1052,7 +1126,7 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding-avg) var(--padding-sm);
 }
 
-.new-box-header>span {
+.new-box-header > span {
   background-color: var(--green);
   font-size: 10px;
   font-weight: 400;
@@ -1063,18 +1137,18 @@ nav.mobile-open .nav-link-menu {
   color: black;
 }
 
-.new-box-header>p {
+.new-box-header > p {
   text-transform: uppercase;
   font-size: 10px;
 }
 
-.new-box-header>h3 {
+.new-box-header > h3 {
   text-align: left;
   font-weight: 200;
   font-size: 16px;
 }
 
-
+/* Button row area (shadow overlay effect) */
 .rec-added-button-row {
   height: auto;
   width: 100%;
@@ -1084,6 +1158,7 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
 }
 
+/* Image preview area */
 .new-box-content {
   width: 100%;
   overflow: hidden;
@@ -1092,13 +1167,13 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
-.new-box-content>img {
+.new-box-content > img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-/* End Recently Added*/
+/* END Recently Added */
 
 
 /* ==================================================================================== */
@@ -1113,7 +1188,7 @@ nav.mobile-open .nav-link-menu {
 
 
 
-/* CATEGORIES.HTML categories.hmtl */
+/* CATEGORIES.HTML */
 
 .intro-container.categories {
   height: auto;
@@ -1185,7 +1260,7 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
-/*intro carousel categories.html */
+/* intro carousel categories.html */
 .goal-slider {
   position: relative;
   width: 100%;
@@ -1212,7 +1287,6 @@ nav.mobile-open .nav-link-menu {
   text-align: center;
   border-radius: var(--border-radius-avrg);
   border: none;
-
 }
 
 .goal-item h5 {
@@ -1259,7 +1333,6 @@ nav.mobile-open .nav-link-menu {
   cursor: grabbing;
 }
 
-
 .controll-btn-row {
   height: auto;
   width: 100%;
@@ -1282,7 +1355,7 @@ nav.mobile-open .nav-link-menu {
   z-index: 4;
 }
 
-/*intro carousel categories.html */
+/* intro carousel categories.html */
 
 .carousel-proposed-video-wrapper {
   width: 100%;
@@ -1332,7 +1405,6 @@ nav.mobile-open .nav-link-menu {
 
   transform-style: preserve-3d;
 
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1364,7 +1436,7 @@ nav.mobile-open .nav-link-menu {
   transition: all .2s ease;
 }
 
-/* the ink layer that grows from center to the outside*/
+/* the ink layer that grows from center to the outside */
 .proposed-video-card::before {
   content: "";
   position: absolute;
@@ -1382,12 +1454,12 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding-sm);
 }
 
-/* animatioon of the green that grows from center -> to the outside */
+/* animation of the green that grows from center -> to the outside */
 .proposed-video-card.highlight::before {
   transform: scale(1);
 }
 
-.proposed-video-card.highlight>.proposed-video-content {
+.proposed-video-card.highlight > .proposed-video-content {
   height: auto;
   padding: var(--padding-sm) 0 0;
   display: flex;
@@ -1395,13 +1467,13 @@ nav.mobile-open .nav-link-menu {
   justify-content: flex-start;
 }
 
-.proposed-video-card>.proposed-video-content p {
+.proposed-video-card > .proposed-video-content p {
   font-size: 14px;
   color: black;
   font-weight: 400;
 }
 
-/*main description*/
+/* main description */
 .courses-desc-wrapper {
   border-top: 1px solid var(--nav-bottom);
   width: 100%;
@@ -1413,7 +1485,6 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
   margin: auto;
   gap: var(--gap);
-
 }
 
 .course-desc-header {
@@ -1459,20 +1530,19 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
-.tag-row>.tag {
+.tag-row > .tag {
   background-color: var(--tag-color);
 }
 
-.tag-row>.tag:first-child {
+.tag-row > .tag:first-child {
   border-radius: 0;
 }
 
-.tag-row>.tag:nth-child(3) {
+.tag-row > .tag:nth-child(3) {
   border-radius: 0;
-
 }
 
-.tag-row>.tag>p {
+.tag-row > .tag > p {
   font-size: 12px;
 }
 
@@ -1484,7 +1554,6 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
   height: auto;
   padding: 0 var(--padding-sm);
-
 }
 
 .course-info-container-box {
@@ -1497,7 +1566,7 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
-.course-info-container-box+.course-info-container-box {
+.course-info-container-box + .course-info-container-box {
   border-top: 1px solid var(--border-top-new);
 }
 
@@ -1547,8 +1616,8 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
-/*=================*/
-/*sticky container*/
+/* ================= */
+/* sticky container */
 .course-desc-sticky-wrapper {
   width: 100%;
   height: auto;
@@ -1587,16 +1656,16 @@ nav.mobile-open .nav-link-menu {
   transform: translateY(-4px);
 }
 
-.course-desc-sticky-container>.tag-row {
+.course-desc-sticky-container > .tag-row {
   padding: 0;
 }
 
-.course-desc-sticky-container>.tag-row .tag:nth-child(2) {
+.course-desc-sticky-container > .tag-row .tag:nth-child(2) {
   background-color: var(--green);
   color: black;
 }
 
-.course-desc-sticky-container>p {
+.course-desc-sticky-container > p {
   font-size: 14px;
 }
 
@@ -1630,7 +1699,7 @@ nav.mobile-open .nav-link-menu {
   height: auto;
 }
 
-.vid-wrp>.qa-list {
+.vid-wrp > .qa-list {
   width: 100%;
   height: auto;
   display: flex;
@@ -1640,18 +1709,27 @@ nav.mobile-open .nav-link-menu {
   overflow: hidden;
 }
 
-.vid-wrp>.qa-list li {
+.vid-wrp > .qa-list li {
   padding: var(--padding-avg) var(--padding-sm);
   border-top: 1px solid var(--tag-color);
 
   width: 100%;
 }
 
+/* ==========================================================================
+   course.html – Courses landing / listing page styles
+   --------------------------------------------------------------------------
+   This section styles:
+   - The top "intro" hero area for courses
+   - The filter toggle + mobile filter drawer
+   - The course listing cards/grid
+   ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   HERO / INTRO (course.html)
+   -------------------------------------------------------------------------- */
 
-
-/*course.html*/
-
+/* Main intro container variant used on course.html */
 .intro-container.courses {
   width: 100%;
   display: flex;
@@ -1666,17 +1744,20 @@ nav.mobile-open .nav-link-menu {
   height: auto;
 }
 
+/* Align tag row (category tags / labels) inside the courses intro */
 .intro-container.courses .tag-row {
   align-items: center;
   justify-content: center;
   gap: 0;
 }
 
+/* Highlight the middle tag in the tag row (often a primary status tag) */
 .intro-container.courses .tag-row .tag:nth-child(2) {
   background-color: var(--green);
   color: black;
 }
 
+/* Title container variant used in course.html intro hero */
 .intro-container.courses>.title-container.courses {
   height: auto;
   width: 100%;
@@ -1690,29 +1771,35 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Course intro hero heading size */
 .title-container.courses h1 {
   font-size: var(--h1-s);
 }
 
+/* Remove extra padding from slider when used inside course intro */
 .intro-container.courses .slider-wrapper {
   padding: 0;
 }
 
+/* Course intro hero subtitle / paragraph */
 .title-container.courses p {
   font-size: 16px;
 }
 
+/* Primary CTA button inside the course intro hero */
 .intro-container.courses>a {
   padding: var(--padding-sm) var(--padding-big);
   background-color: var(--green);
   border: 1px solid var(--green);
 }
 
+/* Hover feedback for hero CTA button */
 .intro-container.courses>a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
 
+/* "See all" button for books section (reused inside course context) */
 .book-see-all-btn {
   padding: var(--padding-sm) var(--padding);
   font-size: 16px;
@@ -1720,11 +1807,13 @@ nav.mobile-open .nav-link-menu {
   border: none;
 }
 
+/* Hover feedback for "see all" */
 .book-see-all-btn:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
 
+/* Small h3 title styling (often section label / accent heading) */
 .title-container h3 {
   color: var(--green);
   font-weight: 200;
@@ -1733,6 +1822,11 @@ nav.mobile-open .nav-link-menu {
 
 
 
+/* --------------------------------------------------------------------------
+   COURSES LISTING WRAPPER
+   -------------------------------------------------------------------------- */
+
+/* Main wrapper for the course listing page content */
 .courses-page {
   padding: var(--padding) var(--padding-sm);
   display: flex;
@@ -1744,6 +1838,7 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
 }
 
+/* Row containing the filter toggle button and results counter */
 .filter-button-results-wrapper {
   height: auto;
   width: 100%;
@@ -1753,11 +1848,13 @@ nav.mobile-open .nav-link-menu {
   padding: 0 var(--padding-avg);
 }
 
+/* Text showing number of visible results (e.g., "12 results") */
 .results-count {
   font-size: 18px;
   color: var(--nav-button-color);
 }
 
+/* Filter toggle pill (opens the filter sidebar on mobile) */
 .filter-toggle {
   background-color: white;
   padding: var(--padding-sm) var(--padding-avg);
@@ -1771,6 +1868,7 @@ nav.mobile-open .nav-link-menu {
   cursor: pointer;
 }
 
+/* Main layout wrapper for filters + list (column-first layout on mobile) */
 .course-layout {
   display: flex;
   align-items: center;
@@ -1780,10 +1878,18 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Hide scrollbar for WebKit in filter sidebar (mobile drawer) */
 .filter-sidebar::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+/* --------------------------------------------------------------------------
+   MOBILE FILTER DRAWER
+   --------------------------------------------------------------------------
+   filter-sidebar is a full-height drawer that slides up from the bottom.
+   The JS toggles `.is-open` to reveal it, and also toggles `.filter-backdrop`.
+   -------------------------------------------------------------------------- */
 
 .filter-sidebar {
   background-color: black;
@@ -1807,10 +1913,12 @@ nav.mobile-open .nav-link-menu {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Visible/open state for filter drawer */
 .filter-sidebar.is-open {
   transform: translateY(0);
 }
 
+/* Close button inside filter drawer (top-right) */
 .filter-close {
   position: absolute;
   top: 0.75rem;
@@ -1821,6 +1929,7 @@ nav.mobile-open .nav-link-menu {
   cursor: pointer;
 }
 
+/* Dimmed backdrop shown when filter drawer is open */
 .filter-backdrop {
   position: fixed;
   inset: 0;
@@ -1831,12 +1940,14 @@ nav.mobile-open .nav-link-menu {
   z-index: 1000;
 }
 
+/* Visible/open state for backdrop */
 .filter-backdrop.is-open {
   opacity: 1;
   pointer-events: auto;
 }
 
 
+/* Header row inside filter drawer (title + close icon) */
 .filters-header {
   width: 100%;
   display: flex;
@@ -1844,10 +1955,12 @@ nav.mobile-open .nav-link-menu {
   justify-content: space-between;
 }
 
+/* Filter drawer heading */
 .filters-header>h2 {
   font-size: 28px;
 }
 
+/* Close (X) icon styling inside the filter header */
 .filters-header>.fa-solid.fa-x {
   background-color: var(--white-bg);
   color: black;
@@ -1857,10 +1970,12 @@ nav.mobile-open .nav-link-menu {
   font-size: 20px;
 }
 
+/* Redundant declaration kept as-is (course layout stays column on mobile) */
 .course-layout {
   flex-direction: column;
 }
 
+/* Individual filter group section (e.g., category, availability) */
 .filter-box {
   border-bottom: 1px solid var(--border-top-new);
   width: 100%;
@@ -1873,36 +1988,43 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Hidden by default (likely used for desktop view or future features) */
 .toggle-filter-menu {
   display: none;
   cursor: pointer;
 
 }
 
+/* Hover feedback for toggle menu */
 .toggle-filter-menu:hover {
   transition: 0.1s;
   transform: scale(0.95);
 }
 
+/* Remove bottom border on last filter section */
 .filter-box:last-child {
   border-bottom: none;
 }
 
+/* Title label of a filter section */
 .filter-box>span {
   font-size: 24px;
 }
 
+/* Wrapper for custom checkbox UI */
 .checkbox-wrapper {
   position: relative;
 
 }
 
+/* Visually hide the real checkbox (custom UI replaces it) */
 .checkbox-wrapper .inp-cbx {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
+/* Custom checkbox container (clickable label UI) */
 .checkbox-wrapper .cbx {
   -webkit-user-select: none;
   user-select: none;
@@ -1915,11 +2037,13 @@ nav.mobile-open .nav-link-menu {
   gap: var(--padding-sm);
 }
 
+/* Light hover highlight for checkbox row */
 .checkbox-wrapper .cbx:hover {
   background: rgba(0, 119, 255, 0.06);
 }
 
 
+/* Ensure the checkbox spans behave consistently */
 .checkbox-wrapper .cbx span {
   display: inline-block;
   vertical-align: middle;
@@ -1927,6 +2051,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* The box part of the custom checkbox */
 .checkbox-wrapper .cbx span:first-child {
   position: relative;
   width: 18px;
@@ -1939,6 +2064,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* The checkmark SVG animation within the checkbox box */
 .checkbox-wrapper .cbx span:first-child svg {
   position: absolute;
   top: 3px;
@@ -1955,6 +2081,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Text label next to the checkbox */
 .checkbox-wrapper .cbx span:last-child {
   padding-left: 8px;
   line-height: 18px;
@@ -1962,17 +2089,20 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Hover effect on checkbox border */
 .checkbox-wrapper .cbx:hover span:first-child {
   border-color: var(--border-top-sec);
 }
 
 
+/* Checked state: fill the box and trigger wave animation */
 .checkbox-wrapper .inp-cbx:checked+.cbx span:first-child {
   background: black;
   border-color: var(--border-top-sec);
   animation: wave-4 0.4s ease;
 }
 
+/* Checked state: draw the checkmark */
 .checkbox-wrapper .inp-cbx:checked+.cbx span:first-child svg {
   stroke-dashoffset: 0;
 }
@@ -1985,6 +2115,11 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* --------------------------------------------------------------------------
+   COURSE GRID / CARDS (course.html listing)
+   -------------------------------------------------------------------------- */
+
+/* Wrapper for all course cards (mobile column layout) */
 .course-grid {
   display: flex;
   height: auto;
@@ -1996,6 +2131,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Individual course card container */
 .course-product {
   padding: var(--padding) var(--padding-sm) var(--padding-sm);
   display: flex;
@@ -2012,10 +2148,12 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Hover lift effect for course cards */
 .course-product:hover {
   transform: translateY(-4px);
 }
 
+/* Generic course info wrapper */
 .course-info {
   display: flex;
   align-items: flex-start;
@@ -2026,6 +2164,7 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
+/* Course title/summary block */
 .course-intro-info {
   padding: 0 var(--padding-avg);
 
@@ -2038,19 +2177,23 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
+/* Ensure tags align left inside a course card */
 .course-intro-info .tag-row {
   justify-content: flex-start;
   padding: 0;
 }
 
+/* Course name */
 .course-intro-info>h3 {
   font-size: 1.5625em;
 }
 
+/* Short course description */
 .course-intro-info>p {
   font-size: 14px;
 }
 
+/* FAQ-like details box inside a course card */
 .course-faq {
   background-color: var(--card-inside-color);
   display: flex;
@@ -2065,6 +2208,7 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
+/* Each FAQ row */
 .course-faq-item {
   height: auto;
   display: flex;
@@ -2076,19 +2220,23 @@ nav.mobile-open .nav-link-menu {
   border-bottom: 1px solid rgb(37, 37, 37);
 }
 
+/* FAQ text */
 .course-faq-item p {
   font-size: 14px;
 }
 
+/* Remove border for last FAQ row */
 .course-faq-item:last-child {
   border-bottom: none;
 }
 
+/* Small index number for FAQ items */
 .course-faq-index {
   font-size: 18px;
   color: grey;
 }
 
+/* Availability badge: course is available */
 .tag.available {
   background-color: var(--green);
   color: black;
@@ -2096,12 +2244,14 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Availability badge: course is unavailable */
 .tag.unavailable {
   background-color: brown;
   border-radius: var(--border-radius-small);
 
 }
 
+/* Category badge inside course cards */
 .tag.category {
   background-color: rgb(51, 51, 51);
   border-radius: var(--border-radius-small);
@@ -2109,10 +2259,16 @@ nav.mobile-open .nav-link-menu {
 
 
 
-/*===================*/
-/*===================*/
-/*===================*/
-/*register.html*/
+/* ==========================================================================
+   register.html – Registration page form + modal styles
+   --------------------------------------------------------------------------
+   This section styles:
+   - The registration form layout
+   - Form fields, radio groups, and goals fieldset
+   - Summary modal overlay and animation
+   - Enrollments panel list
+   ========================================================================== */
+
 .register-container {
   max-width: var(--max-width);
   padding: var(--padding-big) var(--padding-avg) var(--padding);
@@ -2127,6 +2283,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Main registration form wrapper */
 .register-form {
   width: 100%;
   height: auto;
@@ -2138,6 +2295,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
 }
 
+/* Row container for grouped form inputs */
 .from-row {
   width: 100%;
   display: flex;
@@ -2148,6 +2306,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Column wrapper for label + input/select/textarea */
 .form-column {
   width: 100%;
   text-align: left;
@@ -2158,6 +2317,7 @@ nav.mobile-open .nav-link-menu {
   gap: 5px;
 }
 
+/* Text inputs styling */
 .form-column input {
   background-color: var(--intro-item-bg-color);
   padding: 10px 5px;
@@ -2166,6 +2326,7 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
+/* Dropdown selects styling */
 .form-column select {
   width: 100%;
   background-color: var(--intro-item-bg-color);
@@ -2177,6 +2338,7 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
+/* Textarea styling */
 .form-column textarea {
   width: 100%;
   background-color: var(--intro-item-bg-color);
@@ -2185,10 +2347,12 @@ nav.mobile-open .nav-link-menu {
   padding: 8px 5px;
 }
 
+/* Ensure register form inputs fill available width */
 .register-form input {
   width: 100%;
 }
 
+/* Horizontal row variant (e.g., terms checkbox + label) */
 .form-column.last {
   display: flex;
   flex-direction: row;
@@ -2198,10 +2362,12 @@ nav.mobile-open .nav-link-menu {
   gap: 10px;
 }
 
+/* Checkbox width should not stretch */
 .form-column.last input {
   width: auto;
 }
 
+/* Fieldset wrapper for goals radio buttons / choices */
 .goals-fieldset {
   height: auto;
   display: flex;
@@ -2214,10 +2380,12 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Label spacing for goals fieldset */
 .goals-fieldset .goal-label {
   padding-bottom: var(--padding-sm);
 }
 
+/* Radio button row container (full-width clickable strip) */
 .radio-row {
   display: flex;
   align-items: center;
@@ -2230,11 +2398,13 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
+/* Radio input should keep natural size */
 .radio-row input {
   width: auto;
 }
 
 /*register modal content*/
+/* Modal overlay that dims the page when the summary modal is shown */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -2250,6 +2420,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Summary content wrapper inside modal (stacked layout) */
 #summary-content {
   display: flex;
   flex-direction: column;
@@ -2257,12 +2428,14 @@ nav.mobile-open .nav-link-menu {
 }
 
 /* visible state */
+/* JS toggles `.active` to show the overlay + allow interaction */
 .modal-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
 
 /* Modal box */
+/* Modal dialog itself; appears with slight slide + fade animation */
 .modal-content {
   background-color: var(--card-color);
   color: #fff;
@@ -2279,10 +2452,12 @@ nav.mobile-open .nav-link-menu {
     transform 0.25s ease;
 }
 
+/* Modal title spacing */
 .modal-content h2 {
   margin-bottom: var(--padding-avg);
 }
 
+/* Primary modal action button (enroll/confirm) */
 .modal-enroll-btn {
   margin-top: var(--padding-avg);
   width: 100%;
@@ -2290,6 +2465,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 /* Animate in when overlay is active */
+/* When overlay is active, modal dialog becomes visible and moves into place */
 .modal-overlay.active .modal-content {
   transform: translateY(0);
   opacity: 1;
@@ -2297,6 +2473,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 /* Close X */
+/* Absolute positioned close control inside modal */
 .modal-close {
   position: absolute;
   top: 0.75rem;
@@ -2306,6 +2483,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 /* Optional: prevent body scrolling when modal is open */
+/* Typically toggled on <body> with JS */
 .no-scroll {
   overflow: hidden;
 }
@@ -2313,6 +2491,7 @@ nav.mobile-open .nav-link-menu {
 /*register modal content*/
 
 
+/* Enrollments panel list (e.g., past registrations / links) */
 .enrollments-panel {
   height: auto;
   width: 100%;
@@ -2324,6 +2503,7 @@ nav.mobile-open .nav-link-menu {
   padding: 0 var(--padding-sm) var(--padding);
 }
 
+/* Grid list layout for enrollments */
 .enrollments-panel ul {
   height: auto;
   width: 100%;
@@ -2334,6 +2514,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Each enrollment list item */
 .enrollments-panel ul li {
   height: auto;
   display: flex;
@@ -2347,10 +2528,12 @@ nav.mobile-open .nav-link-menu {
   color: white;
 }
 
+/* Muted helper text in enrollment item */
 .enrollments-panel ul li small {
   color: rgb(182, 182, 182);
 }
 
+/* Enrollment links – styled like inline text links */
 .enrollments-panel ul li a {
   width: auto;
   text-align: left;
@@ -2362,6 +2545,7 @@ nav.mobile-open .nav-link-menu {
   border-bottom: 1px solid black;
 }
 
+/* Hover underline contrast on enrollment link */
 .enrollments-panel ul li a:hover {
   border-bottom: 1px solid white;
   transition: 0.2s ease;
@@ -2370,10 +2554,12 @@ nav.mobile-open .nav-link-menu {
 /*======================*/
 
 /*books.html*/
+/* Variant of course-product used for books grid cards */
 .course-product.book {
   padding-bottom: 0;
 }
 
+/* Thumbnail wrapper for book cards */
 .course-thumb {
   height: 20vh;
   width: 100%;
@@ -2382,11 +2568,13 @@ nav.mobile-open .nav-link-menu {
 
 
 
+/* Tag row variant for books page: highlight second tag */
 .tag-row.books>.tag:nth-child(2) {
   background-color: var(--green);
   color: black;
 }
 
+/* Book card info container */
 .course-info.books {
   padding: 0 var(--padding-avg);
   display: flex;
@@ -2401,12 +2589,14 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Category image wrapper used on books pages */
 .books-cat-image {
   height: 20vh;
   width: 90%;
   margin: auto;
 }
 
+/* Center tags on books info */
 .course-info.books .tag-row {
   padding: 0;
   align-items: center;
@@ -2414,26 +2604,38 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Book card short description */
 .course-info.books>p {
   font-size: 14px;
 }
 
+/* Book title */
 .course-info.books>h3 {
   font-size: 1.5625em;
 
 }
 
-/*=============================*/
-/*=============================*/
-/*=============================*/
-/*=============================*/
-/*=============================*/
+
+/* ==========================================================================
+   course-details.html – Course detail page styles
+   --------------------------------------------------------------------------
+   This section styles:
+   - Course details header
+   - Learning goals list
+   - Modules slider
+   - Proposed books section
+   - Extra Q&A accordion
+   - Subscription modal
+   - Reviews section and gated review form
+   ========================================================================== */
 
 /* course-details.html */
+/* Body/page wrapper background for course detail */
 .course-detail-page {
   background-color: var(--secondary-bg-color);
 }
 
+/* Header container for course details page */
 .crs-dtl-header {
   padding: var(--padding-big) var(--padding-sm);
   max-width: var(--max-width);
@@ -2447,10 +2649,12 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
 }
 
+/* Course details title sizing */
 .crs-dtl-header h1 {
   font-size: var(--h1-hd);
 }
 
+/* Learning goals block on course details page */
 .learning-goals-container.course-details {
   height: auto;
   width: 100%;
@@ -2462,6 +2666,7 @@ nav.mobile-open .nav-link-menu {
   padding: 0 var(--padding-sm);
 }
 
+/* Highlight goals tag on course details page */
 .learning-goals-container.course-details .tag {
   background-color: var(--green);
   color: black;
@@ -2470,6 +2675,7 @@ nav.mobile-open .nav-link-menu {
   padding-right: var(--padding-avg);
 }
 
+/* Grid wrapper for learning goal cards */
 .learning__goals__wrapper {
   display: grid;
   grid-template-columns: 1fr;
@@ -2482,6 +2688,7 @@ nav.mobile-open .nav-link-menu {
   width: 100%;
 }
 
+/* Individual learning goal card */
 .learning__goal__item {
   padding: var(--padding-avg) var(--padding-sm);
   background-color: var(--card-color);
@@ -2495,6 +2702,7 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
+/* Learning goal content text */
 .learning__goal__item span,
 .learning__goal__item p {
   font-size: 16px;
@@ -2502,6 +2710,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Main description wrapper section on course details */
 .main-description-course {
   padding: var(--padding-big) 0 0;
   margin: auto;
@@ -2515,6 +2724,7 @@ nav.mobile-open .nav-link-menu {
   text-align: center;
 }
 
+/* Generic section wrapper inside course details page */
 .course-section {
   width: 100%;
   padding: var(--padding) 0;
@@ -2526,6 +2736,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Wrapper for module slider section */
 .course-modules-wrapper {
   width: 100%;
   overflow: hidden;
@@ -2535,6 +2746,7 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
+/* Title + subtitle row above the module slider */
 .course-modules-section-title-row {
   width: 100%;
   height: auto;
@@ -2549,11 +2761,13 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Ensure titles are visible on the light background */
 .course-modules-section-title-row h2,
 .course-modules-section-title-row p {
   color: black;
 }
 
+/* Horizontal scroll slider for course modules */
 .course-model-slider {
   display: flex;
   overflow-x: auto;
@@ -2569,19 +2783,23 @@ nav.mobile-open .nav-link-menu {
   align-items: stretch;
 }
 
+/* Slider active drag state */
 .course-model-slider.active {
   cursor: grabbing;
 }
 
+/* Hide scrollbars for webkit */
 .course-model-slider::-webkit-scrollbar {
   display: none;
 }
 
+/* Ensure each module is treated as a fixed-width item in horizontal scroll */
 .course-model-slider .course-module {
   flex: 0 0 auto;
   /* important */
 }
 
+/* Individual module card */
 .course-module {
   padding: var(--padding) var(--padding-avg);
   display: flex;
@@ -2600,6 +2818,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Tag row inside module cards (lesson label + divider) */
 .course-module .tag-row {
 
   padding: 0;
@@ -2608,6 +2827,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Standard tag styling inside module card */
 .course-module .tag-row .tag {
   font-size: 12px;
   background-color: var(--green);
@@ -2616,6 +2836,7 @@ nav.mobile-open .nav-link-menu {
   color: black;
 }
 
+/* Lesson tag variant */
 .course-module .tag-row .tag.lesson {
   background-color: var(--green);
 
@@ -2625,6 +2846,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Divider line between tags inside module tag row */
 .course-module .tag-row .tag-line {
   height: 1px;
   background-color: var(--border-top-gr);
@@ -2632,6 +2854,7 @@ nav.mobile-open .nav-link-menu {
   min-width: 0;
 }
 
+/* CTA button inside module card */
 .course-module a {
   width: 100%;
   color: white;
@@ -2640,6 +2863,7 @@ nav.mobile-open .nav-link-menu {
   font-size: 18px;
 }
 
+/* "More details" section background wrapper */
 .course__more__details {
   width: 100%;
   padding: var(--padding-big) 0;
@@ -2651,6 +2875,7 @@ nav.mobile-open .nav-link-menu {
   background-color: black;
 }
 
+/* Proposed books section wrapper */
 .course__proposed__book__sec {
   width: 100%;
   height: auto;
@@ -2664,6 +2889,7 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Proposed books section title wrapper */
 .__proposed__books_title {
   display: flex;
   width: 100%;
@@ -2674,10 +2900,12 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Proposed books title paragraph text (white on dark background) */
 .__proposed__books_title p {
   color: white
 }
 
+/* Grid for proposed book cards */
 .__proposed__books__main {
   width: 100%;
   height: auto;
@@ -2690,6 +2918,7 @@ nav.mobile-open .nav-link-menu {
   grid-template-columns: 1fr;
 }
 
+/* Individual proposed book cards */
 .__proposed__books__main .card {
   background-color: var(--secondary-bg-color);
   width: 100%;
@@ -2705,6 +2934,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Proposed video block inside course details */
 .__course__prop_video {
   padding: var(--padding-big) var(--pad-sm);
   height: auto;
@@ -2716,6 +2946,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
 }
 
+/* Title wrapper for proposed video section */
 .__course__prop_video_title {
   display: flex;
   align-items: center;
@@ -2724,11 +2955,13 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Black text on light background for proposed video title */
 .__course__prop_video_title p,
 .__course__prop_video_title h1 {
   color: black;
 }
 
+/* Container that holds injected proposed video elements */
 .__inject_prop_vd {
   width: 100%;
   height: auto;
@@ -2739,6 +2972,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
 }
 
+/* Wrapper for "more questions" / Q&A accordion section */
 .more-quest-wrapper {
   background-color: black;
   padding: var(--padding-big) var(--padding-avg);
@@ -2751,6 +2985,7 @@ nav.mobile-open .nav-link-menu {
   flex-direction: column;
 }
 
+/* Centered content column for Q&A */
 .more-qst-row {
   max-width: var(--max-width);
   height: auto;
@@ -2764,35 +2999,42 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Reuse accordion, but remove offset positioning for module context */
 .courses-detail-accordion.module {
   top: 0;
 }
 
+/* Q&A trigger variant: transparent background on dark section */
 .accordion-trigger.qst {
   background-color: transparent;
   border-top: 1px solid var(--border-top-new);
 }
 
+/* White chevron icon for Q&A accordion */
 .accordion-trigger.qst .fa-solid.fa-chevron-down {
   color: white;
 }
 
+/* Q&A heading text in trigger row */
 .accordion-trigger.qst .course-span {
   color: white;
   font-size: 16px;
 }
 
+/* Q&A panel inner: left align content */
 .accordion-panel-inner.qst {
   text-align: left;
   align-items: flex-start;
   justify-content: center;
 }
 
+/* Q&A content text in white */
 .accordion-panel-inner.qst p {
   color: white;
 
 }
 
+/* Hover effect for links in Q&A section */
 .more-qst-row a:hover {
   background-color: black;
   color: white;
@@ -2800,6 +3042,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 /* modal course susbcription */
+/* Generic modal shell; toggled with `.is-open` */
 .modal {
   position: fixed;
   inset: 0;
@@ -2807,16 +3050,19 @@ nav.mobile-open .nav-link-menu {
   z-index: 9999;
 }
 
+/* Visible state of subscription modal */
 .modal.is-open {
   display: block;
 }
 
+/* Modal backdrop overlay */
 .modal__backdrop {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
 }
 
+/* Modal dialog container (centered, with a top margin) */
 .modal__dialog {
   position: relative;
   max-width: 520px;
@@ -2835,12 +3081,14 @@ nav.mobile-open .nav-link-menu {
   text-align: center;
 }
 
+/* Modal action buttons row */
 .modal__actions {
   display: flex;
   gap: var(--gap);
   justify-content: flex-end;
 }
 
+/* Base modal button */
 .modal__btn {
   padding: var(--padding-sm) var(--padding-avg);
   border: 0;
@@ -2848,6 +3096,7 @@ nav.mobile-open .nav-link-menu {
   font-size: 16px;
 }
 
+/* Primary modal button (confirm) */
 .modal__btn--primary {
   background: var(--green);
   color: #000;
@@ -2855,6 +3104,7 @@ nav.mobile-open .nav-link-menu {
 
 /* reviews section */
 
+/* Main reviews section wrapper */
 .reviews-section {
   height: auto;
   width: 100%;
@@ -2866,10 +3116,12 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding) var(--padding-sm);
 }
 
+/* Reviews section title color */
 .reviews-section h1 {
   color: black;
 }
 
+/* Wrapper for overall rating summary */
 .overall-rating-wrapper {
   height: auto;
   background-color: var(--review-card);
@@ -2882,10 +3134,12 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radious);
 }
 
+/* Empty-state text inside overall rating wrapper */
 .overall-rating-wrapper .empty-state {
   color: black;
 }
 
+/* Overall rating content column */
 .overall-rating {
   width: 100%;
   height: auto;
@@ -2896,10 +3150,12 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-sm);
 }
 
+/* Rating title */
 .overall-rating h2 {
   color: black;
 }
 
+/* Row displaying rating value (number + stars) */
 .overall-rating__value {
   display: flex;
   align-items: center;
@@ -2907,15 +3163,18 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-sm);
 }
 
+/* Rating number emphasis */
 .overall-rating__value strong {
   font-size: 18px;
 }
 
+/* Rating count label */
 .overall-rating__count {
   font-size: 16px;
   color: black;
 }
 
+/* Grid wrapper for individual rating items (mobile: single column) */
 .ratings-wrapper {
   height: auto;
   width: 100%;
@@ -2927,10 +3186,12 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Empty-state text inside ratings grid */
 .ratings-wrapper .empty-state {
   color: black;
 }
 
+/* Individual rating card */
 .rating-item {
   width: 100%;
   height: auto;
@@ -2944,16 +3205,19 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-sm);
 }
 
+/* Rating item title */
 .rating-item h2 {
   color: black;
 }
 
+/* Rating item text */
 .rating-item p {
   color: black;
   font-size: 16px;
   font-weight: 400;
 }
 
+/* Stars wrapper */
 .stars {
   width: auto;
   display: flex;
@@ -2961,15 +3225,18 @@ nav.mobile-open .nav-link-menu {
   justify-content: flex-start;
 }
 
+/* Star icon styling */
 .stars .fa-solid.fa-star {
   color: rgb(230, 195, 0);
   font-size: 16px;
 }
 
+/* Hide review form completely when [hidden] attribute is set */
 #review-form[hidden] {
   display: none !important;
 }
 
+/* Wrapper for the review form section */
 .review-form-section {
   height: auto;
   width: 100%;
@@ -2981,10 +3248,12 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding) var(--padding-sm);
 }
 
+/* Review form section heading */
 .review-form-section h1 {
   color: black;
 }
 
+/* Wrapper for gating UI (e.g., requires enrollment/login) */
 .review-gate {
   height: auto;
   width: 100%;
@@ -2995,15 +3264,18 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Review gate explanatory text */
 .review-gate p {
   color: black;
 }
 
+/* Review gate link (e.g., "Register" / "Enroll") */
 .review-gate a {
   background-color: black;
   color: white;
 }
 
+/* Review form itself */
 .review-form-section .review-form {
   width: 100%;
   gap: var(--gap);
@@ -3013,26 +3285,29 @@ nav.mobile-open .nav-link-menu {
   justify-content: center;
 }
 
+/* Form labels */
 .review-form-section .review-form .form-column label {
   font-size: 18px;
 }
 
+/* Review textarea styling */
 .review-form-section .review-form .form-column textarea {
   border-radius: var(--border-radious);
   font-size: 16px;
 }
 
+/* Submit button styling inside review form */
 .review-form-section .review-form .submit-btn {
   color: white;
   background-color: var(--card-color);
 }
 
 
-/*====================*/
-/*====================*/
-/*====================*/
+/* ==========================================================================
+   book-details.html – Book detail page styles
+   ========================================================================== */
 
-/* book-details.html */
+/* Header wrapper for book details page */
 .book-page-header {
   max-width: var(--max-width);
   height: auto;
@@ -3046,6 +3321,7 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap-mid);
 }
 
+/* Box container for book image/hero */
 .book-dtl-hd-box {
   height: auto;
   width: 100%;
@@ -3056,6 +3332,7 @@ nav.mobile-open .nav-link-menu {
   margin: auto;
 }
 
+/* Book cover image container */
 .book-dtl-img-cnt {
   height: 40vh;
   width: 60%;
@@ -3063,12 +3340,14 @@ nav.mobile-open .nav-link-menu {
   border-radius: var(--border-radius-small);
 }
 
+/* Book cover image sizing */
 .book-dtl-img-cnt img {
   max-width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Book details textual content wrapper */
 .book-dtl-row {
   width: 100%;
   padding: 0 var(--padding-sm);
@@ -3079,21 +3358,25 @@ nav.mobile-open .nav-link-menu {
   gap: var(--gap);
 }
 
+/* Align tags to left for book details */
 .book-dtl-row .tag-row {
   justify-content: flex-start;
 }
 
+/* Highlight first tag (usually "Book" or category) */
 .book-dtl-row .tag-row .tag:first-child {
   background-color: var(--green);
   color: black;
 }
 
+/* Book title */
 .book-dtl-row h2 {
   font-size: 22px;
   color: black;
 
 }
 
+/* Book author / extra info */
 .book-dtl-row span {
   font-size: 14px;
   color: var(--nav-button-color);
@@ -3103,12 +3386,14 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Book section subtitle */
 .book-dtl-row h3 {
   font-size: 20px;
   color: black;
 
 }
 
+/* Primary button (e.g., external link or action) */
 .book-dtl-row a {
   background-color: black;
   color: white;
@@ -3116,11 +3401,13 @@ nav.mobile-open .nav-link-menu {
   padding: var(--padding-sm) var(--padding);
 }
 
+/* Hover feedback on book detail CTA */
 .book-dtl-row a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
 
+/* Main description container on book details page */
 .book-main-dtl {
   width: 100%;
   padding: var(--padding-avg);
@@ -3138,20 +3425,22 @@ nav.mobile-open .nav-link-menu {
 
 }
 
+/* Book main detail headings */
 .book-main-dtl h2 {
   color: black;
 }
 
+/* Book main detail paragraphs */
 .book-main-dtl p {
   color: black;
 
 }
 
-/*===================*/
-/*===================*/
-/*===================*/
+/* ==========================================================================
+   videos.html – Video listing page styles
+   ========================================================================== */
 
-/* videos.html */
+/* Header section for videos page */
 .video-header {
   height: auto;
   max-width: var(--max-width);
@@ -3168,12 +3457,14 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Center tags in video header */
 .video-header .tag-row {
   align-items: center;
   justify-content: center;
   gap: 0;
 }
 
+/* Highlight the first and third tags */
 .video-header .tag-row .tag:nth-child(1),
 .video-header .tag-row .tag:nth-child(3) {
   background-color: var(--green);
@@ -3182,6 +3473,7 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Main videos page wrapper */
 .videos-page {
   padding: var(--padding) var(--padding-sm);
   display: flex;
@@ -3194,17 +3486,23 @@ nav.mobile-open .nav-link-menu {
 }
 
 
+/* Ensure tag row in new-box header aligns left */
 .new-box-header .tag-row {
   justify-content: flex-start;
   padding: 0;
 }
 
 
-/* team.html */
+/* ==========================================================================
+   team.html – About/team page styles
+   ========================================================================== */
+
+/* Team page background override */
 body.team-page {
   background-color: var(--secondary-bg-color);
 }
 
+/* About-us header wrapper */
 .about-us-header {
   display: flex;
   align-items: center;
@@ -3217,17 +3515,20 @@ body.team-page {
   gap: var(--gap-t);
 }
 
+/* Center tag row in about header */
 .about-us-header .tag-row {
   align-items: center;
   justify-content: center;
   gap: 0;
 }
 
+/* About header title */
 .about-us-header h1 {
   color: black;
   font-size: var(--h1-s);
 }
 
+/* People row (images separated by lines) */
 .team-people-row {
   display: flex;
   align-items: center;
@@ -3238,6 +3539,7 @@ body.team-page {
   margin: auto;
 }
 
+/* Horizontal line between profile images */
 .line {
   height: 1px;
   flex: 1 1 auto;
@@ -3245,6 +3547,7 @@ body.team-page {
   background-color: var(--line-background);
 }
 
+/* Circular profile image wrapper */
 .person {
   height: 100px;
   width: 100px;
@@ -3256,12 +3559,14 @@ body.team-page {
   overflow: hidden;
 }
 
+/* Profile images cover the circle */
 .person img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
+/* Main team presentation container */
 .team-presentation {
   height: auto;
 
@@ -3275,6 +3580,7 @@ body.team-page {
 
 }
 
+/* Inner presentation box */
 .team-presentation-box {
   display: flex;
   align-items: center;
@@ -3285,6 +3591,7 @@ body.team-page {
   padding: 0 var(--padding-sm);
 }
 
+/* Intro text block */
 .team-know-us-intro {
   height: auto;
   display: flex;
@@ -3294,17 +3601,20 @@ body.team-page {
   gap: var(--gap);
 }
 
+/* Intro title */
 .team-know-us-intro h2 {
   font-size: 24px;
   color: black;
 }
 
+/* Intro paragraph */
 .team-know-us-intro p {
   font-size: 18px;
   color: black;
 
 }
 
+/* Personal info block */
 .team-personal-info {
   display: flex;
   align-items: center;
@@ -3315,10 +3625,12 @@ body.team-page {
   width: 100%;
 }
 
+/* Full-width line inside personal info section */
 .team-personal-info .line {
   width: 100%;
 }
 
+/* Textual info box */
 .team-info-box {
   width: 100%;
 
@@ -3330,21 +3642,25 @@ body.team-page {
   gap: var(--gap);
 }
 
+/* Ensure team info text is black (light background) */
 .team-info-box h3,
 .team-info-box p,
 .team-info-box h4 {
   color: black;
 }
 
+/* Name/title */
 .team-info-box h3 {
   font-size: 20px;
 }
 
+/* Role/secondary heading */
 .team-info-box h4 {
   font-size: 18px;
   color: var(--border-top-new);
 }
 
+/* Wrapper for stacked/overlapping images */
 .team-presentation-image-wrapper {
   height: 240px;
   width: 100%;
@@ -3355,6 +3671,7 @@ body.team-page {
   flex-wrap: nowrap;
 }
 
+/* Individual image box */
 .team-pres-img-box {
   width: 220px;
   height: 200px;
@@ -3362,18 +3679,21 @@ body.team-page {
   overflow: hidden;
 }
 
+/* Image sizing */
 .team-pres-img-box img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
+/* First image: slightly larger and in front */
 .team-pres-img-box:nth-of-type(1) {
   position: relative;
   z-index: 2;
   width: 240px;
 }
 
+/* Second image: offset + rotated behind */
 .team-pres-img-box:nth-of-type(2) {
   position: relative;
   top: var(--move-top);
@@ -3384,6 +3704,7 @@ body.team-page {
   transform: rotate(var(--tilt-angle));
 }
 
+/* Wrapper for project description block */
 .team-project-description-wrapper {
   height: auto;
   max-width: var(--max-width);
@@ -3394,6 +3715,7 @@ body.team-page {
   justify-content: center;
 }
 
+/* Project description container */
 .team-project-dcr-box {
   height: auto;
   width: 100%;
@@ -3407,6 +3729,7 @@ body.team-page {
   gap: var(--gap-mid);
 }
 
+/* Project title wrapper */
 .team-project-dscr-title-box {
   height: auto;
   width: 100%;
@@ -3416,6 +3739,7 @@ body.team-page {
   justify-content: center;
 }
 
+/* Main text block inside the project description */
 .team-project-main-dsc {
   height: auto;
   width: 100%;
@@ -3427,10 +3751,12 @@ body.team-page {
   gap: var(--gap-mid);
 }
 
+/* Project description text sizing */
 .team-project-main-dsc p {
   font-size: 18px;
 }
 
+/* Project image row wrapper */
 .team-proj-img-row {
   width: 100%;
   height: 20vh;
@@ -3440,12 +3766,14 @@ body.team-page {
   justify-content: flex-start;
 }
 
+/* Project image container box */
 .team-proj-box-img {
   height: 100%;
   width: 45%;
 
 }
 
+/* Ensure images fit without cropping */
 .team-proj-box-img img {
   width: 100%;
   height: 100%;
@@ -3453,11 +3781,16 @@ body.team-page {
 }
 
 
-/* video-details.html */
+/* ==========================================================================
+   video-details.html – Video detail page styles
+   ========================================================================== */
+
+/* Body background override for video detail page */
 .video-details-body-page {
   background-color: var(--secondary-bg-color);
 }
 
+/* Video detail page header wrapper */
 .vd__header {
   height: auto;
   padding: var(--padding-big) var(--padding-avg);
@@ -3471,11 +3804,13 @@ body.team-page {
   text-align: center;
 }
 
+/* Ensure header text is visible on light background */
 .vd__header h1,
 .vd__header p {
   color: black;
 }
 
+/* Main content wrapper that contains the embedded video */
 .vd__main-content {
   height: auto;
   max-width: var(--max-width);
@@ -3489,12 +3824,14 @@ body.team-page {
   gap: var(--gap);
 }
 
+/* Video container sizing and cropping */
 .vd-content {
   width: 100%;
   height: 30vh;
   overflow: hidden;
 }
 
+/* Embedded iframe/video element */
 .vd-cover {
   width: 100%;
   height: 100%;
@@ -3502,10 +3839,12 @@ body.team-page {
   display: block;
 }
 
-/*=================*/
-/*=================*/
-/*=================*/
-/* footer */
+/* ==========================================================================
+   Footer – Shared across pages
+   --------------------------------------------------------------------------
+   Accordion-based footer navigation for mobile, plus CTA registration block.
+   ========================================================================== */
+
 footer {
   background-color: var(--secondary-bg-color);
   height: auto;
@@ -3519,6 +3858,7 @@ footer {
   gap: var(--gap-mid);
 }
 
+/* Outer wrapper for footer content */
 .footer-box {
   height: auto;
   width: 100%;
@@ -3529,6 +3869,7 @@ footer {
   margin: auto;
 }
 
+/* Accordion group container */
 .footer-accordion-group {
   width: 100%;
   height: auto;
@@ -3538,11 +3879,13 @@ footer {
   flex-direction: column;
 }
 
+/* Accordion item wrapper */
 .footer-accordion-item {
   width: 100%;
   height: auto;
 }
 
+/* Accordion panel content layout (when visible) */
 .footer-accordion-panel {
   height: auto;
   width: 100%;
@@ -3552,6 +3895,7 @@ footer {
   gap: var(--gap);
 }
 
+/* Link list wrapper (stacked links) */
 .footer-link-list {
   display: flex;
   align-items: center;
@@ -3559,6 +3903,7 @@ footer {
   flex-direction: column;
 }
 
+/* Accordion trigger button (title row) */
 .footer-accordion-trigger {
   width: 100%;
   display: flex;
@@ -3572,16 +3917,19 @@ footer {
 }
 
 
+/* Chevron/icon transitions */
 .footer-accordion-trigger i {
   font-size: 14px;
   transition: transform 0.3s ease;
 }
 
+/* Rotate chevron on expanded state */
 .footer-accordion-trigger[aria-expanded="true"] i {
   transform: rotate(180deg);
 }
 
 
+/* Accordion panel collapsed state */
 .footer-accordion-panel {
   max-height: 0;
   overflow: hidden;
@@ -3597,11 +3945,13 @@ footer {
 
 }
 
+/* Accordion panel open state */
 .footer-accordion-panel.is-open {
   opacity: 1;
   height: auto;
 }
 
+/* Link list spacing inside panel */
 .footer-link-list {
   padding: 0 0 var(--padding-avg);
   width: 100%;
@@ -3612,6 +3962,7 @@ footer {
   flex-direction: column;
 }
 
+/* Individual link row */
 .footer-link-list li {
   height: auto;
   width: 100%;
@@ -3620,6 +3971,7 @@ footer {
   justify-content: flex-start;
 }
 
+/* Footer link styling */
 .footer-link-list li a {
   padding: var(--padding-sm);
   width: 100%;
@@ -3630,6 +3982,7 @@ footer {
   color: var(--border-top-new);
 }
 
+/* Footer team button (separate CTA row) */
 .footer-team-btn {
   width: 100%;
   padding: var(--padding-avg) var(--padding-sm);
@@ -3642,10 +3995,12 @@ footer {
   border-right: none;
 }
 
+/* Plus icon size */
 .fa-solid.fa-plus {
   font-size: 14px;
 }
 
+/* First footer box padding control */
 .footer-box:first-of-type {
   padding: 0 var(--padding-avg);
   display: flex;
@@ -3653,6 +4008,7 @@ footer {
   justify-content: center;
 }
 
+/* Footer registration CTA block */
 .footer__reg {
   width: 100%;
   padding: var(--padding) 0 0;
@@ -3664,10 +4020,12 @@ footer {
   flex-direction: column;
 }
 
+/* Footer registration title */
 .footer__reg h2 {
   color: black;
 }
 
+/* Footer registration button */
 .footer__reg a {
   background-color: black;
   color: white;
@@ -3675,11 +4033,13 @@ footer {
   width: 70%;
 }
 
+/* Hover feedback for footer CTA */
 .footer__reg a:hover {
   transform: scale(0.95);
   transition: 0.2s;
 }
 
+/* Footer team info wrapper (small print) */
 .footer__team-info-wrapper {
   width: 100%;
   height: auto;
@@ -3690,6 +4050,7 @@ footer {
   flex-direction: column;
 }
 
+/* Footer team info text */
 .footer__team-info-wrapper p {
   font-size: 12px;
   color: black;

@@ -1,5 +1,10 @@
-// footer accordion function
+// Handles all footer-related interactive behavior:
+// 1) Dynamically renders footer categories from the global CATEGORIES array
+// 2) Connects accordion open/close behavior for footer sections
+// 3) Initializes footer logic when the footer element exists on the page
 (function () {
+  // Renders the list of category links inside the footer
+  // Uses the global CATEGORIES array (if available)
   function renderFooterCategories(root) {
     if (typeof CATEGORIES === "undefined") return;
 
@@ -12,6 +17,8 @@
     }).join("");
   }
 
+  // Attaches accordion behavior to footer accordion triggers
+  // Allows sections to expand/collapse smoothly
   function connectFooterAccordion(root) {
     const trig = root.querySelectorAll(".footer-accordion-trigger");
     if (!trig.length) return;
@@ -40,6 +47,8 @@
     });
   }
 
+  // Initializes footer accordion logic
+  // Called once when the footer is present in the DOM
   function init() {
     const footerRoot = document.getElementById("site-footer");
     if (!footerRoot) return;
@@ -47,5 +56,7 @@
     renderFooterCategories(footerRoot);
     connectFooterAccordion(footerRoot);
   }
+
+  // Expose init method for global access
   window.FooterAccordion = { init };
 })();

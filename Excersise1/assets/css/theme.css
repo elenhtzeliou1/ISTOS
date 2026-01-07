@@ -1,5 +1,21 @@
+/*
+  Purpose:
+  - Global theme layer: design tokens (CSS variables), base typography, and element defaults.
+  - Keeps colors, spacing, radii, and type scales centralized for consistency.
+
+  Structure:
+  1) Global typography reset (font)
+  2) Scroll behavior & anchor offsets
+  3) :root design tokens (spacing, colors, sizes, breakpoints-related variables)
+  4) Base element styling (body, headings, buttons, links, utility classes)
+
+  Important:
+  - Do NOT place page/layout-specific rules here; those go in layout.css/components.css.
+*/
+
 * {
 
+    /* Global font family used across the site */
     font-family: "Outfit", sans-serif;
     font-weight: 400;
     font-optical-sizing: auto;
@@ -7,20 +23,28 @@
 
 }
 
+/* Smooth scrolling for in-page navigation (anchors) */
 html {
     scroll-behavior: smooth;
 }
 
+/*
+  When navigating to an in-page anchor, keep content below the fixed navbar
+  (offset equals the nav height + a small buffer).
+*/
 :target {
     scroll-margin-top: 90px;
 }
 
 :root {
+    /* Default scroll offset used by browsers for anchor targets */
     scroll-margin-top: 90px;
 
+    /* Layout primitives */
     --nav-height: 70px;
     --pad-sm: 2px;
 
+    /* Spacing scale */
     --padding-sm: 0.5rem;
     --padding-avg: 1rem;
     --padding-mid: 1.5rem;
@@ -28,9 +52,11 @@ html {
     --padding-big: 4rem;
     --padding-lrg: 6rem;
 
+    /* Larger spacing presets used in certain sections */
     --padding-m: 8em;
     --padding-l: 10em;
 
+    /* Gaps scale */
     --gap-ultra-sm: 2px;
     --gap-sm: 0.5rem;
     --gap: 1rem;
@@ -39,6 +65,7 @@ html {
     --gap-l: 3rem;
     --gap-big: 4rem;
 
+    /* Radius scale */
     --border-radious: 5px;
     --border-radius-small: 3px;
     --border-radius-avrg: 10px;
@@ -46,6 +73,7 @@ html {
     --border-radius-big: 20px;
     --border-radius-huge: 9999px;
 
+    /* Core colors */
     --white-bg: white;
 
     --card-color: rgb(26, 26, 26);
@@ -68,16 +96,15 @@ html {
 
     --review-card: rgb(228, 228, 228);
 
-    /* intro slider*/
+    /* intro slider */
     --intro-item-bg-color: rgb(32, 32, 32);
 
     --intro-slider-height-mob: 26vh;
     --intro-item-height-mob: 120px;
     --intro-item-width-mob: 160px;
+    /* intro slider */
 
-    /* intro slider*/
-
-    /*proposed book card*/
+    /* proposed book card */
     --book-card-width: calc(100dvw - 4rem);
     --book-card-width-tablet: calc(50dvw - 1rem);
     --book-card-width-laptop: calc(30dvw - 4rem);
@@ -88,30 +115,32 @@ html {
     --cat-card-table: calc(60dvw - 1rem);
 
     --simple-card-height: 48vh;
-    /*proposed intro slider*/
+    /* proposed intro slider */
 
-    /* proposed courses carousel*/
+    /* proposed courses carousel */
     --proposed-carousel-height: 36vh;
     --proposed-carousel-card-width-mob: 290px;
     --proposed-video-vd-wrapper-mob: 28vh;
-    /* proposed courses carousel*/
+    /* proposed courses carousel */
 
-
-
+    /* Lines/borders */
     --line-background: #E1E1E1;
     --border-top-gr: rgb(128, 128, 128);
     --border-top-sec: rgb(223, 223, 223);
     --border-top-new: rgb(37, 37, 37);
 
+    /* Card layout measurements */
     --number-block-width: 58px;
     --number-block-height: 58px;
     --card-top-padding: calc(var(--number-block-height));
     --card-left-padding: calc(var(--number-block-width));
 
+    /* Max widths / layout constraints */
     --tag-color: rgb(49, 49, 49);
     --max-width: 1200px;
     --max-width-laptop-larg: 1400px;
 
+    /* Section sizing helpers */
     --card-min-height: 55vh;
 
     --min-height: 90vh;
@@ -123,6 +152,7 @@ html {
     --min-height-wide: 135vh;
     --max-width-register: 900px;
 
+    /* Type scale */
     --h1-hd: 40px;
     --h1-intro: 46px;
     --h1-s: 56px;
@@ -131,18 +161,21 @@ html {
     --h2-b: 36px;
     --h2-tabl: 28px;
 
-
     --p-big: 24px;
     --p-lrg: 30px;
     --p-tabl: 22px;
 
+    /* Accent colors */
     --green: rgb(161, 255, 98);
     --violet: rgb(104, 64, 255);
+
+    /* Common alignment helpers */
     --text-align-def: center;
     --align-items-start: flex-start;
 
     --small-font-size: 16px;
 
+    /* Screen/animation helpers */
     --screen-wrapper-height-s: 50vh;
     --move-top: 2rem;
     --move-left: -3rem;
@@ -150,20 +183,22 @@ html {
     --pers-circle-laptop: 80px;
 }
 
+/*
+  Body uses top padding to prevent content being hidden under a fixed navbar.
+  Background stays dark by default; components can override via section backgrounds.
+*/
 body {
     padding-top: var(--nav-height);
     background-color: var(--background-color);
 
 }
 
-/*no scroll when the mobile menu opens*/
+/* Utility: disable scrolling when mobile menu is open */
 body.no-scroll {
     overflow: hidden;
 }
 
-/*no scroll when the mobile menu opens*/
-
-
+/* Base headings / text */
 h1 {
     font-size: 40px;
     line-height: 1.1;
@@ -205,6 +240,7 @@ p {
     font-weight: 300;
 }
 
+/* Icon sizing (Font Awesome) */
 .fa-solid.fa-bars {
     font-size: 22px;
 }
@@ -213,6 +249,11 @@ nav>h2 {
     color: white;
 }
 
+/*
+  Default <a> styling:
+  - Many pages treat <a> as button-like elements.
+  - If you need "text link" styling, define a component class.
+*/
 a {
     background-color: white;
     padding: 8px 0.8rem;
@@ -222,6 +263,7 @@ a {
     text-align: center;
 }
 
+/* Reusable primary CTA style */
 .green-btn {
     background-color: var(--green);
     padding: var(--padding-sm) var(--padding);
@@ -237,6 +279,7 @@ a {
     transition: 0.2s;
 }
 
+/* Default button reset for consistent styling */
 button {
     box-sizing: border-box;
     color: black;
@@ -246,6 +289,7 @@ button {
     font-size: 20px;
 }
 
+/* Form submit button baseline */
 .submit-btn {
     width: 100%;
     padding: 12px 0.8rem;
@@ -259,11 +303,13 @@ button {
     color: white;
 }
 
+/* Branding icon styling */
 .fa-brands.fa-42-group {
     color: greenyellow;
     font-size: 40px;
 }
 
+/* Mobile menu open/close icons */
 #openMenu,
 #closeMenu {
     cursor: pointer;
@@ -271,23 +317,27 @@ button {
     color: white;
 }
 
+/* Generic inline text emphasis */
 span {
     color: white;
     font-size: 24px;
     font-weight: 350;
 }
 
+/* Menu-specific span styling */
 .menu-span {
     font-weight: 350;
     font-size: 18px;
 
 }
 
+/* Used inside lighter backgrounds where text needs to be dark */
 .course-span {
     color: black;
     font-size: 18px;
 }
 
+/* Menu button styling (mobile navigation) */
 .menu {
     background-color: transparent;
     border: none;
@@ -298,6 +348,7 @@ span {
     text-align: left;
 }
 
+/* Small accent label (e.g., tag/pill) */
 .a-green {
     background-color: var(--green);
     border: none;
@@ -308,6 +359,7 @@ span {
     text-transform: uppercase;
 }
 
+/* Arrow icon colors for light backgrounds */
 .fa-solid.fa-arrow-left {
     font-size: 12px;
     color: black;
@@ -319,6 +371,7 @@ span {
 
 }
 
+/* Course detail sections appear on light cards; force readable text */
 .main-description-course h2 {
     color: black;
 }
@@ -331,6 +384,7 @@ span {
     color: black;
 }
 
+/* Keep images responsive (duplicated safeguard vs reset.css) */
 img {
     max-width: 100%;
 }

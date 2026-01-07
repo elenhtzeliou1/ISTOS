@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta information ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | About Us</title>
 
+    <!-- ===== Shared global styles ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -17,6 +19,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Google Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,21 +27,30 @@
       rel="stylesheet"
     />
   </head>
+
   <body class="team-page">
+    <!-- ===== Main navigation (loaded dynamically) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Page header / team introduction ===== -->
     <header class="about-us-header">
       <h1>About Us</h1>
+
+      <!-- Decorative tag row -->
       <div class="tag-row">
         <div class="tag">Meet</div>
         <div class="tag">Our</div>
         <div class="tag">Team</div>
       </div>
+
+      <!-- Team photos row -->
       <div class="team-people-row">
         <div class="line"></div>
+
         <div class="person">
           <img src="assets/images/team/tzeliou.jpg" alt="" />
         </div>
+
         <div class="person">
           <img src="assets/images/team/haralampidis.jpg" alt="" />
         </div>
@@ -46,8 +58,11 @@
         <div class="line"></div>
       </div>
     </header>
+
+    <!-- ===== Team presentation section ===== -->
     <section class="team-presentation">
       <div class="team-presentation-box">
+        <!-- Intro text about the team -->
         <div class="team-know-us-intro">
           <h2>A few words about our team</h2>
           <p>
@@ -61,6 +76,7 @@
           </p>
         </div>
 
+        <!-- Team member details -->
         <div class="team-personal-info">
           <div class="team-info-box">
             <h3>Our team members</h3>
@@ -68,6 +84,8 @@
           </div>
 
           <div class="line"></div>
+
+          <!-- First team member -->
           <div class="team-info-box">
             <h3>Napoleon Haralampidis</h3>
             <h4>AΜ: 3220225</h4>
@@ -77,6 +95,7 @@
 
           <div class="line"></div>
 
+          <!-- Second team member -->
           <div class="team-info-box">
             <h3>Eleni Tzeliou</h3>
             <h4>AM: 3220200</h4>
@@ -86,6 +105,7 @@
         </div>
       </div>
 
+      <!-- Supporting images for team presentation -->
       <div class="team-presentation-image-wrapper">
         <div class="team-pres-img-box">
           <img src="assets/images/team/image-team-1.jpg" alt="" />
@@ -99,6 +119,7 @@
       </div>
     </section>
 
+    <!-- ===== Project / assignment description ===== -->
     <section class="team-project-description-wrapper">
       <div class="team-project-dcr-box">
         <div class="team-project-dscr-title-box">
@@ -107,6 +128,7 @@
             “Technologies and Programming of Applications on the Web.”
           </h2>
         </div>
+
         <div class="team-project-main-dsc">
           <p>
             Our platform was designed to make studying simpler and more
@@ -129,14 +151,17 @@
         </div>
       </div>
     </section>
-    <!--Footer -->
-    <footer id="site-footer"></footer>
-    <!--Used scripts-->
 
+    <!-- ===== Footer (loaded dynamically) ===== -->
+    <footer id="site-footer"></footer>
+
+    <!-- ===== JavaScript ===== -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
 
+    <!-- Category data (used by shared layout/navigation) -->
     <script src="assets/js/data/categories.js"></script>
 
+    <!-- App orchestrator -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

@@ -1,13 +1,16 @@
-//this js page handles all the logic and the function of the categories.html page and the categories that
-// are revealed in the index.html page
-
+// Categories page logic
+// Handles both the index.html category preview and the full categories.html page rendering
+// Wrapped in an IIFE to keep the global scope clean
 (function () {
-  //preview for index.html
+  // ---- Preview accordion for index.html ----
   function renderPreview(container, categories) {
+    // Render accordion-style category previews
     container.innerHTML = categories
       .map((category, index) => {
         const panelId = `category-panel-${category.id}`;
         const triggerId = `category-trigger-${category.id}`;
+
+        // Shorten description for preview display
         const pshort =
           category.description.length > 100
             ? category.description.slice(0, 200) + "..."
@@ -32,7 +35,7 @@
             aria-labelledby="${triggerId}"
           >
             <a class="accordion-panel-inner" href="categories.html#${category.slug}">
-              <!-- to krimeno content-->
+              <!-- Hidden / expandable content -->
               <p>
                 ${pshort}
               </p>
@@ -46,25 +49,23 @@
                         alt="${category.title}"
                     />
                 </div>
-
-              
                 `
                   : "No cover found!"
               }
-           
             </a>
           </div>
         </div>
-    
     `;
       })
       .join("");
   }
 
-  //preview for carousel for header categories.html
+  // ---- Header carousel preview for categories.html ----
   function headerPreview(container, categories) {
+    // Render ring-carousel items for category header
     container.innerHTML = categories
       .map((category, index) => {
+        // Short description for carousel cards
         const pshort =
           category.description.length > 100
             ? category.description.slice(0, 100) + "..."
@@ -73,18 +74,23 @@
         const href = `#${category.slug}`;
         const num = String(index + 1).padStart(2, "0");
 
+        // Predefined background colors for cards
         const colors = ["#492db3", "#adadadff", "#151313", "#a1ff62"];
 
+        // Convert hex color to RGB
         function hexToRgb(hex) {
           const h = hex.replace("#", "").slice(0, 6);
           const n = parseInt(h, 16);
           return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
         }
+
+        // Pick readable text color based on background brightness
         function pickTextColor(bgHex) {
           const { r, g, b } = hexToRgb(bgHex);
           const brightness = (r * 299 + g * 587 + b * 114) / 1000;
           return brightness < 140 ? "#ffffff" : "#000000";
         }
+
         const bg = colors[index % colors.length];
         const pcolor = pickTextColor(bg);
 
@@ -102,13 +108,14 @@
       .join("");
   }
 
-  // recomendations for categories.html main content
+  // ---- Recommendation selection logic ----
   function pickRecommendations(categorySlug) {
+    // Ensure required datasets are loaded
     if (typeof COURSES === "undefined" || typeof BOOKS === "undefined") {
       return { course: null, books: [] };
     }
 
-    // 1 course for this category prefer available && featured)
+    // Pick one available course (prefer featured)
     const courseCandidates = COURSES.filter(
       (c) => c.category === categorySlug && c.available
     );
@@ -119,7 +126,7 @@
       course = featuredCourse || courseCandidates[0];
     }
 
-    // 2 books for this category ,prefer available && featured
+    // Pick up to two available books (prefer featured)
     const bookCandidates = BOOKS.filter(
       (b) => b.category === categorySlug && b.available
     );
@@ -132,9 +139,11 @@
     return { course, books };
   }
 
+  // ---- Single recommendation card renderer ----
   function renderRecommendationCard(kind, item) {
     if (!item) return "";
 
+    // Truncate description for card layout
     const shortedDesc =
       item.description && item.description.length > 140
         ? item.description.slice(0, 140) + "..."
@@ -150,6 +159,7 @@
     const href = `${desiredUrl}?id=${encodeURIComponent(item.id)}`;
     let bottomHtml = "";
 
+    // Book-specific preview
     if (kind === "book") {
       bottomHtml = `
     <div class="vid-wrp vid-book">
@@ -157,6 +167,7 @@
     </div>
   `;
     } else {
+      // Course-specific preview (questions teaser)
       const questions = Array.isArray(item.questions)
         ? item.questions.slice(0, 2)
         : [];
@@ -184,20 +195,19 @@
           <div class="tag">${tag1}</div>
           <div class="tag">${tag3}</div>
           <div class="tag">${tag2}</div>
-          
         </div>
         <h1>${item.title}</h1>
         <p>${shortedDesc}</p>
-          ${bottomHtml}
-        
+        ${bottomHtml}
       </a>
     `;
   }
 
+  // ---- Recommendations section renderer ----
   function renderRecommendationsSection(category) {
     const { course, books } = pickRecommendations(category.slug);
 
-    // if nothing found, block doesnt render
+    // Do not render section if no recommendations exist
     if (!course && (!books || !books.length)) {
       return "";
     }
@@ -220,9 +230,8 @@
       </div>
     `;
   }
-  // recomendations for categories.html main content
 
-  // render full content of categories for categories.html
+  // ---- Full categories content renderer (categories.html) ----
   function renderFullContent(container, categories) {
     container.innerHTML = categories
       .map((category) => {
@@ -265,7 +274,6 @@
             </div>
           </div>
         </div>
-            
 
         ${renderRecommendationsSection(category)}
       </section>
@@ -274,13 +282,17 @@
       .join("");
   }
 
+  // ---- Page initializer ----
   function init() {
+    // Guard: ensure categories data exists
     if (typeof CATEGORIES === "undefined") {
       console.error(
         "CATEGORIES data is missing! Load assets/js/data/categories.js first!"
       );
       return;
     }
+
+    // Header carousel preview (categories.html)
     const headerPreviewCategories = document.getElementById(
       "categories-header-preview"
     );
@@ -290,6 +302,7 @@
       window.RevealUI?.refresh?.();
     }
 
+    // Index.html accordion preview
     const preview = document.getElementById("categories-accordion");
     if (preview) {
       renderPreview(preview, CATEGORIES);
@@ -297,6 +310,7 @@
       return;
     }
 
+    // Full categories view (categories.html main content)
     const fullView = document.getElementById("categories-full");
     if (fullView) {
       renderFullContent(fullView, CATEGORIES);
@@ -304,5 +318,6 @@
     }
   }
 
+  // Expose page initializer
   window.CategoriesPage = { init };
 })();

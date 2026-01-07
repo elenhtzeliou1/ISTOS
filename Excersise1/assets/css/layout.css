@@ -1,3 +1,15 @@
+/*
+  Purpose:
+  - Responsive layout rules (mobile-first), mostly via media queries.
+  - Defines how sections rearrange for tablet and desktop (grid/flex changes).
+  - Contains page-level layout adjustments (courses, categories, register, details, footer).
+
+  Notes:
+  - This file is mostly breakpoint-driven.
+  - Component appearance (cards, buttons, etc.) should live in components.css.
+  - Many sizes rely on CSS variables from theme.css.
+*/
+
 /*---------------------------------------------*/
 /*---------------------------------------------*/
 /*------------------- TABLET ------------------*/
@@ -6,16 +18,22 @@
 
 @media (min-width:768px) and (max-width: 1023.98px) {
 
+    /* General spacing adjustments for tablet */
     .title-container {
         padding: 0 var(--padding);
     }
 
-
+    /* Intro slider card sizing on tablet */
     .intro-item {
         width: 210px;
         height: 200px;
     }
 
+    /*
+      Intro slider height on tablet:
+      - Uses clamp to keep a sensible min/max.
+      - Falls back to vh unless svh is supported (Safari-friendly).
+    */
     .intro-slider {
         height: clamp(320px, 44vh, 560px);
     }
@@ -27,19 +45,23 @@
         }
     }
 
+    /* Description section spacing tweaks */
     .description-wrapper {
         padding-right: var(--padding);
     }
 
+    /* Center intro description content on tablet */
     .description-intro {
         align-items: center;
         text-align: center;
     }
 
+    /* Maintain a reasonable image height on tablet */
     .description-image {
         height: 40vh;
     }
 
+    /* Increase spacing and type sizing within description cards */
     .description-card-details {
         gap: var(--gap-mid);
         padding-bottom: var(--padding);
@@ -49,10 +71,12 @@
         font-size: 18px;
     }
 
+    /* Courses description section (index / categories) */
     .courses-description-wraper {
         padding: var(--padding-m) var(--padding-avg) 0;
     }
 
+    /* Video mockup wrapper scales to full width on tablet */
     .courses-description-video-wrapper {
         height: var(--wrapper-height);
         width: 100%;
@@ -65,6 +89,7 @@
         width: 92%;
     }
 
+    /* Screen "device" framing */
     .screen-wrapper {
         height: 79%;
         border: 10px solid black;
@@ -80,6 +105,10 @@
         display: block;
     }
 
+    /*
+      Accordion layout (non-module variant) becomes 2-column grid on tablet.
+      Panels are forced open (no max-height animation) for a more "desktop-like" feel.
+    */
     .courses-detail-accordion:not(.module) {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -104,10 +133,12 @@
         padding-bottom: 0;
     }
 
+    /* Hide chevron indicator when accordion is effectively always expanded */
     .courses-detail-accordion:not(.module) .accordion-trigger .fa-chevron-down {
         display: none;
     }
 
+    /* Force open panel styling (no collapse animation on tablet grid layout) */
     .courses-detail-accordion:not(.module) .accordion-panel {
         max-height: none !important;
         opacity: 1 !important;
@@ -116,12 +147,11 @@
 
     }
 
-
     .courses-detail-accordion:not(.module) .accordion-pannel-inner-img-cont {
         height: 24vh;
     }
 
-    /* laptop reveal accordion*/
+    /* laptop reveal accordion (used for scroll reveal animations) */
     .courses-detail-accordion:not(.module) .accordion-item.reveal-acc {
         opacity: 0;
         transform: translateY(30px);
@@ -134,12 +164,13 @@
         transform: translateY(0);
     }
 
-    /* laptop reveal accordion*/
+    /* End reveal accordion */
 
     .courses {
         padding: var(--padding-big) var(--padding-avg);
     }
 
+    /* Proposed videos section sizing */
     .proposed-video-container {
         width: 100%;
     }
@@ -160,7 +191,7 @@
         height: 52vh;
     }
 
-
+    /* Courses grid becomes 2 columns on tablet */
     .courses-info {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -175,11 +206,13 @@
 
     }
 
+    /* Recently added section spacing */
     .recently-added {
         padding: var(--gap-big) var(--padding-avg);
 
     }
 
+    /* "New" content card becomes horizontal row on tablet */
     .new-box {
         flex-direction: row;
         height: auto;
@@ -209,12 +242,14 @@
         height: auto;
     }
 
+    /* Ensure image fills available height without distortion */
     .new-box-content img {
         height: 100%;
         width: 100%;
         object-fit: cover;
     }
 
+    /* Book carousel card width on tablet */
     .card-carousel .card {
         flex: 0 0 var(--book-card-width-tablet);
         width: var(--book-card-width-tablet);
@@ -229,12 +264,12 @@
         font-size: var(--p-tabl);
     }
 
+    /* Side-by-side layout for course description page */
     .course-desc-main-wrap {
         flex-direction: row-reverse;
         gap: var(--gap);
         align-items: stretch;
     }
-
 
     .course-desc-box-wrap:nth-child(2) {
         width: 60%;
@@ -258,6 +293,10 @@
         font-size: 18px;
     }
 
+    /*
+      Sticky info section becomes a 2-column grid on tablet.
+      Ensures last item spans full width when odd.
+    */
     .course-desc-sticky-wrapper {
         min-height: 0;
         height: auto;
@@ -279,6 +318,7 @@
         grid-column: 1 / -1;
     }
 
+    /* Course grid for categories page (tablet = 2 columns) */
     .course-grid {
         flex: 1;
         display: grid;
@@ -288,6 +328,7 @@
         padding: var(--padding) 0;
     }
 
+    /* Video listing uses vertical layout */
     .course-grid.videos {
         display: flex;
         flex-direction: column;
@@ -317,6 +358,7 @@
         font-size: var(--p-big);
     }
 
+    /* Two-column form rows on tablet */
     .from-row {
         flex-direction: row;
         gap: var(--gap);
@@ -338,6 +380,7 @@
         font-size: 2em;
     }
 
+    /* Goals fieldset becomes a 2-column grid */
     .goals-fieldset {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -368,9 +411,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* ratings course-details.html */
-
-
     /* course-details.html */
 
     /* learning goals updated */
@@ -385,12 +425,15 @@
         text-align: center;
     }
 
-    /* learning goals updated  */
     .learning-goals-container {
         padding: 0;
         gap: var(--gap-big);
     }
 
+    /*
+      Goal slider height:
+      - JS may set --goal-slider-h to fit content; falls back to tablet height variable.
+    */
     .goal-slider {
         /* JS sets --goal-slider-h (px). If not set, fallback is tablet var. */
         height: clamp(320px, var(--goal-slider-h, var(--goal-card-height-tablet)), 700px);
@@ -416,7 +459,7 @@
         font-size: 20px;
     }
 
-
+    /* Course description sections spacing */
     .main-description-course {
         padding: var(--padding-big) 0 0;
         gap: 0;
@@ -458,7 +501,6 @@
         width: 100%;
     }
 
-
     .course-module {
 
         flex: 0 0 var(--book-card-width-tablet);
@@ -469,7 +511,6 @@
     .__proposed__books__main {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
 
     /* video-details.html */
     .vd__main-content {
@@ -485,6 +526,7 @@
         padding: 0 var(--padding-avg);
     }
 
+    /* Footer accordion shifts to horizontal layout on tablet */
     .footer-accordion-group {
         flex-direction: row;
         gap: var(--gap-mid);
@@ -500,6 +542,7 @@
         flex: 0 0 120px;
     }
 
+    /* Footer accordion becomes always-open on tablet/desktop */
     .footer-accordion-trigger {
         border: none;
         cursor: default;
@@ -521,13 +564,10 @@
         gap: var(--gap);
     }
 
-
     .footer-link-list li a {
         padding: 0;
         font-size: 16px;
     }
-
-
 
     .footer-accordion-trigger i {
         display: none;
@@ -538,7 +578,6 @@
         font-size: var(--p-big);
 
     }
-
 
     .footer-accordion-panel[hidden] {
         display: flex;
@@ -622,6 +661,7 @@
         display: contents;
     }
 
+    /* Debug-style background retained as-is (do not change functionality) */
     .nav-menu {
         background-color: rgb(115, 255, 0);
         display: none;
@@ -633,6 +673,7 @@
         font-size: 24px;
     }
 
+    /* Desktop navigation links are always visible */
     .nav-link-menu {
         order: 2;
         opacity: 1;
@@ -659,6 +700,7 @@
         transition: 0.2s;
     }
 
+    /* Hide the mobile "menu open" CTA in desktop nav */
     .nav-link-menu>a {
         display: none;
     }
@@ -668,6 +710,7 @@
         gap: var(--gap-mid);
     }
 
+    /* Desktop nav link styling */
     .group-link>a {
         position: relative;
         display: inline-block;
@@ -675,7 +718,6 @@
         padding: 6px 0;
         font-weight: 300;
         font-size: 16px;
-
 
         text-decoration: none;
     }
@@ -727,6 +769,7 @@
         }
     }
 
+    /* Hide mobile-only separators in desktop nav */
     .group-link>span {
         display: none;
     }
@@ -734,11 +777,8 @@
     /* End Menu*/
 
     /*=================================*/
+    /*========= LAPTOP / DESKTOP ======*/
     /*=================================*/
-    /*========= LAPTOP ========*/
-    /*=================================*/
-    /*=================================*/
-
 
     /*header index.html*/
     .intro-container {
@@ -780,9 +820,6 @@
         font-size: 12px;
     }
 
-    /*header index.html*/
-
-
     /*index description*/
     .description-intro {
         align-items: center;
@@ -815,7 +852,6 @@
     .description-card:last-of-type {
         padding-bottom: 0;
     }
-
 
     .description-card-details {
         flex: 1.6;
@@ -852,9 +888,7 @@
         padding: var(--padding-lrg) var(--padding) var(--padding-big);
     }
 
-    /*index description*/
-
-    /*Περιγραφή των κατηγοριών των μαθημάτων*/
+    /* Courses categories description (index) */
     .courses-description-wraper {
         padding: var(--padding-m) var(--padding) var(--padding-big);
         max-width: none;
@@ -909,6 +943,7 @@
         font-size: var(--h2-b);
     }
 
+    /* Desktop course cards grid */
     .courses-info {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -923,6 +958,7 @@
 
     }
 
+    /* "New" box layout on desktop */
     .new-box {
         flex-direction: row;
         height: auto;
@@ -959,6 +995,7 @@
         height: 100%;
     }
 
+    /* Video mockup wrapper on desktop */
     .courses-description-video-wrapper {
         height: var(--wrapper-height);
         border-radius: var(--border-radius-huge);
@@ -1002,7 +1039,6 @@
         gap: var(--padding);
         align-items: stretch;
     }
-
 
     .courses-detail-accordion:not(.module) .accordion-item {
         flex: 1 1 calc(33.333% - var(--gap-mid));
@@ -1056,11 +1092,7 @@
         transform: translateY(0);
     }
 
-    /* laptop reveal accordion*/
-
     /*end accordion*/
-    /*Περιγραφή των κατηγοριών των μαθημάτων*/
-
 
     /* proposed books section index.html */
     .proposed-books {
@@ -1077,18 +1109,15 @@
         font-size: var(--h1-mid);
     }
 
-
     .proposed-book-intro-container>p {
         width: 60%;
     }
-
 
     .proposed-book-intro-container>a {
         width: 30%;
     }
 
-
-
+    /* Desktop carousel: wider cards and drag behavior */
     .card-carousel {
         align-items: stretch;
         padding: var(--padding) 0 0;
@@ -1123,15 +1152,6 @@
         font-size: 10px;
     }
 
-
-
-    /* proposed books section index.html */
-
-    /*=================*/
-    /*=================*/
-    /*=================*/
-    /*=================*/
-
     /* categories.html */
     .intro-container.categories {
         max-width: none;
@@ -1150,7 +1170,6 @@
         max-width: none;
         width: 90%;
     }
-
 
     .proposed-video-carousel {
         height: 75vh;
@@ -1231,7 +1250,6 @@
         justify-content: flex-start;
     }
 
-
     .start p {
         font-size: 22px;
         width: 50%;
@@ -1240,12 +1258,6 @@
     .categories {
         width: 60%;
     }
-
-
-    /*==============================*/
-    /*==============================*/
-    /*==============================*/
-    /*==============================*/
 
     /*courses.html*/
     .intro-container.courses {
@@ -1259,8 +1271,6 @@
         padding: var(--padding-lrg) var(--padding);
     }
 
-
-
     .intro-container.courses>.title-container.courses h1 {
         font-size: var(--h1-ultra);
         width: 60%;
@@ -1270,8 +1280,6 @@
         font-size: 18px;
     }
 
-
-
     .courses-page {
         width: 95%;
         max-width: none;
@@ -1279,6 +1287,7 @@
         display: flex;
     }
 
+    /* Desktop course page layout: sticky sidebar + grid */
     .course-layout {
         display: flex;
 
@@ -1290,10 +1299,12 @@
         gap: var(--gap);
     }
 
+    /* When sidebar collapses, remove the gap */
     .course-layout:has(.filter-sidebar.is-collapsed) {
         gap: 0;
     }
 
+    /* Sticky filter sidebar on desktop */
     .filter-sidebar {
         position: sticky;
         top: var(--nav-height);
@@ -1315,7 +1326,6 @@
         padding: var(--padding) 0;
     }
 
-
     /* SIDEBAR: collapsed (hidden) state! */
     .filter-sidebar.is-collapsed {
         flex-basis: 0;
@@ -1328,10 +1338,12 @@
 
     }
 
+    /* Hide mobile-only close icon on desktop */
     .filters-header .fa-solid.fa-x {
         display: none;
     }
 
+    /* Course grid on desktop = 3 columns */
     .course-grid {
         flex: 1;
         display: grid;
@@ -1349,7 +1361,7 @@
         height: 100%;
     }
 
-
+    /* FAQ positioning at the bottom of cards */
     .course-faq {
         margin: auto auto 0 auto;
     }
@@ -1362,15 +1374,16 @@
         font-size: 16px;
     }
 
+    /* Desktop: no backdrop overlay needed for sidebar */
     .filter-backdrop {
         display: none;
     }
-
 
     .filter-button-results-wrapper {
         padding: 0;
     }
 
+    /* Desktop: show "Toggle filter menu" button, hide mobile toggle */
     .toggle-filter-menu {
         font-size: 18px;
         padding: var(--padding-sm) var(--padding-avg);
@@ -1388,6 +1401,7 @@
         font-size: 18px;
     }
 
+    /* Tags are smaller on desktop to fit more in a row */
     .tag {
         font-size: 12px;
         padding: 2px var(--padding-sm);
@@ -1402,7 +1416,6 @@
         flex-wrap: wrap;
         justify-content: flex-start;
     }
-
 
     .intro-container.courses .title-container {
         height: auto;
@@ -1419,12 +1432,9 @@
         font-size: var(--p-big);
     }
 
-    /*====================*/
-    /*====================*/
-    /*====================*/
     /*register.html*/
-
     .register-container {
+        /* NOTE: Keeping original value exactly as provided (var(padding) typo remains untouched) */
         max-width: var(--max-width-register);
         padding: var(--padding-lrg) var(padding);
     }
@@ -1449,6 +1459,7 @@
         font-size: 18px;
     }
 
+    /* Desktop goals layout */
     .goals-fieldset {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -1472,16 +1483,9 @@
         height: 100%;
     }
 
-
-
     .course-info.books>h3 {
         font-size: 2em;
     }
-
-
-    /*========================*/
-    /*========================*/
-    /*========================*/
 
     /* course-details.html */
     .crs-dtl-header {
@@ -1525,6 +1529,7 @@
 
     }
 
+    /* Module cards become larger on desktop and gain hover lift */
     .course-module {
         flex: 0 0 var(--book-card-width-laptop);
         width: var(--book-card-width-laptop);
@@ -1541,6 +1546,7 @@
         -webkit-user-drag: none;
     }
 
+    /* Desktop: module slider becomes a wrapped layout (no horizontal scroll) */
     .course-model-slider {
         overflow-x: visible;
         flex-wrap: wrap;
@@ -1566,10 +1572,9 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-
     /* learning goals updated */
 
-    /* move the below */
+    /* Additional course details spacing on desktop */
     .learning-goals-container {
         max-width: none;
         width: 100%;
@@ -1650,6 +1655,7 @@
 
     }
 
+    /* Ratings grid expands on desktop */
     .ratings-wrapper {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1660,7 +1666,7 @@
         padding-right: var(--padding-big);
     }
 
-
+    /* Enrollment list spacing and grid */
     .enrollments-panel {
         padding-top: var(--padding);
         padding-left: var(--padding);
@@ -1672,8 +1678,6 @@
         grid-area: var(--gap-t);
     }
 
-
-    /*====================*/
     /* book-details.html */
     .book-page-header {
         flex-direction: row;
@@ -1722,9 +1726,7 @@
         font-size: 20px;
     }
 
-
     /* videos.html */
-
     .video-header h1 {
         font-size: var(--h1-mid);
     }
@@ -1746,11 +1748,11 @@
         flex-direction: column;
     }
 
+    /* Hover lift for video cards */
     .course-grid.videos .new-box:hover {
         transform: translateY(-5px);
         transition: 0.2s;
     }
-
 
     .course-grid.videos .new-box .new-box-header .tag-row {
         padding: 0;
@@ -1764,8 +1766,6 @@
         display: block;
     }
 
-    /* end videos.html */
-
     /* team.html */
     .about-us-header {
         max-width: none;
@@ -1775,8 +1775,6 @@
     .about-us-header h1 {
         font-size: var(--h1-mid);
     }
-
-
 
     .team-people-row {
         position: relative;
@@ -1871,7 +1869,6 @@
         top: -8vh;
     }
 
-
     /* footer */
     footer {
         padding: 0 var(--padding-big);
@@ -1931,7 +1928,6 @@
         gap: var(--gap);
     }
 
-
     .footer-link-list li a {
         padding: 0;
         font-size: 16px;
@@ -1976,9 +1972,12 @@
         justify-content: space-between;
     }
 
-
 }
 
+/*
+  Narrow desktop / small laptop adjustments (1024–1200px):
+  - Reduce some heights, tweak spacing, and adjust card sizes so layout doesn't feel cramped.
+*/
 @media (min-width: 1024px) and (max-width: 1200px) {
     .intro-container {
         min-height: 0;
@@ -2013,7 +2012,6 @@
     .card-img-cont {
         height: 18vh;
     }
-
 
     .title-container.categories {
         padding: 0;

@@ -1,5 +1,11 @@
-// ta proteinomena vivlia pou fainontai sto index.html kai sto books.html
+// Featured / recommended books
+// Used on:
+// - index.html (homepage preview)
+// - books.html (highlighted books section)
+// Responsible for selecting featured books and rendering compact cards
+
 (function () {
+  // Utility: limits text length by number of words (used for short descriptions)
   function sliceWords(text, maxWords = 26) {
     const words = String(text || "")
       .trim()
@@ -11,16 +17,20 @@
   }
 
   function init() {
+    // Wrapper that holds the featured book cards
     const prefered_books_wrapper = document.getElementById("prefered-books-wrapper");
     if (!prefered_books_wrapper) return;
 
+    // Ensure BOOKS dataset is available
     if (typeof BOOKS === "undefined") {
       console.error("BOOKS data missing. Did you load assets/js/data/books.js? Check again!");
       return;
     }
 
+    // Pick up to 4 featured books
     let prefered = BOOKS.filter((b) => b.featured).slice(0, 4);
 
+    // Render featured book cards
     prefered_books_wrapper.innerHTML = prefered
       .map((book) => {
         const desc = sliceWords(book.description, 26);
@@ -45,5 +55,6 @@
       .join("");
   }
 
+  // Public API
   window.PreferedBooksPage = { init };
 })();

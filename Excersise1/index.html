@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta information ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Home Page</title>
 
+    <!-- ===== Core stylesheets ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
 
+    <!-- ===== Icons ===== -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,6 +20,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,9 +28,12 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- ===== Main navigation (injected dynamically) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Hero / Intro section ===== -->
     <header class="intro-container">
       <div class="title-container">
         <h1>InfoHub - Your Path Through Modern Computing</h1>
@@ -39,6 +46,8 @@
         </p>
       </div>
 
+      <!-- ===== Intro image slider ===== -->
+      <!-- Static markup, animated via intro-slider.js -->
       <div class="intro-slider">
         <div class="intro-item">
           <div class="image-wrapper">
@@ -74,13 +83,12 @@
           <div class="image-wrapper">
             <img src="assets/images/thumbnails/cover-6.jpeg" />
           </div>
-
           <p>Become programming expert</p>
         </div>
       </div>
     </header>
 
-    <!-- Τι προσφερει η πλατφορμα-->
+    <!-- ===== Platform description / value proposition ===== -->
     <section class="description">
       <div class="description-intro">
         <h1 class="reveal-up">What we Contribute</h1>
@@ -95,6 +103,7 @@
         </p>
       </div>
 
+      <!-- ===== Feature cards ===== -->
       <div class="description-wrapper">
         <div class="description-card">
           <div class="description-card-details">
@@ -115,6 +124,7 @@
             </p>
           </div>
 
+          <!-- Decorative numbering element -->
           <div class="card-number-block">
             <div class="number-circle">
               <h1>01</h1>
@@ -122,6 +132,7 @@
             <div class="block-line"></div>
           </div>
 
+          <!-- Feature image -->
           <div class="description-image">
             <picture>
               <img
@@ -256,9 +267,8 @@
         </div>
       </div>
     </section>
-    <!--Telos Τι προσφερει η πλατφορμα-->
 
-    <!--Περιγραφή των κατηγοριών των μαθημάτων-->
+    <!-- ===== Categories preview section ===== -->
     <section class="courses-description-wraper">
       <div class="courses-description-intro">
         <h1>Explore Our Categories</h1>
@@ -275,15 +285,13 @@
         </p>
       </div>
 
+      <!-- Decorative tags -->
       <div class="courses-above-wrapper-row">
-        <div class="tag">
-          <p>STUDY TOOLS</p>
-        </div>
-        <div class="tag">
-          <p>Learning hub</p>
-        </div>
+        <div class="tag"><p>STUDY TOOLS</p></div>
+        <div class="tag"><p>Learning hub</p></div>
       </div>
 
+      <!-- Category visual preview -->
       <div class="courses-description-video-wrapper">
         <div class="courses-description-box-screen">
           <div class="screen-wrapper">
@@ -295,18 +303,17 @@
         </div>
       </div>
 
+      <!-- Categories accordion preview (rendered via JS) -->
       <div
         class="courses-detail-accordion"
         id="categories-accordion"
         data-mode="preview"
       >
-        <!-- Load content via js: -->
+        <!-- Content injected by categories-ui.js -->
       </div>
-
-      <!-- add more here-->
     </section>
 
-    <!-- proposed courses-->
+    <!-- ===== Proposed / featured courses section ===== -->
     <section class="courses">
       <div class="courses-wrap">
         <div class="courses-main">
@@ -318,6 +325,8 @@
             revise, practise, and explore new topics at your own pace.
           </h2>
         </div>
+
+        <!-- Informational blocks -->
         <div class="courses-info">
           <div class="course-item">
             <div class="item-title">
@@ -401,12 +410,11 @@
           </div>
         </div>
 
+        <!-- Featured courses carousel -->
         <div class="carousel-proposed-video-wrapper">
           <div class="proposed-video-container">
             <div class="proposed-video-carousel" id="proposed-courses-carousel">
-              <!--js injects content here
-              proposed-courses.js
-              -->
+              <!-- JS injects proposed courses here -->
             </div>
           </div>
         </div>
@@ -414,64 +422,48 @@
         <a href="courses.html">View All Courses</a>
       </div>
     </section>
-    <!-- proposed courses-->
 
-    <!--proposed videos-->
+    <!-- ===== Proposed videos section ===== -->
     <section class="recently-added">
       <div class="rec-added-wrapper">
         <div class="rec-added-info">
           <h2>Best videos available now</h2>
           <span>New videos added every week</span>
-          <p>
-            Browse a hand-picked selection of video lessons chosen for
-            Informatics students at different levels. From beginner-friendly
-            explanations to more advanced walkthroughs, each video is selected
-            to support your courses, reinforce key concepts, and help you
-            practise with confidence.
-          </p>
         </div>
 
-        <div class="rec-added-box-wrap" id="prefered-videos-wrapper">
-          <!-- content loads here via js-->
-        </div>
+        <!-- Injected via prefered-videos.js -->
+        <div class="rec-added-box-wrap" id="prefered-videos-wrapper"></div>
 
         <div class="rec-added-button-row">
           <a href="videos.html" class="green-btn">View More</a>
         </div>
       </div>
     </section>
-    <!--end proposed videos-->
 
-    <!--proposed books section-->
+    <!-- ===== Proposed books section ===== -->
     <section class="proposed-books">
       <div class="proposed-book-intro-container">
         <h1>Explore the best books available</h1>
         <p>
           Browse a curated selection of books for programming, networks,
-          databases, cybersecurity, web development, and AIchosen to support
-          Informatics students at different levels. From beginner-friendly
-          introductions to deeper references, each title is selected to
-          strengthen your understanding, help with coursework, and guide your
-          projects.
+          databases, cybersecurity, web development, and AI.
         </p>
         <a href="books.html">Explore Now</a>
       </div>
 
       <div class="slider-wrapper">
         <div class="card-carousel" id="prefered-books-wrapper">
-          <!-- 
-        the content loads with js   <script src="assets/js/ui/prefered-books.js"></script>: 
-        --></div>
+          <!-- Injected via prefered-books.js -->
+        </div>
       </div>
     </section>
-    <!--END proposed books section-->
 
-    <!--Footer -->
+    <!-- ===== Footer (injected dynamically) ===== -->
     <footer id="site-footer"></footer>
-    <!--Used scripts-->
+
+    <!-- ===== JavaScript ===== -->
 
     <!-- COMMON UI -->
-
     <script src="assets/js/ui/common/accordion-ui.js"></script>
     <script src="assets/js/ui/common/card-carousel-drag.js"></script>
     <script src="assets/js/ui/common/intro-slider.js"></script>
@@ -479,21 +471,20 @@
     <script src="assets/js/ui/common/proposed-courses-carousel.js"></script>
     <script src="assets/js/ui/common/reveal.js"></script>
 
-    <!--DATA-->
+    <!-- DATA -->
     <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/courses.js"></script>
     <script src="assets/js/data/books.js"></script>
     <script src="assets/js/data/videos.js"></script>
 
-    <!--PAGE RENDERS-->
+    <!-- PAGE RENDERS -->
     <script src="assets/js/ui/pages/categories-ui.js"></script>
     <script src="assets/js/ui/prefered/prefered-books.js"></script>
     <script src="assets/js/ui/prefered/prefered-videos.js"></script>
     <script src="assets/js/ui/prefered/proposed-courses.js"></script>
 
+    <!-- APP BOOTSTRAP -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
     <script src="assets/js/app.js"></script>
-
-    <!--Used scripts-->
   </body>
 </html>

@@ -1,3 +1,17 @@
+/**
+ * categories.js
+ * --------------
+ * Defines the main learning categories of the platform.
+ *
+ * Purpose:
+ * - Used to render category landing pages
+ * - Powers course/book filtering by category
+ * - Provides descriptive metadata for UI sections
+ *
+ * Structure:
+ * - Each category includes labels and informational bullet points
+ * - `slug` is used as a stable identifier across the application
+ */
 const CATEGORIES = [
   {
     id: 1,
@@ -127,4 +141,8 @@ const CATEGORIES = [
 
   
 ];
+
+/**
+ * Make categories globally accessible
+ */
 window.CATEGORIES = CATEGORIES;

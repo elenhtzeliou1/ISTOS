@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Book Details Page</title>
 
+    <!-- ===== Core CSS ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
+
+    <!-- ===== Icons ===== -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,6 +21,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,45 +31,64 @@
   </head>
 
   <body class="course-detail-page">
+    <!-- ===== Navigation (Injected via JS) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Book Header Section ===== -->
     <header class="book-page-header">
+      <!-- Book cover -->
       <div class="book-dtl-hd-box">
         <div class="book-dtl-img-cnt">
-          <!--insert book img here-->
+          <!-- Book cover image injected dynamically -->
           <img src="" id="book-cover" alt="Book cover" />
         </div>
       </div>
+
+      <!-- Book metadata -->
       <div class="book-dtl-hd-box">
         <div class="book-dtl-row">
+          <!-- Book title -->
           <h2 id="book-title">Title</h2>
+
+          <!-- Book category -->
           <span id="book-category">category</span>
+
+          <!-- Book author -->
           <h3 id="book-author">Author</h3>
+
+          <!-- Availability & difficulty tags -->
           <div class="tag-row">
             <div class="tag" id="book-availability">Available</div>
             <div class="tag" id="book-difficulty">Difficulty</div>
           </div>
-    
         </div>
       </div>
     </header>
 
+    <!-- ===== Main Content ===== -->
     <main class="book-main-dtl">
+      <!-- Description section -->
       <h2>Book Description</h2>
       <p id="book-description">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem.
       </p>
     </main>
 
-     <!--Footer -->
+    <!-- ===== Footer (Injected via JS) ===== -->
     <footer id="site-footer"></footer>
 
-
-    <!--Used scripts-->
+    <!-- ===== JavaScript ===== -->
+    <!-- Shared layout (nav + footer) -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
+
+    <!-- Data sources -->
     <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/books.js"></script>
+
+    <!-- Page-specific logic -->
     <script src="assets/js/ui/pages/book-details.js"></script>
+
+    <!-- Global app bootstrap -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

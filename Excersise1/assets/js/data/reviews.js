@@ -1,3 +1,16 @@
+/**
+ * reviews.js
+ * ----------
+ * Stores user-generated reviews for courses.
+ *
+ * Purpose:
+ * - Used to render reviews and average ratings on course detail pages
+ * - Demonstrates relational data (courseId → reviews)
+ *
+ * Notes:
+ * - In Part A, reviews are static
+ * - In Part B, this structure is replaced by MongoDB documents
+ */
 const REVIEWS = [
   {
     courseId: "python-intro",
@@ -123,4 +136,8 @@ const REVIEWS = [
 
 
 ];
+
+/**
+ * Make reviews accessible to UI scripts
+ */
 window.REVIEWS = REVIEWS;

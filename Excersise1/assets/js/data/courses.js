@@ -1,3 +1,17 @@
+/**
+ * courses.js
+ * ----------
+ * Static representation of courses offered by the platform.
+ *
+ * Purpose:
+ * - Used to populate course listings and featured sections
+ * - Supports filtering by category, difficulty, and availability
+ * - Mirrors backend Course schema used in Part B
+ *
+ * Fields:
+ * - featured: determines homepage visibility
+ * - available: controls enrollment actions
+ */
 const COURSES = [
 
   {
@@ -1571,4 +1585,7 @@ const COURSES = [
   },
 ];
 
+/**
+ * Expose courses globally
+ */
 window.COURSES = COURSES;

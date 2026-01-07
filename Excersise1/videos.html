@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta information ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Video List</title>
 
+    <!-- ===== Global shared styles ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -17,6 +19,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Google Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,9 +27,12 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- ===== Navigation (rendered dynamically) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Page header / introduction ===== -->
     <header class="video-header">
       <h1>Video Collections</h1>
       <p>
@@ -35,6 +41,8 @@
         and level. Open your desired video, view its details and start learning
         at your own pace.
       </p>
+
+      <!-- Decorative tags / emphasis text -->
       <div class="tag-row">
         <div class="tag">New Videos</div>
         <div class="tag">added</div>
@@ -42,9 +50,14 @@
       </div>
     </header>
 
+    <!-- ===== Main videos listing section ===== -->
     <section class="videos-page">
+      <!-- Filter controls & results counter -->
       <div class="filter-button-results-wrapper">
+        <!-- Updated dynamically by videos.js -->
         <span id="results-count" class="results-count">0 Αποτελέσματα</span>
+
+        <!-- Open filter sidebar (mobile / small screens) -->
         <button id="filter-toggle" class="filter-toggle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,31 +74,32 @@
           Filters
         </button>
 
+        <!-- Toggle visibility of filter menu -->
         <button id="toggle-filter-menu" class="toggle-filter-menu">
           Hide Filters
         </button>
       </div>
 
+      <!-- Backdrop for closing filters on mobile -->
       <div id="filter-backdrop" class="filter-backdrop"></div>
 
       <div class="course-layout">
+        <!-- ===== Filter sidebar ===== -->
         <aside class="filter-sidebar">
           <div class="filters-header">
             <h2>Filters</h2>
             <i class="fa-solid fa-x" id="filter-close"></i>
           </div>
 
+          <!-- Category filters -->
           <div class="filter-box">
             <span>Category</span>
 
+            <!-- Each checkbox corresponds to a video category -->
+            <!-- Filtering logic handled in videos.js -->
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-programming"
-                type="checkbox"
-                name="filter-category"
-                value="programming"
-              />
+              <input class="inp-cbx" id="cat-programming" type="checkbox"
+                     name="filter-category" value="programming" />
               <label class="cbx" for="cat-programming">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -97,13 +111,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-networks"
-                type="checkbox"
-                name="filter-category"
-                value="networks"
-              />
+              <input class="inp-cbx" id="cat-networks" type="checkbox"
+                     name="filter-category" value="networks" />
               <label class="cbx" for="cat-networks">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -115,13 +124,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-cybersecurity"
-                type="checkbox"
-                name="filter-category"
-                value="cybersecurity"
-              />
+              <input class="inp-cbx" id="cat-cybersecurity" type="checkbox"
+                     name="filter-category" value="cybersecurity" />
               <label class="cbx" for="cat-cybersecurity">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -133,13 +137,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-databases"
-                type="checkbox"
-                name="filter-category"
-                value="databases"
-              />
+              <input class="inp-cbx" id="cat-databases" type="checkbox"
+                     name="filter-category" value="databases" />
               <label class="cbx" for="cat-databases">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -151,13 +150,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-web-development"
-                type="checkbox"
-                name="filter-category"
-                value="web-development"
-              />
+              <input class="inp-cbx" id="cat-web-development" type="checkbox"
+                     name="filter-category" value="web-development" />
               <label class="cbx" for="cat-web-development">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -169,13 +163,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="cat-ai"
-                type="checkbox"
-                name="filter-category"
-                value="ai"
-              />
+              <input class="inp-cbx" id="cat-ai" type="checkbox"
+                     name="filter-category" value="ai" />
               <label class="cbx" for="cat-ai">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -187,17 +176,13 @@
             </div>
           </div>
 
+          <!-- Difficulty filters -->
           <div class="filter-box">
             <span>Difficulty</span>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="diff-beginner"
-                type="checkbox"
-                name="filter-difficulty"
-                value="beginner"
-              />
+              <input class="inp-cbx" id="diff-beginner" type="checkbox"
+                     name="filter-difficulty" value="beginner" />
               <label class="cbx" for="diff-beginner">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -209,13 +194,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="diff-intermediate"
-                type="checkbox"
-                name="filter-difficulty"
-                value="intermediate"
-              />
+              <input class="inp-cbx" id="diff-intermediate" type="checkbox"
+                     name="filter-difficulty" value="intermediate" />
               <label class="cbx" for="diff-intermediate">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -227,13 +207,8 @@
             </div>
 
             <div class="checkbox-wrapper">
-              <input
-                class="inp-cbx"
-                id="diff-advanced"
-                type="checkbox"
-                name="filter-difficulty"
-                value="advanced"
-              />
+              <input class="inp-cbx" id="diff-advanced" type="checkbox"
+                     name="filter-difficulty" value="advanced" />
               <label class="cbx" for="diff-advanced">
                 <span>
                   <svg width="12" height="10" viewBox="0 0 12 10">
@@ -245,6 +220,7 @@
             </div>
           </div>
 
+          <!-- Availability filter -->
           <div class="filter-box">
             <div class="checkbox-wrapper">
               <input class="inp-cbx" id="filter-available" type="checkbox" />
@@ -260,29 +236,31 @@
           </div>
         </aside>
 
+        <!-- ===== Videos grid ===== -->
+        <!-- Video cards are injected dynamically via videos.js -->
         <div class="course-grid videos" id="video-list"></div>
       </div>
     </section>
 
-    <!--Footer -->
+    <!-- ===== Footer (rendered dynamically) ===== -->
     <footer id="site-footer"></footer>
-    <!--Used scripts-->
 
-    <!-- COMMON UI -->
+    <!-- ===== JavaScript files ===== -->
 
+    <!-- Shared layout (navbar & footer) -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
 
+    <!-- Shared filter UI logic -->
     <script src="assets/js/ui/common/menu-filters.js"></script>
 
-    <!-- DATA -->
-
+    <!-- Data sources -->
     <script src="assets/js/data/categories.js"></script>
     <script src="assets/js/data/videos.js"></script>
 
-    <!-- PAGE -->
+    <!-- Page-specific logic: filtering & rendering videos -->
     <script src="assets/js/ui/pages/videos.js"></script>
 
-    <!-- APP orchestrator LAST -->
+    <!-- Application entry point -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

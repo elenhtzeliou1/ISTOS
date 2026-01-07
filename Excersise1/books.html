@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoHub | Book List</title>
 
+    <!-- ===== Core CSS ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
 
+    <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ===== Icons ===== -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -26,14 +31,19 @@
   </head>
 
   <body class="books-page-active">
+    <!-- ===== Navigation (Injected via JS) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Page Header / Intro ===== -->
     <header class="intro-container courses">
       <div class="title-container courses">
+        <!-- Page title -->
         <h1>Book List</h1>
 
+        <!-- Anchor scroll to main list -->
         <a class="book-see-all-btn" href="#book-menu">See all</a>
 
+        <!-- Intro description -->
         <p>
           Browse our curated selection of Informatics books and choose the
           titles you want to explore. Use the filters to find books by topic and
@@ -41,23 +51,33 @@
         </p>
       </div>
 
+      <!-- Decorative tags -->
       <div class="tag-row books">
         <div class="tag">The</div>
         <div class="tag">Best</div>
         <div class="tag">Sellers</div>
       </div>
 
+      <!-- Featured books carousel -->
       <div class="slider-wrapper">
         <div class="card-carousel" id="prefered-books-wrapper">
-          <!-- 
-        the content loads with js   <script src="assets/js/ui/prefered-books.js"></script>: 
-        --></div>
+          <!--
+            Featured books are injected dynamically via:
+            assets/js/ui/prefered/prefered-books.js
+          -->
+        </div>
       </div>
     </header>
 
+    <!-- ===== Main Books Section ===== -->
     <section class="courses-page" id="book-menu">
+      <!-- Results count & filter controls -->
       <div class="filter-button-results-wrapper">
-        <span id="results-count" class="results-count">0 Αποτελέσματα</span>
+        <span id="results-count" class="results-count">
+          0 Αποτελέσματα
+        </span>
+
+        <!-- Mobile filter toggle -->
         <button id="filter-toggle" class="filter-toggle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,23 +94,33 @@
           Filters
         </button>
 
+        <!-- Desktop collapse toggle -->
         <button id="toggle-filter-menu" class="toggle-filter-menu">
           Hide Filters
         </button>
       </div>
 
+      <!-- Backdrop for mobile filter sidebar -->
       <div id="filter-backdrop" class="filter-backdrop"></div>
 
       <div class="course-layout">
+        <!-- ===== Filter Sidebar ===== -->
         <aside class="filter-sidebar">
           <div class="filters-header">
             <h2>Filters</h2>
             <i class="fa-solid fa-x" id="filter-close"></i>
           </div>
 
+          <!-- Category filters -->
           <div class="filter-box">
             <span>Category</span>
 
+            <!-- Individual category checkboxes -->
+            <!-- (Programming, Networks, Cybersecurity, Databases, Web, AI) -->
+            <!-- Each checkbox is wired to JS filtering logic -->
+            <!-- Repeated markup intentionally explicit for clarity -->
+
+            <!-- Programming -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -109,6 +139,7 @@
               </label>
             </div>
 
+            <!-- Networks -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -127,6 +158,7 @@
               </label>
             </div>
 
+            <!-- Cybersecurity -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -145,6 +177,7 @@
               </label>
             </div>
 
+            <!-- Databases -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -163,6 +196,7 @@
               </label>
             </div>
 
+            <!-- Web Development -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -181,6 +215,7 @@
               </label>
             </div>
 
+            <!-- Artificial Intelligence -->
             <div class="checkbox-wrapper">
               <input
                 class="inp-cbx"
@@ -200,6 +235,7 @@
             </div>
           </div>
 
+          <!-- Difficulty filters -->
           <div class="filter-box">
             <span>Difficulty</span>
 
@@ -258,6 +294,7 @@
             </div>
           </div>
 
+          <!-- Availability filter -->
           <div class="filter-box">
             <div class="checkbox-wrapper">
               <input class="inp-cbx" id="filter-available" type="checkbox" />
@@ -273,26 +310,33 @@
           </div>
         </aside>
 
+        <!-- ===== Books Grid (Injected via JS) ===== -->
         <div class="course-grid" id="books-list"></div>
       </div>
     </section>
 
-    <!--Footer -->
+    <!-- ===== Footer (Injected via JS) ===== -->
     <footer id="site-footer"></footer>
 
-    <!--Used scripts-->
-    <!-- COMMON UI -->
+    <!-- ===== JavaScript ===== -->
+
+    <!-- Common layout & filter UI -->
     <script src="assets/js/ui/common/shared-layout.js"></script>
     <script src="assets/js/ui/common/menu-filters.js"></script>
-    <!-- DATA -->
+
+    <!-- Data -->
     <script src="assets/js/data/categories.js"></script>
+    <script src="assets/js/data/books.js"></script>
+
+    <!-- UI utilities -->
     <script src="assets/js/ui/common/card-carousel-drag.js"></script>
     <script src="assets/js/data/books.js"></script>
     <script src="assets/js/ui/prefered/prefered-books.js"></script>
-    <!-- PAGE -->
+
+    <!-- Page-specific logic -->
     <script src="assets/js/ui/pages/books.js"></script>
 
-    <!-- APP orchestrator LAST -->
+    <!-- App bootstrap (must be last) -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>

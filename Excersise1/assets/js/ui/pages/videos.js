@@ -1,16 +1,24 @@
-//video list page generator
+// Video list page generator (videos.html)
+// Responsible for:
+// - Rendering video cards
+// - Applying sidebar filters (category, difficulty, availability)
+// - Keeping layout stable (equal card heights)
+// - Handling browser back/forward cache restores
+
 (function () {
   function init() {
+    // Main container for video cards
     const listContainer = document.getElementById("video-list");
     if (!listContainer) return;
 
-    // Prevent double init
+    // Prevent double initialization (important for SPA-like navigation / bfcache)
     if (listContainer.dataset.videosBound === "1") return;
     listContainer.dataset.videosBound = "1";
 
-    // Sidebar open/close UI
+    // Initialize sidebar open/close + filter UI (shared utility)
     window.FilterUI?.init();
 
+    // Ensure video data is loaded
     if (typeof VIDEOS === "undefined") {
       console.error("VIDEOS missing. Did you load assets/js/data/videos.js?");
       return;
@@ -18,7 +26,7 @@
 
     const resultsCount = document.getElementById("results-count");
 
-    // Grab filters from videos.html
+    // Filter inputs from sidebar
     const categoryCheckboxes = Array.from(
       document.querySelectorAll('input[name="filter-category"]')
     );
@@ -27,34 +35,46 @@
     );
     const availabilityFilter = document.getElementById("filter-available");
 
+    // Normalize string values for safe comparisons
     const norm = (v) =>
       String(v || "")
         .toLowerCase()
         .trim();
 
+    // Update results counter
     function setCount(n) {
       if (!resultsCount) return;
       resultsCount.textContent = n === 1 ? "Video (1)" : `Videos (${n})`;
     }
 
-    // ---------- Equal heights ----------
+    // -------------------------------------------------
+    // Equal-height handling for video cards
+    // Ensures consistent layout regardless of content
+    // -------------------------------------------------
     let rafId = 0;
+
     function equalizeNewBoxHeights() {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         const cards = Array.from(listContainer.querySelectorAll(".new-box"));
         if (!cards.length) return;
 
+        // Reset heights to measure natural size
         cards.forEach((c) => (c.style.height = "auto"));
+
         const maxH = Math.max(
           ...cards.map((c) => c.getBoundingClientRect().height)
         );
+
+        // Lock all cards to tallest height
         cards.forEach((c) => (c.style.height = `${maxH}px`));
       });
     }
 
+    // Re-equalize after images load (images affect card height)
     function equalizeAfterImages() {
       equalizeNewBoxHeights();
+
       listContainer.querySelectorAll("img").forEach((img) => {
         if (!img.complete) {
           img.addEventListener("load", equalizeNewBoxHeights, { once: true });
@@ -63,10 +83,13 @@
       });
     }
 
+    // Recalculate layout on viewport changes
     window.addEventListener("resize", equalizeAfterImages);
     window.visualViewport?.addEventListener("resize", equalizeAfterImages);
 
-    // ---------- Render ----------
+    // -------------------------------------------------
+    // Rendering logic
+    // -------------------------------------------------
     function renderVideos(videosArray) {
       listContainer.innerHTML = "";
       setCount(videosArray.length);
@@ -103,11 +126,12 @@
 
           <div class="new-box-content">
             <img src="${video.cover || ""}" alt="${
-          video.title || "Video"
-        } cover">
+              video.title || "Video"
+            } cover">
           </div>
         `;
 
+        // Navigate to video details page
         card.addEventListener("click", () => {
           window.location.href = `video-details.html?id=${encodeURIComponent(
             video.id
@@ -117,10 +141,13 @@
         listContainer.appendChild(card);
       });
 
+      // Equalize heights after rendering
       equalizeAfterImages();
     }
 
-    // ---------- Filtering ----------
+    // -------------------------------------------------
+    // Filtering logic
+    // -------------------------------------------------
     function applyFilters() {
       let filtered = [...VIDEOS];
 
@@ -151,18 +178,24 @@
       renderVideos(filtered);
     }
 
-     categoryCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
-    difficultyCheckboxes.forEach((cb) => cb.addEventListener("change", applyFilters));
+    // Re-apply filters on UI interaction
+    categoryCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
+    difficultyCheckboxes.forEach((cb) =>
+      cb.addEventListener("change", applyFilters)
+    );
     availabilityFilter?.addEventListener("change", applyFilters);
 
-    // Initial render based on current checkbox state
+    // Initial render (respects default checkbox state)
     requestAnimationFrame(applyFilters);
 
-    //When returning via Back/Forward cache, re-sync the list with checkbox state
+    // Handle browser Back / Forward cache restores
     window.addEventListener("pageshow", () => {
       requestAnimationFrame(applyFilters);
     });
   }
 
+  // Public API
   window.VideosPage = { init };
 })();

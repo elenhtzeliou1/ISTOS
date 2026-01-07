@@ -1,27 +1,34 @@
-// ta proteinomena courses pou emfanizontai sto index.html aki sthn arxi tou courses.html
+// Featured / proposed courses carousel
+// Used on:
+// - index.html (homepage featured courses section)
+// - courses.html (top featured carousel)
+// Responsible for selecting up to 5 courses and rendering them in a carousel layout
+
 (function () {
   function init() {
+    // Carousel container element
     const carousel = document.getElementById("proposed-courses-carousel");
     if (!carousel) return;
 
+    // Ensure COURSES dataset is available
     if (typeof COURSES === "undefined") {
       console.error("COURSES not found. Check courses.js path in index.html.");
       return;
     }
 
-    // 1) Prefer featured
+    // 1) Prefer featured courses
     let proposed = COURSES.filter((c) => c.featured);
 
-    // 2) Fallback if fewer than 5 featured
+    // 2) Fallback: if fewer than 5 featured, fill with non-featured courses
     if (proposed.length < 5) {
       const extras = COURSES.filter((c) => !c.featured);
       proposed = proposed.concat(extras);
     }
 
-    // 3) Take only 5
+    // 3) Limit to 5 total courses
     proposed = proposed.slice(0, 5);
 
-    // Render them
+    // Render proposed course cards inside the carousel
     carousel.innerHTML = proposed
       .map(
         (course) => `
@@ -40,5 +47,6 @@
       .join("");
   }
 
+  // Public API
   window.ProposedCoursesPage = { init };
 })();

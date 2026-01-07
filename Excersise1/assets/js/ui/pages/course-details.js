@@ -1,5 +1,8 @@
-//course-details.html page
+// course-details.html page logic
+// Handles course rendering, enrollment, reviews, lesson access, and recommendations
+// Wrapped in an IIFE to avoid polluting the global scope
 (function () {
+  // Escapes user-controlled or dynamic text to prevent HTML injection
   function escapeHTML(v) {
     return String(v ?? "")
       .replaceAll("&", "&amp;")
@@ -9,15 +12,18 @@
       .replaceAll("'", "&#39;");
   }
 
+  // LocalStorage keys used by this page
   const LS = {
     ACTIVE: "ih_activeUserId",
     ENROLLMENTS: "ih_enrollments",
   };
 
+  // Returns the currently active user id (empty string if not logged in)
   function getActiveUserId() {
     return localStorage.getItem(LS.ACTIVE) || "";
   }
 
+  // Loads enrollments safely from localStorage
   function loadEnrollments() {
     try {
       const raw = localStorage.getItem(LS.ENROLLMENTS);
@@ -28,10 +34,12 @@
     }
   }
 
+  // Persists enrollment list to localStorage
   function saveEnrollments(items) {
     localStorage.setItem(LS.ENROLLMENTS, JSON.stringify(items));
   }
 
+  // Checks if a given user is enrolled in a specific course
   function isEnrolled(userId, courseId) {
     if (!userId || !courseId) return false;
     const items = loadEnrollments();
@@ -42,6 +50,7 @@
     );
   }
 
+  // Enrolls a user to a course (idempotent)
   function enroll(userId, courseId) {
     const items = loadEnrollments();
 
@@ -63,11 +72,13 @@
   }
 
   function init() {
+    // Guard: ensure course data exists
     if (!Array.isArray(window.COURSES)) {
       console.error("Courses data is missing! Check courses.js path");
       return;
     }
 
+    // Read course id from URL
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get("id");
     if (!courseId) {
@@ -75,25 +86,30 @@
       return;
     }
 
+    // Find course by id
     const course = window.COURSES.find((c) => c.id === courseId);
     if (!course) {
       console.warn("Course not found for this specific id: ", courseId);
       return;
     }
-    const isAvailable = course.available !== false; // by default true if is missing
 
+    // Course availability (defaults to true if missing)
+    const isAvailable = course.available !== false;
+
+    // Review form elements
     const reviewTitleEl = document.querySelector(".review-form-section h1");
     const reviewSubmitBtn = document.getElementById("review-submit");
 
-    //REVIEW FORM GATING (registered? enrolled?)
+    // Review gating elements
     const reviewGate = document.getElementById("review-gate");
     const reviewForm = document.getElementById("review-form");
     const ratingEl = document.getElementById("review-rating");
     const commentEl = document.getElementById("review-comment");
 
+    // Used when user clicks a lesson before enrolling
     let pendingLesson = null;
 
-    //get active user name
+    // Retrieves active user's display name
     function getActiveUserName() {
       try {
         const uid = getActiveUserId();
@@ -106,6 +122,7 @@
       }
     }
 
+    // Displays a gating message above the review form
     function setGateMessage({ text, linkHref, linkText }) {
       if (!reviewGate) return;
       reviewGate.textContent = "";
@@ -122,6 +139,7 @@
       }
     }
 
+    // Controls review form visibility based on user/enrollment state
     function refreshReviewUI() {
       const uid = getActiveUserId();
 
@@ -136,7 +154,7 @@
         return;
       }
 
-      // Registered but NOT enrolled in this course
+      // Registered but not enrolled
       if (!isEnrolled(uid, course.id)) {
         if (reviewForm) reviewForm.hidden = true;
         setGateMessage({
@@ -145,10 +163,11 @@
         return;
       }
 
-      // Registered + enrolled => show form
+      // Registered + enrolled
       if (reviewGate) reviewGate.textContent = "";
       if (reviewForm) reviewForm.hidden = false;
 
+      // Populate form if user already reviewed
       const existing = window.ReviewsUI?.getUserReview?.(course.id, uid);
 
       if (existing) {
@@ -164,7 +183,7 @@
       }
     }
 
-    // Bind submit once
+    // Bind review submit handler once
     if (reviewForm && reviewForm.dataset.bound !== "1") {
       reviewForm.dataset.bound = "1";
 
@@ -172,14 +191,16 @@
         e.preventDefault();
 
         const uid = getActiveUserId();
-        if (!uid) return; // safety
+        if (!uid) return;
 
+        // Ensure enrollment before saving review
         const okEnrolled = isEnrolled(uid, course.id);
         if (!okEnrolled) {
           refreshReviewUI();
           return;
         }
-        // check BEFORE saving: is it update or new review?
+
+        // Determine if this is an update or a new review
         const hadReview = !!window.ReviewsUI?.getUserReview?.(course.id, uid);
 
         const res = window.ReviewsUI?.addReview?.({
@@ -194,10 +215,9 @@
           alert(res?.message || "Could not save review.");
           return;
         }
-        // Re-render review list + overall rating
-        window.ReviewsUI?.renderForCourse?.(course.id);
 
-        // update title/button immediately (no refresh needed)
+        // Re-render reviews and update UI
+        window.ReviewsUI?.renderForCourse?.(course.id);
         refreshReviewUI();
 
         openModal({
@@ -213,9 +233,10 @@
       });
     }
 
-    // Run once on page load
+    // Initialize review UI on load
     refreshReviewUI();
 
+    // Modal elements
     const modal = document.getElementById("subscribeModal");
     const titleModal = document.getElementById("subscribeTitle");
     const descModal = document.getElementById("subscribeDesc");
@@ -225,13 +246,14 @@
     const uid0 = getActiveUserId();
     const alreadyEnrolled = uid0 && isEnrolled(uid0, course.id);
 
+    // Update subscribe button if already enrolled
     if (subscribeBtn && alreadyEnrolled) {
       subscribeBtn.textContent = "Enrolled";
       subscribeBtn.setAttribute("aria-disabled", "true");
       subscribeBtn.classList.add("is-disabled");
     }
 
-    // If course is unavailable (and user is not already enrolled), show it on the button
+    // Update subscribe button if course unavailable
     if (subscribeBtn && !alreadyEnrolled && !isAvailable) {
       subscribeBtn.textContent = "Unavailable";
       subscribeBtn.setAttribute("aria-disabled", "true");
@@ -243,8 +265,8 @@
 
     let lastFocus = null;
 
+    // Opens modal with contextual content
     const openModal = ({ title, desc, mode, buttonText }) => {
-      // Fallback if modal is missing
       if (!modal || !titleModal || !descModal || !confirmBtn) {
         alert(`${title}\n\n${desc}`.trim());
         return;
@@ -257,7 +279,7 @@
       descModal.textContent = desc || "";
       confirmBtn.textContent = buttonText || "Close";
 
-      // Only show Cancel on confirm mode; hide it on info/lesson modes
+      // Only show cancel button for confirmation flows
       if (cancelBtn) {
         const m = modal.dataset.mode;
         const showCancel = m === "subscribe-confirm";
@@ -269,19 +291,18 @@
       confirmBtn.focus();
     };
 
+    // Closes modal and restores focus
     const closeModal = () => {
       if (!modal) return;
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       modal.dataset.mode = "info";
 
-      // reset Cancel visibility for th next time
       if (cancelBtn) cancelBtn.style.display = "";
-
       lastFocus?.focus?.();
     };
 
-    // bind modal close handlers once
+    // Bind modal close handlers once
     if (modal && modal.dataset.bound !== "1") {
       modal.dataset.bound = "1";
 
@@ -294,7 +315,7 @@
         if (e.key === "Escape") closeModal();
       });
 
-      // confirm button logic depends on mode
+      // Confirm button logic varies by modal mode
       confirmBtn?.addEventListener("click", () => {
         const mode = modal.dataset.mode;
 
@@ -304,7 +325,6 @@
         }
 
         if (mode === "subscribe-confirm") {
-          // create enrollment
           const uid = getActiveUserId();
 
           if (!uid) {
@@ -316,6 +336,7 @@
             });
             return;
           }
+
           if (!isAvailable) {
             openModal({
               title: "Course unavailable",
@@ -329,14 +350,14 @@
           enroll(uid, course.id);
           refreshReviewUI();
 
-          // update subscribe button UI
+          // Update subscribe button UI
           if (subscribeBtn) {
             subscribeBtn.textContent = "Enrolled";
             subscribeBtn.setAttribute("aria-disabled", "true");
             subscribeBtn.classList.add("is-disabled");
           }
 
-          // if a lesson click triggered the subscribe, continue to lesson modal
+          // Continue pending lesson if user tried to open one
           if (pendingLesson) {
             const { lessonTitle, minutesText } = pendingLesson;
             pendingLesson = null;
@@ -359,12 +380,12 @@
           return;
         }
 
-        // lesson/info mode
+        // Default: close modal
         closeModal();
       });
     }
 
-    // ------ HEADER ------//
+    // ---- HEADER CONTENT ----
     const titleCourse = document.getElementById("course-title");
     const descCourse = document.getElementById("course-description");
     if (titleCourse) titleCourse.textContent = course.title;
@@ -372,7 +393,7 @@
 
     window.ReviewsUI?.renderForCourse?.(course.id);
 
-    // ------- LEARNING GOALS ---------//
+    // ---- LEARNING GOALS ----
     const wrapper = document.getElementById("learning__goals_wrapper");
     if (wrapper && Array.isArray(course.learningGoals)) {
       wrapper.innerHTML = course.learningGoals
@@ -389,7 +410,7 @@
         .join("");
     }
 
-    // ----- SECTIONS + LESSONS ------//
+    // ---- SECTIONS & LESSONS ----
     const sectionWrapper = document.getElementById("course___section");
 
     if (sectionWrapper && Array.isArray(course.sections)) {
@@ -440,11 +461,11 @@
         })
         .join("");
 
-      // init drag for each slider
+      // Enable drag scrolling for lesson sliders
       window.CardCarouselDrag?.init?.(".course-model-slider");
     }
 
-    // Start Learning -> modal (bind AFTER HTML injected)
+    // ---- START LEARNING HANDLER ----
     if (sectionWrapper && sectionWrapper.dataset.lessonModalBound !== "1") {
       sectionWrapper.dataset.lessonModalBound = "1";
 
@@ -464,8 +485,8 @@
           });
           return;
         }
+
         if (!isEnrolled(uid, course.id)) {
-          // save which lesson they tried to open
           const card = btn.closest(".course-module");
           const lessonTitle =
             card?.querySelector("h1")?.textContent?.trim() || "Lesson";
@@ -485,7 +506,6 @@
           return;
         }
 
-        //enrolled -> what we did before continue
         const card = btn.closest(".course-module");
         const lessonTitle =
           card?.querySelector("h1")?.textContent?.trim() || "Lesson";
@@ -503,7 +523,7 @@
       });
     }
 
-    // ---- 2 PROPOSED BOOKS -----//
+    // ---- PROPOSED BOOKS ----
     const proposedBooksSec = document.getElementById("proposed__bks");
     if (proposedBooksSec) {
       const recBooks = Array.isArray(course?.recommended?.books)
@@ -549,7 +569,7 @@
       }
     }
 
-    // ------ PROPOSED VIDEO ------//
+    // ---- PROPOSED VIDEOS ----
     const proposedVideoSec = document.getElementById("__prop__vd");
     if (proposedVideoSec) {
       const recVideos = Array.isArray(course?.recommended?.videos)
@@ -592,7 +612,7 @@
       }
     }
 
-    // ----- QUESTIONS -----//
+    // ---- QUESTIONS (FAQ) ----
     const questionItems = document.querySelectorAll(
       ".courses-detail-accordion.module .accordion-item"
     );
@@ -615,7 +635,7 @@
       });
     }
 
-    // ---- SUBSCRIBE BUTTON ----//
+    // ---- SUBSCRIBE BUTTON HANDLER ----
     if (subscribeBtn && subscribeBtn.dataset.bound !== "1") {
       subscribeBtn.dataset.bound = "1";
       subscribeBtn.addEventListener("click", (e) => {
@@ -663,5 +683,6 @@
     }
   }
 
+  // Expose page initializer
   window.CourseDetailsPage = { init };
 })();

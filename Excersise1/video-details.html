@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== Meta information ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Video Details Page</title>
 
+    <!-- ===== Global shared styles ===== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -17,6 +19,7 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- ===== Google Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,15 +29,21 @@
   </head>
 
   <body class="video-details-body-page">
+    <!-- ===== Navigation (injected dynamically via shared-layout.js) ===== -->
     <nav id="site-nav"></nav>
 
+    <!-- ===== Video header section ===== -->
+    <!-- Title and short description are populated dynamically via video-details.js -->
     <header class="vd__header">
       <h1 id="vd__title">Test Video Title</h1>
       <p id="vd__description">test description</p>
     </header>
 
+    <!-- ===== Main video content ===== -->
     <main class="vd__main-content">
+      <!-- Video player container -->
       <div class="vd-content">
+        <!-- YouTube iframe is injected dynamically based on video ID -->
         <iframe
           id="vd-cover"
           class="vd-cover"
@@ -44,6 +53,8 @@
           allowfullscreen
         ></iframe>
       </div>
+
+      <!-- Video metadata (category & difficulty) -->
       <div class="vd-conent-bottom">
         <div class="tag-row">
           <div class="tag" id="vd-category">Programming</div>
@@ -52,19 +63,24 @@
       </div>
     </main>
 
-    <!--Footer -->
+    <!-- ===== Footer (injected dynamically) ===== -->
     <footer id="site-footer"></footer>
-    <!--Used scripts-->
 
-        <script src="assets/js/ui/common/shared-layout.js"></script>
+    <!-- ===== JavaScript files ===== -->
 
+    <!-- Shared layout: navbar & footer rendering -->
+    <script src="assets/js/ui/common/shared-layout.js"></script>
 
-
+    <!-- Categories data (used by shared navigation/menu) -->
     <script src="assets/js/data/categories.js"></script>
 
+    <!-- Video dataset -->
     <script src="assets/js/data/videos.js"></script>
+
+    <!-- Page-specific logic: fetch video by ID & inject content -->
     <script src="assets/js/ui/pages/video-details.js"></script>
 
+    <!-- Application entry point -->
     <script src="assets/js/app.js"></script>
   </body>
 </html>
