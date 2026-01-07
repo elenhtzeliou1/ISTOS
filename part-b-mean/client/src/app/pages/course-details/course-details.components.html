@@ -142,8 +142,12 @@
 
             <div class="courses-detail-accordion module">
                 <div class="accordion-item" *ngFor="let qa of c.questions; let i = index; trackBy: trackByIndex">
-                    <button class="accordion-trigger qst" [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
-                        [attr.aria-controls]="'qst-detail-panel-' + i" [attr.id]="'qst-detail-trigger-' + i">
+                    <button 
+                    type="button"
+                    class="accordion-trigger qst" 
+                    [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
+                        [attr.aria-controls]="'qst-detail-panel-' + i" 
+                        [attr.id]="'qst-detail-trigger-' + i">
                         <span class="course-span">{{ qa.question }}</span>
                         <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>

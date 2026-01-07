@@ -205,8 +205,8 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
          */
         this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
           (window as any).RevealUI?.refresh?.();
-          (window as any).AccordionUI?.init?.();
           (window as any).ModalUI?.init?.();
+          this.initQuestionsAccordionWhenReady();
         });
       });
   }
@@ -405,9 +405,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
             this.cdr.detectChanges();
 
             // Re-init accordion after DOM update
-            this.zone.onStable.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-              (window as any).AccordionUI?.init?.();
-            });
+            this.initQuestionsAccordionWhenReady();
           },
           error: () => {
             this.recommendedBooks = [];
@@ -463,6 +461,8 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       this.ui.initCommon();
       (window as any).RevealUI?.refresh?.();
       this.uiInited = true;
+
+      this.initQuestionsAccordionWhenReady();
     }
   }
 
@@ -475,6 +475,31 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     this.destroy$.complete();
   }
 
+  private initQuestionsAccordionWhenReady(): void {
+    const selector = '.courses-detail-accordion .accordion-trigger';
+    const maxFrames = 120; // 2 seconds at 60fps
+    let frame = 0;
+
+    const tryInit = () => {
+      frame++;
+
+      const hasUI = typeof (window as any).AccordionUI?.init === 'function';
+      const hasTriggers = document.querySelectorAll(selector).length > 0;
+
+      if (hasUI && hasTriggers) {
+        // scope init ONLY to Q&A accordion
+        (window as any).AccordionUI.init(selector);
+        return;
+      }
+
+      if (frame < maxFrames) {
+        requestAnimationFrame(tryInit);
+      }
+    };
+
+    requestAnimationFrame(tryInit);
+  }
+
   // ------------------------------------------------------------------
   // Template helpers
   // ------------------------------------------------------------------
@@ -483,7 +508,10 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
    * Limits text to a fixed number of words for previews.
    */
   sliceWords(text: string, maxWords = 26): string {
-    const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+    const words = String(text || '')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
     if (words.length <= maxWords) return words.join(' ');
     return words.slice(0, maxWords).join(' ') + '…';
   }
@@ -656,9 +684,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
           // Scroll user down to reviews section for convenience
           setTimeout(() => {
-            document
-              .getElementById('reviews-section')
-              ?.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('reviews-section')?.scrollIntoView({ behavior: 'smooth' });
           }, 50);
 
           this.modalBusy = false;
@@ -765,9 +791,7 @@ export class CourseDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
       )
       .subscribe((rows: any[]) => {
         // Create a set of enrolled course ids for O(1) membership checks
-        const set = new Set(
-          (rows || []).map((r: any) => String(r.course?._id || r.course))
-        );
+        const set = new Set((rows || []).map((r: any) => String(r.course?._id || r.course)));
 
         this.isEnrolled = set.has(String(courseId));
         this.enrollCheckLoading = false;
